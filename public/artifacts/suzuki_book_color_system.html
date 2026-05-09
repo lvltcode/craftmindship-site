@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suzuki Book Color System</title>
+<style>
+  :root {
+    --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: ui-monospace, 'Cascadia Code', 'Fira Code', Consolas, monospace;
+    --color-text-primary: #1f2937;
+    --color-text-secondary: #6b7280;
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f3f4f6;
+    --color-border-tertiary: #e5e7eb;
+  }
+  body { margin: 0; padding: 16px; background: #fff; }
+</style>
+<style>
+.book-row { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: 8px; margin-bottom: 6px; font-family: var(--font-sans); }
+.book-num { font-size: 13px; font-weight: 500; min-width: 54px; }
+.book-hex { font-size: 12px; font-family: var(--font-mono); color: var(--color-text-secondary); min-width: 70px; }
+.book-name { font-size: 13px; color: var(--color-text-secondary); }
+.book-swatch { width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0; }
+.section-label { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin: 20px 0 10px; }
+.card-mock { border-radius: 12px; padding: 16px; margin-bottom: 10px; border-left: 4px solid; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-sans); background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); }
+.card-mock-inner { display: flex; align-items: center; gap: 10px; }
+.card-name { font-size: 15px; font-weight: 500; color: var(--color-text-primary); }
+.card-level { font-size: 12px; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
+.card-meta { font-size: 12px; color: var(--color-text-secondary); }
+.card-right { text-align: right; font-size: 12px; color: var(--color-text-secondary); }
+</style>
+</head>
+<body>
+
+<div style="padding: 0.5rem 0;">
+
+<div class="section-label">Book level colors (1 - 10)</div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px;">
+
+<div class="book-row" style="background: #E8F5E9;">
+<div class="book-swatch" style="background: #66BB6A;"></div>
+<div class="book-num" style="color: #2E7D32;">Book 1</div>
+<div class="book-hex">#66BB6A</div>
+<div class="book-name">Fresh green</div>
+</div>
+
+<div class="book-row" style="background: #E0F2F1;">
+<div class="book-swatch" style="background: #26A69A;"></div>
+<div class="book-num" style="color: #00695C;">Book 2</div>
+<div class="book-hex">#26A69A</div>
+<div class="book-name">Teal</div>
+</div>
+
+<div class="book-row" style="background: #E0F7FA;">
+<div class="book-swatch" style="background: #29B6F6;"></div>
+<div class="book-num" style="color: #0277BD;">Book 3</div>
+<div class="book-hex">#29B6F6</div>
+<div class="book-name">Sky blue</div>
+</div>
+
+<div class="book-row" style="background: #E3F2FD;">
+<div class="book-swatch" style="background: #1E88E5;"></div>
+<div class="book-num" style="color: #1565C0;">Book 4</div>
+<div class="book-hex">#1E88E5</div>
+<div class="book-name">Royal blue</div>
+</div>
+
+<div class="book-row" style="background: #E8EAF6;">
+<div class="book-swatch" style="background: #5C6BC0;"></div>
+<div class="book-num" style="color: #283593;">Book 5</div>
+<div class="book-hex">#5C6BC0</div>
+<div class="book-name">Indigo</div>
+</div>
+
+<div class="book-row" style="background: #F3E5F5;">
+<div class="book-swatch" style="background: #AB47BC;"></div>
+<div class="book-num" style="color: #6A1B9A;">Book 6</div>
+<div class="book-hex">#AB47BC</div>
+<div class="book-name">Purple</div>
+</div>
+
+<div class="book-row" style="background: #FCE4EC;">
+<div class="book-swatch" style="background: #EC407A;"></div>
+<div class="book-num" style="color: #AD1457;">Book 7</div>
+<div class="book-hex">#EC407A</div>
+<div class="book-name">Rose</div>
+</div>
+
+<div class="book-row" style="background: #FFF3E0;">
+<div class="book-swatch" style="background: #FF9800;"></div>
+<div class="book-num" style="color: #E65100;">Book 8</div>
+<div class="book-hex">#FF9800</div>
+<div class="book-name">Orange</div>
+</div>
+
+<div class="book-row" style="background: #FFF8E1;">
+<div class="book-swatch" style="background: #FFB300;"></div>
+<div class="book-num" style="color: #FF6F00;">Book 9</div>
+<div class="book-hex">#FFB300</div>
+<div class="book-name">Amber gold</div>
+</div>
+
+<div class="book-row" style="background: #FFFDE7;">
+<div class="book-swatch" style="background: #FDD835;"></div>
+<div class="book-num" style="color: #F57F17;">Book 10</div>
+<div class="book-hex">#FDD835</div>
+<div class="book-name">Gold</div>
+</div>
+
+</div>
+
+<div class="section-label" style="margin-top: 28px;">Student card mockups</div>
+
+<div class="card-mock" style="border-left: 4px solid #66BB6A;">
+<div>
+<div class="card-mock-inner">
+<div class="card-name">Gump Dang</div>
+<span style="font-size: 13px; color: var(--color-text-secondary);">&#127931;</span>
+<span class="card-level" style="background: #E8F5E9; color: #2E7D32;">Book 1</span>
+</div>
+<div class="card-meta" style="margin-top: 4px;">2 lessons &middot; Parent linked</div>
+</div>
+<div class="card-right">
+<div style="color: #2E7D32; font-size: 13px; font-weight: 500;">&rarr;</div>
+</div>
+</div>
+
+<div class="card-mock" style="border-left: 4px solid #26A69A;">
+<div>
+<div class="card-mock-inner">
+<div class="card-name">Sara Chen</div>
+<span style="font-size: 13px; color: var(--color-text-secondary);">&#127931;</span>
+<span class="card-level" style="background: #E0F2F1; color: #00695C;">Book 2</span>
+</div>
+<div class="card-meta" style="margin-top: 4px;">5 lessons &middot; Invite sent</div>
+</div>
+<div class="card-right">
+<div style="color: #00695C; font-size: 13px; font-weight: 500;">&rarr;</div>
+</div>
+</div>
+
+<div class="card-mock" style="border-left: 4px solid #AB47BC;">
+<div>
+<div class="card-mock-inner">
+<div class="card-name">Ria Huang</div>
+<span style="font-size: 13px; color: var(--color-text-secondary);">&#127931;</span>
+<span class="card-level" style="background: #F3E5F5; color: #6A1B9A;">Book 6</span>
+</div>
+<div class="card-meta" style="margin-top: 4px;">12 lessons &middot; Parent linked</div>
+</div>
+<div class="card-right">
+<div style="color: #6A1B9A; font-size: 13px; font-weight: 500;">&rarr;</div>
+</div>
+</div>
+
+<div class="card-mock" style="border-left: 4px solid #FDD835;">
+<div>
+<div class="card-mock-inner">
+<div class="card-name">Nathan Roberts</div>
+<span style="font-size: 13px; color: var(--color-text-secondary);">&#127931;</span>
+<span class="card-level" style="background: #FFFDE7; color: #F57F17;">Book 10</span>
+</div>
+<div class="card-meta" style="margin-top: 4px;">48 lessons &middot; Parent linked</div>
+</div>
+<div class="card-right">
+<div style="color: #F57F17; font-size: 13px; font-weight: 500;">&rarr;</div>
+</div>
+</div>
+
+</div>
+</body>
+</html>

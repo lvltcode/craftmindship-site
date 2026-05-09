@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Card Compact Options</title>
+<style>
+  :root {
+    --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --color-text-primary: #1f2937;
+    --color-text-secondary: #6b7280;
+    --color-text-tertiary: #9ca3af;
+    --color-text-info: #1d4ed8;
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f3f4f6;
+    --color-background-info: #eff6ff;
+    --color-border-tertiary: #e5e7eb;
+  }
+  body { margin: 0; padding: 16px; background: #fff; }
+</style>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.container { max-width: 400px; font-family: var(--font-sans); padding: 0.5rem 0; }
+.opt-label { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin: 16px 0 8px; }
+.opt-desc { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 12px; line-height: 1.5; }
+
+.card-a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: 10px; margin-bottom: 6px; border-left: 4px solid; }
+.card-a-name { font-size: 14px; font-weight: 500; color: var(--color-text-primary); white-space: nowrap; }
+.card-a-pill { font-size: 11px; padding: 1px 7px; border-radius: 8px; font-weight: 500; white-space: nowrap; }
+.card-a-meta { font-size: 11px; color: var(--color-text-secondary); white-space: nowrap; }
+.card-a-right { margin-left: auto; display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.card-a-left { display: flex; align-items: center; gap: 6px; min-width: 0; flex-shrink: 1; }
+.dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+.card-b { padding: 10px 12px; background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: 10px; margin-bottom: 6px; border-left: 4px solid; }
+.card-b-row1 { display: flex; align-items: center; gap: 8px; }
+.card-b-row2 { display: flex; align-items: center; gap: 8px; margin-top: 4px; padding-left: 28px; flex-wrap: wrap; }
+.card-b-name { font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
+.card-b-pill { font-size: 11px; padding: 1px 7px; border-radius: 8px; font-weight: 500; }
+.card-b-chip { font-size: 11px; color: var(--color-text-secondary); display: flex; align-items: center; gap: 3px; }
+.card-b-arrow { margin-left: auto; color: var(--color-text-secondary); font-size: 13px; }
+.sep { color: var(--color-text-tertiary); font-size: 11px; }
+.next-badge { font-size: 10px; padding: 1px 6px; border-radius: 6px; background: var(--color-background-info); color: var(--color-text-info); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="opt-label">Option A &mdash; single row per student</div>
+<div class="opt-desc">Everything on one line. Maximum density. Good for 20+ students.</div>
+
+<div class="card-a" style="border-left-color: #66BB6A;">
+<div class="card-a-left">
+<span style="font-size: 14px;">&#127931;</span>
+<span class="card-a-name">Gump Dang</span>
+<span class="card-a-pill" style="background: #E8F5E9; color: #2E7D32;">1</span>
+</div>
+<div class="card-a-right">
+<span class="next-badge">Today</span>
+<span class="card-a-meta">3x &middot; 15m</span>
+<span class="dot" style="background: #22c55e;"></span>
+<span style="color: var(--color-text-secondary); font-size: 13px;">&rsaquo;</span>
+</div>
+</div>
+
+<div class="card-a" style="border-left-color: #66BB6A;">
+<div class="card-a-left">
+<span style="font-size: 14px;">&#127931;</span>
+<span class="card-a-name">Forrest</span>
+<span class="card-a-pill" style="background: #E8F5E9; color: #2E7D32;">1</span>
+</div>
+<div class="card-a-right">
+<span class="next-badge">Tomorrow</span>
+<span class="card-a-meta">1x &middot; 15m</span>
+<span class="dot" style="background: #22c55e;"></span>
+<span style="color: var(--color-text-secondary); font-size: 13px;">&rsaquo;</span>
+</div>
+</div>
+
+<div class="card-a" style="border-left-color: #26A69A;">
+<div class="card-a-left">
+<span style="font-size: 14px;">&#127931;</span>
+<span class="card-a-name">Sara Chen</span>
+<span class="card-a-pill" style="background: #E0F2F1; color: #00695C;">2</span>
+</div>
+<div class="card-a-right">
+<span class="card-a-meta" style="color: var(--color-text-tertiary);">no log</span>
+<span class="dot" style="background: #d1d5db;"></span>
+<span style="color: var(--color-text-secondary); font-size: 13px;">&rsaquo;</span>
+</div>
+</div>
+
+<div class="card-a" style="border-left-color: #AB47BC;">
+<div class="card-a-left">
+<span style="font-size: 14px;">&#127931;</span>
+<span class="card-a-name">Ria Huang</span>
+<span class="card-a-pill" style="background: #F3E5F5; color: #6A1B9A;">6</span>
+</div>
+<div class="card-a-right">
+<span class="card-a-meta">5x &middot; 20m</span>
+<span class="dot" style="background: #22c55e;"></span>
+<span style="color: var(--color-text-secondary); font-size: 13px;">&rsaquo;</span>
+</div>
+</div>
+
+<div class="card-a" style="border-left-color: #FDD835;">
+<div class="card-a-left">
+<span style="font-size: 14px;">&#127931;</span>
+<span class="card-a-name">Nathan Roberts</span>
+<span class="card-a-pill" style="background: #FFFDE7; color: #F57F17;">10</span>
+</div>
+<div class="card-a-right">
+<span class="card-a-meta">4x &middot; 30m</span>
+<span class="dot" style="background: #22c55e;"></span>
+<span style="color: var(--color-text-secondary); font-size: 13px;">&rsaquo;</span>
+</div>
+</div>
+
+<div style="height: 24px;"></div>
+
+<div class="opt-label">Option B &mdash; two rows per student</div>
+<div class="opt-desc">Name + level on row 1. Practice + status chips on row 2. More readable.</div>
+
+<div class="card-b" style="border-left-color: #66BB6A;">
+<div class="card-b-row1">
+<span style="font-size: 14px;">&#127931;</span>
+<span class="card-b-name">Gump Dang</span>
+<span class="card-b-pill" style="background: #E8F5E9; color: #2E7D32;">Book 1</span>
+<span class="next-badge">Today</span>
+<span class="card-b-arrow">&rsaquo;</span>
+</div>
+<div class="card-b-row2">
+<span class="card-b-chip">&#127925; 3x &middot; 15m</span>
+<span class="sep">&middot;</span>
+<span class="card-b-chip" style="color: #22c55e;">&#10003; Linked</span>
+<span class="sep">&middot;</span>
+<span class="card-b-chip">&#128221; 2</span>
+</div>
+</div>
+
+<div class="card-b" style="border-left-color: #66BB6A;">
+<div class="card-b-row1">
+<span style="font-size: 14px;">&#127931;</span>
+<span class="card-b-name">Forrest</span>
+<span class="card-b-pill" style="background: #E8F5E9; color: #2E7D32;">Book 1</span>
+<span class="next-badge">Tomorrow</span>
+<span class="card-b-arrow">&rsaquo;</span>
+</div>
+<div class="card-b-row2">
+<span class="card-b-chip">&#127925; 1x &middot; 15m</span>
+<span class="sep">&middot;</span>
+<span class="card-b-chip" style="color: #22c55e;">&#10003; Linked</span>
+<span class="sep">&middot;</span>
+<span class="card-b-chip">&#128221; 2</span>
+</div>
+</div>
+
+<div class="card-b" style="border-left-color: #26A69A;">
+<div class="card-b-row1">
+<span style="font-size: 14px;">&#127931;</span>
+<span class="card-b-name">Sara Chen</span>
+<span class="card-b-pill" style="background: #E0F2F1; color: #00695C;">Book 2</span>
+<span class="card-b-arrow">&rsaquo;</span>
+</div>
+<div class="card-b-row2">
+<span class="card-b-chip" style="color: var(--color-text-tertiary);">&#127925; no log</span>
+<span class="sep">&middot;</span>
+<span class="card-b-chip" style="color: #9ca3af;">Invite sent</span>
+<span class="sep">&middot;</span>
+<span class="card-b-chip">&#128221; 5</span>
+</div>
+</div>
+
+<div class="card-b" style="border-left-color: #AB47BC;">
+<div class="card-b-row1">
+<span style="font-size: 14px;">&#127931;</span>
+<span class="card-b-name">Ria Huang</span>
+<span class="card-b-pill" style="background: #F3E5F5; color: #6A1B9A;">Book 6</span>
+<span class="card-b-arrow">&rsaquo;</span>
+</div>
+<div class="card-b-row2">
+<span class="card-b-chip">&#127925; 5x &middot; 20m</span>
+<span class="sep">&middot;</span>
+<span class="card-b-chip" style="color: #22c55e;">&#10003; Linked</span>
+<span class="sep">&middot;</span>
+<span class="card-b-chip">&#128221; 12</span>
+</div>
+</div>
+
+<div class="card-b" style="border-left-color: #FDD835;">
+<div class="card-b-row1">
+<span style="font-size: 14px;">&#127931;</span>
+<span class="card-b-name">Nathan Roberts</span>
+<span class="card-b-pill" style="background: #FFFDE7; color: #F57F17;">Book 10</span>
+<span class="card-b-arrow">&rsaquo;</span>
+</div>
+<div class="card-b-row2">
+<span class="card-b-chip">&#127925; 4x &middot; 30m</span>
+<span class="sep">&middot;</span>
+<span class="card-b-chip" style="color: #22c55e;">&#10003; Linked</span>
+<span class="sep">&middot;</span>
+<span class="card-b-chip">&#128221; 48</span>
+</div>
+</div>
+
+<div style="height: 16px;"></div>
+<div class="opt-desc" style="margin-top: 8px;">
+Both options: sorted by next lesson date (today &rarr; tomorrow &rarr; later &rarr; none).<br>
+Green dot / &#10003; = parent linked. Gray dot = no parent. &ldquo;Today&rdquo;/&ldquo;Tomorrow&rdquo; badge = next lesson proximity.<br>
+&#127925; 3x &middot; 15m = 3 practices this week, 15 min average.
+</div>
+
+</div>
+</body>
+</html>
