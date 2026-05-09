@@ -43,7 +43,7 @@ const externalLinks = [
 ];
 
 export default function About() {
-  usePageMeta("About", "Multi-venture operator building production SaaS across construction tech, travel tech, fintech, and edtech.");
+  usePageMeta("About", "AI Product Builder and Technical Product Manager. I analyze messy workflows, find the real constraint, and turn it into a working system.");
 
   return (
     <div className="px-6 py-16 sm:py-24">
@@ -53,35 +53,34 @@ export default function About() {
           About
         </h1>
         <p className="mt-3 text-lg font-medium text-gray-900">
-          I analyze systems, find what&apos;s broken, and build what&apos;s missing.
+          I analyze messy workflows, find the real constraint, and turn it into a working system.
         </p>
       </header>
 
       {/* Bio */}
       <section className="mt-8 space-y-4 text-gray-700 leading-relaxed">
         <p>
-          I&apos;m Luke — a multi-venture operator at Cognito Technology Canada Inc.,
-          based in Ontario. I build production SaaS products across construction tech,
-          travel tech, fintech, and edtech. Not prototypes, not demos — products that
-          run in production with real users and real data.
+          I&apos;m Luke, an AI Product Builder and Technical Product Manager based in
+          Ontario. My work sits between product strategy, operations, software
+          architecture, and AI-assisted execution.
         </p>
         <p>
-          My background is in product building and technical product management. At
-          CognitoCRM, I built three full-stack platforms (construction, logistics, fintech),
-          designed internal Notion operations infrastructure, and developed market
-          intelligence systems. I think in workflows, not features.
+          I do not start with features. I start with the workflow: who does the work,
+          where it breaks, what data matters, what should stay private, and what needs
+          to happen next.
         </p>
         <p>
-          I work with AI-native tools — Lovable for frontend prototyping, Claude Code
-          for precision development, Supabase for backend architecture, Vercel for
-          deployment. The tools are fast. The bottleneck is always clarity: knowing
-          what to build and what not to build.
+          My strongest skill is building the system around the build: planning docs,
+          data models, user flows, implementation phases, QA loops, and knowledge
+          management. I use AI-native tools as execution leverage, but the real value
+          is judgment: knowing what to build, what to defer, and how to keep the
+          product from drifting.
         </p>
         <p>
-          Every project I ship follows the same discipline: plan first, design the
-          data model, lock architecture decisions, then execute in structured groups
-          with QA at every step. Planning artifacts as agent context means the AI
-          builds what I designed, not what it imagined.
+          Every project I ship follows the same discipline: understand the workflow,
+          define the source of truth, lock the architecture, execute in small phases,
+          test each step, and preserve knowledge so the next build decision is easier
+          than the last.
         </p>
       </section>
 
