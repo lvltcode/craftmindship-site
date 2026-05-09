@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
@@ -106,10 +106,7 @@ function ComparisonCard() {
 }
 
 export default function TdInsurance() {
-  useEffect(() => {
-    document.title = "When Safe Driving Apps Punish Safe Drivers — Craftmindship";
-    return () => { document.title = "Craftmindship — Operator & Builder"; };
-  }, []);
+  usePageMeta("When Safe Driving Apps Punish Safe Drivers", "A product teardown of TD Insurance\u2019s telematics scoring \u2014 proxy metrics, incentive misalignment, and $744/year in lost value.");
 
   return (
     <article className="px-6 py-16 sm:py-24">

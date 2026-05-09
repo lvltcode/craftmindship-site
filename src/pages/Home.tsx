@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowDown, User, BookOpen } from "lucide-react";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const projects = [
   {
@@ -30,6 +31,8 @@ const statusColor: Record<string, string> = {
 };
 
 export default function Home() {
+  usePageMeta();
+
   return (
     <>
       {/* Hero */}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ExternalLink, Code } from "lucide-react";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const externalLinks = [
   { label: "Live App", href: "https://cadence-osa.com", icon: ExternalLink },
@@ -68,6 +69,7 @@ function ArtifactEmbed({ src, title, height = "480px" }: { src: string; title: s
 
 export default function Cadence() {
   const [prototypeFailed, setPrototypeFailed] = useState(false);
+  usePageMeta("Cadence", "Lesson continuity and practice management for private music teachers and parents.");
 
   return (
     <div className="px-6 py-16 sm:py-24">

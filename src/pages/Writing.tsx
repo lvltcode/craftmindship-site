@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const posts = [
   {
@@ -16,6 +17,8 @@ const statusColor: Record<string, string> = {
 };
 
 export default function Writing() {
+  usePageMeta("Writing", "Product teardowns, build logs, and operational thinking.");
+
   return (
     <div className="px-6 py-16 sm:py-24">
       <header>

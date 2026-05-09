@@ -7,6 +7,7 @@ import MultiAgentWorkflow from "./pages/MultiAgentWorkflow";
 import Writing from "./pages/Writing";
 import About from "./pages/About";
 import TdInsurance from "./pages/TdInsurance";
+import NotFound from "./pages/NotFound";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/writing" element={<Writing />} />
           <Route path="/writing/td-insurance-telematics" element={<TdInsurance />} />
           <Route path="/about" element={<About />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

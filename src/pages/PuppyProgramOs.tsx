@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ExternalLink, Code } from "lucide-react";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const externalLinks = [
   { label: "Case Study Source", href: "https://github.com/lvltcode/lukedang/blob/main/casestudies/puppy-program-os.md", icon: Code },
@@ -49,6 +50,8 @@ function ArtifactEmbed({ src, title, height = "600px" }: { src: string; title: s
 }
 
 export default function PuppyProgramOs() {
+  usePageMeta("Puppy Program OS", "Automated foster management platform for a national guide dog organization.");
+
   return (
     <div className="px-6 py-16 sm:py-24">
       {/* Header */}
@@ -291,7 +294,7 @@ export default function PuppyProgramOs() {
       {/* Tech Stack */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">Tech Stack</h2>
-        <div className="mt-4">
+        <div className="mt-4 overflow-x-auto">
           <table className="w-full text-sm">
             <tbody>
               {techStack.map((row) => (

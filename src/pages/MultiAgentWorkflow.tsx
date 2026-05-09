@@ -1,4 +1,8 @@
+import { usePageMeta } from "../hooks/usePageMeta";
+
 export default function MultiAgentWorkflow() {
+  usePageMeta("Multi-Agent Workflow", "Practical AI orchestration for production software \u2014 planning, execution, and handoff discipline.");
+
   return (
     <div className="px-6 py-16 sm:py-24">
       {/* Header */}

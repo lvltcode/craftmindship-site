@@ -1,4 +1,5 @@
 import { Code, Briefcase, BookOpen, Mail } from "lucide-react";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const iconMap = { Code, Briefcase, BookOpen, Mail } as const;
 
@@ -42,6 +43,8 @@ const externalLinks = [
 ];
 
 export default function About() {
+  usePageMeta("About", "Multi-venture operator building production SaaS across construction tech, travel tech, fintech, and edtech.");
+
   return (
     <div className="px-6 py-16 sm:py-24">
       {/* Header */}
