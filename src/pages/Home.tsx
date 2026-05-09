@@ -5,19 +5,19 @@ import { usePageMeta } from "../hooks/usePageMeta";
 const projects = [
   {
     name: "Cadence",
-    description: "Lesson continuity and practice management for Suzuki music teachers and parents.",
+    description: "Live production app for teacher-parent lesson continuity, practice visibility, scheduling, and progress tracking.",
     status: "Live",
     path: "/work/cadence",
   },
   {
     name: "Puppy Program OS",
-    description: "Automated foster management platform for a national guide dog organization.",
+    description: "Prototype for foster management with daily logs, alert logic, and staff intervention workflows.",
     status: "Prototype",
     path: "/work/puppy-program-os",
   },
   {
     name: "Multi-Agent Workflow",
-    description: "Practical AI orchestration for production software \u2014 planning, execution, and handoff discipline.",
+    description: "Repeatable ChatGPT, Claude Code, Codex, and Playwright delivery system for shipping with AI without agent drift.",
     status: "Active",
     path: "/work/multi-agent-workflow",
   },
@@ -41,11 +41,14 @@ export default function Home() {
           Luke V.
         </p>
         <h1 className="mt-3 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-          Operator &amp; Builder
+          AI Product Builder · Technical Product Manager
         </h1>
         <p className="mt-4 max-w-xl text-lg leading-relaxed text-gray-600">
-          I design and ship SaaS products that solve real operational problems —
-          from concept through production. Craft over ceremony, systems over hype.
+          I design and ship workflow-heavy SaaS products that solve real operational
+          problems, from concept to production. Systems over hype. Craft over ceremony.
+        </p>
+        <p className="mt-3 max-w-xl text-sm text-gray-400">
+          Production SaaS · Supabase/RLS · AI-native delivery · Workflow automation · Real user pilots
         </p>
         <div className="mt-8 flex flex-wrap gap-4">
           <a

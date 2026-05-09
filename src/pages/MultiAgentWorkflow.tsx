@@ -2,43 +2,148 @@ import { Link } from "react-router-dom";
 import { Code } from "lucide-react";
 import { usePageMeta } from "../hooks/usePageMeta";
 
-/* ── Workflow Map Step ── */
-function FlowStep({
-  tool,
-  role,
-  annotation,
-  accent,
-  isLast,
-}: {
-  tool: string;
-  role: string;
-  annotation: string;
-  accent: string;
-  isLast?: boolean;
-}) {
+/* ── Workflow Map (inline SVG diagram) ── */
+function WorkflowMap() {
   return (
-    <>
-      <div className="relative flex gap-4 sm:gap-6">
-        <div
-          className="w-1 shrink-0 rounded-full"
-          style={{ background: accent }}
-        />
-        <div className="flex-1 rounded-lg border border-gray-200 p-4 sm:p-5">
-          <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-            <div>
-              <span className="font-semibold text-gray-900">{tool}</span>
-              <span className="ml-2 text-sm text-gray-500">({role})</span>
-            </div>
-            <span className="text-[13px] italic text-gray-400">{annotation}</span>
-          </div>
-        </div>
-      </div>
-      {!isLast && (
-        <div className="flex items-center pl-[1px]">
-          <div className="w-1 mx-auto h-6 border-l-2 border-dashed border-gray-300" />
-        </div>
-      )}
-    </>
+    <svg
+      viewBox="0 0 680 670"
+      className="w-full"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ fontFamily: "inherit" }}
+    >
+      <defs>
+        <marker id="chv" viewBox="0 0 10 7" refX="9" refY="3.5"
+          markerWidth="8" markerHeight="6" orient="auto">
+          <polyline points="1,1 9,3.5 1,6" fill="none" stroke="#9CA3AF"
+            strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </marker>
+        <marker id="chv-a" viewBox="0 0 10 7" refX="9" refY="3.5"
+          markerWidth="8" markerHeight="6" orient="auto">
+          <polyline points="1,1 9,3.5 1,6" fill="none" stroke="#F59E0B"
+            strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </marker>
+        <marker id="chv-p" viewBox="0 0 10 7" refX="9" refY="3.5"
+          markerWidth="8" markerHeight="6" orient="auto">
+          <polyline points="1,1 9,3.5 1,6" fill="none" stroke="#7F77DD"
+            strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </marker>
+      </defs>
+
+      {/* Step 1 — Load project context (purple, operator) */}
+      <rect x="220" y="12" width="240" height="68" rx="8"
+        fill="#F0EEFF" stroke="#7F77DD" strokeWidth="1.5" />
+      <text x="340" y="34" textAnchor="middle"
+        fontSize="13" fontWeight="600" fill="#1F2937">Load project context</text>
+      <text x="340" y="49" textAnchor="middle"
+        fontSize="11" fill="#6B7280">PRD · architecture</text>
+      <text x="340" y="63" textAnchor="middle"
+        fontSize="11" fill="#6B7280">design locks · repo state</text>
+
+      <line x1="340" y1="82" x2="340" y2="110" stroke="#9CA3AF"
+        strokeWidth="1.5" markerEnd="url(#chv)" />
+      <text x="362" y="100" fontSize="10" fill="#9CA3AF">project state</text>
+
+      {/* Step 2 — Plan task (teal, AI planning) */}
+      <rect x="220" y="112" width="240" height="54" rx="8"
+        fill="#EEFBF8" stroke="#14B8A6" strokeWidth="1.5" />
+      <text x="340" y="136" textAnchor="middle"
+        fontSize="13" fontWeight="600" fill="#1F2937">Plan task</text>
+      <text x="340" y="151" textAnchor="middle"
+        fontSize="11" fill="#6B7280">ChatGPT + Claude Chat</text>
+
+      <line x1="340" y1="168" x2="340" y2="196" stroke="#9CA3AF"
+        strokeWidth="1.5" markerEnd="url(#chv)" />
+      <text x="362" y="186" fontSize="10" fill="#9CA3AF">task scope</text>
+
+      {/* Step 3 — Write scoped handoff (purple, operator) */}
+      <rect x="220" y="198" width="240" height="54" rx="8"
+        fill="#F0EEFF" stroke="#7F77DD" strokeWidth="1.5" />
+      <text x="340" y="222" textAnchor="middle"
+        fontSize="13" fontWeight="600" fill="#1F2937">Write scoped handoff</text>
+      <text x="340" y="237" textAnchor="middle"
+        fontSize="11" fill="#6B7280">Operator scoping</text>
+
+      <line x1="340" y1="254" x2="340" y2="282" stroke="#9CA3AF"
+        strokeWidth="1.5" markerEnd="url(#chv)" />
+      <text x="362" y="272" fontSize="10" fill="#9CA3AF">scoped prompt</text>
+
+      {/* Step 4 — Execute (coral, AI execution) */}
+      <rect x="220" y="284" width="240" height="54" rx="8"
+        fill="#FFF1F0" stroke="#F97066" strokeWidth="1.5" />
+      <text x="340" y="308" textAnchor="middle"
+        fontSize="13" fontWeight="600" fill="#1F2937">Execute</text>
+      <text x="340" y="323" textAnchor="middle"
+        fontSize="11" fill="#6B7280">Claude Code</text>
+
+      <line x1="340" y1="340" x2="340" y2="368" stroke="#9CA3AF"
+        strokeWidth="1.5" strokeDasharray="4 3" markerEnd="url(#chv)" />
+      <text x="362" y="358" fontSize="10" fill="#9CA3AF">code diff</text>
+
+      {/* Step 5 — Patch / refactor (coral, dashed border, optional) */}
+      <rect x="245" y="370" width="190" height="44" rx="8"
+        fill="#FFF1F0" stroke="#F97066" strokeWidth="1.5" strokeDasharray="4 3" />
+      <text x="340" y="390" textAnchor="middle"
+        fontSize="13" fontWeight="600" fill="#1F2937">Patch / refactor</text>
+      <text x="340" y="403" textAnchor="middle"
+        fontSize="11" fill="#6B7280">Codex · optional</text>
+
+      <line x1="340" y1="416" x2="340" y2="444" stroke="#9CA3AF"
+        strokeWidth="1.5" strokeDasharray="4 3" markerEnd="url(#chv)" />
+      <text x="362" y="434" fontSize="10" fill="#9CA3AF">reviewed diff</text>
+
+      {/* Step 6 — QA gate (amber, pill shape) */}
+      <rect x="210" y="446" width="260" height="64" rx="22"
+        fill="#FFFBEB" stroke="#F59E0B" strokeWidth="1" />
+      <text x="340" y="470" textAnchor="middle"
+        fontSize="13" fontWeight="600" fill="#1F2937">QA gate</text>
+      <text x="340" y="485" textAnchor="middle"
+        fontSize="11" fill="#6B7280">lint · build · Playwright</text>
+      <text x="340" y="499" textAnchor="middle"
+        fontSize="11" fill="#6B7280">browser + mobile QA</text>
+
+      <line x1="340" y1="512" x2="340" y2="540" stroke="#9CA3AF"
+        strokeWidth="1.5" markerEnd="url(#chv)" />
+      <text x="362" y="530" fontSize="10" fill="#9CA3AF">pass</text>
+
+      {/* Step 7 — Commit + verify (gray, checkpoint) */}
+      <rect x="220" y="542" width="240" height="54" rx="8"
+        fill="#F3F4F6" stroke="#6B7280" strokeWidth="1.5" />
+      <text x="340" y="566" textAnchor="middle"
+        fontSize="13" fontWeight="600" fill="#1F2937">Commit + verify</text>
+      <text x="340" y="581" textAnchor="middle"
+        fontSize="11" fill="#6B7280">Git checkpoint + deploy check</text>
+
+      {/* Fail path: QA gate → Execute (amber, right side) */}
+      <path
+        d="M 470 478 H 535 A 10 10 0 0 0 545 468 V 321 A 10 10 0 0 0 535 311 H 460"
+        stroke="#F59E0B" strokeWidth="1.5" markerEnd="url(#chv-a)" />
+      <text x="555" y="400" fontSize="10" fill="#F59E0B" fontWeight="500">fail</text>
+
+      {/* Loop-back: Commit → Load context (purple dashed, left side) */}
+      <path
+        d="M 220 569 H 145 A 10 10 0 0 1 135 559 V 56 A 10 10 0 0 1 145 46 H 220"
+        stroke="#7F77DD" strokeWidth="2" strokeDasharray="6 4"
+        markerEnd="url(#chv-p)" />
+      <text x="120" y="310" fontSize="10" fill="#7F77DD" fontWeight="500"
+        textAnchor="middle" transform="rotate(-90 120 310)">
+        next scoped task
+      </text>
+
+      {/* Legend */}
+      <g transform="translate(140, 640)">
+        <circle cx="0" cy="0" r="4" fill="#7F77DD" />
+        <text x="10" y="4" fontSize="10" fill="#6B7280">Operator</text>
+        <circle cx="90" cy="0" r="4" fill="#14B8A6" />
+        <text x="100" y="4" fontSize="10" fill="#6B7280">AI planning</text>
+        <circle cx="195" cy="0" r="4" fill="#F97066" />
+        <text x="205" y="4" fontSize="10" fill="#6B7280">AI execution</text>
+        <circle cx="305" cy="0" r="4" fill="#F59E0B" />
+        <text x="315" y="4" fontSize="10" fill="#6B7280">Gate</text>
+        <circle cx="365" cy="0" r="4" fill="#6B7280" />
+        <text x="375" y="4" fontSize="10" fill="#6B7280">Checkpoint</text>
+      </g>
+    </svg>
   );
 }
 
@@ -63,11 +168,13 @@ function TimelineStep({
   tool,
   input,
   output,
+  detail,
 }: {
   num: number;
   tool: string;
   input: string;
   output: string;
+  detail?: string;
 }) {
   return (
     <div className="relative pl-8">
@@ -82,6 +189,9 @@ function TimelineStep({
         <p className="mt-2 text-[13px] text-gray-500 leading-relaxed">
           <span className="font-medium text-gray-600">&rarr; Output:</span> {output}
         </p>
+        {detail && (
+          <p className="mt-2 text-xs text-gray-400 font-mono truncate">{detail}</p>
+        )}
       </div>
     </div>
   );
@@ -91,8 +201,17 @@ function TimelineStep({
 export default function MultiAgentWorkflow() {
   usePageMeta(
     "Multi-Agent Workflow",
-    "A controlled system for using Claude Chat, Claude Code, Codex, and Playwright to ship production software without agent drift."
+    "A controlled system for using ChatGPT, Claude Chat, Claude Code, Codex, and Playwright to ship production software without agent drift."
   );
+
+  const roleMatrix = [
+    { tool: "Claude Chat", role: "Planning, architecture, prompt design, scope decisions", not: "Random coding without a plan", color: "#14B8A6" },
+    { tool: "ChatGPT", role: "Debate, critique, alternative perspectives", not: "Own the implementation", color: "#14B8A6" },
+    { tool: "Claude Code", role: "Main executor \u2014 features, fixes, RLS, git operations", not: "Broad product decisions without human direction", color: "#F97066" },
+    { tool: "Codex", role: "Narrow patches, refactor, cleanup, secondary review", not: "Owning the full repo or rewriting working code", color: "#F97066" },
+    { tool: "Playwright", role: "Real-browser QA, regression testing, flow verification", not: "Replacing human judgment on UX", color: "#F59E0B" },
+    { tool: "Git", role: "Checkpoint, handoff boundary, clean state enforcement", not: "Messy parallel work on the same codebase", color: "#6B7280" },
+  ];
 
   return (
     <div className="px-6 py-16 sm:py-24">
@@ -107,7 +226,7 @@ export default function MultiAgentWorkflow() {
           </span>
         </div>
         <p className="mt-3 text-lg text-gray-600">
-          A controlled system for using Claude Chat, Claude Code, Codex, and Playwright
+          A controlled system for using ChatGPT, Claude Chat, Claude Code, Codex, and Playwright
           to ship production software without agent drift.
         </p>
         <div className="mt-4">
@@ -167,48 +286,9 @@ export default function MultiAgentWorkflow() {
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Workflow Map
         </h2>
-        <div className="mt-6 mx-auto max-w-[600px] space-y-0">
-          <FlowStep
-            tool="Product question / task"
-            role="Human input"
-            annotation="Human decides what matters"
-            accent="#374151"
-          />
-          <FlowStep
-            tool="Claude Chat / ChatGPT"
-            role="Planning & Debate"
-            annotation="Architecture, scope control, prompt design"
-            accent="#6366f1"
-          />
-          <FlowStep
-            tool="Claude Code"
-            role="Execution"
-            annotation="Implementation, RLS, Edge Functions, git ops"
-            accent="#2563eb"
-          />
-          <FlowStep
-            tool="Codex"
-            role="Secondary patches"
-            annotation="Overflow: patches, refactor, cleanup"
-            accent="#0891b2"
-          />
-          <FlowStep
-            tool="Playwright / lint / build"
-            role="QA Loop"
-            annotation="Browser automation, type check, build verify"
-            accent="#059669"
-          />
-          <FlowStep
-            tool="Git commit"
-            role="Checkpoint"
-            annotation="Clean state, documented change, ready for next"
-            accent="#2D6A4F"
-            isLast
-          />
+        <div className="mt-6 mx-auto max-w-[600px]">
+          <WorkflowMap />
         </div>
-        <p className="mt-4 text-center text-sm text-gray-400 italic">
-          Loop repeats for each scoped task
-        </p>
       </section>
 
       <hr className="my-12 border-gray-200" />
@@ -228,16 +308,18 @@ export default function MultiAgentWorkflow() {
               </tr>
             </thead>
             <tbody>
-              {[
-                { tool: "Claude Chat", role: "Planning, architecture, prompt design, scope decisions", not: "Random coding without a plan" },
-                { tool: "ChatGPT", role: "Debate, critique, alternative perspectives", not: "Own the implementation" },
-                { tool: "Claude Code", role: "Main executor \u2014 features, fixes, RLS, git operations", not: "Broad product decisions without human direction" },
-                { tool: "Codex", role: "Narrow patches, refactor, cleanup, secondary review", not: "Owning the full repo or rewriting working code" },
-                { tool: "Playwright", role: "Real-browser QA, regression testing, flow verification", not: "Replacing human judgment on UX" },
-                { tool: "Git", role: "Checkpoint, handoff boundary, clean state enforcement", not: "Messy parallel work on the same codebase" },
-              ].map((row, i) => (
+              {roleMatrix.map((row, i) => (
                 <tr key={row.tool} className={i % 2 === 1 ? "bg-gray-50/50" : ""}>
-                  <td className="py-3 pr-4 font-medium text-gray-900 whitespace-nowrap align-top">{row.tool}</td>
+                  <td className="py-3 pr-4 font-medium text-gray-900 whitespace-nowrap align-top">
+                    <span
+                      className="inline-block w-2 h-2 rounded-full mr-2 align-middle"
+                      style={{
+                        backgroundColor: row.color,
+                        opacity: row.tool === "Codex" ? 0.4 : 1,
+                      }}
+                    />
+                    {row.tool}
+                  </td>
                   <td className="py-3 pr-4 text-gray-600 align-top">{row.role}</td>
                   <td className="py-3 text-gray-400 italic align-top">{row.not}</td>
                 </tr>
@@ -262,6 +344,13 @@ export default function MultiAgentWorkflow() {
           <LoopStep num={5} label="Commit" desc="Clean git commit with descriptive message." />
           <LoopStep num={6} label="Next" desc="Load updated project state. Repeat." />
         </div>
+        <div className="mt-3 flex items-center gap-2 text-gray-400">
+          <div className="flex-1 border-t border-dashed border-gray-300" />
+          <span className="text-xs italic flex items-center gap-1">
+            ↺ repeat from Plan
+          </span>
+          <div className="flex-1 border-t border-dashed border-gray-300" />
+        </div>
         <div className="mt-8 rounded-lg border-l-4 bg-emerald-50/50 p-4" style={{ borderLeftColor: "#2D6A4F" }}>
           <p className="text-sm text-gray-700 leading-relaxed">
             No parallel agents on the same repo. No vague mega-prompts.
@@ -283,27 +372,31 @@ export default function MultiAgentWorkflow() {
         <div className="mt-6 space-y-6">
           <TimelineStep
             num={1}
-            tool="Claude Chat \u2014 Planning"
-            input="Redesign teacher dashboard student cards from simple list to 4-column \u00d7 2-row layout with book-level color coding, parent status, practice frequency, and next lesson time."
+            tool="Claude Chat — Planning"
+            input="Redesign teacher dashboard student cards from simple list to 4-column × 2-row layout with book-level color coding, parent status, practice frequency, and next lesson time."
             output="Design lock document (cadence_task_8_design_lock.md)"
+            detail="cadence_task_8_design_lock.md"
           />
           <TimelineStep
             num={2}
-            tool="Claude Code \u2014 Execution"
+            tool="Claude Code — Execution"
             input="Implement BookChip component, refactor TeacherDashboard, add bookColors.ts constants, wire up v_student_weekly_log_count view."
             output="8 files changed, new component, constants file, view integration"
+            detail="BookChip.tsx · bookColors.ts · TeacherDashboard refactor"
           />
           <TimelineStep
             num={3}
-            tool="Playwright + Manual \u2014 QA"
+            tool="Playwright + Manual — QA"
             input="Verify card rendering at 380px on iPhone Safari. Check book colors match spec. Confirm parent status shows correct ternary state."
             output="All checks pass. One spacing fix caught on mobile."
+            detail="✓ 4/4 Playwright tests passed"
           />
           <TimelineStep
             num={4}
-            tool="Git \u2014 Commit"
-            input="feat: teacher dashboard student card 4\u00d72 layout with BookChip component"
+            tool="Git — Commit"
+            input="feat: teacher dashboard student card 4×2 layout with BookChip component"
             output="Clean commit. Project state updated. Ready for next task."
+            detail="feat: teacher dashboard student card 4×2 layout"
           />
         </div>
       </section>
@@ -360,12 +453,36 @@ export default function MultiAgentWorkflow() {
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           What This Proves
         </h2>
-        <p className="mt-4 text-gray-700 leading-relaxed">
-          This workflow is not a rigid system. It adapts based on task complexity,
-          available tools, and project phase. The discipline is in the operating
-          principles: scope before execution, one agent per task, QA before commit,
-          documentation as working memory. The tools change. The discipline compounds.
-        </p>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-lg border border-gray-200 p-5">
+            <h3 className="font-semibold text-gray-900">Product judgment</h3>
+            <p className="mt-2 text-sm text-gray-600 leading-relaxed">
+              Scope decisions, feature boundaries, and deliberate &ldquo;no&rdquo; choices that
+              protected the core product model across hundreds of commits.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 p-5">
+            <h3 className="font-semibold text-gray-900">Technical coordination</h3>
+            <p className="mt-2 text-sm text-gray-600 leading-relaxed">
+              Multiple AI agents (ChatGPT, Claude Chat, Claude Code, Codex) assigned distinct
+              roles with no overlapping authority and no unscoped execution.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 p-5">
+            <h3 className="font-semibold text-gray-900">QA discipline</h3>
+            <p className="mt-2 text-sm text-gray-600 leading-relaxed">
+              Every task verified through lint, build, Playwright automation, and manual
+              browser/mobile testing before commit.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 p-5">
+            <h3 className="font-semibold text-gray-900">AI-native execution</h3>
+            <p className="mt-2 text-sm text-gray-600 leading-relaxed">
+              AI generated the code. The operator controlled the architecture, sequencing,
+              permissions, and quality gates.
+            </p>
+          </div>
+        </div>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             to="/work/cadence"
