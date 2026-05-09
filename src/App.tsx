@@ -18,7 +18,7 @@ export default function App() {
           <Route path="/work/puppy-program-os" element={<PuppyProgramOs />} />
           <Route path="/work/multi-agent-workflow" element={<MultiAgentWorkflow />} />
           <Route path="/writing" element={<Writing />} />
-          <Route path="/writing/td-insurance" element={<TdInsurance />} />
+          <Route path="/writing/td-insurance-telematics" element={<TdInsurance />} />
           <Route path="/about" element={<About />} />
         </Route>
       </Routes>

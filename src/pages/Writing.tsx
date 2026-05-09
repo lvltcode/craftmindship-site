@@ -5,8 +5,8 @@ const posts = [
     title: "When Safe Driving Apps Punish Safe Drivers",
     description:
       "A product teardown of TD Insurance's telematics scoring \u2014 proxy metrics, incentive misalignment, and $744/year in lost value.",
-    status: "Draft",
-    path: "/writing/td-insurance",
+    status: "Published",
+    path: "/writing/td-insurance-telematics",
   },
 ];
 

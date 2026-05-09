@@ -97,15 +97,21 @@ export default function Home() {
           Selected Writing
         </h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-xl border border-gray-200 p-6">
-            <p className="text-xs font-medium text-gray-400 uppercase">Coming Soon</p>
-            <h3 className="mt-2 font-semibold text-gray-900">
-              Why I Build in Public
+          <Link
+            to="/writing/td-insurance-telematics"
+            className="group rounded-xl border border-gray-200 p-6 text-left transition-colors hover:border-gray-300 hover:bg-gray-50"
+          >
+            <p className="text-xs font-medium text-gray-400 uppercase">Product Analysis</p>
+            <h3 className="mt-2 font-semibold text-gray-900 group-hover:text-gray-700">
+              When Safe Driving Apps Punish Safe Drivers
             </h3>
             <p className="mt-1 text-sm text-gray-600">
-              Reflections on shipping work transparently as an independent operator.
+              A product teardown of TD Insurance&apos;s telematics scoring &mdash; proxy metrics, incentive misalignment, and $744/year in lost value.
             </p>
-          </div>
+            <span className="mt-3 inline-block text-sm font-medium text-gray-900 group-hover:underline">
+              Read &rarr;
+            </span>
+          </Link>
           <a
             href="https://craftmindship.substack.com"
             target="_blank"
