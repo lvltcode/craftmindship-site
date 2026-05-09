@@ -72,7 +72,7 @@ export default function Cadence() {
   usePageMeta("Cadence", "Lesson continuity and practice management for private music teachers and parents.");
 
   return (
-    <div className="px-6 py-16 sm:py-24">
+    <div className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">
       {/* Hero */}
       <header>
         <div className="flex flex-wrap items-center gap-3">
@@ -106,7 +106,7 @@ export default function Cadence() {
         </div>
       </header>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 1: The Problem */}
       <section>
@@ -132,7 +132,7 @@ export default function Cadence() {
         </p>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 2: Product Thesis */}
       <section>
@@ -154,7 +154,7 @@ export default function Cadence() {
         </p>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 3: 90-Second Constraint */}
       <section>
@@ -182,7 +182,7 @@ export default function Cadence() {
         </p>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 4: What Cadence Does Not Do */}
       <section>
@@ -208,7 +208,7 @@ export default function Cadence() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 5: Learning Pattern Model */}
       <section>
@@ -265,7 +265,7 @@ export default function Cadence() {
         </p>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 6: Privacy and Trust */}
       <section>
@@ -298,7 +298,7 @@ export default function Cadence() {
         </p>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 7: Design System */}
       <section>
@@ -346,7 +346,7 @@ export default function Cadence() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 8: Adoption Reality */}
       <section>
@@ -375,7 +375,7 @@ export default function Cadence() {
         </p>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 9: Rollout and Business Model */}
       <section>
@@ -402,7 +402,7 @@ export default function Cadence() {
         </p>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 10: Why This Exists */}
       <section>
@@ -433,7 +433,7 @@ export default function Cadence() {
         </p>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 11: Prototype to Production */}
       <section>
@@ -454,7 +454,7 @@ export default function Cadence() {
         </p>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 12: Interactive Prototype */}
       <section>
@@ -492,7 +492,7 @@ export default function Cadence() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 13: Technical Architecture */}
       <section>
@@ -541,7 +541,7 @@ export default function Cadence() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 14: AI-Assisted Build Workflow */}
       <section>
@@ -591,7 +591,7 @@ export default function Cadence() {
         </p>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 15: Current Status */}
       <section className="pb-8">

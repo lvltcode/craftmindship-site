@@ -109,7 +109,7 @@ export default function TdInsurance() {
   usePageMeta("When Safe Driving Apps Punish Safe Drivers", "A product teardown of TD Insurance\u2019s telematics scoring \u2014 proxy metrics, incentive misalignment, and $744/year in lost value.");
 
   return (
-    <article className="px-6 py-16 sm:py-24">
+    <article className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">
       {/* Header */}
       <header>
         <div className="flex flex-wrap items-center gap-3">
@@ -137,7 +137,7 @@ export default function TdInsurance() {
         </p>
       </header>
 
-      <hr className="my-10 border-gray-200" />
+      <hr className="my-6 border-gray-200" />
 
       {/* Body */}
       <div className="prose-custom max-w-none space-y-4 text-gray-700 leading-relaxed">
@@ -434,7 +434,7 @@ export default function TdInsurance() {
         </p>
       </div>
 
-      <hr className="my-10 border-gray-200" />
+      <hr className="my-6 border-gray-200" />
 
       <footer className="flex flex-wrap items-center justify-between gap-4 text-sm text-gray-500">
         <p>

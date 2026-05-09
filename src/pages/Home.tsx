@@ -36,7 +36,7 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="px-6 pt-16 pb-12 sm:pt-20 sm:pb-16">
+      <section className="px-6 pt-8 pb-8 sm:pt-10 sm:pb-10">
         <p className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Luke V.
         </p>
@@ -69,7 +69,7 @@ export default function Home() {
       </section>
 
       {/* Featured Work */}
-      <section id="work" className="px-6 pb-14 sm:pb-20">
+      <section id="work" className="px-6 pb-8 sm:pb-12">
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Featured Work
         </h2>
@@ -102,7 +102,7 @@ export default function Home() {
       </section>
 
       {/* Selected Writing */}
-      <section className="px-6 pb-14 sm:pb-20">
+      <section className="px-6 pb-14 sm:pb-16">
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Selected Writing
         </h2>
@@ -126,7 +126,7 @@ export default function Home() {
             href="https://craftmindship.substack.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center justify-between rounded-xl border border-gray-200 p-6 transition-colors hover:border-gray-300 hover:bg-gray-50"
+            className="group flex flex-col justify-center rounded-xl border border-gray-200 p-6 transition-colors hover:border-gray-300 hover:bg-gray-50"
           >
             <div>
               <p className="text-xs font-medium text-gray-400 uppercase">Substack</p>

@@ -46,7 +46,7 @@ export default function About() {
   usePageMeta("About", "AI Product Builder and Technical Product Manager. I analyze messy workflows, find the real constraint, and turn it into a working system.");
 
   return (
-    <div className="px-6 py-16 sm:py-24">
+    <div className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">
       {/* Header */}
       <header>
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -84,7 +84,7 @@ export default function About() {
         </p>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* Target Roles */}
       <section>
@@ -103,7 +103,7 @@ export default function About() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* How I Build */}
       <section>
@@ -120,7 +120,7 @@ export default function About() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* CV */}
       <section>
@@ -140,7 +140,7 @@ export default function About() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* Links */}
       <section className="pb-8">

@@ -214,7 +214,7 @@ export default function MultiAgentWorkflow() {
   ];
 
   return (
-    <div className="px-6 py-16 sm:py-24">
+    <div className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">
       {/* Hero */}
       <header>
         <div className="flex flex-wrap items-center gap-3">
@@ -242,7 +242,7 @@ export default function MultiAgentWorkflow() {
         </div>
       </header>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 1: Before / After */}
       <section>
@@ -279,7 +279,7 @@ export default function MultiAgentWorkflow() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 2: Workflow Map */}
       <section>
@@ -291,7 +291,7 @@ export default function MultiAgentWorkflow() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 3: Agent Role Matrix */}
       <section>
@@ -329,7 +329,7 @@ export default function MultiAgentWorkflow() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 4: Operating Loop */}
       <section>
@@ -359,7 +359,7 @@ export default function MultiAgentWorkflow() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 5: Real Example */}
       <section>
@@ -401,7 +401,7 @@ export default function MultiAgentWorkflow() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 6: Four Lessons */}
       <section>
@@ -446,7 +446,7 @@ export default function MultiAgentWorkflow() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* 7: What This Proves */}
       <section className="pb-8">

@@ -20,7 +20,7 @@ export default function Writing() {
   usePageMeta("Writing", "Product teardowns, build logs, and operational thinking.");
 
   return (
-    <div className="px-6 py-16 sm:py-24">
+    <div className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">
       <header>
         <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           Writing
@@ -63,7 +63,7 @@ export default function Writing() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* Substack */}
       <section className="pb-8">

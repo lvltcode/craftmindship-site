@@ -53,7 +53,7 @@ export default function PuppyProgramOs() {
   usePageMeta("Puppy Program OS", "Automated foster management platform for a national guide dog organization.");
 
   return (
-    <div className="px-6 py-16 sm:py-24">
+    <div className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">
       {/* Header */}
       <header>
         <div className="flex flex-wrap items-center gap-3">
@@ -96,7 +96,7 @@ export default function PuppyProgramOs() {
         </p>
       </header>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* Problem */}
       <section>
@@ -121,7 +121,7 @@ export default function PuppyProgramOs() {
         </p>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* System Design */}
       <section>
@@ -157,7 +157,7 @@ export default function PuppyProgramOs() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* Design Artifacts */}
       <section>
@@ -195,7 +195,7 @@ export default function PuppyProgramOs() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* Alert Engine */}
       <section>
@@ -226,7 +226,7 @@ export default function PuppyProgramOs() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* Architecture Decisions */}
       <section>
@@ -253,7 +253,7 @@ export default function PuppyProgramOs() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* What Makes It Interesting */}
       <section>
@@ -289,7 +289,7 @@ export default function PuppyProgramOs() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* Tech Stack */}
       <section>
@@ -308,7 +308,7 @@ export default function PuppyProgramOs() {
         </div>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* Data Model */}
       <section>
@@ -326,7 +326,7 @@ content_modules           alerts \u2192 alert_events (append-only)
 foster_stats + foster_achievements`}</pre>
       </section>
 
-      <hr className="my-12 border-gray-200" />
+      <hr className="my-8 border-gray-200" />
 
       {/* Status */}
       <section className="pb-8">

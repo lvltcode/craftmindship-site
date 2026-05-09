@@ -5,7 +5,7 @@ export default function NotFound() {
   usePageMeta("Page Not Found");
 
   return (
-    <div className="px-6 py-24 text-center sm:py-32">
+    <div className="px-6 py-16 text-center sm:py-20">
       <p className="text-sm font-medium tracking-wide text-gray-400 uppercase">404</p>
       <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
         Page not found
