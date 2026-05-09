@@ -1,0 +1,719 @@
+
+<style>
+:root {
+  --ink: #1a1a2e; --ink-soft: #52526e; --ink-faint: #9898b4;
+  --foster-primary: #1e8a45; --foster-primary-light: #ecf8f0; --foster-primary-mid: #2da85a;
+  --staff-primary: #5048E5; --staff-primary-light: #eeedfd; --staff-primary-mid: #7c75ee;
+  --primary: var(--foster-primary); --primary-light: var(--foster-primary-light); --primary-mid: var(--foster-primary-mid);
+  --ring: var(--foster-primary);
+  --red: #dc2626; --red-light: #fef2f2;
+  --amber: #d97706; --amber-light: #fffbeb;
+  --green: #059669; --green-light: #ecfdf5;
+  --surf: #ffffff; --bg: #f8f6f4; --border: #e4e4f0;
+  --staff: var(--staff-primary); --staff-light: var(--staff-primary-light);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Inter', var(--font-sans), sans-serif; background: var(--bg); color: var(--ink); font-size: 14px; }
+
+.tabs { display:flex; gap:0; border-bottom: 1px solid var(--border); background: var(--surf); padding: 0 16px; flex-wrap: wrap; }
+.tab { padding: 10px 16px; font-size: 12px; font-weight: 500; color: var(--ink-soft); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; }
+.tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+.screen { display: none; }
+.screen.active { display: block; }
+.theme-foster {
+  --primary: var(--foster-primary);
+  --primary-light: var(--foster-primary-light);
+  --primary-mid: var(--foster-primary-mid);
+  --ring: var(--foster-primary);
+}
+.theme-staff {
+  --primary: var(--staff-primary);
+  --primary-light: var(--staff-primary-light);
+  --primary-mid: var(--staff-primary-mid);
+  --ring: var(--staff-primary);
+  --staff: var(--staff-primary);
+  --staff-light: var(--staff-primary-light);
+}
+
+/* ── FOSTER MOBILE ── */
+.phone { width: 390px; margin: 0 auto; background: var(--bg); min-height: 600px; padding-bottom: 70px; }
+.phone-wrap { display: flex; justify-content: center; padding: 24px 16px; }
+.bottom-nav { position: sticky; bottom: 0; background: var(--surf); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 8px 0 4px; z-index: 10; }
+.nav-btn { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 4px 12px; cursor: pointer; border: none; background: none; color: var(--ink-soft); font-size: 10px; font-weight: 500; border-radius: 8px; }
+.nav-btn.active { color: var(--primary); }
+.nav-btn svg { width: 20px; height: 20px; }
+.nav-badge { position: relative; }
+.nav-badge::after { content: ''; position: absolute; top: -2px; right: -2px; width: 7px; height: 7px; background: var(--red); border-radius: 50%; border: 1.5px solid white; }
+
+.card { background: var(--surf); border: 1px solid var(--border); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+.card-sm { border-radius: 12px; padding: 14px; }
+.label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-faint); margin-bottom: 4px; }
+.pill { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 600; }
+.pill-green { background: var(--green-light); color: var(--green); border: 1px solid #a7f3d0; }
+.pill-amber { background: var(--amber-light); color: var(--amber); border: 1px solid #fde68a; }
+.pill-red { background: var(--red-light); color: var(--red); border: 1px solid #fecaca; }
+.pill-purple { background: var(--primary-light); color: var(--primary); border: 1px solid var(--primary-mid); }
+
+/* puppy hero */
+.puppy-hero { background: var(--surf); border-radius: 20px; padding: 20px; margin-bottom: 12px; border: 1px solid var(--border); }
+.puppy-row { display: flex; gap: 14px; align-items: center; }
+.puppy-avatar { width: 64px; height: 64px; border-radius: 14px; background: linear-gradient(135deg, #fde68a, #f59e0b); display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; }
+.puppy-name { font-size: 22px; font-weight: 700; color: var(--ink); line-height: 1.1; }
+.puppy-meta { font-size: 12px; color: var(--ink-soft); margin-top: 3px; }
+.puppy-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 14px; }
+.stat-box { background: var(--bg); border-radius: 10px; padding: 10px 8px; text-align: center; }
+.stat-num { font-size: 18px; font-weight: 700; color: var(--primary); }
+.stat-lbl { font-size: 10px; color: var(--ink-faint); margin-top: 1px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* log nudge */
+.log-nudge { background: var(--amber-light); border: 1px solid #fde68a; border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
+.log-nudge-done { background: var(--green-light); border-color: #a7f3d0; }
+.nudge-btn { background: var(--amber); color: white; border: none; border-radius: 8px; padding: 7px 14px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.nudge-btn-done { background: var(--green); }
+
+/* streak */
+.streak-card { background: var(--surf); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+.streak-num { font-size: 32px; font-weight: 700; color: var(--green); line-height: 1; }
+.streak-flame { font-size: 28px; }
+
+/* upcoming strip */
+.strip { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 12px; }
+.strip::-webkit-scrollbar { display: none; }
+.strip-item { background: var(--surf); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; min-width: 120px; flex-shrink: 0; }
+.strip-item.urgent { border-color: #fde68a; background: var(--amber-light); }
+.strip-date { font-size: 10px; font-weight: 600; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.08em; }
+.strip-title { font-size: 12px; font-weight: 600; color: var(--ink); margin-top: 3px; }
+
+/* log form */
+.section-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-radius: 12px; background: var(--surf); border: 1px solid var(--border); margin-bottom: 4px; cursor: pointer; }
+.section-title { font-size: 14px; font-weight: 600; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.section-body { background: var(--surf); border: 1px solid var(--border); border-top: none; border-radius: 0 0 12px 12px; padding: 14px 16px; margin-bottom: 8px; }
+.stepper { display: flex; align-items: center; gap: 12px; }
+.step-btn { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+.step-val { font-size: 18px; font-weight: 700; min-width: 24px; text-align: center; }
+.pill-toggle { display: flex; flex-wrap: wrap; gap: 6px; }
+.tog { padding: 6px 12px; border-radius: 100px; border: 1px solid var(--border); background: var(--bg); font-size: 12px; cursor: pointer; font-weight: 500; color: var(--ink-soft); }
+.tog.on-purple { background: var(--primary); border-color: var(--primary); color: white; }
+.tog.on-amber { background: var(--amber); border-color: var(--amber); color: white; }
+.tog.on-red { background: var(--red); border-color: var(--red); color: white; }
+.save-btn { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 8px; }
+
+/* alerts */
+.alert-card { border-radius: 12px; padding: 14px; margin-bottom: 10px; }
+.alert-high { background: var(--red-light); border-left: 4px solid var(--red); }
+.alert-med { background: var(--amber-light); border-left: 4px solid var(--amber); }
+.alert-title { font-size: 13px; font-weight: 600; }
+.alert-body { font-size: 12px; color: var(--ink-soft); margin-top: 4px; line-height: 1.5; }
+.alert-meta { font-size: 11px; color: var(--ink-faint); margin-top: 6px; display: flex; align-items: center; gap: 6px; }
+
+/* content modules */
+.module-card { background: var(--surf); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 8px; display: flex; gap: 12px; align-items: flex-start; }
+.module-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.module-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.module-meta { font-size: 11px; color: var(--ink-soft); }
+.module-locked { opacity: 0.5; }
+
+/* profile */
+.profile-avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--primary-light); display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; color: var(--primary); margin: 0 auto 8px; }
+.badge-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.badge-item { background: var(--bg); border-radius: 10px; padding: 10px 6px; text-align: center; border: 1px solid var(--border); }
+.badge-item.earned { background: #fffbeb; border-color: #fde68a; }
+.badge-ico { font-size: 20px; }
+.badge-name { font-size: 10px; color: var(--ink-faint); margin-top: 3px; }
+.badge-item.earned .badge-name { color: var(--amber); font-weight: 600; }
+
+/* ── STAFF DESKTOP ── */
+.desktop { display: flex; min-height: 600px; background: var(--bg); }
+.sidebar { width: 220px; background: var(--ink); display: flex; flex-direction: column; padding: 20px 0; flex-shrink: 0; border-radius: 16px 0 0 16px; }
+.sidebar-brand { padding: 0 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.07); margin-bottom: 12px; }
+.sidebar-brand-name { font-size: 14px; font-weight: 700; color: white; }
+.sidebar-brand-sub { font-size: 10px; color: rgba(255,255,255,0.35); font-family: monospace; letter-spacing: 0.08em; margin-top: 2px; }
+.slink { display: flex; align-items: center; gap: 10px; padding: 9px 16px; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.65); cursor: pointer; transition: background 0.15s; }
+.slink:hover { background: rgba(255,255,255,0.06); }
+.slink.active { background: var(--primary); color: white; border-radius: 0 100px 100px 0; margin-right: 8px; }
+.slink svg { width: 16px; height: 16px; flex-shrink: 0; }
+.staff-main { flex: 1; overflow: auto; padding: 20px; }
+.staff-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.breadcrumb { font-size: 11px; font-weight: 600; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 6px; }
+.breadcrumb .cur { color: var(--staff); }
+.stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+.stat-card { background: var(--surf); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+.stat-card-num { font-size: 28px; font-weight: 700; color: var(--ink); line-height: 1; }
+.stat-card-num.red { color: var(--red); }
+.stat-card-num.green { color: var(--green); }
+.stat-card-label { font-size: 11px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+.staff-grid { display: grid; grid-template-columns: 1fr 320px; gap: 16px; }
+.staff-card { background: var(--surf); border: 1px solid var(--border); border-radius: 14px; padding: 18px; margin-bottom: 16px; }
+.staff-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.table-row { display: grid; grid-template-columns: 1fr 80px 80px 90px 60px; gap: 8px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.table-row:last-child { border-bottom: none; }
+.table-row.header { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint); padding-top: 0; }
+.table-row.alert-row { background: #fef2f2; margin: 0 -18px; padding: 10px 18px; }
+.puppy-row-info { display: flex; align-items: center; gap: 8px; }
+.mini-avatar { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, #fde68a, #f59e0b); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.mini-avatar.lab { background: linear-gradient(135deg, #dbeafe, #3b82f6); }
+.mini-avatar.other { background: linear-gradient(135deg, #d1fae5, #059669); }
+
+/* puppy detail hero */
+.detail-hero { background: var(--surf); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 16px; display: grid; grid-template-columns: 80px 1fr 200px; gap: 20px; align-items: start; }
+.detail-photo { width: 80px; height: 80px; border-radius: 14px; background: linear-gradient(135deg, #fde68a, #f59e0b); display: flex; align-items: center; justify-content: center; font-size: 38px; }
+.detail-name { font-size: 24px; font-weight: 700; color: var(--ink); }
+.detail-meta { font-size: 13px; color: var(--ink-soft); margin-top: 4px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.detail-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+.detail-stat { background: var(--bg); border-radius: 8px; padding: 8px 10px; }
+.detail-stat-val { font-size: 16px; font-weight: 700; color: var(--primary); }
+.detail-stat-lbl { font-size: 10px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.08em; }
+.foster-mini { text-align: right; }
+.foster-mini-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--primary-light); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: var(--primary); margin-left: auto; margin-bottom: 6px; }
+.dtabs { display: flex; gap: 24px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.dtab { padding: 8px 0; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint); cursor: pointer; border-bottom: 2px solid transparent; }
+.dtab.active { color: var(--staff); border-bottom-color: var(--staff); }
+
+/* support screen */
+.ticket-row { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.ticket-row:last-child { border-bottom: none; }
+.ticket-body { flex: 1; }
+.ticket-title { font-size: 13px; font-weight: 600; }
+.ticket-meta { font-size: 11px; color: var(--ink-faint); margin-top: 2px; }
+</style>
+
+<div class="tabs" id="mainTabs">
+  <div class="tab active" onclick="switchTab('foster-home')">Foster: Home</div>
+  <div class="tab" onclick="switchTab('foster-log')">Foster: Log</div>
+  <div class="tab" onclick="switchTab('foster-alerts')">Foster: Alerts</div>
+  <div class="tab" onclick="switchTab('foster-content')">Foster: Content</div>
+  <div class="tab" onclick="switchTab('foster-profile')">Foster: Profile</div>
+  <div class="tab" onclick="switchTab('staff-dashboard')">Staff: Dashboard</div>
+  <div class="tab" onclick="switchTab('staff-puppy')">Staff: Puppy Detail</div>
+  <div class="tab" onclick="switchTab('staff-support')">Staff: Support</div>
+</div>
+
+<!-- FOSTER HOME -->
+<div id="foster-home" class="screen theme-foster active">
+<div class="phone-wrap">
+<div class="phone">
+  <div class="puppy-hero">
+    <div class="puppy-row">
+      <div class="puppy-avatar">🐶</div>
+      <div>
+        <div class="puppy-name">Zuri</div>
+        <div class="puppy-meta">Yellow Labrador · Female · 7 months</div>
+        <div style="margin-top:6px"><span class="pill pill-green">Day 210</span></div>
+      </div>
+    </div>
+    <div class="puppy-stats">
+      <div class="stat-box"><div class="stat-num">7</div><div class="stat-lbl">Months</div></div>
+      <div class="stat-box"><div class="stat-num">210</div><div class="stat-lbl">Days placed</div></div>
+      <div class="stat-box"><div class="stat-num">19 kg</div><div class="stat-lbl">Weight</div></div>
+    </div>
+  </div>
+
+  <div class="log-nudge" id="logNudge">
+    <div>
+      <div style="font-size:13px;font-weight:600;color:var(--amber)">Log Zuri's day</div>
+      <div style="font-size:11px;color:var(--ink-soft);margin-top:2px">Takes less than 2 minutes</div>
+    </div>
+    <button class="nudge-btn" onclick="markLogged()">Log now →</button>
+  </div>
+
+  <div class="card card-sm" style="border-color:#fde68a;background:var(--amber-light)">
+    <div class="label">Feeding today</div>
+    <div style="font-size:15px;font-weight:700">1 cup · 3× daily · soaked</div>
+    <div style="font-size:11px;color:var(--ink-soft);margin-top:3px">Auto-updated for 7 months — Royal Canin Hydrolyzed</div>
+  </div>
+
+  <div class="streak-card">
+    <div class="streak-flame">🔥</div>
+    <div>
+      <div class="streak-num" id="streakNum">5</div>
+      <div style="font-size:11px;color:var(--ink-soft);margin-top:2px">days in a row — keep it up!</div>
+    </div>
+  </div>
+
+  <div class="label" style="margin-bottom:8px;padding:0 2px">Upcoming</div>
+  <div class="strip">
+    <div class="strip-item urgent"><div class="strip-date">Today</div><div class="strip-title">NexGard due</div></div>
+    <div class="strip-item urgent"><div class="strip-date">Tomorrow</div><div class="strip-title">Zoom class</div></div>
+    <div class="strip-item"><div class="strip-date">Mar 28</div><div class="strip-title">Vaccine check</div></div>
+    <div class="strip-item"><div class="strip-date">Mar 30</div><div class="strip-title">Zora sitting</div></div>
+  </div>
+
+  <div class="card card-sm" style="display:flex;gap:10px;align-items:center">
+    <div style="width:36px;height:36px;border-radius:10px;background:var(--primary-light);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">📚</div>
+    <div>
+      <div style="font-size:12px;font-weight:600">Today's learning</div>
+      <div style="font-size:11px;color:var(--ink-soft)">Adolescence: Managing Distraction</div>
+    </div>
+    <div style="margin-left:auto;color:var(--primary);font-size:18px">›</div>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="nav-btn active nav-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+      Home
+    </button>
+    <button class="nav-btn" onclick="switchTab('foster-log')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Log
+    </button>
+    <button class="nav-btn" onclick="switchTab('foster-content')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+      Content
+    </button>
+    <button class="nav-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      Checklist
+    </button>
+    <button class="nav-btn" onclick="switchTab('foster-profile')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Profile
+    </button>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- FOSTER LOG -->
+<div id="foster-log" class="screen theme-foster">
+<div class="phone-wrap">
+<div class="phone">
+  <div style="padding:16px 0 8px;font-size:17px;font-weight:700">Today's Log <span style="font-size:12px;font-weight:400;color:var(--ink-soft)">Sun, Mar 22</span></div>
+
+  <div class="section-header"><div class="section-title">🍽️ Meals</div><span style="color:var(--ink-faint);font-size:18px">›</span></div>
+  <div class="section-body">
+    <div style="font-size:12px;color:var(--ink-soft);margin-bottom:8px">Recommended: 3 meals today (1 cup each, soaked)</div>
+    <div class="stepper"><button class="step-btn">−</button><span class="step-val">3</span><button class="step-btn">+</button><span style="font-size:12px;color:var(--ink-soft);margin-left:4px">meals today</span></div>
+  </div>
+
+  <div class="section-header"><div class="section-title">💧 Potty</div><span style="color:var(--ink-faint);font-size:18px">›</span></div>
+  <div class="section-body">
+    <div style="display:flex;gap:24px">
+      <div><div style="font-size:11px;color:var(--ink-faint);margin-bottom:6px">Outdoor trips</div><div class="stepper"><button class="step-btn">−</button><span class="step-val">4</span><button class="step-btn">+</button></div></div>
+      <div><div style="font-size:11px;color:var(--ink-faint);margin-bottom:6px">Accidents</div><div class="stepper"><button class="step-btn">−</button><span class="step-val">0</span><button class="step-btn">+</button></div></div>
+    </div>
+  </div>
+
+  <div class="section-header"><div class="section-title">🎯 Training</div><span style="color:var(--ink-faint);font-size:18px">›</span></div>
+  <div class="section-body">
+    <div class="pill-toggle">
+      <span class="tog on-purple">Sit</span>
+      <span class="tog on-purple">Down</span>
+      <span class="tog">Wait</span>
+      <span class="tog on-purple">Loose leash</span>
+      <span class="tog">Crate</span>
+      <span class="tog on-purple">Social outing</span>
+    </div>
+  </div>
+
+  <div class="section-header"><div class="section-title">⚡ Behavior</div><span style="color:var(--ink-faint);font-size:18px">›</span></div>
+  <div class="section-body">
+    <div style="font-size:11px;color:var(--ink-faint);margin-bottom:8px">Flag if observed today</div>
+    <div class="pill-toggle">
+      <span class="tog on-amber">Jumping</span>
+      <span class="tog">Nipping</span>
+      <span class="tog">Pulling</span>
+      <span class="tog">Barking</span>
+      <span class="tog">Resource guarding</span>
+    </div>
+  </div>
+
+  <div class="section-header"><div class="section-title">🏥 Health</div><span style="color:var(--ink-faint);font-size:18px">›</span></div>
+  <div class="section-body">
+    <div style="font-size:11px;color:var(--ink-faint);margin-bottom:8px">Tap if any health issue observed — staff will be notified</div>
+    <div class="pill-toggle">
+      <span class="tog">Vomiting</span>
+      <span class="tog">Diarrhea</span>
+      <span class="tog">Lethargy</span>
+      <span class="tog">Limping</span>
+    </div>
+  </div>
+
+  <button class="save-btn">Save Zuri's log</button>
+
+  <div class="bottom-nav">
+    <button class="nav-btn" onclick="switchTab('foster-home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Home
+    </button>
+    <button class="nav-btn active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Log
+    </button>
+    <button class="nav-btn" onclick="switchTab('foster-content')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Content
+    </button>
+    <button class="nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Checklist</button>
+    <button class="nav-btn" onclick="switchTab('foster-profile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</button>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- FOSTER ALERTS -->
+<div id="foster-alerts" class="screen theme-foster">
+<div class="phone-wrap">
+<div class="phone">
+  <div style="padding:16px 0 12px;font-size:17px;font-weight:700">Alerts</div>
+  <div class="alert-card alert-high">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <span class="pill pill-red" style="font-size:10px">High · Health</span>
+      <span style="font-size:11px;color:var(--ink-faint)">2h ago</span>
+    </div>
+    <div class="alert-title" style="margin-top:8px">Jumping pattern detected</div>
+    <div class="alert-body">Jumping flagged on 3 of the last 5 logs. This may signal early reinforcement of an unwanted behaviour.</div>
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid #fecaca">
+      <div style="font-size:11px;font-weight:600;color:var(--red);margin-bottom:6px">Recommended actions</div>
+      <div style="font-size:12px;color:var(--ink-soft);display:flex;flex-direction:column;gap:4px">
+        <div>☐ Ignore the jump — no eye contact, turn away</div>
+        <div>☐ Reward all four paws on ground</div>
+        <div>☐ Practice "sit" as an alternative greeting</div>
+      </div>
+    </div>
+  </div>
+  <div class="alert-card alert-med">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <span class="pill pill-amber" style="font-size:10px">Medium · Socialization</span>
+      <span style="font-size:11px;color:var(--ink-faint)">3 days ago</span>
+    </div>
+    <div class="alert-title" style="margin-top:8px">No public outing in 8 days</div>
+    <div class="alert-body">Zuri is in week 14 — a critical socialization window. Outings help build confidence for public access work.</div>
+  </div>
+  <div style="text-align:center;padding:24px;color:var(--ink-faint);font-size:13px">No other active alerts</div>
+  <div class="bottom-nav">
+    <button class="nav-btn" onclick="switchTab('foster-home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Home</button>
+    <button class="nav-btn" onclick="switchTab('foster-log')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Log</button>
+    <button class="nav-btn" onclick="switchTab('foster-content')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Content</button>
+    <button class="nav-btn active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Checklist</button>
+    <button class="nav-btn" onclick="switchTab('foster-profile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</button>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- FOSTER CONTENT -->
+<div id="foster-content" class="screen theme-foster">
+<div class="phone-wrap">
+<div class="phone">
+  <div style="padding:16px 0 4px;font-size:17px;font-weight:700">Content</div>
+  <div style="background:var(--primary-light);border:1px solid var(--primary-mid);border-radius:12px;padding:12px 14px;margin-bottom:12px;display:flex;gap:10px;align-items:center">
+    <div style="font-size:20px">⭐</div>
+    <div><div style="font-size:12px;font-weight:600;color:var(--primary)">Start here — 5 things for today</div><div style="font-size:11px;color:var(--ink-soft);margin-top:1px">Critical first-day modules</div></div>
+  </div>
+  <div class="label" style="padding:0 2px;margin-bottom:8px">Training</div>
+  <div class="module-card"><div class="module-icon" style="background:#fffbeb">🎯</div><div><div class="module-title">Adolescence: Managing Distraction</div><div class="module-meta">Training · 4 min read</div></div><span class="pill pill-amber" style="margin-left:auto;font-size:10px">HIGH</span></div>
+  <div class="module-card"><div class="module-icon" style="background:var(--primary-light)">🐾</div><div><div class="module-title">Skill: Loose Leash Walking</div><div class="module-meta">Training · 3 min read · Completed</div></div><span class="pill pill-green" style="margin-left:auto;font-size:10px">✓</span></div>
+  <div class="label" style="padding:0 2px;margin-bottom:8px;margin-top:4px">Health</div>
+  <div class="module-card"><div class="module-icon" style="background:var(--red-light)">🏥</div><div><div class="module-title">When to Call the Vet: Diarrhea</div><div class="module-meta">Health · 5 min read</div></div><span class="pill pill-red" style="margin-left:auto;font-size:10px">HIGH</span></div>
+  <div class="module-card module-locked"><div class="module-icon" style="background:var(--bg)">🔒</div><div><div class="module-title">Heat Cycle: What to Expect</div><div class="module-meta">Health · Unlocks at 8 months (female)</div></div></div>
+  <div class="label" style="padding:0 2px;margin-bottom:8px;margin-top:4px">Program</div>
+  <div class="module-card"><div class="module-icon" style="background:#ecfeff">📋</div><div><div class="module-title">Preparing for Recall</div><div class="module-meta">Program · 6 min read</div></div><span class="pill pill-amber" style="margin-left:auto;font-size:10px">MED</span></div>
+  <div class="bottom-nav">
+    <button class="nav-btn" onclick="switchTab('foster-home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Home</button>
+    <button class="nav-btn" onclick="switchTab('foster-log')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Log</button>
+    <button class="nav-btn active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Content</button>
+    <button class="nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Checklist</button>
+    <button class="nav-btn" onclick="switchTab('foster-profile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</button>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- FOSTER PROFILE -->
+<div id="foster-profile" class="screen theme-foster">
+<div class="phone-wrap">
+<div class="phone">
+  <div style="padding:16px 0 12px;font-size:17px;font-weight:700">Profile</div>
+  <div class="card" style="text-align:center;margin-bottom:12px">
+    <div class="profile-avatar">S</div>
+    <div style="font-size:17px;font-weight:700">Sarah</div>
+    <div style="font-size:12px;color:var(--ink-soft);margin-top:2px">Foster since 2021 · 3 puppies raised</div>
+    <div style="display:flex;justify-content:center;gap:8px;margin-top:10px">
+      <span class="pill pill-green">Active foster</span>
+      <span class="pill pill-purple">Zuri · Day 210</span>
+    </div>
+  </div>
+  <div class="card card-sm" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">
+    <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--green)">🔥 5</div><div class="label">Streak</div></div>
+    <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--primary)">47</div><div class="label">Total logs</div></div>
+    <div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--amber)">1,240</div><div class="label">Points</div></div>
+  </div>
+  <div class="label" style="margin-bottom:8px;padding:0 2px">Badges</div>
+  <div class="badge-grid">
+    <div class="badge-item earned"><div class="badge-ico">🏅</div><div class="badge-name">First Step</div></div>
+    <div class="badge-item earned"><div class="badge-ico">🔥</div><div class="badge-name">On a Roll</div></div>
+    <div class="badge-item earned"><div class="badge-ico">📚</div><div class="badge-name">Learner</div></div>
+    <div class="badge-item"><div class="badge-ico" style="opacity:0.3">?</div><div class="badge-name">Locked</div></div>
+    <div class="badge-item"><div class="badge-ico" style="opacity:0.3">?</div><div class="badge-name">Locked</div></div>
+    <div class="badge-item"><div class="badge-ico" style="opacity:0.3">?</div><div class="badge-name">Locked</div></div>
+    <div class="badge-item"><div class="badge-ico" style="opacity:0.3">?</div><div class="badge-name">Locked</div></div>
+    <div class="badge-item"><div class="badge-ico" style="opacity:0.3">?</div><div class="badge-name">Locked</div></div>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-btn" onclick="switchTab('foster-home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Home</button>
+    <button class="nav-btn" onclick="switchTab('foster-log')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Log</button>
+    <button class="nav-btn" onclick="switchTab('foster-content')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Content</button>
+    <button class="nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Checklist</button>
+    <button class="nav-btn active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</button>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- STAFF DASHBOARD -->
+<div id="staff-dashboard" class="screen theme-staff">
+<div style="padding:16px">
+<div class="desktop" style="border-radius:16px;overflow:hidden;border:1px solid var(--border)">
+  <div class="sidebar">
+    <div class="sidebar-brand"><div class="sidebar-brand-name">Puppy Program OS</div><div class="sidebar-brand-sub">STAFF PORTAL</div></div>
+    <div class="slink active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</div>
+    <div class="slink" onclick="switchTab('staff-puppy')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 5.172C10 3.782 8.423 2.679 6.5 3c-2.823.47-4.113 6.006-4 7 .08.703 1.725 1.722 3.656 1 1.261-.472 1.96-1.45 2.344-2.5"/><path d="M14.267 5.172c0-1.39 1.577-2.493 3.5-2.172 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.96-1.45-2.344-2.5"/><path d="M8 14v.5"/><path d="M16 14v.5"/><path d="M11.25 16.25h1.5L12 17l-.75-.75z"/><path d="M4.42 11.247A13.152 13.152 0 0012 13c2.61 0 5.085-.694 7.166-1.87"/><path d="M4 16.105C4.5 17.5 5.5 19 7 20l-1 2h4s.5-1.5 1-2h0c.5.5 1 2 1 2h4l-1-2c1.5-1 2.5-2.5 3-3.895"/></svg>Puppies</div>
+    <div class="slink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>Fosters</div>
+    <div class="slink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>Alerts <span style="margin-left:auto;background:var(--red);color:white;font-size:10px;font-weight:700;padding:1px 6px;border-radius:100px">3</span></div>
+    <div class="slink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>Requests</div>
+    <div class="slink" onclick="switchTab('staff-support')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Support <span style="margin-left:auto;background:var(--amber);color:white;font-size:10px;font-weight:700;padding:1px 6px;border-radius:100px">5</span></div>
+    <div class="slink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Content</div>
+    <div class="slink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Settings</div>
+  </div>
+  <div class="staff-main">
+    <div class="staff-header">
+      <div class="breadcrumb"><span>Puppy Program OS</span><span>›</span><span class="cur">Dashboard</span></div>
+      <div style="font-size:12px;color:var(--ink-faint)">Sun, Mar 22 · 14:32</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-card"><div class="stat-card-num">12</div><div class="stat-card-label">Active puppies</div></div>
+      <div class="stat-card"><div class="stat-card-num red">3</div><div class="stat-card-label">Open alerts</div></div>
+      <div class="stat-card"><div class="stat-card-num red">1</div><div class="stat-card-label">High severity</div></div>
+      <div class="stat-card"><div class="stat-card-num green">11</div><div class="stat-card-label">Active fosters</div></div>
+    </div>
+    <div class="staff-grid">
+      <div>
+        <div class="staff-card">
+          <h3>🐕 Puppies</h3>
+          <div class="table-row header"><span>Puppy</span><span>Age</span><span>Last log</span><span>Alert</span><span>Days</span></div>
+          <div class="table-row alert-row">
+            <div class="puppy-row-info"><div class="mini-avatar">🐶</div><span style="font-weight:600">Zuri</span></div>
+            <span>7 mo</span><span style="color:var(--green)">Today</span>
+            <span class="pill pill-red" style="font-size:10px">High</span>
+            <span style="color:var(--ink-soft)">210</span>
+          </div>
+          <div class="table-row">
+            <div class="puppy-row-info"><div class="mini-avatar lab">🐾</div><span style="font-weight:600">Zora</span></div>
+            <span>7 mo</span><span style="color:var(--green)">Today</span>
+            <span class="pill pill-amber" style="font-size:10px">Med</span>
+            <span style="color:var(--ink-soft)">195</span>
+          </div>
+          <div class="table-row">
+            <div class="puppy-row-info"><div class="mini-avatar other">🐕</div><span style="font-weight:600">Atlas</span></div>
+            <span>4 mo</span><span style="color:var(--amber)">2d ago</span>
+            <span class="pill" style="background:var(--bg);color:var(--ink-faint);font-size:10px;border:1px solid var(--border)">None</span>
+            <span style="color:var(--ink-soft)">122</span>
+          </div>
+          <div class="table-row">
+            <div class="puppy-row-info"><div class="mini-avatar">🦮</div><span style="font-weight:600">Maple</span></div>
+            <span>10 mo</span><span style="color:var(--red)">5d ago</span>
+            <span class="pill pill-amber" style="font-size:10px">Med</span>
+            <span style="color:var(--ink-soft)">298</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="staff-card" style="margin-bottom:16px">
+          <h3 style="color:var(--red)">⚠️ Needs attention</h3>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="background:var(--red-light);border-radius:8px;padding:10px;border-left:3px solid var(--red)"><div style="font-size:12px;font-weight:600">Zuri — Jumping pattern</div><div style="font-size:11px;color:var(--ink-soft);margin-top:2px">3 of last 5 logs · 2h ago</div></div>
+            <div style="background:var(--amber-light);border-radius:8px;padding:10px;border-left:3px solid var(--amber)"><div style="font-size:12px;font-weight:600">Maple — No log in 5 days</div><div style="font-size:11px;color:var(--ink-soft);margin-top:2px">Socialization window at risk</div></div>
+            <div style="background:var(--amber-light);border-radius:8px;padding:10px;border-left:3px solid var(--amber)"><div style="font-size:12px;font-weight:600">5 support tickets awaiting reply</div><div style="font-size:11px;color:var(--ink-soft);margin-top:2px">Oldest: 26h ago</div></div>
+          </div>
+        </div>
+        <div class="staff-card">
+          <h3>📥 Request queue</h3>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px"><span>Sitting requests</span><span class="pill pill-amber" style="font-size:10px">2 new</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px"><span>Food pickups</span><span class="pill pill-purple" style="font-size:10px">3 pending</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px"><span>NexGard requests</span><span class="pill pill-green" style="font-size:10px">All clear</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- STAFF PUPPY DETAIL -->
+<div id="staff-puppy" class="screen theme-staff">
+<div style="padding:16px">
+<div class="desktop" style="border-radius:16px;overflow:hidden;border:1px solid var(--border)">
+  <div class="sidebar">
+    <div class="sidebar-brand"><div class="sidebar-brand-name">Puppy Program OS</div><div class="sidebar-brand-sub">STAFF PORTAL</div></div>
+    <div class="slink" onclick="switchTab('staff-dashboard')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</div>
+    <div class="slink active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 5.172C10 3.782 8.423 2.679 6.5 3c-2.823.47-4.113 6.006-4 7 .08.703 1.725 1.722 3.656 1 1.261-.472 1.96-1.45 2.344-2.5"/><path d="M14.267 5.172c0-1.39 1.577-2.493 3.5-2.172 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.96-1.45-2.344-2.5"/><path d="M8 14v.5"/><path d="M16 14v.5"/><path d="M11.25 16.25h1.5L12 17l-.75-.75z"/><path d="M4.42 11.247A13.152 13.152 0 0012 13c2.61 0 5.085-.694 7.166-1.87"/><path d="M4 16.105C4.5 17.5 5.5 19 7 20l-1 2h4s.5-1.5 1-2h0c.5.5 1 2 1 2h4l-1-2c1.5-1 2.5-2.5 3-3.895"/></svg>Puppies</div>
+    <div class="slink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>Alerts</div>
+    <div class="slink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>Requests</div>
+    <div class="slink" onclick="switchTab('staff-support')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Support</div>
+  </div>
+  <div class="staff-main">
+    <div class="staff-header">
+      <div class="breadcrumb"><span style="cursor:pointer" onclick="switchTab('staff-dashboard')">Dashboard</span><span>›</span><span style="cursor:pointer">Puppies</span><span>›</span><span class="cur">Zuri</span></div>
+    </div>
+    <div class="detail-hero">
+      <div class="detail-photo">🐶</div>
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+          <div class="detail-name">Zuri</div>
+          <span class="pill pill-green">Active</span>
+          <span class="pill pill-red">High alert</span>
+        </div>
+        <div class="detail-meta">
+          <span>Yellow Labrador</span><span>·</span><span>Female</span><span>·</span><span>DOB Aug 9, 2025</span>
+        </div>
+        <div class="detail-stats">
+          <div class="detail-stat"><div class="detail-stat-val">7 mo</div><div class="detail-stat-lbl">Age</div></div>
+          <div class="detail-stat"><div class="detail-stat-val">Day 210</div><div class="detail-stat-lbl">Placed</div></div>
+          <div class="detail-stat"><div class="detail-stat-val">19 kg</div><div class="detail-stat-lbl">Weight</div></div>
+          <div class="detail-stat"><div class="detail-stat-val">47</div><div class="detail-stat-lbl">Logs total</div></div>
+        </div>
+      </div>
+      <div class="foster-mini">
+        <div class="foster-mini-avatar">S</div>
+        <div style="font-size:13px;font-weight:600">Sarah</div>
+        <div style="font-size:11px;color:var(--ink-soft)">Foster since 2021</div>
+        <div style="font-size:11px;color:var(--staff);margin-top:4px;cursor:pointer">View profile →</div>
+      </div>
+    </div>
+    <div class="dtabs">
+      <div class="dtab active">Overview</div>
+      <div class="dtab">Logs</div>
+      <div class="dtab">Alerts</div>
+      <div class="dtab">Milestones</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 280px;gap:16px">
+      <div>
+        <div class="staff-card">
+          <h3>🍽️ Feeding guidance</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+            <div><div class="label">Food type</div><div style="font-size:13px;font-weight:500;background:var(--bg);padding:8px 10px;border-radius:8px;border:1px solid var(--border)">Royal Canin Hydrolyzed</div></div>
+            <div><div class="label">Daily total</div><div style="font-size:13px;font-weight:500;background:var(--bg);padding:8px 10px;border-radius:8px;border:1px solid var(--border)">3 cups · 3 meals · soaked</div></div>
+          </div>
+          <div><div class="label">Staff note for foster</div><textarea style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;resize:none;color:var(--ink)" rows="2" placeholder="Add feeding note for Sarah..."></textarea></div>
+          <div style="margin-top:12px;padding:10px 12px;background:var(--amber-light);border-radius:8px;border:1px solid #fde68a;display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-size:12px;font-weight:600;color:var(--amber)">Diet transition pending</div><div style="font-size:11px;color:var(--ink-soft)">Medical notes indicate Hypo → EN transition overdue</div></div>
+            <button style="background:var(--amber);color:white;border:none;border-radius:6px;padding:6px 12px;font-size:11px;font-weight:600;cursor:pointer">Update</button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="staff-card" style="margin-bottom:12px">
+          <h3 style="color:var(--red)">⚠️ Active alerts <span style="background:var(--red-light);color:var(--red);font-size:11px;padding:2px 7px;border-radius:100px;font-weight:700">1 new</span></h3>
+          <div style="background:var(--red-light);border-left:3px solid var(--red);border-radius:0 8px 8px 0;padding:10px;margin-bottom:8px">
+            <div style="font-size:11px;font-weight:600;color:var(--red);text-transform:uppercase;letter-spacing:0.08em">Behavior · Medium</div>
+            <div style="font-size:12px;font-weight:600;margin-top:3px">Jumping pattern detected</div>
+            <div style="font-size:11px;color:var(--ink-soft);margin-top:2px">3 of last 5 logs · 2h ago</div>
+          </div>
+          <button style="width:100%;padding:7px;background:none;border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--staff);font-weight:600;cursor:pointer">View all alerts →</button>
+        </div>
+        <div class="staff-card">
+          <h3>📋 Recent logs</h3>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-size:12px"><div style="font-weight:600">Today · 08:30</div><div style="color:var(--ink-soft)">3 meals · 4 potty · Sit, Down, Social outing · Jumping flagged</div></div>
+            <div style="font-size:12px;border-top:1px solid var(--border);padding-top:8px"><div style="font-weight:600">Yesterday · 19:15</div><div style="color:var(--ink-soft)">3 meals · 5 potty · Loose leash · No issues</div></div>
+          </div>
+          <button style="width:100%;margin-top:10px;padding:7px;background:none;border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--staff);font-weight:600;cursor:pointer">View all logs →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- STAFF SUPPORT -->
+<div id="staff-support" class="screen theme-staff">
+<div style="padding:16px">
+<div class="desktop" style="border-radius:16px;overflow:hidden;border:1px solid var(--border)">
+  <div class="sidebar">
+    <div class="sidebar-brand"><div class="sidebar-brand-name">Puppy Program OS</div><div class="sidebar-brand-sub">STAFF PORTAL</div></div>
+    <div class="slink" onclick="switchTab('staff-dashboard')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</div>
+    <div class="slink" onclick="switchTab('staff-puppy')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 5.172C10 3.782 8.423 2.679 6.5 3c-2.823.47-4.113 6.006-4 7 .08.703 1.725 1.722 3.656 1 1.261-.472 1.96-1.45 2.344-2.5"/><path d="M14.267 5.172c0-1.39 1.577-2.493 3.5-2.172 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.96-1.45-2.344-2.5"/></svg>Puppies</div>
+    <div class="slink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>Alerts</div>
+    <div class="slink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/></svg>Requests</div>
+    <div class="slink active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Support <span style="margin-left:auto;background:var(--amber);color:white;font-size:10px;font-weight:700;padding:1px 6px;border-radius:100px">5</span></div>
+  </div>
+  <div class="staff-main">
+    <div class="staff-header">
+      <div class="breadcrumb"><span>Dashboard</span><span>›</span><span class="cur">Support</span></div>
+      <div style="display:flex;gap:8px">
+        <span class="pill pill-red" style="font-size:11px">1 Emergency</span>
+        <span class="pill pill-amber" style="font-size:11px">2 High</span>
+        <span class="pill" style="background:var(--bg);border:1px solid var(--border);font-size:11px">2 Normal</span>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="staff-card">
+        <h3>📬 Open tickets</h3>
+        <div class="ticket-row">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--red-light);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:var(--red);flex-shrink:0">S</div>
+          <div class="ticket-body">
+            <div class="ticket-title">Zuri vomited twice this morning</div>
+            <div class="ticket-meta">Sarah · Zuri · Health concern · 26h ago</div>
+            <div style="margin-top:4px"><span class="pill pill-red" style="font-size:10px">Emergency</span></div>
+          </div>
+        </div>
+        <div class="ticket-row">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--amber-light);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:var(--amber);flex-shrink:0">M</div>
+          <div class="ticket-body">
+            <div class="ticket-title">How much should I feed during transition?</div>
+            <div class="ticket-meta">Marcus · Atlas · Feeding question · 8h ago</div>
+            <div style="margin-top:4px"><span class="pill pill-amber" style="font-size:10px">High</span></div>
+          </div>
+        </div>
+        <div class="ticket-row">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--primary-light);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:var(--primary);flex-shrink:0">J</div>
+          <div class="ticket-body">
+            <div class="ticket-title">NexGard pickup — week of Mar 25</div>
+            <div class="ticket-meta">Jamie · Maple · Medication request · 3h ago</div>
+            <div style="margin-top:4px"><span class="pill" style="background:var(--bg);border:1px solid var(--border);font-size:10px">Normal</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="staff-card">
+        <h3>💬 Reply — Sarah · Zuri</h3>
+        <div style="background:var(--red-light);border-radius:10px;padding:12px;margin-bottom:12px;border-left:3px solid var(--red)">
+          <div style="font-size:11px;font-weight:600;color:var(--red);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Emergency · Health concern · 26h ago</div>
+          <div style="font-size:13px">"Zuri vomited twice this morning, once at 6am and once at 8:30am. She seems tired but is drinking water. No blood. Ate her breakfast but slowly. Should I be worried?"</div>
+          <div style="font-size:11px;color:var(--ink-faint);margin-top:6px">Puppy: Zuri · 7 months · Yellow Labrador</div>
+        </div>
+        <div style="margin-bottom:10px"><div class="label">Status</div>
+          <div style="display:flex;gap:6px;margin-top:4px">
+            <span class="pill pill-red" style="font-size:11px;cursor:pointer">Open</span>
+            <span class="pill" style="background:var(--bg);border:1px solid var(--border);font-size:11px;cursor:pointer">Reviewing</span>
+            <span class="pill" style="background:var(--bg);border:1px solid var(--border);font-size:11px;cursor:pointer">Resolved</span>
+          </div>
+        </div>
+        <textarea style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px;font-size:13px;font-family:inherit;resize:none;color:var(--ink)" rows="4" placeholder="Type your reply to Sarah..."></textarea>
+        <button style="width:100%;margin-top:8px;padding:10px;background:var(--primary);color:white;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">Send reply</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function switchTab(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const tabMap = {
+    'foster-home':'Foster: Home','foster-log':'Foster: Log','foster-alerts':'Foster: Alerts',
+    'foster-content':'Foster: Content','foster-profile':'Foster: Profile',
+    'staff-dashboard':'Staff: Dashboard','staff-puppy':'Staff: Puppy Detail','staff-support':'Staff: Support'
+  };
+  document.querySelectorAll('.tab').forEach(t => { if(t.textContent.trim()===tabMap[id]) t.classList.add('active'); });
+}
+function markLogged() {
+  const n = document.getElementById('logNudge');
+  n.className = 'log-nudge log-nudge-done';
+  n.innerHTML = '<div><div style="font-size:13px;font-weight:600;color:var(--green)">✓ Logged today</div><div style="font-size:11px;color:var(--ink-soft);margin-top:2px">You\'re building Zuri\'s record</div></div><span class="pill pill-green">Done</span>';
+  const s = document.getElementById('streakNum');
+  s.textContent = parseInt(s.textContent) + 1;
+}
+</script>

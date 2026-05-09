@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Puppy Program OS — Product Overview</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./shared.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --primary: #4A56CB;
+  --primary-light: #EEF1FF;
+  --primary-mid: #CAD3FF;
+  --success: #2F9569;
+  --success-light: #E6F6EE;
+  --warning: #B8871A;
+  --warning-light: #FFF5DB;
+  --danger: #BE4C4C;
+  --danger-light: #FDEDED;
+  --bg: #F3F5F8;
+  --surface: #FFFFFF;
+  --surface-soft: #F8FAFF;
+  --text: #1F2A3A;
+  --text-2: #4D5B70;
+  --text-3: #7E8AA0;
+  --border: #DEE4EE;
+  --sidebar: #EDF2FB;
+  --foster-accent: #6C77D6;
+  --staff-accent: #2F6FB8;
+}
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: radial-gradient(circle at 15% 0%, #FFFFFF 0%, var(--bg) 55%);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ── LAYOUT ── */
+.page { max-width: 960px; margin: 0 auto; padding: 48px 32px; }
+@media (max-width: 700px) { .page { padding: 24px 16px; } }
+
+/* ── COVER ── */
+.cover {
+  background: linear-gradient(140deg, #1F2C47 0%, #263660 55%, #2D436D 100%);
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.14);
+  padding: 56px 48px;
+  margin-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 28px 46px -34px rgba(20, 32, 64, 0.58);
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -120px; right: -100px;
+  width: 340px; height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(114,139,255,0.3) 0%, rgba(114,139,255,0) 70%);
+}
+.cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0));
+  pointer-events: none;
+}
+.cover-tag { font-size: 11px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; color: #E8ECFF; background: rgba(148,167,255,0.18); border: 1px solid rgba(181,196,255,0.24); display: inline-flex; padding: 5px 12px; border-radius: 20px; width: fit-content; position: relative; z-index: 1; }
+.cover h1 { font-size: 42px; font-weight: 800; color: #fff; line-height: 1.15; letter-spacing: -1px; }
+.cover p { font-size: 16px; color: #D5DDF1; max-width: 520px; }
+.cover-meta { display: flex; gap: 24px; margin-top: 8px; flex-wrap: wrap; }
+.cover-meta-item { display: flex; flex-direction: column; gap: 2px; }
+.cover-meta-item .label { font-size: 11px; color: #A9B5D7; text-transform: uppercase; letter-spacing: 1px; }
+.cover-meta-item .value { font-size: 14px; color: #EEF2FF; font-weight: 500; }
+.cover-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+.cover-badge { font-size: 12px; padding: 4px 12px; border-radius: 20px; font-weight: 600; }
+.cover-badge.foster { background: rgba(160,140,255,0.18); color: #E4D9FF; border: 1px solid rgba(160,140,255,0.35); }
+.cover-badge.staff { background: rgba(106,184,255,0.18); color: #D5EDFF; border: 1px solid rgba(106,184,255,0.32); }
+
+/* ── SECTION HEADERS ── */
+.section-label {
+  display: flex; align-items: center; gap: 12px;
+  margin: 56px 0 28px;
+}
+.section-label .role-pill {
+  font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 20px; border: 1px solid transparent;
+}
+.section-label .role-pill.foster { background: #EEF1FF; color: #4E5BC7; border-color: #D8E0FB; }
+.section-label .role-pill.staff { background: #EAF3FF; color: #2E6EBA; border-color: #D2E3FA; }
+.section-label h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
+.section-desc { font-size: 15px; color: var(--text-2); margin-bottom: 32px; max-width: 680px; line-height: 1.7; }
+
+/* ── SCREEN BLOCK ── */
+.screen-block { margin-bottom: 56px; }
+.screen-block-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-3); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.screen-block-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }
+
+/* ── MOCKUP FRAME ── */
+.mockup-frame {
+  border-radius: 18px;
+  overflow: visible;
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 40px -32px rgba(31,42,58,0.45), 0 1px 2px rgba(31,42,58,0.08);
+}
+.mockup-frame.mobile {
+  max-width: 390px;
+  margin: 0 auto;
+  border-radius: 22px;
+}
+.mockup-browser-bar {
+  background: linear-gradient(180deg, #F8FAFF 0%, #EFF3FB 100%);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 18px 18px 0 0;
+  border-bottom: 1px solid var(--border);
+}
+.browser-dots { display: flex; gap: 5px; }
+.browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+.browser-dot.r { background: #FF5F57; }
+.browser-dot.y { background: #FEBC2E; }
+.browser-dot.g { background: #28C840; }
+.browser-url { flex: 1; background: #E8EDF7; border: 1px solid #D8DFEB; border-radius: 7px; padding: 4px 10px; font-size: 11px; color: #637089; margin-left: 8px; }
+.mobile-bar {
+  background: linear-gradient(135deg, #2C3960 0%, #36477A 100%);
+  padding: 14px 16px 6px;
+  border-radius: 22px 22px 0 0;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.mobile-bar::before {
+  content: 'Puppy Program OS';
+  position: absolute;
+  left: 14px;
+  top: 9px;
+  font-size: 9px;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: rgba(236,241,255,0.8);
+}
+.mobile-notch { width: 84px; height: 5px; background: rgba(255,255,255,0.28); border-radius: 10px; }
+
+/* ── CALLOUT ANNOTATIONS ── */
+.annotated { position: relative; }
+.callout {
+  position: absolute;
+  z-index: 10;
+}
+.callout-circle {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 14px -8px rgba(74,86,203,0.95);
+  cursor: default;
+}
+.callout-circle.danger { background: var(--danger); box-shadow: 0 6px 14px -8px rgba(190,76,76,0.95); }
+.callout-circle.success { background: var(--success); box-shadow: 0 6px 14px -8px rgba(47,149,105,0.95); }
+.callout-circle.warning { background: var(--warning); box-shadow: 0 6px 14px -8px rgba(184,135,26,0.95); }
+
+/* highlight ring around areas */
+.highlight-ring {
+  position: absolute;
+  border: 2.5px solid var(--primary);
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 5;
+}
+.highlight-ring.danger { border-color: var(--danger); }
+.highlight-ring.success { border-color: var(--success); }
+.highlight-ring.warning { border-color: var(--warning); }
+
+/* ── CALLOUT LEGEND ── */
+.callout-legend {
+  display: flex; flex-direction: column; gap: 8px;
+  margin-top: 16px;
+  padding: 16px 20px 18px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F9FBFF 100%);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 24px -26px rgba(31,42,58,0.55);
+}
+.callout-legend-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13px; line-height: 1.5;
+}
+.callout-legend-item .num {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--primary); color: #fff;
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.callout-legend-item .num.danger { background: var(--danger); }
+.callout-legend-item .num.success { background: var(--success); }
+.callout-legend-item .num.warning { background: var(--warning); }
+.callout-legend-item strong { color: var(--text); }
+.callout-legend-item span { color: var(--text-2); }
+
+/* ── SCREEN MOCKUP BUILT IN HTML ── */
+.screen-ui {
+  background: var(--surface-soft);
+  border-radius: 0 0 16px 16px;
+  overflow: hidden;
+  font-size: 13px;
+}
+
+/* Staff sidebar */
+.staff-layout { display: flex; min-height: 480px; }
+.staff-sidebar { width: 210px; background: linear-gradient(180deg, #F7FAFF 0%, var(--sidebar) 100%); padding: 16px 0; display: flex; flex-direction: column; flex-shrink: 0; border-right: 1px solid var(--border); }
+.staff-sidebar .s-logo { display: flex; align-items: center; gap: 9px; padding: 8px 14px 16px; margin-bottom: 4px; }
+.staff-sidebar .s-logo .dot { width: 24px; height: 24px; border-radius: 8px; background: linear-gradient(135deg, #5260D7 0%, #3A76C9 100%); color: #fff; font-size: 11px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 16px -12px rgba(43,78,180,0.9); }
+.staff-sidebar .s-logo span { font-size: 12px; font-weight: 700; color: #253450; letter-spacing: 0.1px; }
+.s-nav-item { display: flex; align-items: center; gap: 8px; padding: 9px 14px; font-size: 12px; color: #5B6880; cursor: default; margin: 0 6px; border-radius: 10px; }
+.s-nav-item.active { background: #E8EDFF; color: var(--primary); font-weight: 600; }
+.s-nav-item .icon { font-size: 13px; width: 16px; text-align: center; }
+.s-nav-item .badge { margin-left: auto; background: #EF6262; color: #fff; font-size: 9px; font-weight: 700; padding: 1px 6px; border-radius: 8px; }
+.staff-content { flex: 1; padding: 20px 22px; background: linear-gradient(180deg, #F9FBFF 0%, #F3F6FB 100%); overflow: auto; }
+
+/* Shared UI components */
+.ui-page-title { font-size: 18px; font-weight: 700; margin-bottom: 14px; color: var(--text); }
+.ui-card { background: var(--surface); border-radius: 14px; border: 1px solid var(--border); padding: 14px; margin-bottom: 10px; box-shadow: 0 12px 28px -26px rgba(31,42,58,0.6); }
+.ui-badge { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 20px; font-size: 10px; font-weight: 700; border: 1px solid transparent; }
+.ui-badge.active { background: #E6F6EE; color: #1D7A50; border-color: #BCE7D0; }
+.ui-badge.medium { background: #FFF4DA; color: #8A600B; border-color: #F1DEAD; }
+.ui-badge.high { background: #FDECEC; color: #A33A3A; border-color: #F5CACA; }
+.ui-badge.info { background: #E8F0FF; color: #2652A2; border-color: #CDDCF9; }
+.ui-stat { background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFF 100%); border-radius: 10px; border: 1px solid var(--border); padding: 10px 12px; }
+.ui-stat .num { font-size: 22px; font-weight: 700; }
+.ui-stat .lbl { font-size: 10px; color: var(--text-3); margin-top: 2px; }
+.stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-bottom: 10px; }
+.stats-row.two { grid-template-columns: repeat(2,1fr); }
+.ui-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+.ui-table th { text-align: left; padding: 6px 8px; color: var(--text-3); font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); font-weight: 600; }
+.ui-table td { padding: 8px 8px; border-bottom: 1px solid #F9F9F9; }
+.ui-table tr:last-child td { border-bottom: none; }
+.attn-card { background: #FFF9EA; border: 1px solid #F2DFB1; border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; box-shadow: 0 10px 24px -24px rgba(88,62,10,0.5); }
+.attn-title { font-size: 12px; font-weight: 700; color: #845A05; margin-bottom: 8px; }
+.attn-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid rgba(184,135,26,0.2); font-size: 11px; }
+.attn-row:last-child { border-bottom: none; }
+
+/* Foster mobile UI */
+.foster-mobile { background: linear-gradient(180deg, #FFFFFF 0%, #FAFCFF 100%); border-radius: 0 0 18px 18px; padding: 16px; position: relative; }
+.foster-mobile::before {
+  content: 'Puppy Program OS';
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #EEF2FF;
+  border: 1px solid #D8E0FB;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #4652C1;
+}
+.foster-greeting { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.foster-sub { font-size: 11px; color: var(--text-2); margin-bottom: 14px; }
+.foster-streak { display: inline-flex; align-items: center; gap: 5px; background: var(--primary-light); color: var(--primary); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-bottom: 14px; }
+.foster-alert { background: #FFF8E8; border: 1px solid #F0DBA8; border-left: 4px solid var(--warning); border-radius: 12px; padding: 10px 12px; display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 11px; cursor: default; box-shadow: 0 10px 24px -24px rgba(136,95,14,0.58); }
+.foster-bottom-nav { display: flex; background: #fff; border-top: 1px solid var(--border); border-radius: 10px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.7); }
+.bnav { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 8px 4px; font-size: 9px; color: var(--text-3); cursor: default; gap: 2px; }
+.bnav.active { color: var(--primary); }
+.bnav .bi { font-size: 18px; }
+
+/* Log screen */
+.log-section { margin-bottom: 12px; }
+.log-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-3); margin-bottom: 6px; }
+.chip-row { display: flex; flex-wrap: wrap; gap: 4px; }
+.chip { font-size: 10px; padding: 4px 10px; border-radius: 20px; border: 1px solid var(--border); background: #fff; cursor: default; }
+.chip.sel { border-color: var(--primary); background: var(--primary-light); color: var(--primary); font-weight: 600; }
+.chip.sel.warn { border-color: var(--warning); background: var(--warning-light); color: #92400E; }
+.num-input { display: flex; align-items: center; gap: 8px; }
+.num-btn { width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--border); background: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: default; }
+.num-val { font-size: 16px; font-weight: 700; width: 24px; text-align: center; }
+.btn-primary { background: linear-gradient(135deg, #4F5ED4 0%, #3F70C9 100%); color: #fff; border: none; border-radius: 11px; padding: 10px 16px; font-size: 12px; font-weight: 700; cursor: default; width: 100%; text-align: center; margin-top: 10px; box-shadow: 0 12px 22px -16px rgba(64,95,199,0.9); }
+.btn-sm { font-size: 10px; padding: 4px 10px; border-radius: 8px; border: 1px solid var(--border); background: #fff; color: #4D5B70; font-weight: 600; cursor: default; }
+.btn-sm.success { background: #E6F6EE; color: #1D7A50; border-color: #BCE7D0; }
+
+/* ── FLOW DIAGRAM ── */
+.flow-diagram { margin: 0 0 40px; }
+.flow-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-3); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.flow-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }
+.flow-track { display: flex; align-items: flex-start; gap: 0; overflow-x: auto; padding-bottom: 8px; }
+.flow-step-wrap { display: flex; align-items: center; }
+.flow-step {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F9FBFF 100%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  min-width: 120px;
+  text-align: center;
+  flex-shrink: 0;
+  box-shadow: 0 10px 24px -24px rgba(31,42,58,0.7);
+}
+.flow-step .step-icon { font-size: 20px; margin-bottom: 6px; }
+.flow-step .step-label { font-size: 12px; font-weight: 600; color: var(--text); }
+.flow-step .step-sub { font-size: 10px; color: var(--text-3); margin-top: 2px; }
+.flow-step.primary { border-color: #BCC8FA; background: #EEF2FF; }
+.flow-step.primary .step-label { color: var(--primary); }
+.flow-step.success { border-color: #BFE4D1; background: var(--success-light); }
+.flow-step.success .step-label { color: #166534; }
+.flow-step.warning { border-color: #EED9AA; background: var(--warning-light); }
+.flow-step.warning .step-label { color: #92400E; }
+.flow-step.danger { border-color: #F0C2C2; background: var(--danger-light); }
+.flow-step.danger .step-label { color: #991B1B; }
+.flow-arrow { font-size: 18px; color: var(--text-3); padding: 0 4px; flex-shrink: 0; margin-top: 20px; }
+
+/* ── ALERT RULES TABLE ── */
+.rules-table-wrap { overflow: hidden; border-radius: 14px; border: 1px solid var(--border); margin-bottom: 32px; box-shadow: 0 14px 30px -28px rgba(31,42,58,0.65); }
+.rules-table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface); }
+.rules-table th { text-align: left; padding: 12px 16px; font-size: 11px; font-weight: 700; color: #627086; text-transform: uppercase; letter-spacing: 1px; background: #F3F6FC; border-bottom: 1px solid var(--border); }
+.rules-table td { padding: 12px 16px; border-bottom: 1px solid #EDF1F7; vertical-align: top; }
+.rules-table tr:last-child td { border-bottom: none; }
+.rules-table tr:hover td { background: #F8FAFF; }
+.rule-name { font-weight: 600; font-size: 13px; }
+.rule-sub { font-size: 11px; color: var(--text-3); margin-top: 1px; }
+
+/* ── SECURITY TABLE ── */
+.security-section { margin-bottom: 40px; }
+.security-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.security-header .lock-icon { width: 36px; height: 36px; border-radius: 10px; background: #DCFCE7; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.security-header h3 { font-size: 18px; font-weight: 700; }
+.security-header p { font-size: 13px; color: var(--text-2); }
+.check-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.check-table th { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: 1px; background: #F9F9F7; border-bottom: 1px solid var(--border); }
+.check-table th:last-child { text-align: center; }
+.check-table td { padding: 10px 14px; border-bottom: 1px solid #F3F4F6; vertical-align: middle; }
+.check-table tr:last-child td { border-bottom: none; }
+.check-table td:last-child { text-align: center; }
+.check-table .layer { font-size: 10px; color: var(--text-3); margin-top: 2px; }
+.tick { display: inline-flex; width: 20px; height: 20px; border-radius: 50%; background: var(--success-light); color: var(--success); font-size: 11px; font-weight: 700; align-items: center; justify-content: center; }
+.cross { display: inline-flex; width: 20px; height: 20px; border-radius: 50%; background: var(--danger-light); color: var(--danger); font-size: 11px; font-weight: 700; align-items: center; justify-content: center; }
+
+/* ── RLS DIAGRAM ── */
+.rls-diagram { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 32px; }
+.rls-org { background: var(--surface); border-radius: 12px; border: 2px solid var(--border); padding: 14px; }
+.rls-org.partner { border-color: var(--primary); background: var(--primary-light); }
+.rls-org-name { font-size: 12px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.rls-org-name .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }
+.rls-row { font-size: 10px; color: var(--text-2); padding: 3px 0; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; gap: 5px; }
+.rls-row:last-child { border-bottom: none; }
+.rls-row .lock { color: var(--success); font-size: 10px; }
+.rls-label { font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.wall { display: flex; align-items: center; justify-content: center; padding: 0 8px; }
+.wall-line { writing-mode: vertical-lr; font-size: 10px; color: var(--danger); font-weight: 700; background: var(--danger-light); padding: 6px 4px; border-radius: 6px; border: 1px solid var(--danger); }
+
+/* ── STAT CALLOUTS ── */
+.stat-callouts { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 32px; }
+@media (max-width: 600px) { .stat-callouts { grid-template-columns: repeat(2,1fr); } }
+.stat-callout { background: var(--surface); border-radius: 12px; border: 1px solid var(--border); padding: 16px; text-align: center; }
+.stat-callout .big { font-size: 28px; font-weight: 800; }
+.stat-callout .lbl { font-size: 11px; color: var(--text-3); margin-top: 4px; }
+
+/* ── DIVIDER ── */
+.divider { height: 1px; background: var(--border); margin: 40px 0; }
+
+/* ── FEATURE GRID ── */
+.feature-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-bottom: 32px; }
+@media (max-width: 600px) { .feature-grid { grid-template-columns: 1fr; } }
+.feature-card { background: var(--surface); border-radius: 12px; border: 1px solid var(--border); padding: 16px; }
+.feature-card .fc-icon { font-size: 24px; margin-bottom: 8px; }
+.feature-card .fc-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.feature-card .fc-desc { font-size: 12px; color: var(--text-2); line-height: 1.5; }
+.feature-card.foster { border-top: 3px solid var(--foster-accent); }
+.feature-card.staff { border-top: 3px solid var(--staff-accent); }
+
+/* ── TOP DESIGN HIGHLIGHT ── */
+.design-highlight {
+  margin-bottom: 32px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFF 100%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 14px 30px -28px rgba(31,42,58,0.65);
+}
+.design-highlight .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: var(--primary-light);
+  border: 1px solid #D8E0FB;
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+.design-highlight h3 {
+  margin: 10px 0 6px;
+  font-size: 21px;
+  line-height: 1.25;
+  letter-spacing: -0.4px;
+}
+.design-highlight p {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+/* ── COLLAPSIBLE SECTIONS ── */
+.collapsible-section {
+  margin-bottom: 26px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FBFF 100%);
+  box-shadow: 0 14px 30px -28px rgba(31,42,58,0.65);
+  overflow: hidden;
+}
+.collapsible-section summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  border-bottom: 1px solid transparent;
+}
+.collapsible-section summary::-webkit-details-marker { display: none; }
+.collapsible-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.collapsible-left h2 {
+  font-size: 22px;
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+}
+.collapsible-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #D4DDF1;
+  border-radius: 999px;
+  padding: 6px 12px;
+  background: #F4F7FF;
+  color: var(--text-2);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  white-space: nowrap;
+}
+.collapsible-toggle .chev {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid #C9D5F1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--primary);
+}
+.collapsible-toggle .label-open { display: none; }
+.collapsible-section[open] .collapsible-toggle .label-open { display: inline; }
+.collapsible-section[open] .collapsible-toggle .label-closed { display: none; }
+.collapsible-section[open] .collapsible-toggle .chev { transform: rotate(180deg); }
+.collapsible-section[open] summary { border-bottom-color: var(--border); }
+.collapsible-body { padding: 18px 18px 16px; }
+.collapsible-body .section-desc { margin-bottom: 20px; }
+@media (max-width: 700px) {
+  .collapsible-section summary { flex-direction: column; align-items: flex-start; }
+  .collapsible-left h2 { font-size: 20px; }
+}
+
+/* ── MISC ── */
+.tip-box { background: var(--primary-light); border-radius: 10px; padding: 12px 16px; font-size: 13px; color: #3730A3; margin-bottom: 24px; border-left: 3px solid var(--primary); line-height: 1.5; }
+.warn-box { background: var(--warning-light); border-radius: 10px; padding: 12px 16px; font-size: 13px; color: #92400E; margin-bottom: 24px; border-left: 3px solid var(--warning); line-height: 1.5; }
+.footer { text-align: center; padding: 48px 0 32px; color: var(--text-3); font-size: 12px; }
+
+/* Print hint */
+@media print {
+  body { background: #fff; }
+  .page { padding: 24px; }
+  .cover { background: #20304F !important; -webkit-print-color-adjust: exact; }
+  .collapsible-section summary { display: none; }
+  .collapsible-section .collapsible-body { display: block; padding-top: 0; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- COVER -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="cover">
+    <div class="cover-tag">Product Overview · Pilot Edition</div>
+    <h1>Puppy Program OS</h1>
+    <p>A mobile-first platform replacing static foster manuals with contextual learning, daily logging, and an automated behavioural alert engine — built for a national guide dog organization.</p>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <div class="label">Organization</div>
+        <div class="value">Partner Organization</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="label">Pilot contact</div>
+        <div class="value">Program Coordinators</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="label">Build</div>
+        <div class="value">v0.1.2 · March 2026</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="label">Stack</div>
+        <div class="value">React · Supabase · Vercel</div>
+      </div>
+    </div>
+    <div class="cover-badges">
+      <span class="cover-badge foster">👤 Foster App — mobile-first</span>
+      <span class="cover-badge staff">🖥 Staff App — desktop</span>
+    </div>
+    <div class="site-cta-wrap">
+      <a class="site-cta" href="./prototype-gate.html">View Interactive Prototype</a>
+      <a class="site-cta-outline" href="./puppy_program_os_ui.html">View UI/UX Design</a>
+      <a class="site-cta-outline" href="./book-demo.html">Book a Guided Demo</a>
+      <span class="site-note">Private pilot preview</span>
+    </div>
+  </div>
+
+  <div class="design-highlight">
+    <div class="eyebrow">Design Preview</div>
+    <h3>See what the full product experience looks like</h3>
+    <p>If you prefer a visual-first review before the interactive walkthrough, open the UI/UX design file for a faster orientation of layout, tone, and workflow direction.</p>
+    <div class="site-cta-wrap">
+      <a class="site-cta" href="./puppy_program_os_ui.html">Open UI/UX Design</a>
+      <a class="site-cta-outline" href="./prototype-gate.html">Go to Interactive Prototype</a>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- STATS ROW -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="stat-callouts">
+    <div class="stat-callout"><div class="big" style="color:var(--primary)">46</div><div class="lbl">Content modules seeded</div></div>
+    <div class="stat-callout"><div class="big" style="color:var(--success)">18</div><div class="lbl">Database tables with RLS</div></div>
+    <div class="stat-callout"><div class="big" style="color:var(--warning)">4</div><div class="lbl">Automated alert rules</div></div>
+    <div class="stat-callout"><div class="big" style="color:var(--danger)">90s</div><div class="lbl">Target log completion time</div></div>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- PART 1: FOSTER VIEW -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-label">
+    <span class="role-pill foster">Part 1</span>
+    <h2>Foster View</h2>
+  </div>
+  <p class="section-desc">Fosters access the app on their phone. The experience is designed to be completable in under 90 seconds per day — a daily log, contextual learning, and a direct line to staff support. No PDF manuals. No email chains.</p>
+
+  <!-- FOSTER FLOW -->
+  <div class="flow-diagram">
+    <div class="flow-title"><div class="dot"></div>Foster onboarding → daily workflow</div>
+    <div class="flow-track">
+      <div class="flow-step-wrap">
+        <div class="flow-step">
+          <div class="step-icon">📧</div>
+          <div class="step-label">Magic link</div>
+          <div class="step-sub">Email, no password</div>
+        </div>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step-wrap">
+        <div class="flow-step">
+          <div class="step-icon">👤</div>
+          <div class="step-label">Setup profile</div>
+          <div class="step-sub">Name only</div>
+        </div>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step-wrap">
+        <div class="flow-step primary">
+          <div class="step-icon">🏠</div>
+          <div class="step-label">Home screen</div>
+          <div class="step-sub">Puppy assigned</div>
+        </div>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step-wrap">
+        <div class="flow-step success">
+          <div class="step-icon">📋</div>
+          <div class="step-label">Daily log</div>
+          <div class="step-sub">&lt;90 sec</div>
+        </div>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step-wrap">
+        <div class="flow-step">
+          <div class="step-icon">🔔</div>
+          <div class="step-label">Alerts surface</div>
+          <div class="step-sub">Auto-generated</div>
+        </div>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step-wrap">
+        <div class="flow-step">
+          <div class="step-icon">📚</div>
+          <div class="step-label">Content unlocks</div>
+          <div class="step-sub">By age + placement</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOSTER HOME SCREEN -->
+  <div class="screen-block">
+    <div class="screen-block-title"><div class="dot" style="background:var(--foster-accent)"></div>Foster Home Screen</div>
+    <div class="mockup-frame mobile">
+      <div class="mobile-bar"><div class="mobile-notch"></div></div>
+      <div class="foster-mobile">
+        <div class="foster-greeting">Good morning, Luke 👋</div>
+        <div class="foster-sub">Zuri · 31 weeks · GoldenLab · Female</div>
+        <div class="foster-streak">🔥 4-day streak</div>
+
+        <div class="foster-alert">
+          <span style="font-size:18px">⚠️</span>
+          <div>
+            <div style="font-weight:600;color:#92400E;margin-bottom:2px">Jumping pattern flagged by staff</div>
+            <div style="color:var(--text-2)">Review recommended actions →</div>
+          </div>
+          <span class="ui-badge medium" style="margin-left:auto;flex-shrink:0">medium</span>
+        </div>
+
+        <div class="ui-card" style="margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div style="font-size:12px;font-weight:700">Today's log</div>
+            <div style="background:var(--primary);color:#fff;font-size:10px;font-weight:600;padding:3px 10px;border-radius:6px">+ Log now</div>
+          </div>
+          <div style="font-size:11px;color:var(--text-3);text-align:center;padding:8px 0">No log submitted today</div>
+        </div>
+
+        <div class="ui-card" style="margin-bottom:10px">
+          <div style="font-size:12px;font-weight:700;margin-bottom:8px">Milestones</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:11px"><span style="color:var(--success)">✓</span> Sit</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:11px"><span style="color:var(--success)">✓</span> Stay</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text-3)">○ Down — in progress</div>
+          </div>
+        </div>
+
+        <div class="stats-row two">
+          <div class="ui-stat"><div class="num" style="color:var(--primary)">12</div><div class="lbl">Logs submitted</div></div>
+          <div class="ui-stat"><div class="num" style="color:var(--success)">85</div><div class="lbl">Points earned</div></div>
+        </div>
+
+        <div style="height:8px"></div>
+        <div class="foster-bottom-nav">
+          <div class="bnav active"><div class="bi">🏠</div>Home</div>
+          <div class="bnav"><div class="bi">📋</div>Log</div>
+          <div class="bnav"><div class="bi">📚</div>Content</div>
+          <div class="bnav"><div class="bi">🔔</div>Alerts</div>
+          <div class="bnav"><div class="bi">👤</div>Profile</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout-legend">
+      <div class="callout-legend-item"><div class="num warning">!</div><strong>Alert banner</strong> <span>— auto-generated when a behavioural pattern is detected in log data. Fosters see it; staff saw it first.</span></div>
+      <div class="callout-legend-item"><div class="num success">✓</div><strong>Streak counter</strong> <span>— gamification layer that rewards daily consistency. Drives log completion rate.</span></div>
+      <div class="callout-legend-item"><div class="num">1</div><strong>Today's log CTA</strong> <span>— persistent prompt if no log submitted today. Disappears after save.</span></div>
+      <div class="callout-legend-item"><div class="num">2</div><strong>Milestone tracker</strong> <span>— staff-managed milestones visible to foster. Read-only from foster side.</span></div>
+    </div>
+  </div>
+
+  <!-- FOSTER DAILY LOG -->
+  <div class="screen-block">
+    <div class="screen-block-title"><div class="dot" style="background:var(--foster-accent)"></div>Daily Log — the core workflow</div>
+    <div class="mockup-frame mobile">
+      <div class="mobile-bar"><div class="mobile-notch"></div></div>
+      <div class="foster-mobile">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+          <div style="font-size:16px">←</div>
+          <div style="font-size:15px;font-weight:700">Daily Log — Zuri</div>
+          <div style="margin-left:auto;font-size:10px;color:var(--text-3)">March 18, 2026</div>
+        </div>
+
+        <div class="log-section">
+          <div class="log-label">🚽 Potty</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div>
+              <div style="font-size:10px;color:var(--text-2);margin-bottom:4px">Successes</div>
+              <div class="num-input"><div class="num-btn">−</div><div class="num-val">3</div><div class="num-btn">+</div></div>
+            </div>
+            <div>
+              <div style="font-size:10px;color:var(--text-2);margin-bottom:4px">Accidents</div>
+              <div class="num-input"><div class="num-btn">−</div><div class="num-val">0</div><div class="num-btn">+</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="log-section">
+          <div class="log-label">🍽 Feeding</div>
+          <div class="chip-row"><div class="chip sel">2× meals</div><div class="chip">1× meal</div><div class="chip">Refused food</div></div>
+        </div>
+
+        <div class="log-section">
+          <div class="log-label">🐾 Behaviour</div>
+          <div class="chip-row">
+            <div class="chip sel warn">Jumping</div>
+            <div class="chip">Mouthing</div>
+            <div class="chip">Pulling</div>
+            <div class="chip">Barking</div>
+          </div>
+        </div>
+
+        <div class="log-section">
+          <div class="log-label">❤ Health</div>
+          <div class="chip-row">
+            <div class="chip sel">Healthy</div>
+            <div class="chip" style="color:var(--danger);border-color:#FBBCB6">Vomiting</div>
+            <div class="chip" style="color:var(--danger);border-color:#FBBCB6">Diarrhea</div>
+          </div>
+        </div>
+
+        <div class="log-section">
+          <div class="log-label">🌍 Socialization</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="font-size:10px;display:flex;align-items:center;gap:6px"><input type="checkbox" checked style="accent-color:var(--primary)"> New people</div>
+            <div style="font-size:10px;display:flex;align-items:center;gap:6px"><input type="checkbox"> New environments</div>
+          </div>
+        </div>
+
+        <div class="btn-primary">Save Daily Log ✓</div>
+      </div>
+    </div>
+    <div class="callout-legend">
+      <div class="callout-legend-item"><div class="num">1</div><strong>Chip-based input</strong> <span>— fosters tap chips, not text. Designed for one-thumb mobile use under 90 seconds.</span></div>
+      <div class="callout-legend-item"><div class="num warning">!</div><strong>Behaviour chips (amber)</strong> <span>— when jumping is selected 3 of 5 days, a Postgres trigger fires and creates an alert automatically — no staff manual review needed.</span></div>
+      <div class="callout-legend-item"><div class="num danger">!</div><strong>Health chips (red)</strong> <span>— if vomiting or diarrhea selected 2 consecutive days, a HIGH severity alert is raised immediately.</span></div>
+      <div class="callout-legend-item"><div class="num success">✓</div><strong>Unique per day</strong> <span>— database enforces UNIQUE(puppy_id, log_date). Fosters can re-save the same day to correct entries — no duplicates created.</span></div>
+    </div>
+  </div>
+
+  <!-- FOSTER CONTENT + SUPPORT -->
+  <div class="feature-grid">
+    <div class="feature-card foster">
+      <div class="fc-icon">📚</div>
+      <div class="fc-title">Content library</div>
+      <div class="fc-desc">46 modules unlock progressively based on Zuri's age and days since placement. CRITICAL urgency modules (vaccination, Day 0 checklist) surface at the top automatically. Fosters never see a wall of content.</div>
+    </div>
+    <div class="feature-card foster">
+      <div class="fc-icon">🎧</div>
+      <div class="fc-title">Support tickets</div>
+      <div class="fc-desc">Foster submits a structured request (category + priority + description). Ticket appears immediately in staff Support Queue. Priority levels: Low, Medium, High, Emergency. No email needed.</div>
+    </div>
+    <div class="feature-card foster">
+      <div class="fc-icon">🔔</div>
+      <div class="fc-title">Alerts (foster view)</div>
+      <div class="fc-desc">Fosters see their own alerts with plain-language explanations and recommended actions. They can acknowledge and ask follow-up questions directly from the alert card.</div>
+    </div>
+    <div class="feature-card foster">
+      <div class="fc-icon">🏆</div>
+      <div class="fc-title">Gamification</div>
+      <div class="fc-desc">Log streaks, points, and badge achievements (Group 10 — built next). Drives consistent daily log completion, which is the primary data source for the alert engine.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- PART 2: STAFF VIEW -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-label">
+    <span class="role-pill staff">Part 2</span>
+    <h2>Staff View</h2>
+  </div>
+  <p class="section-desc">Staff access a desktop-first dashboard. The goal: reduce coordinator time spent chasing fosters for updates. Everything a coordinator needs to see — puppy status, alerts, support tickets, foster compliance — is surfaced automatically from the data fosters enter.</p>
+
+  <!-- STAFF DASHBOARD MOCKUP -->
+  <div class="screen-block">
+    <div class="screen-block-title"><div class="dot" style="background:var(--staff-accent)"></div>Staff Dashboard</div>
+    <div class="mockup-frame">
+      <div class="mockup-browser-bar">
+        <div class="browser-dots"><div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div></div>
+        <div class="browser-url">puppy-program.vercel.app/staff/dashboard</div>
+      </div>
+      <div class="screen-ui">
+        <div class="staff-layout">
+          <div class="staff-sidebar">
+            <div class="s-logo"><div class="dot">🐾</div><span>Puppy Program OS</span></div>
+            <div class="s-nav-item active"><span class="icon">⊞</span> Dashboard</div>
+            <div class="s-nav-item"><span class="icon">🐕</span> Puppies</div>
+            <div class="s-nav-item"><span class="icon">👨‍👩‍👧</span> Fosters</div>
+            <div class="s-nav-item"><span class="icon">🔔</span> Alerts <span class="badge">1</span></div>
+            <div class="s-nav-item"><span class="icon">📚</span> Content</div>
+            <div class="s-nav-item"><span class="icon">🎧</span> Support <span class="badge">3</span></div>
+            <div class="s-nav-item"><span class="icon">⚙</span> Settings</div>
+            <div style="margin-top:auto;padding:12px;border-top:1px solid #DCE3EE">
+              <div style="display:flex;align-items:center;gap:8px">
+                <div style="width:26px;height:26px;border-radius:50%;background:#DBEAFE;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#1D4ED8">PC</div>
+                <div style="font-size:11px;color:#243753">Staff Coordinator<div style="font-size:9px;color:#6B7890">Staff coordinator</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="staff-content">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+              <div class="ui-page-title" style="margin:0">Dashboard</div>
+              <div style="display:flex;gap:6px">
+                <div class="btn-sm">🔔 View All Alerts</div>
+                <div style="background:var(--primary);color:#fff;font-size:10px;font-weight:600;padding:5px 10px;border-radius:6px">+ Add Puppy</div>
+              </div>
+            </div>
+
+            <div class="attn-card">
+              <div class="attn-title">🔔 Needs attention today — ranked by urgency</div>
+              <div class="attn-row"><div><strong>Zeb</strong> · No log in 3+ days</div><span class="ui-badge medium">Medium</span></div>
+              <div class="attn-row"><div><strong>Zora</strong> · No log in 3+ days</div><span class="ui-badge medium">Medium</span></div>
+              <div class="attn-row"><div><strong>Zuri</strong> · Persistent jumping pattern</div><span class="ui-badge medium">Medium</span></div>
+            </div>
+
+            <div class="stats-row">
+              <div class="ui-stat"><div class="num" style="color:var(--primary)">3</div><div class="lbl">Active Puppies</div></div>
+              <div class="ui-stat"><div class="num" style="color:var(--warning)">1</div><div class="lbl">Open Alerts</div></div>
+              <div class="ui-stat"><div class="num">0</div><div class="lbl">High Severity</div></div>
+              <div class="ui-stat"><div class="num">3</div><div class="lbl">Active Fosters</div></div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:8px">
+              <div class="ui-card" style="padding:10px">
+                <div style="font-size:11px;font-weight:700;margin-bottom:8px">Puppies</div>
+                <table class="ui-table">
+                  <thead><tr><th>Name</th><th>Age</th><th>Foster</th><th>Alerts</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Zuri</strong></td><td>31 wks</td><td>Luke Dang</td><td><span class="ui-badge medium">1</span></td></tr>
+                    <tr><td><strong>Zeb</strong></td><td>75 wks</td><td>—</td><td>0</td></tr>
+                    <tr><td><strong>Zora</strong></td><td>31 wks</td><td>Zora Foster</td><td>0</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="ui-card" style="padding:10px">
+                <div style="font-size:11px;font-weight:700;margin-bottom:8px">Support Queue</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px">
+                  <div class="ui-stat"><div class="num" style="font-size:16px;color:var(--primary)">3</div><div class="lbl">New</div></div>
+                  <div class="ui-stat"><div class="num" style="font-size:16px;color:var(--danger)">1</div><div class="lbl">High</div></div>
+                </div>
+                <div style="font-size:10px;color:var(--danger);background:var(--danger-light);border-radius:6px;padding:6px 8px;border-left:2px solid var(--danger)">
+                  <strong>High:</strong> Zuri ate grass — 5d open
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="callout-legend">
+      <div class="callout-legend-item"><div class="num warning">!</div><strong>Needs attention today</strong> <span>— auto-populated from alert engine. Staff open their day here, not from email.</span></div>
+      <div class="callout-legend-item"><div class="num">1</div><strong>4 stat tiles</strong> <span>— Active Puppies, Open Alerts, High Severity, Active Fosters. All live from database.</span></div>
+      <div class="callout-legend-item"><div class="num">2</div><strong>Puppies table</strong> <span>— alert count per puppy highlighted in amber/red. Zuri's "1" indicates an unresolved alert. Click row to open puppy profile.</span></div>
+      <div class="callout-legend-item"><div class="num danger">!</div><strong>Support Queue preview</strong> <span>— highest priority open ticket shown inline. Red border = High/Emergency. Staff can act without leaving dashboard.</span></div>
+      <div class="callout-legend-item"><div class="num success">3</div><strong>Support badge on sidebar</strong> <span>— live count of unread tickets. Persists across all pages so staff never miss incoming requests.</span></div>
+    </div>
+  </div>
+
+  <!-- STAFF ALERTS MOCKUP -->
+  <div class="screen-block">
+    <div class="screen-block-title"><div class="dot" style="background:var(--staff-accent)"></div>Staff Alerts — automated engine output</div>
+    <div class="mockup-frame">
+      <div class="mockup-browser-bar">
+        <div class="browser-dots"><div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div></div>
+        <div class="browser-url">puppy-program.vercel.app/staff/alerts</div>
+      </div>
+      <div class="screen-ui">
+        <div class="staff-layout">
+          <div class="staff-sidebar">
+            <div class="s-logo"><div class="dot">🐾</div><span>Puppy Program OS</span></div>
+            <div class="s-nav-item"><span class="icon">⊞</span> Dashboard</div>
+            <div class="s-nav-item"><span class="icon">🐕</span> Puppies</div>
+            <div class="s-nav-item"><span class="icon">👨‍👩‍👧</span> Fosters</div>
+            <div class="s-nav-item active"><span class="icon">🔔</span> Alerts <span class="badge">1</span></div>
+            <div class="s-nav-item"><span class="icon">📚</span> Content</div>
+            <div class="s-nav-item"><span class="icon">🎧</span> Support <span class="badge">3</span></div>
+          </div>
+          <div class="staff-content">
+            <div class="ui-page-title">Alerts</div>
+            <div style="display:flex;gap:6px;margin-bottom:12px">
+              <div style="background:var(--primary);color:#fff;font-size:10px;font-weight:600;padding:4px 10px;border-radius:20px">Open</div>
+              <div class="btn-sm" style="border-radius:20px">All severity ▾</div>
+              <div class="btn-sm" style="border-radius:20px">All types ▾</div>
+              <div class="btn-sm" style="border-radius:20px">All dates ▾</div>
+            </div>
+            <div class="ui-card" style="border-left:3px solid var(--warning)">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start">
+                <div>
+                  <div style="font-size:12px;font-weight:700;margin-bottom:3px">⚠ Persistent jumping reported — 3 of last 5 days</div>
+                  <div style="font-size:10px;color:var(--text-2);margin-bottom:6px">Zuri · Foster: Luke Dang · 4d open</div>
+                  <div style="font-size:11px;color:var(--text-2)">Jumping logged on 3 of last 5 days. Pattern indicates behaviour reinforcement.</div>
+                  <div style="font-size:11px;color:var(--text-2);margin-top:5px">• Review OFF cue with foster (CM-029)<br>• Management: prevent greeting strangers until resolved<br>• Consider coordinator visit if unresolved in 7 days</div>
+                </div>
+                <span class="ui-badge medium" style="flex-shrink:0">medium</span>
+              </div>
+              <div style="display:flex;gap:6px;margin-top:10px;padding-top:8px;border-top:1px solid #F3F4F6;align-items:center">
+                <select style="padding:4px 8px;border-radius:6px;border:1px solid var(--border);font-size:10px;background:#fff">
+                  <option>Open</option><option>In Review</option><option>Resolved</option>
+                </select>
+                <input style="flex:1;padding:4px 8px;border-radius:6px;border:1px solid var(--border);font-size:10px" placeholder="Add a note…">
+                <div style="background:var(--primary);color:#fff;font-size:10px;font-weight:600;padding:4px 10px;border-radius:6px">Add</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="callout-legend">
+      <div class="callout-legend-item"><div class="num">1</div><strong>Auto-generated alert</strong> <span>— created by a Postgres trigger, not by any staff action. Zero manual work to detect this pattern.</span></div>
+      <div class="callout-legend-item"><div class="num">2</div><strong>Recommended actions</strong> <span>— seeded into each alert type. Staff get a protocol checklist, not just a flag.</span></div>
+      <div class="callout-legend-item"><div class="num success">3</div><strong>Inline status + notes</strong> <span>— staff update status (Open → In Review → Resolved) and add notes without leaving the screen. Append-only audit log records all actions.</span></div>
+      <div class="callout-legend-item"><div class="num">4</div><strong>Filters</strong> <span>— by status, severity, type, and date range. Designed for a coordinator managing multiple puppies across multiple fosters.</span></div>
+    </div>
+  </div>
+
+  <!-- STAFF SUPPORT MOCKUP -->
+  <div class="screen-block">
+    <div class="screen-block-title"><div class="dot" style="background:var(--staff-accent)"></div>Staff Support Queue</div>
+    <div class="mockup-frame">
+      <div class="mockup-browser-bar">
+        <div class="browser-dots"><div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div></div>
+        <div class="browser-url">puppy-program.vercel.app/staff/support</div>
+      </div>
+      <div class="screen-ui">
+        <div class="staff-layout">
+          <div class="staff-sidebar">
+            <div class="s-logo"><div class="dot">🐾</div><span>Puppy Program OS</span></div>
+            <div class="s-nav-item"><span class="icon">⊞</span> Dashboard</div>
+            <div class="s-nav-item"><span class="icon">🐕</span> Puppies</div>
+            <div class="s-nav-item"><span class="icon">👨‍👩‍👧</span> Fosters</div>
+            <div class="s-nav-item"><span class="icon">🔔</span> Alerts <span class="badge">1</span></div>
+            <div class="s-nav-item"><span class="icon">📚</span> Content</div>
+            <div class="s-nav-item active"><span class="icon">🎧</span> Support <span class="badge">3</span></div>
+          </div>
+          <div class="staff-content">
+            <div class="ui-page-title">Support Queue</div>
+            <div class="stats-row" style="margin-bottom:10px">
+              <div class="ui-stat"><div class="num" style="font-size:16px">0</div><div class="lbl">Emergency</div></div>
+              <div class="ui-stat"><div class="num" style="font-size:16px;color:var(--danger)">1</div><div class="lbl">High</div></div>
+              <div class="ui-stat"><div class="num" style="font-size:16px;color:var(--warning)">3</div><div class="lbl">Awaiting</div></div>
+              <div class="ui-stat"><div class="num" style="font-size:16px;color:var(--success)">1</div><div class="lbl">Resolved</div></div>
+            </div>
+            <div style="display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap">
+              <div style="background:var(--primary);color:#fff;font-size:10px;font-weight:600;padding:4px 10px;border-radius:20px">New (3)</div>
+              <div class="btn-sm" style="border-radius:20px">In Progress (0)</div>
+              <div class="btn-sm" style="border-radius:20px">Resolved (1)</div>
+              <div class="btn-sm" style="border-radius:20px">High + Emergency</div>
+            </div>
+            <div style="border:1px solid var(--border);border-left:3px solid var(--danger);border-radius:8px;padding:10px 12px;margin-bottom:8px;background:#fff">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px">
+                <div style="font-size:11px;font-weight:700;flex:1">Zuri · High · Ate something unsafe · item ingested: grass</div>
+                <div style="display:flex;gap:4px;flex-shrink:0"><span class="ui-badge high">high</span><span class="ui-badge" style="background:#F0FDF4;color:#166534;border:1px solid #BBF7D0">New</span></div>
+              </div>
+              <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px">
+                <div style="background:#F3F4F6;color:var(--text-2);font-size:9px;padding:2px 6px;border-radius:4px">Zuri</div>
+                <div style="background:#F3F4F6;color:var(--text-2);font-size:9px;padding:2px 6px;border-radius:4px">Luke Dang</div>
+                <div style="background:#F3F4F6;color:var(--text-2);font-size:9px;padding:2px 6px;border-radius:4px">Ate something unsafe</div>
+                <div style="background:var(--warning-light);color:#92400E;font-size:9px;padding:2px 6px;border-radius:4px">5d open</div>
+              </div>
+              <div style="font-size:10px;color:var(--text-2);line-height:1.4">Zuri ate grass about 20 minutes ago. No vomiting yet, but seems sleepy.</div>
+              <div style="display:flex;gap:5px;margin-top:8px">
+                <div class="btn-sm">Reply</div>
+                <div class="btn-sm success">Mark resolved</div>
+                <div class="btn-sm" style="background:var(--danger-light);color:var(--danger);border-color:#FBBCB6">Escalate</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="callout-legend">
+      <div class="callout-legend-item"><div class="num danger">!</div><strong>High-priority ticket (red border)</strong> <span>— visual triage at a glance. Staff know which ticket to handle first without reading every line.</span></div>
+      <div class="callout-legend-item"><div class="num">1</div><strong>4 queue counters</strong> <span>— Emergency, High, Awaiting, Resolved. Coordinators open their day knowing exactly what state the queue is in.</span></div>
+      <div class="callout-legend-item"><div class="num">2</div><strong>Structured ticket format</strong> <span>— puppy, foster, category, timestamp, and SLA badge (5d open) in every ticket. No freeform email parsing.</span></div>
+      <div class="callout-legend-item"><div class="num success">3</div><strong>Inline actions</strong> <span>— Reply, Mark resolved, Escalate. No modal. Staff stay in context.</span></div>
+    </div>
+  </div>
+
+  <!-- STAFF FEATURES GRID -->
+  <div class="feature-grid">
+    <div class="feature-card staff">
+      <div class="fc-icon">🐕</div>
+      <div class="fc-title">Puppy profiles</div>
+      <div class="fc-desc">Each puppy has a full profile: DOB, breed, sex, Foundation ID, foster assignment, placement date. Operational snapshot shows last log date, open alerts, and open support tickets in one view.</div>
+    </div>
+    <div class="feature-card staff">
+      <div class="fc-icon">👨‍👩‍👧</div>
+      <div class="fc-title">Foster directory</div>
+      <div class="fc-desc">All active and inactive fosters with contact info, assigned puppies, and status. Staff can navigate directly from foster to their assigned puppy profile.</div>
+    </div>
+    <div class="feature-card staff">
+      <div class="fc-icon">📚</div>
+      <div class="fc-title">Content management</div>
+      <div class="fc-desc">46 modules managed by staff. Unlock logic is rule-based: by placement days, puppy age, and sex. Staff can add new modules without a developer.</div>
+    </div>
+    <div class="feature-card staff">
+      <div class="fc-icon">⊞</div>
+      <div class="fc-title">Action queues</div>
+      <div class="fc-desc">Dashboard surfaces: unanswered tickets, stale open issues, and high-risk queue. Three distinct queues so coordinators know where to start every morning.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- AUTOMATED ALERT ENGINE -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-label">
+    <span class="role-pill" style="background:#FEE2E2;color:#991B1B">Engine</span>
+    <h2>Automated Alert Rules</h2>
+  </div>
+  <p class="section-desc">Alerts are generated by Postgres triggers — not by app logic, not by staff reviewing logs manually. Every time a daily log is saved, four rules evaluate in sequence. If a rule fires, an alert is created or escalated automatically.</p>
+
+  <div class="flow-diagram">
+    <div class="flow-title"><div class="dot" style="background:var(--danger)"></div>How an alert is created</div>
+    <div class="flow-track">
+      <div class="flow-step-wrap">
+        <div class="flow-step success">
+          <div class="step-icon">📋</div>
+          <div class="step-label">Foster saves log</div>
+          <div class="step-sub">Daily log upserted</div>
+        </div>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step-wrap">
+        <div class="flow-step">
+          <div class="step-icon">⚡</div>
+          <div class="step-label">Postgres trigger fires</div>
+          <div class="step-sub">AFTER INSERT/UPDATE</div>
+        </div>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step-wrap">
+        <div class="flow-step primary">
+          <div class="step-icon">🔍</div>
+          <div class="step-label">fn_evaluate_all_rules</div>
+          <div class="step-sub">4 rules checked</div>
+        </div>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step-wrap">
+        <div class="flow-step warning">
+          <div class="step-icon">🔔</div>
+          <div class="step-label">Alert created/escalated</div>
+          <div class="step-sub">Deduplicated per puppy</div>
+        </div>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step-wrap">
+        <div class="flow-step danger">
+          <div class="step-icon">👁</div>
+          <div class="step-label">Staff notified</div>
+          <div class="step-sub">Dashboard + badge</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rules-table-wrap">
+    <table class="rules-table">
+      <thead>
+        <tr>
+          <th>Rule</th>
+          <th>Condition</th>
+          <th>Initial severity</th>
+          <th>Escalation</th>
+          <th>Who sees it</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="rule-name">A — Missing socialization</div><div class="rule-sub">Weeks 8–20 of age</div></td>
+          <td>No socialization logged for 8+ consecutive days</td>
+          <td><span class="ui-badge medium">Medium</span></td>
+          <td>Escalates to <span class="ui-badge high">High</span> at 14 days</td>
+          <td>Staff + Foster</td>
+        </tr>
+        <tr>
+          <td><div class="rule-name">B — Jumping pattern</div><div class="rule-sub">Any age</div></td>
+          <td>behavior_jumping = true on 3 of last 5 log days</td>
+          <td><span class="ui-badge medium">Medium</span></td>
+          <td>No auto-escalation</td>
+          <td>Staff + Foster</td>
+        </tr>
+        <tr>
+          <td><div class="rule-name">C — Potty regression</div><div class="rule-sub">Age &gt;18 weeks</div></td>
+          <td>2+ accidents/day for 3 consecutive days</td>
+          <td><span class="ui-badge medium">Medium</span></td>
+          <td>No auto-escalation</td>
+          <td>Staff only</td>
+        </tr>
+        <tr>
+          <td><div class="rule-name">D — Health flag</div><div class="rule-sub">Any age</div></td>
+          <td>Vomiting or diarrhea on 2 consecutive log days</td>
+          <td><span class="ui-badge high">High</span></td>
+          <td>Immediate high</td>
+          <td>Staff + Foster</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip-box">
+    <strong>Alert deduplication:</strong> A partial unique index on the alerts table ensures only one open alert per puppy per rule type can exist at a time. If the same condition persists, the existing alert is updated — not duplicated. Staff always see one clean alert per issue.
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- SECURITY & DATA INTEGRITY -->
+  <!-- ══════════════════════════════════════ -->
+  <details class="collapsible-section">
+    <summary>
+      <div class="collapsible-left">
+        <span class="role-pill" style="background:#DCFCE7;color:#166534">Security</span>
+        <h2>Security &amp; Data Integrity</h2>
+      </div>
+      <span class="collapsible-toggle"><span class="label-closed">Show details</span><span class="label-open">Hide details</span><span class="chev">⌄</span></span>
+    </summary>
+    <div class="collapsible-body">
+      <p class="section-desc">What you can't see in the UI is as important as what you can. Every data access decision is enforced at the database level — not just in the application code.</p>
+
+      <!-- RLS DIAGRAM -->
+      <div class="rls-label">Row-Level Security: each org sees only its own data</div>
+      <div class="rls-diagram">
+        <div class="rls-org partner">
+          <div class="rls-org-name"><div class="dot"></div>Partner Org</div>
+          <div class="rls-row"><span class="lock">🔒</span> Zuri (Puppy)</div>
+          <div class="rls-row"><span class="lock">🔒</span> Zeb (Puppy)</div>
+          <div class="rls-row"><span class="lock">🔒</span> Luke Dang (Foster)</div>
+          <div class="rls-row"><span class="lock">🔒</span> Staff Coordinator (Staff)</div>
+          <div class="rls-row"><span class="lock">🔒</span> Alert engine data</div>
+        </div>
+        <div class="wall"><div class="wall-line">RLS WALL — Postgres enforced</div></div>
+        <div class="rls-org">
+          <div class="rls-org-name" style="color:var(--text-3)">Org B (future)</div>
+          <div class="rls-row" style="opacity:0.4">🔒 Their puppies</div>
+          <div class="rls-row" style="opacity:0.4">🔒 Their fosters</div>
+          <div class="rls-row" style="opacity:0.4">🔒 Their logs</div>
+          <div class="rls-row" style="opacity:0.4">🔒 Their alerts</div>
+          <div style="font-size:9px;color:var(--text-3);margin-top:6px;text-align:center">Cannot see Partner Org data — ever</div>
+        </div>
+      </div>
+
+      <!-- SECURITY CHECKLIST -->
+      <div class="security-section">
+        <div class="security-header">
+          <div class="lock-icon">🔐</div>
+          <div>
+            <h3>Security checklist</h3>
+            <p>Enforced at database level — not just front-end</p>
+          </div>
+        </div>
+        <div class="rules-table-wrap">
+          <table class="check-table">
+            <thead>
+              <tr>
+                <th>Control</th>
+                <th>Layer</th>
+                <th>Detail</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Row-Level Security (RLS)</strong><div class="layer">Supabase Postgres</div></td>
+                <td>Database</td>
+                <td>All 18 tables have RLS enabled. Users can only access rows where org_id matches their organization. No application-level bypass possible.</td>
+                <td><span class="tick">✓</span></td>
+              </tr>
+              <tr>
+                <td><strong>Auth — magic link only</strong><div class="layer">Supabase Auth</div></td>
+                <td>Auth</td>
+                <td>No passwords stored. Sign-in is email OTP via Supabase. No password reset flows, no credential leaks.</td>
+                <td><span class="tick">✓</span></td>
+              </tr>
+              <tr>
+                <td><strong>Role-based routing</strong><div class="layer">App layer</div></td>
+                <td>App</td>
+                <td>Foster users cannot access /staff/* routes. Staff users cannot access /foster/* routes. Role stored in profiles table, verified on every route.</td>
+                <td><span class="tick">✓</span></td>
+              </tr>
+              <tr>
+                <td><strong>org_id on every table</strong><div class="layer">Database schema</div></td>
+                <td>Database</td>
+                <td>Every table from puppies to daily_logs to alerts carries org_id. Multi-tenancy is structural, not optional.</td>
+                <td><span class="tick">✓</span></td>
+              </tr>
+              <tr>
+                <td><strong>Alert engine in Postgres only</strong><div class="layer">Postgres triggers</div></td>
+                <td>Database</td>
+                <td>No alert logic in app layer. Triggers cannot be bypassed by a UI bug or a malformed API call.</td>
+                <td><span class="tick">✓</span></td>
+              </tr>
+              <tr>
+                <td><strong>Unique constraint on daily logs</strong><div class="layer">Database</div></td>
+                <td>Database</td>
+                <td>UNIQUE(puppy_id, log_date) with ON CONFLICT DO UPDATE. Duplicate logs are impossible. Fosters can re-save the same day safely.</td>
+                <td><span class="tick">✓</span></td>
+              </tr>
+              <tr>
+                <td><strong>Append-only alert event log</strong><div class="layer">alert_events table</div></td>
+                <td>Database</td>
+                <td>Every status change on an alert is recorded in alert_events. Full audit trail. Cannot be deleted from the app.</td>
+                <td><span class="tick">✓</span></td>
+              </tr>
+              <tr>
+                <td><strong>No passwords, no PII beyond name/email</strong><div class="layer">Data minimization</div></td>
+                <td>Policy</td>
+                <td>No medical records, no SIN, no financial data. The only personal data collected is name, email, phone (optional). PIPEDA compliant scope.</td>
+                <td><span class="tick">✓</span></td>
+              </tr>
+              <tr>
+                <td><strong>React Query cache scoped by orgId</strong><div class="layer">App layer</div></td>
+                <td>App</td>
+                <td>Client-side query cache keys include orgId. Prevents cross-org data bleed if two staff users share a browser session. Cache cleared on sign-out.</td>
+                <td><span class="tick">✓</span></td>
+              </tr>
+              <tr>
+                <td><strong>Security expert review</strong><div class="layer">Planned</div></td>
+                <td>External</td>
+                <td>Full penetration test and RLS policy audit planned after pilot contract is signed. Not a pre-launch blocker for internal pilot.</td>
+                <td><span class="cross">→</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="warn-box">
+        <strong>Pilot note:</strong> The platform is currently in a controlled internal pilot with known test accounts. The external security review is scoped for post-contract. All data accessed during the pilot is test data only.
+      </div>
+    </div>
+  </details>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- DATABASE OVERVIEW -->
+  <!-- ══════════════════════════════════════ -->
+  <details class="collapsible-section">
+    <summary>
+      <div class="collapsible-left">
+        <span class="role-pill" style="background:#F3F4F6;color:#374151">Backend</span>
+        <h2>Database Architecture</h2>
+      </div>
+      <span class="collapsible-toggle"><span class="label-closed">Show details</span><span class="label-open">Hide details</span><span class="chev">⌄</span></span>
+    </summary>
+    <div class="collapsible-body">
+      <p class="section-desc">18 tables, all deployed in Supabase Postgres with RLS enabled. The schema is designed for multi-tenancy from day one — a second organization (e.g. a different guide dog program) can be onboarded without any schema changes.</p>
+
+      <div class="rules-table-wrap">
+        <table class="rules-table">
+          <thead>
+            <tr><th>Table</th><th>Purpose</th><th>Key constraints</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code style="font-size:11px;background:#F3F4F6;padding:2px 6px;border-radius:4px">organizations</code></td><td>Org scoping. Partner org row seeded.</td><td>All other tables reference org_id here</td></tr>
+            <tr><td><code style="font-size:11px;background:#F3F4F6;padding:2px 6px;border-radius:4px">profiles</code></td><td>id = auth.users.id. Roles: foster / staff / vet / org_admin</td><td>SECURITY DEFINER functions prevent RLS recursion</td></tr>
+            <tr><td><code style="font-size:11px;background:#F3F4F6;padding:2px 6px;border-radius:4px">puppies</code></td><td>DOB drives all age calculations. Never store computed age.</td><td>Age always calculated from DOB string at query time</td></tr>
+            <tr><td><code style="font-size:11px;background:#F3F4F6;padding:2px 6px;border-radius:4px">daily_logs</code></td><td>6 sections. Core data source for alert engine.</td><td>UNIQUE(puppy_id, log_date) — ON CONFLICT DO UPDATE</td></tr>
+            <tr><td><code style="font-size:11px;background:#F3F4F6;padding:2px 6px;border-radius:4px">alerts</code></td><td>Auto-created by Postgres triggers only.</td><td>Partial unique index: one open alert per puppy+type</td></tr>
+            <tr><td><code style="font-size:11px;background:#F3F4F6;padding:2px 6px;border-radius:4px">alert_events</code></td><td>Append-only audit trail for every alert status change.</td><td>INSERT only — no UPDATE or DELETE from app layer</td></tr>
+            <tr><td><code style="font-size:11px;background:#F3F4F6;padding:2px 6px;border-radius:4px">content_modules</code></td><td>46 rows seeded. Unlock logic: stage + day_after_placement + age_days</td><td>CM-012 (heat cycle): female puppies only</td></tr>
+            <tr><td><code style="font-size:11px;background:#F3F4F6;padding:2px 6px;border-radius:4px">support_tickets</code></td><td>Foster-submitted structured requests.</td><td>Priority: low / medium / high / emergency</td></tr>
+            <tr><td><code style="font-size:11px;background:#F3F4F6;padding:2px 6px;border-radius:4px">foster_stats</code></td><td>Denormalized streak + points counters.</td><td>Updated by server trigger — never client-side</td></tr>
+            <tr><td><code style="font-size:11px;background:#F3F4F6;padding:2px 6px;border-radius:4px">foster_achievements</code></td><td>Earned badges per foster.</td><td>8 badge definitions seeded</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- PILOT ROADMAP -->
+  <!-- ══════════════════════════════════════ -->
+  <div class="section-label">
+    <span class="role-pill" style="background:#EEF2FF;color:#3741B5">Roadmap</span>
+    <h2>How the Pilot Can Work</h2>
+  </div>
+  <p class="section-desc">A structured approach to move from prototype preview to real operational impact.</p>
+
+  <div class="roadmap-summary">
+    <div class="roadmap-grid">
+      <div class="roadmap-card">
+        <span class="roadmap-step">1</span>
+        <h4>Prototype Preview</h4>
+        <p>Review the system and explore the interactive prototype.</p>
+      </div>
+      <div class="roadmap-card">
+        <span class="roadmap-step">2</span>
+        <h4>Guided Demo</h4>
+        <p>Walk through the system with staff and active foster participants.</p>
+      </div>
+      <div class="roadmap-card">
+        <span class="roadmap-step">3</span>
+        <h4>Pilot Program (1–2 months)</h4>
+        <p>Test the system in real workflows and gather feedback.</p>
+      </div>
+      <div class="roadmap-card">
+        <span class="roadmap-step">4</span>
+        <h4>Post-Pilot Plan</h4>
+        <p>Receive a structured roadmap, priorities, and cost outline.</p>
+      </div>
+      <div class="roadmap-card">
+        <span class="roadmap-step">5</span>
+        <h4>Implementation</h4>
+        <p>Move into phased development and longer-term rollout.</p>
+      </div>
+      <div class="roadmap-card">
+        <span class="roadmap-step">6</span>
+        <h4>Future Opportunities</h4>
+        <p>Explore partnerships, donations, and extended features.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:26px">
+    <a class="site-cta" href="./book-demo.html">👉 Book a Guided Demo</a>
+    <a class="site-cta-outline" href="./prototype-gate.html">View Interactive Prototype</a>
+  </div>
+
+  <div class="divider"></div>
+
+  <div style="display:flex;justify-content:center;margin-bottom:26px">
+    <a class="site-cta" href="./prototype-gate.html">View Interactive Prototype</a>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    Puppy Program OS · Build v0.1.2 · March 2026 · Partner Organization — Pilot<br>
+    <span style="margin-top:6px;display:block">Prepared by Puppy Program OS pilot team · puppy-program.vercel.app</span>
+  </div>
+
+</div>
+</body>
+</html>

@@ -3,28 +3,29 @@ import { Link } from "react-router-dom";
 const projects = [
   {
     name: "Cadence",
-    description: "Rhythm-based productivity system for operators managing multiple ventures.",
-    status: "In Progress",
+    description: "Lesson continuity and practice management for Suzuki music teachers and parents.",
+    status: "Live",
     path: "/work/cadence",
   },
   {
     name: "Puppy Program OS",
-    description: "End-to-end operations platform for structured puppy development programs.",
-    status: "Live",
+    description: "Automated foster management platform for a national guide dog organization.",
+    status: "Prototype",
     path: "/work/puppy-program-os",
   },
   {
     name: "Multi-Agent Workflow",
-    description: "Orchestration layer for coordinating multiple AI agents across complex tasks.",
-    status: "Exploring",
+    description: "Practical AI orchestration for production software \u2014 planning, execution, and handoff discipline.",
+    status: "Active",
     path: "/work/multi-agent-workflow",
   },
 ] as const;
 
 const statusColor: Record<string, string> = {
   "Live": "bg-emerald-50 text-emerald-700 ring-emerald-600/20",
+  "Active": "bg-emerald-50 text-emerald-700 ring-emerald-600/20",
+  "Prototype": "bg-sky-50 text-sky-700 ring-sky-600/20",
   "In Progress": "bg-amber-50 text-amber-700 ring-amber-600/20",
-  "Exploring": "bg-sky-50 text-sky-700 ring-sky-600/20",
 };
 
 export default function Home() {
