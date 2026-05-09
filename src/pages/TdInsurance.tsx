@@ -7,6 +7,20 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
+function PostImage({ src, alt, caption }: { src: string; alt: string; caption: string }) {
+  return (
+    <figure className="my-6">
+      <img
+        src={src}
+        alt={alt}
+        className="w-full rounded-lg border border-gray-200"
+        loading="lazy"
+      />
+      <figcaption className="mt-2 text-[13px] text-gray-500">{caption}</figcaption>
+    </figure>
+  );
+}
+
 function Formula({ children }: { children: string }) {
   return (
     <pre className="my-4 overflow-x-auto rounded-lg bg-gray-50 border border-gray-200 px-4 py-3 text-sm font-mono text-gray-800">
@@ -144,6 +158,11 @@ export default function TdInsurance() {
           After the app update, my driving score fell from roughly 4.5 to 3.5. The discount
           went from 22% down to 8%, then 6%. Premium climbed back toward $400/month.
         </p>
+        <PostImage
+          src="/images/writing/td-contract-increase.png"
+          alt="Premium renewal: $3.6K to $4.2K annually"
+          caption="Premium renewal: $3.6K → $4.2K annually"
+        />
         <p>Quick math on the discount loss alone:</p>
         <p>At $300/month with 22% discount, the base premium was approximately:</p>
         <Formula>{"300 / (1 - 0.22) ≈ $385/month"}</Formula>
@@ -159,6 +178,12 @@ export default function TdInsurance() {
         </p>
 
         <SectionHeading>What the app actually measures</SectionHeading>
+
+        <PostImage
+          src="/images/writing/td-driving-score.png"
+          alt="Driving score 3.5 — projected discount dropped to 8%"
+          caption="Driving score 3.5 — projected discount dropped to 8%"
+        />
 
         <p>TD MyAdvantage tracks five categories:</p>
         <ul className="ml-5 list-disc space-y-1">
@@ -189,6 +214,11 @@ export default function TdInsurance() {
           the app scores you incorrectly. In school zones with time-based speed limits (common
           in Ontario, where yellow lights flash during arrival/dismissal hours), the complexity multiplies.
         </p>
+        <PostImage
+          src="/images/writing/td-trip-perfect.png"
+          alt="A trip scored perfectly across all categories"
+          caption="A trip scored perfectly across all categories"
+        />
 
         <h3 className="mt-8 mb-2 text-lg font-semibold text-gray-900">Acceleration and braking</h3>
         <p>Technically straightforward:</p>
@@ -201,6 +231,11 @@ export default function TdInsurance() {
         <p className="font-medium text-gray-900">
           The problem: hard braking isn&apos;t always unsafe driving.
         </p>
+        <PostImage
+          src="/images/writing/td-trip-braking.png"
+          alt="Same driver, same route — braking flagged as could be better"
+          caption='Same driver, same route — braking flagged as "could be better"'
+        />
         <p>Real-world situations where hard braking is the correct response:</p>
         <ul className="ml-5 list-disc space-y-1">
           <li>A pedestrian steps into the road</li>
@@ -232,6 +267,11 @@ export default function TdInsurance() {
           <li>Rough road surface</li>
           <li>GPS jitter</li>
         </ul>
+        <PostImage
+          src="/images/writing/td-app-screens.jpg"
+          alt="TD MyAdvantage trip tracking interface"
+          caption="TD MyAdvantage trip tracking interface"
+        />
 
         <SectionHeading>The real issue: incentive misalignment</SectionHeading>
 
