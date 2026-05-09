@@ -7,13 +7,32 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-function PostImage({ src, alt, caption }: { src: string; alt: string; caption: string }) {
+function PhoneScreenshot({ src, alt, caption, context }: { src: string; alt: string; caption: string; context?: string }) {
   return (
     <figure className="my-6">
+      <div className="flex flex-col items-center sm:flex-row sm:items-start sm:gap-6">
+        <img
+          src={src}
+          alt={alt}
+          className="w-full max-w-[240px] sm:max-w-[280px] shrink-0 rounded-lg border border-gray-200"
+          loading="lazy"
+        />
+        <div className="mt-3 sm:mt-0 text-center sm:text-left">
+          <figcaption className="text-[13px] font-medium text-gray-700">{caption}</figcaption>
+          {context && <p className="mt-1 text-[13px] text-gray-500 leading-relaxed">{context}</p>}
+        </div>
+      </div>
+    </figure>
+  );
+}
+
+function DocImage({ src, alt, caption }: { src: string; alt: string; caption: string }) {
+  return (
+    <figure className="my-6 flex flex-col items-center">
       <img
         src={src}
         alt={alt}
-        className="w-full rounded-lg border border-gray-200"
+        className="w-full max-w-[480px] rounded-lg border border-gray-200"
         loading="lazy"
       />
       <figcaption className="mt-2 text-[13px] text-gray-500">{caption}</figcaption>
@@ -158,7 +177,7 @@ export default function TdInsurance() {
           After the app update, my driving score fell from roughly 4.5 to 3.5. The discount
           went from 22% down to 8%, then 6%. Premium climbed back toward $400/month.
         </p>
-        <PostImage
+        <DocImage
           src="/images/writing/td-contract-increase.png"
           alt="Premium renewal: $3.6K to $4.2K annually"
           caption="Premium renewal: $3.6K → $4.2K annually"
@@ -179,10 +198,11 @@ export default function TdInsurance() {
 
         <SectionHeading>What the app actually measures</SectionHeading>
 
-        <PostImage
+        <PhoneScreenshot
           src="/images/writing/td-driving-score.png"
           alt="Driving score 3.5 — projected discount dropped to 8%"
           caption="Driving score 3.5 — projected discount dropped to 8%"
+          context="After the app update, the score dropped from 4.5 to 3.5. The projected discount fell from 22% to 8%, erasing most of the financial benefit."
         />
 
         <p>TD MyAdvantage tracks five categories:</p>
@@ -214,10 +234,11 @@ export default function TdInsurance() {
           the app scores you incorrectly. In school zones with time-based speed limits (common
           in Ontario, where yellow lights flash during arrival/dismissal hours), the complexity multiplies.
         </p>
-        <PostImage
+        <PhoneScreenshot
           src="/images/writing/td-trip-perfect.png"
           alt="A trip scored perfectly across all categories"
           caption="A trip scored perfectly across all categories"
+          context="When all conditions align — smooth road, no sudden stops, accurate GPS — the app gives a clean score. But real traffic rarely cooperates."
         />
 
         <h3 className="mt-8 mb-2 text-lg font-semibold text-gray-900">Acceleration and braking</h3>
@@ -231,10 +252,11 @@ export default function TdInsurance() {
         <p className="font-medium text-gray-900">
           The problem: hard braking isn&apos;t always unsafe driving.
         </p>
-        <PostImage
+        <PhoneScreenshot
           src="/images/writing/td-trip-braking.png"
           alt="Same driver, same route — braking flagged as could be better"
           caption='Same driver, same route — braking flagged as "could be better"'
+          context="One hard braking event on an otherwise clean trip. The app penalizes the entire trip rather than scoring the event in proportion to the distance driven."
         />
         <p>Real-world situations where hard braking is the correct response:</p>
         <ul className="ml-5 list-disc space-y-1">
@@ -267,10 +289,11 @@ export default function TdInsurance() {
           <li>Rough road surface</li>
           <li>GPS jitter</li>
         </ul>
-        <PostImage
+        <PhoneScreenshot
           src="/images/writing/td-app-screens.jpg"
           alt="TD MyAdvantage trip tracking interface"
           caption="TD MyAdvantage trip tracking interface"
+          context="The trip view shows speed, acceleration, braking, and cornering scores per trip. Individual events are visible but the aggregation logic remains opaque."
         />
 
         <SectionHeading>The real issue: incentive misalignment</SectionHeading>
