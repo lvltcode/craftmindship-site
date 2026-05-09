@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { ExternalLink, Code } from "lucide-react";
 
 const externalLinks = [
-  { label: "GitHub", href: "https://github.com/lvltcode/puppy-program-os" },
+  { label: "GitHub", href: "https://github.com/lvltcode/puppy-program", icon: Code },
 ];
 
 const alertRules = [
@@ -69,9 +70,10 @@ export default function PuppyProgramOs() {
             href="https://puppy-prototype.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
           >
-            View Prototype &rarr;
+            <ExternalLink size={16} />
+            View Prototype
           </a>
           {externalLinks.map((link) => (
             <a
@@ -79,9 +81,10 @@ export default function PuppyProgramOs() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center rounded-lg border border-gray-300 px-3.5 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-3.5 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
             >
-              {link.label} &rarr;
+              <link.icon size={16} />
+              {link.label}
             </a>
           ))}
         </div>

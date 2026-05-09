@@ -1,4 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
+import { Code, Briefcase, BookOpen, Mail } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 const navLinks = [
   { to: "/work/cadence", label: "Work" },
@@ -6,11 +8,11 @@ const navLinks = [
   { to: "/about", label: "About" },
 ];
 
-const footerLinks = [
-  { href: "https://github.com/lvltcode", label: "GitHub" },
-  { href: "https://linkedin.com/in/lvltcode", label: "LinkedIn" },
-  { href: "https://craftmindship.substack.com", label: "Substack" },
-  { href: "mailto:hello@craftmindship.com", label: "Email" },
+const footerLinks: { href: string; label: string; icon: LucideIcon }[] = [
+  { href: "https://github.com/lvltcode", label: "GitHub", icon: Code },
+  { href: "https://www.linkedin.com/in/dangtranlevu/", label: "LinkedIn", icon: Briefcase },
+  { href: "https://craftmindship.substack.com", label: "Substack", icon: BookOpen },
+  { href: "mailto:lvltcode@gmail.com", label: "lvltcode@gmail.com", icon: Mail },
 ];
 
 export default function Layout() {
@@ -54,8 +56,9 @@ export default function Layout() {
                 href={link.href}
                 target={link.href.startsWith("mailto:") ? undefined : "_blank"}
                 rel={link.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                className="hover:text-gray-900 transition-colors"
+                className="inline-flex items-center gap-1.5 hover:text-gray-900 transition-colors"
               >
+                <link.icon size={16} />
                 {link.label}
               </a>
             ))}

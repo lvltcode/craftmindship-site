@@ -1,3 +1,7 @@
+import { Code, Briefcase, BookOpen, Mail } from "lucide-react";
+
+const iconMap = { Code, Briefcase, BookOpen, Mail } as const;
+
 const targetRoles = [
   "AI Product Builder",
   "Technical Product Manager",
@@ -31,10 +35,10 @@ const buildProcess = [
 ];
 
 const externalLinks = [
-  { label: "GitHub", href: "https://github.com/lvltcode" },
-  { label: "LinkedIn", href: "https://linkedin.com/in/dangtranlevu" },
-  { label: "Substack", href: "https://craftmindship.substack.com" },
-  { label: "Email", href: "mailto:hello@craftmindship.com" },
+  { label: "GitHub", href: "https://github.com/lvltcode", icon: "Code" as const },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/dangtranlevu/", icon: "Briefcase" as const },
+  { label: "Substack", href: "https://craftmindship.substack.com", icon: "BookOpen" as const },
+  { label: "lvltcode@gmail.com", href: "mailto:lvltcode@gmail.com", icon: "Mail" as const },
 ];
 
 export default function About() {
@@ -142,17 +146,21 @@ export default function About() {
           Connect
         </h2>
         <div className="mt-4 flex flex-wrap gap-3">
-          {externalLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              target={link.href.startsWith("mailto:") ? undefined : "_blank"}
-              rel={link.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-              className="inline-flex items-center rounded-lg border border-gray-300 px-3.5 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
+          {externalLinks.map((link) => {
+            const Icon = iconMap[link.icon];
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+                rel={link.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-3.5 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                <Icon size={16} />
+                {link.label}
+              </a>
+            );
+          })}
         </div>
       </section>
     </div>

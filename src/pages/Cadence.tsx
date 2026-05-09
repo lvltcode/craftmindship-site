@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { ExternalLink, Code } from "lucide-react";
 
 const externalLinks = [
-  { label: "Live App", href: "https://cadence-osa.com" },
-  { label: "Prototype", href: "https://cadence-prototype-psi.vercel.app" },
-  { label: "GitHub", href: "https://github.com/lvltcode/cadence-osa" },
+  { label: "Live App", href: "https://cadence-osa.com", icon: ExternalLink },
+  { label: "Prototype", href: "https://cadence-prototype-psi.vercel.app", icon: ExternalLink },
+  { label: "GitHub", href: "https://github.com/lvltcode/cadence-osa", icon: Code },
 ];
 
 const architectureDecisions = [
@@ -138,9 +139,10 @@ export default function Cadence() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center rounded-lg border border-gray-300 px-3.5 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-3.5 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
             >
-              {link.label} &rarr;
+              <link.icon size={16} />
+              {link.label}
             </a>
           ))}
         </div>

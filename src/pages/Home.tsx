@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ArrowDown, User, BookOpen } from "lucide-react";
 
 const projects = [
   {
@@ -46,14 +47,16 @@ export default function Home() {
         <div className="mt-8 flex flex-wrap gap-4">
           <a
             href="#work"
-            className="inline-flex items-center rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
           >
+            <ArrowDown size={16} />
             View Work
           </a>
           <Link
             to="/about"
-            className="inline-flex items-center rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
           >
+            <User size={16} />
             About Me
           </Link>
         </div>
@@ -121,7 +124,8 @@ export default function Home() {
           >
             <div>
               <p className="text-xs font-medium text-gray-400 uppercase">Substack</p>
-              <h3 className="mt-2 font-semibold text-gray-900 group-hover:underline">
+              <h3 className="mt-2 inline-flex items-center gap-1.5 font-semibold text-gray-900 group-hover:underline">
+                <BookOpen size={16} />
                 Read more on Substack &rarr;
               </h3>
               <p className="mt-1 text-sm text-gray-600">
