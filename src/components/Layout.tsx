@@ -24,7 +24,7 @@ export default function Layout() {
             to="/"
             className="flex items-center gap-2 text-lg font-semibold text-gray-900 hover:text-gray-700 transition-colors"
           >
-            <img src="/Logo-light-bg.png" alt="" className="h-7 w-7 rounded-full" />
+            <img src="/images/logos/craftmindship-light.png" alt="" className="h-7 w-7 rounded-full" />
             Craftmindship
           </Link>
           <div className="flex items-center gap-4 sm:gap-6 text-sm text-gray-600">
