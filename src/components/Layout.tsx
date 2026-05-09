@@ -22,8 +22,9 @@ export default function Layout() {
         <nav className="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
           <Link
             to="/"
-            className="text-lg font-semibold text-gray-900 hover:text-gray-700 transition-colors"
+            className="flex items-center gap-2 text-lg font-semibold text-gray-900 hover:text-gray-700 transition-colors"
           >
+            <img src="/Logo-light-bg.png" alt="" className="h-7 w-7 rounded-full" />
             Craftmindship
           </Link>
           <div className="flex items-center gap-4 sm:gap-6 text-sm text-gray-600">

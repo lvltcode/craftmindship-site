@@ -36,21 +36,21 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="px-6 pt-24 pb-20 sm:pt-32 sm:pb-28">
+      <section className="px-6 pt-16 pb-12 sm:pt-20 sm:pb-16">
         <p className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Luke V.
         </p>
-        <h1 className="mt-3 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+        <h1 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
           AI Product Builder · Technical Product Manager
         </h1>
-        <p className="mt-4 max-w-xl text-lg leading-relaxed text-gray-600">
+        <p className="mt-3 max-w-xl text-lg leading-relaxed text-gray-600">
           I design and ship workflow-heavy SaaS products that solve real operational
           problems, from concept to production. Systems over hype. Craft over ceremony.
         </p>
-        <p className="mt-3 max-w-xl text-sm text-gray-400">
+        <p className="mt-2 max-w-xl text-sm text-gray-400">
           Production SaaS · Supabase/RLS · AI-native delivery · Workflow automation · Real user pilots
         </p>
-        <div className="mt-8 flex flex-wrap gap-4">
+        <div className="mt-5 flex flex-wrap gap-4">
           <a
             href="#work"
             className="inline-flex items-center gap-1.5 rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
@@ -69,7 +69,7 @@ export default function Home() {
       </section>
 
       {/* Featured Work */}
-      <section id="work" className="px-6 pb-20 sm:pb-28">
+      <section id="work" className="px-6 pb-14 sm:pb-20">
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Featured Work
         </h2>
@@ -102,7 +102,7 @@ export default function Home() {
       </section>
 
       {/* Selected Writing */}
-      <section className="px-6 pb-20 sm:pb-28">
+      <section className="px-6 pb-14 sm:pb-20">
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Selected Writing
         </h2>
