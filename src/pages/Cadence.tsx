@@ -76,6 +76,7 @@ export default function Cadence() {
       {/* Hero */}
       <header>
         <div className="flex flex-wrap items-center gap-3">
+          <img src="/images/projects/cadence/logo.jpg" alt="Cadence logo" className="h-12 w-auto" />
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Cadence
           </h1>
