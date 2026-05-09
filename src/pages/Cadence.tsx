@@ -8,77 +8,29 @@ const externalLinks = [
 ];
 
 const architectureDecisions = [
-  {
-    decision: "Teacher-first",
-    detail: "org_id nullable everywhere",
-    reason: "Teachers can use Cadence independently without org adoption",
-  },
-  {
-    decision: "Lesson = source of truth",
-    detail: "piece_progress.last_updated_lesson_id NOT NULL",
-    reason: "No floating progress updates — essential for learning record integrity",
-  },
-  {
-    decision: "Magic link auth",
-    detail: "No passwords",
-    reason: "Teachers and parents are non-technical — zero password friction",
-  },
-  {
-    decision: "Status model",
-    detail: "introduced \u2192 working \u2192 can_play \u2192 polished",
-    reason: "Mastery-based progression, true to Suzuki method",
-  },
-  {
-    decision: "Private fields",
-    detail: "teacher_observation excluded from parent queries",
-    reason: "Teachers need private space — this drives adoption",
-  },
-  {
-    decision: "Parent-safe views",
-    detail: "Database views, not UI guards",
-    reason: "Defense in depth — private fields excluded at DB layer",
-  },
-  {
-    decision: "Date type",
-    detail: "date not timestamptz for lesson dates",
-    reason: "Prevents timezone shift in Eastern time",
-  },
-  {
-    decision: "Skills \u2260 Pieces",
-    detail: "Architecturally separate tables",
-    reason: "Suzuki tracks foundational technique independently of repertoire",
-  },
+  { decision: "org_id nullable everywhere", reason: "Teacher can use Cadence independently \u2014 no org required for adoption" },
+  { decision: "piece_progress.last_updated_lesson_id NOT NULL", reason: "Every progress update ties to a real lesson \u2014 no floating data, no orphaned progress entries" },
+  { decision: "date type, not timestamptz for lesson dates", reason: "A parent in Ontario should see \u201cMay 9\u201d not \u201cMay 8\u201d because of timezone conversion. This one decision prevented the single most common date bug in the app." },
+  { decision: "Parent-safe database views", reason: "Private fields excluded at the database layer, not just the UI \u2014 defense in depth" },
+  { decision: "Skills architecturally separate from pieces", reason: "Technique transfers across repertoire. A child can polish Twinkle but still need work on bow hold. These are different axes of progress." },
+  { decision: "String-split date parsing, never new Date() on bare strings", reason: "JavaScript\u2019s new Date('2026-05-09') parses as UTC midnight, which shifts to May 8 in Eastern Time. Every date display in Cadence avoids this trap." },
 ];
 
 const techStack = [
-  { layer: "Frontend", tools: "React 18 + TypeScript + Vite + Tailwind + shadcn/ui" },
-  { layer: "Backend", tools: "Supabase (PostgreSQL + RLS + Auth + Edge Functions)" },
-  { layer: "Deploy", tools: "Vercel (auto-deploy from main)" },
-  { layer: "Testing", tools: "Playwright (E2E for critical flows)" },
-  { layer: "Auth", tools: "Supabase magic link (no passwords)" },
+  { layer: "Frontend", tools: "React 18 + TypeScript + Vite + Tailwind + shadcn/ui", role: "Mobile-first web app" },
+  { layer: "Backend", tools: "Supabase (PostgreSQL + RLS + Edge Functions)", role: "Data, auth, permissions" },
+  { layer: "Auth", tools: "Passwordless email OTP", role: "Zero-friction login" },
+  { layer: "Deploy", tools: "Vercel (auto-deploy from main branch)", role: "Continuous deployment" },
+  { layer: "QA", tools: "Playwright + manual mobile testing", role: "Browser automation + real-device QA" },
+  { layer: "DNS/Email", tools: "Cloudflare + Resend", role: "Branded auth emails from auth.cadence-osa.com" },
 ];
 
-const builderRoles = [
-  {
-    who: "Me (Luke)",
-    role: "Product owner, architect, QA",
-    did: "Product planning (5 docs before code), data model design, RLS policy architecture, scope decisions, all QA, pilot strategy",
-  },
-  {
-    who: "Claude Code",
-    role: "Precision backend + targeted patches",
-    did: "SQL migrations, RLS policies, Edge Functions, multi-file refactors, git operations, bug fixes",
-  },
-  {
-    who: "Lovable",
-    role: "UI scaffolding",
-    did: "Initial component generation, page layouts, form structures — all from detailed prompts. Manual direction needed for spacing, hierarchy, and empty states",
-  },
-  {
-    who: "Supabase",
-    role: "Backend platform",
-    did: "24 tables, row-level security, magic link auth, parent-safe views, Edge Functions (Resend API for invites)",
-  },
+const buildRoles = [
+  { role: "Planning + architecture", tool: "Claude (chat)", did: "Product discovery, SQL/RLS design, prompt engineering, architecture decisions" },
+  { role: "Frontend + feature execution", tool: "Lovable (Groups 1\u20137), then Claude Code", did: "UI scaffolding, component builds, feature implementation" },
+  { role: "Backend precision", tool: "Claude Code", did: "RLS policies, Edge Functions, targeted fixes, git operations" },
+  { role: "QA", tool: "Playwright + manual mobile", did: "Automated browser testing + real-device verification" },
+  { role: "Overflow / refactor", tool: "Codex", did: "Secondary patches, code cleanup" },
 ];
 
 function ArtifactEmbed({ src, title, height = "480px" }: { src: string; title: string; height?: string }) {
@@ -119,7 +71,7 @@ export default function Cadence() {
 
   return (
     <div className="px-6 py-16 sm:py-24">
-      {/* Header */}
+      {/* Hero */}
       <header>
         <div className="flex flex-wrap items-center gap-3">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -130,7 +82,11 @@ export default function Cadence() {
           </span>
         </div>
         <p className="mt-3 text-lg text-gray-600">
-          Lesson continuity and practice management for Suzuki music teachers and parents.
+          Lesson continuity and practice management for private music teachers and parents.
+        </p>
+        <p className="mt-2 text-gray-700 leading-relaxed">
+          One teacher input after every lesson gives parents weekly clarity on what their
+          child is learning and what to practice next.
         </p>
         <div className="mt-4 flex flex-wrap gap-3">
           {externalLinks.map((link) => (
@@ -150,44 +106,97 @@ export default function Cadence() {
 
       <hr className="my-12 border-gray-200" />
 
-      {/* Problem + Solution */}
+      {/* 1: The Problem */}
       <section>
-        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
-          The Problem
-        </h2>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">The Problem</h2>
         <p className="mt-4 text-gray-700 leading-relaxed">
-          After every lesson, the learning stops. The teacher knows what happened.
-          The parent wasn't there — or didn't fully understand. The child comes home
-          and nothing continues until next week.
+          After every lesson, the learning stops.
         </p>
         <p className="mt-3 text-gray-700 leading-relaxed">
-          Over a year of Suzuki violin lessons, the parent's job is to run daily practice —
-          but they have almost no real information to do it well. Teachers manage 15–30 students
-          across a season. Schedules change, makeups get missed, parents ask the same questions
-          by text. None of this has a system.
+          The teacher knows what happened. The parent wasn&apos;t there &mdash; or was there
+          but didn&apos;t fully understand. The child comes home and nothing continues until
+          next week. Over a year of Suzuki violin lessons, the parent&apos;s job is to run
+          daily practice, but they have almost no real information to do it well.
         </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          At the same time, teachers like Janet manage 15&ndash;30 students across a season.
+          Schedules change. Makeups get missed. Parents ask the same questions by text. Recitals
+          require coordination across families. None of this has a system &mdash; it runs on
+          memory, email, and manual effort.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          The result: parents feel uninformed. Teachers repeat themselves constantly.
+          Learning continuity breaks between lessons. Progress is invisible outside the lesson room.
+        </p>
+      </section>
 
-        <h2 className="mt-12 text-sm font-medium tracking-wide text-gray-500 uppercase">
-          What Cadence Does
+      <hr className="my-12 border-gray-200" />
+
+      {/* 2: Product Thesis */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">The Product Thesis</h2>
+        <p className="mt-4 text-gray-700 leading-relaxed font-medium">
+          The lesson is the unit of value. Everything else is context around it.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          If the teacher writes a note, the parent has clarity. If the parent has clarity, the
+          child practices. If the child practices, the teacher&apos;s work compounds. That
+          loop &mdash; lesson &rarr; note &rarr; practice &rarr; better student &mdash; is the
+          product. The teacher writes once after each lesson (what they worked on, what to
+          practice, how many minutes and days per week), and the parent immediately sees the
+          full weekly plan without asking.
+        </p>
+        <p className="mt-3 text-sm text-gray-500 italic">
+          Every feature decision asks one question: does this make the loop faster, clearer,
+          or more consistent?
+        </p>
+      </section>
+
+      <hr className="my-12 border-gray-200" />
+
+      {/* 3: 90-Second Constraint */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          The Hard Constraint &mdash; 90 Seconds
         </h2>
-        <div className="mt-4 space-y-4">
+        <p className="mt-4 text-gray-700 leading-relaxed">
+          The most important product constraint was speed.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          If a teacher cannot write the note in under 90 seconds on a phone between lessons,
+          the system will not survive real studio life. Teachers finish a lesson, have
+          2&ndash;3 minutes before the next student arrives, and need to capture what happened
+          while it&apos;s fresh.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          Cadence was designed around that reality: short structured fields, reusable lesson
+          context, tap-based piece and skill selection, pre-filled dates and times, and no
+          extra admin ceremony. The form is optimized for fast mobile entry, with the main
+          save path kept short and obvious.
+        </p>
+        <p className="mt-3 text-sm text-gray-500 italic">
+          This constraint shaped the entire product. No feature was added that would slow
+          down the core input flow.
+        </p>
+      </section>
+
+      <hr className="my-12 border-gray-200" />
+
+      {/* 4: What Cadence Does Not Do */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          What Cadence Deliberately Does Not Do
+        </h2>
+        <p className="mt-4 text-sm text-gray-500 italic">
+          Every &ldquo;no&rdquo; protected the core loop.
+        </p>
+        <div className="mt-4 space-y-3">
           {[
-            {
-              title: "Captures what happened in every lesson",
-              desc: "Teacher writes 3–4 lines after each session: what we worked on, what to practice, how many minutes and days per week. Takes under 90 seconds.",
-            },
-            {
-              title: "Delivers it to the parent immediately",
-              desc: "Parent opens the app and sees this week's lesson note, practice goal, and current piece status. No searching, no asking.",
-            },
-            {
-              title: "Tracks piece progression (Suzuki-native)",
-              desc: "Each student has a live piece list. Teacher updates status: introduced \u2192 working \u2192 can_play \u2192 polished. Parents see progress in real terms.",
-            },
-            {
-              title: "Keeps the schedule accurate",
-              desc: "Teacher marks cancellations and makeups. Parent sees the updated schedule without a text chain.",
-            },
+            { title: "No messaging", desc: "Prevents the app from becoming another inbox. The teacher writes structured lesson context, not ad-hoc messages." },
+            { title: "No parent-side practice scoring", desc: "Prevents parents from gaming their child\u2019s record. Practice check-ins are lightweight confirmations, not evaluations." },
+            { title: "No multi-instrument at MVP", desc: "Keeps the data model clean for Suzuki violin first. Other instruments and curricula can be added later without redesigning the core." },
+            { title: "No billing integration", desc: "Removes procurement friction from pilot adoption. A teacher can start using Cadence without asking anyone for budget approval." },
+            { title: "No passwords", desc: "Passwordless email OTP removes the most common friction point for non-technical users. No password to forget, no reset flow, no signup form." },
           ].map((item) => (
             <div key={item.title} className="rounded-lg border border-gray-200 p-4">
               <h3 className="font-semibold text-gray-900">{item.title}</h3>
@@ -195,16 +204,257 @@ export default function Cadence() {
             </div>
           ))}
         </div>
+      </section>
+
+      <hr className="my-12 border-gray-200" />
+
+      {/* 5: Learning Pattern Model */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          Learning Pattern Model
+        </h2>
+        <p className="mt-4 text-gray-700 leading-relaxed">
+          Cadence is not trying to measure children against each other. That is the wrong
+          incentive in early music education.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          Instead, Cadence tracks the smallest useful learning signals: which pieces appeared
+          in lessons, which skills were practiced, how often they were repeated, and when the
+          teacher confirms something is retained.
+        </p>
+        <div className="mt-6 space-y-4">
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900">Pieces show repertoire progress</h3>
+            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
+              Each student has a live piece list mapped to their Suzuki book. Teacher updates
+              status as pieces move through a mastery progression: introduced &rarr; working
+              &rarr; can play &rarr; polished. Parents see progress in real terms, not abstract percentages.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900">Skills show transferable technique</h3>
+            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
+              A child may polish a piece but still need work on tone production, bow direction,
+              rhythm, posture, or left-hand control. Cadence keeps skills architecturally separate
+              from pieces so teachers can see what is improving across the repertoire, not just
+              whether one song is finished.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900">+N exposure counts</h3>
+            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
+              Track how often a piece or skill has appeared across lessons and practice context.
+              A &ldquo;+7&rdquo; does not mean seven perfect practices. It means the skill or
+              piece has been touched repeatedly. This helps the teacher see repetition and exposure
+              without turning the app into a fake scoring system.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900">Retained status</h3>
+            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
+              Teacher-confirmed mastery &mdash; not an algorithm, not a threshold. The teacher
+              decides when a skill or piece is truly retained based on their professional judgment.
+            </p>
+          </div>
+        </div>
         <p className="mt-6 text-sm text-gray-500 italic">
-          The lesson is the unit of value. Everything else is context around it.
-          If the teacher writes a note, the parent has clarity. If the parent has clarity,
-          the child practices. That loop — lesson &rarr; note &rarr; practice &rarr; better student — is the product.
+          Instead of calling a child &ldquo;talented&rdquo; or &ldquo;behind,&rdquo; Cadence
+          makes progress visible at the smallest useful level.
         </p>
       </section>
 
       <hr className="my-12 border-gray-200" />
 
-      {/* Prototype */}
+      {/* 6: Privacy and Trust */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          Privacy and Trust Architecture
+        </h2>
+        <p className="mt-4 text-gray-700 leading-relaxed font-medium">
+          The strongest product decision was to keep the teacher as the only source of teaching truth.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          Parents can read lesson notes, confirm practice, and understand the weekly plan.
+          They cannot edit lesson content, score skills, or inflate progress. This protects
+          the integrity of the learning record.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          Teachers need private space to think. Every lesson note has an optional private
+          observation field &mdash; visible only to the teacher, excluded from all parent-facing
+          queries at the database level, not just the UI. This is defense in depth: parent-safe
+          database views (<code className="rounded bg-gray-100 px-1.5 py-0.5 text-sm font-mono text-gray-800">parent_safe_lesson_notes</code>,{" "}
+          <code className="rounded bg-gray-100 px-1.5 py-0.5 text-sm font-mono text-gray-800">parent_safe_piece_progress</code>)
+          enforce the boundary even if a UI bug occurs.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          Row-Level Security policies ensure that teachers see only their students, parents
+          see only their children, and private teaching observations never leak across the boundary.
+        </p>
+        <p className="mt-3 text-sm text-gray-500 italic">
+          This matters for adoption. Teachers will not use a system where parents can see their
+          unfiltered teaching notes. The privacy architecture made adoption possible.
+        </p>
+      </section>
+
+      <hr className="my-12 border-gray-200" />
+
+      {/* 7: Design System */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          Design System
+        </h2>
+
+        <div className="mt-6 space-y-8">
+          <div>
+            <h3 className="text-sm font-medium text-gray-900">
+              Suzuki Book Color System
+            </h3>
+            <p className="mt-1 text-sm text-gray-500">
+              The Suzuki book color system maps 10 books to a consistent visual language
+              across the entire app. Every book reference renders through a single BookChip
+              component &mdash; no hand-coded color values anywhere in the codebase.
+            </p>
+            <div className="mt-3">
+              <ArtifactEmbed
+                src="/artifacts/suzuki_book_color_system.html"
+                title="Suzuki Book Color System"
+                height="520px"
+              />
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-medium text-gray-900">
+              Student Card Layout
+            </h3>
+            <p className="mt-1 text-sm text-gray-500">
+              Student cards on the teacher dashboard use a compact layout optimized for
+              scanning at a glance: student name, instrument, book level, parent link status,
+              lesson count, practice frequency, next lesson date and time. The left stripe
+              color matches the student&apos;s current book level.
+            </p>
+            <div className="mt-3">
+              <ArtifactEmbed
+                src="/artifacts/student_card_compact_options.html"
+                title="Student Card Compact Layout Options"
+                height="640px"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr className="my-12 border-gray-200" />
+
+      {/* 8: Adoption Reality */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          Adoption Reality
+        </h2>
+        <p className="mt-4 text-gray-700 leading-relaxed">
+          The first real user was not a technical early adopter.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          Janet is a long-time private violin/viola teacher with Suzuki and RCM students.
+          She manages schedules, notes, and parent communication mostly through paper, email,
+          and memory. That shaped the product: no complex dashboard, no heavy setup, no
+          passwords, no extra data entry for the sake of data entry.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          If the system created more work than it saved, Janet would stop using it. Every
+          feature had to pass a simple test: does this reduce Janet&apos;s daily coordination
+          overhead, or does it add to it?
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          The design decisions that came from this reality: passwordless email OTP (no
+          passwords to forget), mobile-first layout (Janet uses her phone between lessons),
+          pre-filled lesson dates and times (from the schedule), and tap-based piece/skill
+          selection (no typing lists of song names).
+        </p>
+      </section>
+
+      <hr className="my-12 border-gray-200" />
+
+      {/* 9: Rollout and Business Model */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          Rollout and Business Model
+        </h2>
+        <p className="mt-4 text-gray-700 leading-relaxed">
+          Cadence was designed to avoid enterprise-style adoption friction.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          The first phase is a free pilot with one real teacher and a small group of families.
+          The goal is proof: fewer repeated parent questions, faster lesson notes, better
+          schedule clarity, and more consistent home practice.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          The commercial path starts with teachers, not parents and not the organization.
+          Teachers own the workflow and create the data. If the teacher uses Cadence, parents
+          receive value automatically. Teacher-level pricing avoids org procurement friction.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          Future expansion can add an organization layer for visibility across teachers,
+          group-class context, and administrative support &mdash; but the product starts
+          teacher-first.
+        </p>
+      </section>
+
+      <hr className="my-12 border-gray-200" />
+
+      {/* 10: Why This Exists */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          Why This Exists
+        </h2>
+        <p className="mt-4 text-gray-700 leading-relaxed">
+          Luke has over 10 years of teaching experience as a side job across multiple
+          disciplines, and has worked around EdTech and organizational systems professionally.
+          When his son joined the Suzuki violin community, Luke bought a violin and started
+          practicing alongside him &mdash; not to become a violinist, but to understand the
+          learning loop from the parent side.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          Cadence came from that gap: what the teacher knows after a lesson, what the parent
+          actually understands, and what happens (or doesn&apos;t) during home practice between
+          lessons. The model is not limited to violin. The same coach-parent-child feedback
+          gap exists in piano, cello, swimming, martial arts, and team sports. Any structured
+          learning environment where a coach sees the student weekly and a parent manages
+          daily practice has the same problem.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          Cadence is founder-supported during the pilot phase. The goal is to prove usefulness
+          with real teachers and families before introducing payment pressure. Long-term
+          sustainability may come from teacher subscriptions, optional community support,
+          and local partner sponsorship. Core progress visibility &mdash; lesson notes, piece
+          status, skill tracking, practice guidance &mdash; will not be paywalled.
+        </p>
+      </section>
+
+      <hr className="my-12 border-gray-200" />
+
+      {/* 11: Prototype to Production */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          Prototype to Production
+        </h2>
+        <p className="mt-4 text-gray-700 leading-relaxed">
+          The early prototype proved the teacher-parent flow: lesson note, parent view, piece
+          status, and weekly practice clarity.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          Production added the hard parts: Supabase RLS and parent-safe database views,
+          invite-only parent onboarding with email delivery via Resend, teacher approval queue,
+          recurring schedule generation with cancellation and makeup handling, parent practice
+          check-ins with duplicate prevention, events with student assignment and parent RSVP,
+          Super Admin support tools, and mobile QA with production auth and branded email
+          setup on a custom domain.
+        </p>
+      </section>
+
+      <hr className="my-12 border-gray-200" />
+
+      {/* 12: Interactive Prototype */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Interactive Prototype
@@ -242,78 +492,45 @@ export default function Cadence() {
 
       <hr className="my-12 border-gray-200" />
 
-      {/* Design Artifacts */}
+      {/* 13: Technical Architecture */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
-          Design Artifacts
+          Technical Architecture
         </h2>
-        <p className="mt-2 text-sm text-gray-500">
-          Early design explorations generated during product planning.
-        </p>
-
-        <div className="mt-6 space-y-8">
-          <div>
-            <h3 className="text-sm font-medium text-gray-900">
-              Suzuki Book Color System
-            </h3>
-            <p className="mt-1 text-sm text-gray-500">
-              10-level color gradient from green (Book 1) to gold (Book 10).
-              Used across student cards, piece lists, and progress indicators.
-            </p>
-            <div className="mt-3">
-              <ArtifactEmbed
-                src="/artifacts/suzuki_book_color_system.html"
-                title="Suzuki Book Color System"
-                height="520px"
-              />
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-medium text-gray-900">
-              Student Card Layout Options
-            </h3>
-            <p className="mt-1 text-sm text-gray-500">
-              Two density options for the teacher dashboard — single-row (20+ students)
-              vs two-row (more readable with practice/status chips).
-            </p>
-            <div className="mt-3">
-              <ArtifactEmbed
-                src="/artifacts/student_card_compact_options.html"
-                title="Student Card Compact Layout Options"
-                height="640px"
-              />
-            </div>
-          </div>
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-gray-200 text-left">
+                <th className="py-3 pr-4 font-medium text-gray-900">Layer</th>
+                <th className="py-3 pr-4 font-medium text-gray-900">Technology</th>
+                <th className="py-3 font-medium text-gray-900">Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              {techStack.map((row) => (
+                <tr key={row.layer} className="border-b border-gray-100">
+                  <td className="py-3 pr-4 font-medium text-gray-900 whitespace-nowrap align-top">{row.layer}</td>
+                  <td className="py-3 pr-4 text-gray-600 align-top">{row.tools}</td>
+                  <td className="py-3 text-gray-600 align-top">{row.role}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      </section>
 
-      <hr className="my-12 border-gray-200" />
-
-      {/* Architecture Decisions */}
-      <section>
-        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
-          Architecture Decisions
-        </h2>
-        <p className="mt-2 text-sm text-gray-500">
-          Locked before build. Not revisited mid-sprint.
-        </p>
+        <h3 className="mt-8 text-sm font-medium text-gray-900">Key Architecture Decisions</h3>
         <div className="mt-4 overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-200 text-left">
                 <th className="py-3 pr-4 font-medium text-gray-900">Decision</th>
-                <th className="py-3 pr-4 font-medium text-gray-900">What</th>
                 <th className="py-3 font-medium text-gray-900">Why</th>
               </tr>
             </thead>
             <tbody>
               {architectureDecisions.map((row) => (
                 <tr key={row.decision} className="border-b border-gray-100">
-                  <td className="py-3 pr-4 font-medium text-gray-900 whitespace-nowrap align-top">
-                    {row.decision}
-                  </td>
-                  <td className="py-3 pr-4 text-gray-600 align-top">{row.detail}</td>
+                  <td className="py-3 pr-4 font-medium text-gray-900 align-top whitespace-nowrap">{row.decision}</td>
                   <td className="py-3 text-gray-600 align-top">{row.reason}</td>
                 </tr>
               ))}
@@ -324,73 +541,76 @@ export default function Cadence() {
 
       <hr className="my-12 border-gray-200" />
 
-      {/* Tech Stack */}
+      {/* 14: AI-Assisted Build Workflow */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
-          Tech Stack
+          AI-Assisted Build Workflow
         </h2>
-        <div className="mt-4">
+        <p className="mt-4 text-gray-700 leading-relaxed font-medium">
+          AI accelerated execution. It did not decide the product.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          Luke owned the product model, user flows, data architecture, permission boundaries,
+          QA sequencing, prompt structure, and scope control. AI tools were used as specialized
+          execution agents within a disciplined workflow:
+        </p>
+        <div className="mt-4 overflow-x-auto">
           <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-gray-200 text-left">
+                <th className="py-3 pr-4 font-medium text-gray-900">Role</th>
+                <th className="py-3 pr-4 font-medium text-gray-900">Tool</th>
+                <th className="py-3 font-medium text-gray-900">What It Did</th>
+              </tr>
+            </thead>
             <tbody>
-              {techStack.map((row) => (
-                <tr key={row.layer} className="border-b border-gray-100">
-                  <td className="py-3 pr-4 font-medium text-gray-900 whitespace-nowrap w-28">
-                    {row.layer}
-                  </td>
-                  <td className="py-3 text-gray-600">{row.tools}</td>
+              {buildRoles.map((row) => (
+                <tr key={row.role} className="border-b border-gray-100">
+                  <td className="py-3 pr-4 font-medium text-gray-900 align-top whitespace-nowrap">{row.role}</td>
+                  <td className="py-3 pr-4 text-gray-600 align-top whitespace-nowrap">{row.tool}</td>
+                  <td className="py-3 text-gray-600 align-top">{row.did}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-      </section>
-
-      <hr className="my-12 border-gray-200" />
-
-      {/* Builder Roles */}
-      <section>
-        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
-          What I Built vs What the Tool Built
-        </h2>
-        <p className="mt-2 text-sm text-gray-500">
-          AI-assisted, not AI-autonomous. 80% of effort was planning; 20% was execution.
-        </p>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          {builderRoles.map((role) => (
-            <div key={role.who} className="rounded-lg border border-gray-200 p-5">
-              <h3 className="font-semibold text-gray-900">{role.who}</h3>
-              <p className="mt-0.5 text-xs font-medium text-gray-500 uppercase">
-                {role.role}
-              </p>
-              <p className="mt-3 text-sm text-gray-600 leading-relaxed">{role.did}</p>
-            </div>
-          ))}
-        </div>
         <div className="mt-6 rounded-lg border border-amber-200 bg-amber-50 p-4">
           <p className="text-sm text-amber-800">
-            <span className="font-medium">What AI is bad at here:</span> design taste
-            and scope discipline. Every screen needed manual direction on spacing, hierarchy,
-            and empty states. AI will build features you didn&apos;t ask for if prompts are
-            slightly ambiguous.
+            <span className="font-medium">The hardest part was not generating code.</span>{" "}
+            The hardest part was preventing drift: keeping lesson notes, practice data, skills,
+            pieces, parent views, teacher-private fields, and admin tools aligned to one product
+            model across hundreds of AI-generated commits.
           </p>
         </div>
+        <p className="mt-4 text-sm text-gray-500">
+          Planning artifacts (8 markdown files totaling ~40 pages) served as the shared memory
+          layer between the human operator and every AI agent. Each build session started by
+          loading the current project state, not by re-explaining the product.
+        </p>
       </section>
 
       <hr className="my-12 border-gray-200" />
 
-      {/* Status */}
+      {/* 15: Current Status */}
       <section className="pb-8">
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Current Status
         </h2>
         <p className="mt-4 text-gray-700 leading-relaxed">
-          In production at{" "}
+          Cadence is live in production at{" "}
           <a href="https://cadence-osa.com" target="_blank" rel="noopener noreferrer" className="font-medium underline">
             cadence-osa.com
           </a>.
-          Core lesson-practice-scheduling loop is functional. 24 tables, 3 roles,
-          RLS-enforced access control. Next phase: user validation with Suzuki teachers
-          in Ontario.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          The teacher-parent lesson continuity loop, parent practice view, piece and skill
+          progress tracking, scheduling, events, parent practice check-ins, and Super Admin
+          support layer are all functional.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          Next phase: profile polish, parent progress reports with PDF export, deeper teacher
+          validation with Janet&apos;s full student roster, and funding transparency for
+          community support.
         </p>
       </section>
     </div>
