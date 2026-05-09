@@ -4,7 +4,7 @@ import { ExternalLink, Code } from "lucide-react";
 const externalLinks = [
   { label: "Live App", href: "https://cadence-osa.com", icon: ExternalLink },
   { label: "Prototype", href: "https://cadence-prototype-psi.vercel.app", icon: ExternalLink },
-  { label: "GitHub", href: "https://github.com/lvltcode/cadence-osa", icon: Code },
+  { label: "Case Study Source", href: "https://github.com/lvltcode/lukedang/blob/main/casestudies/cadence.md", icon: Code },
 ];
 
 const architectureDecisions = [

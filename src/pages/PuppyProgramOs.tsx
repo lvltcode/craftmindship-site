@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ExternalLink, Code } from "lucide-react";
 
 const externalLinks = [
-  { label: "GitHub", href: "https://github.com/lvltcode/puppy-program", icon: Code },
+  { label: "Case Study Source", href: "https://github.com/lvltcode/lukedang/blob/main/casestudies/puppy-program-os.md", icon: Code },
 ];
 
 const alertRules = [
