@@ -40,7 +40,7 @@ export default function Home() {
         <p className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Luke V.
         </p>
-        <h1 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+        <h1 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-[2.5rem]">
           AI Product Builder · Technical Product Manager
         </h1>
         <p className="mt-3 max-w-xl text-lg leading-relaxed text-gray-600">

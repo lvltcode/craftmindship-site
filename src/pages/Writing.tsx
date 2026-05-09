@@ -31,7 +31,7 @@ export default function Writing() {
       </header>
 
       {/* On-site posts */}
-      <section className="mt-12">
+      <section className="mt-8">
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Posts
         </h2>

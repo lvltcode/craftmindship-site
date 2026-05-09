@@ -3,7 +3,7 @@ import { usePageMeta } from "../hooks/usePageMeta";
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="mt-12 mb-4 text-xl font-bold text-gray-900">{children}</h2>
+    <h2 className="mt-8 mb-4 text-xl font-bold text-gray-900">{children}</h2>
   );
 }
 
