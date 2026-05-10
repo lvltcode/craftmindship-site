@@ -9,6 +9,7 @@ import Analysis from "./pages/Analysis";
 import Lab from "./pages/Lab";
 import About from "./pages/About";
 import TdInsurance from "./pages/TdInsurance";
+import CodingBootcamps from "./pages/CodingBootcamps";
 import NotFound from "./pages/NotFound";
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/analysis" element={<Analysis />} />
           <Route path="/lab" element={<Lab />} />
           <Route path="/analysis/td-insurance-telematics" element={<TdInsurance />} />
+          <Route path="/analysis/coding-bootcamps-dying" element={<CodingBootcamps />} />
           {/* Redirects from old /writing paths */}
           <Route path="/writing" element={<Navigate to="/analysis" replace />} />
           <Route path="/writing/td-insurance-telematics" element={<Navigate to="/analysis/td-insurance-telematics" replace />} />

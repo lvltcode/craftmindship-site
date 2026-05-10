@@ -41,7 +41,7 @@ export default function Home() {
           Luke V.
         </p>
         <h1 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-[2.5rem]">
-          AI Product Builder · Technical Product Manager
+          AI Product Builder&nbsp;· Technical Product Manager
         </h1>
         <p className="mt-3 max-w-xl text-lg leading-relaxed text-gray-600">
           I design and ship workflow-heavy SaaS products that solve real operational
@@ -53,7 +53,7 @@ export default function Home() {
         <div className="mt-5 flex flex-wrap gap-4">
           <a
             href="#work"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
+            className="inline-flex items-center gap-1.5 min-h-[44px] rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
           >
             <ArrowDown size={16} />
             View Work
@@ -62,14 +62,14 @@ export default function Home() {
             href="/cv.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            className="inline-flex items-center gap-1.5 min-h-[44px] rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
           >
             <FileText size={16} />
             View CV
           </a>
           <Link
             to="/about"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            className="inline-flex items-center gap-1.5 min-h-[44px] rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
           >
             <User size={16} />
             About Me
@@ -116,6 +116,21 @@ export default function Home() {
           Selected Analysis
         </h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          <Link
+            to="/analysis/coding-bootcamps-dying"
+            className="group rounded-xl border border-gray-200 p-6 text-left transition-colors hover:border-gray-300 hover:bg-gray-50"
+          >
+            <p className="text-xs font-medium text-gray-400 uppercase">Edtech Teardown</p>
+            <h3 className="mt-2 font-semibold text-gray-900 group-hover:text-gray-700">
+              Why coding bootcamps are dying &mdash; and what replaces them
+            </h3>
+            <p className="mt-1 text-sm text-gray-600">
+              A 2023 course review reread in 2026. Coffee Credit formula, business model analysis, and four futures for coding schools.
+            </p>
+            <span className="mt-3 inline-block text-sm font-medium text-gray-900 group-hover:underline">
+              Read &rarr;
+            </span>
+          </Link>
           <Link
             to="/analysis/td-insurance-telematics"
             className="group rounded-xl border border-gray-200 p-6 text-left transition-colors hover:border-gray-300 hover:bg-gray-50"

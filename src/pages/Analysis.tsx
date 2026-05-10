@@ -3,6 +3,14 @@ import { usePageMeta } from "../hooks/usePageMeta";
 
 const posts = [
   {
+    category: "Edtech teardown · Coding bootcamps · Business model",
+    title: "Why coding bootcamps are dying \u2014 and what replaces them",
+    thesis:
+      "A 2023 course review reread in 2026. The bootcamp model passed its bubble before AI. AI just made the zombie layer visible.",
+    impact: "Codesmith placement: 83% (2021) \u2192 37% (2023) \u00b7 2U exited bootcamps 2024",
+    path: "/analysis/coding-bootcamps-dying",
+  },
+  {
     category: "Product teardown · Insurance · Telematics",
     title: "When Safe Driving Apps Punish Safe Drivers",
     thesis:
@@ -39,7 +47,7 @@ export default function Analysis() {
             <h3 className="mt-2 font-semibold text-gray-900 group-hover:text-gray-700">
               {post.title}
             </h3>
-            <p className="mt-2 text-sm text-gray-600 leading-relaxed line-clamp-2">
+            <p className="mt-2 text-sm text-gray-600 leading-relaxed">
               {post.thesis}
             </p>
             <p className="mt-3 text-xs font-medium text-gray-500">
