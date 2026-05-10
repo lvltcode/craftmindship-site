@@ -449,8 +449,8 @@ export default function TdInsurance() {
           </a>
           . May 2026.
         </p>
-        <Link to="/writing" className="font-medium text-gray-900 hover:underline">
-          &larr; All writing
+        <Link to="/analysis" className="font-medium text-gray-900 hover:underline">
+          &larr; All analysis
         </Link>
       </footer>
     </article>

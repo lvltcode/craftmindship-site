@@ -4,7 +4,7 @@ import type { LucideIcon } from "lucide-react";
 
 const navLinks = [
   { to: "/work/cadence", label: "Work" },
-  { to: "/writing", label: "Writing" },
+  { to: "/analysis", label: "Analysis" },
   { to: "/about", label: "About" },
 ];
 

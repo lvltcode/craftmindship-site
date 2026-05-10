@@ -101,14 +101,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Selected Writing */}
+      {/* Selected Analysis */}
       <section className="px-6 pb-14 sm:pb-16">
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
-          Selected Writing
+          Selected Analysis
         </h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           <Link
-            to="/writing/td-insurance-telematics"
+            to="/analysis/td-insurance-telematics"
             className="group rounded-xl border border-gray-200 p-6 text-left transition-colors hover:border-gray-300 hover:bg-gray-50"
           >
             <p className="text-xs font-medium text-gray-400 uppercase">Product Analysis</p>
