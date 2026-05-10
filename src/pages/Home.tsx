@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowDown, User, BookOpen } from "lucide-react";
+import { ArrowDown, User, FileText, BookOpen } from "lucide-react";
 import { usePageMeta } from "../hooks/usePageMeta";
 
 const projects = [
@@ -57,6 +57,15 @@ export default function Home() {
           >
             <ArrowDown size={16} />
             View Work
+          </a>
+          <a
+            href="/cv.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+          >
+            <FileText size={16} />
+            View CV
           </a>
           <Link
             to="/about"

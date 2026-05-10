@@ -37,6 +37,14 @@ export default function Layout() {
                 {link.label}
               </Link>
             ))}
+            <a
+              href="/cv.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-gray-900 transition-colors"
+            >
+              CV
+            </a>
           </div>
         </nav>
       </header>
