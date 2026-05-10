@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agricultural Drone Business Plan — Canada Market Entry</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Noto+Serif:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#193127;
+  --ink-soft:#50675d;
+  --ink-faint:#7e968c;
+  --primary:#1f8a5b;
+  --primary-dark:#146442;
+  --primary-light:#edf9f1;
+  --teal:#157a84;
+  --teal-light:#eef9fb;
+  --amber:#b67717;
+  --amber-light:#fff8eb;
+  --red:#b63b3b;
+  --red-light:#fff3f3;
+  --blue:#2b6cb0;
+  --blue-light:#eff6ff;
+  --surface:#ffffff;
+  --bg:#f4f8f6;
+  --border:#dce7df;
+  --nav-w:300px;
+  --shadow:0 10px 28px rgba(25,49,39,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--ink);display:flex;min-height:100vh}
+.sidebar{width:var(--nav-w);position:fixed;left:0;top:0;bottom:0;background:linear-gradient(180deg,#10251c 0%,#0b1914 100%);overflow-y:auto;z-index:10}
+.sidebar-brand{padding:28px 24px 18px;border-bottom:1px solid rgba(255,255,255,.08)}
+.brand-row{display:flex;gap:12px;align-items:center}
+.brand-mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#2ec27e,#1f8a5b);display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;box-shadow:0 10px 24px rgba(46,194,126,.25)}
+.brand-name{font-family:'Noto Serif',serif;font-size:16px;color:#fff;line-height:1.25}
+.brand-sub{margin-top:10px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.38);font-family:'JetBrains Mono',monospace}
+.nav-section{padding:18px 16px 8px}
+.nav-label{padding:0 8px 8px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.26)}
+.nav-item{display:flex;gap:10px;align-items:flex-start;text-decoration:none;padding:10px;border-radius:10px;margin-bottom:4px;cursor:pointer;transition:.15s ease background,.15s ease transform}
+.nav-item:hover{background:rgba(255,255,255,.06);transform:translateX(1px)}
+.nav-item.active{background:linear-gradient(135deg,#1f8a5b,#157a84)}
+.nav-dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex-shrink:0}
+.nav-title{font-size:13px;font-weight:600;color:rgba(255,255,255,.88);line-height:1.35}
+.nav-sub{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px;line-height:1.35}
+.nav-item.active .nav-sub{color:rgba(255,255,255,.74)}
+.sidebar-foot{padding:16px 24px 24px;border-top:1px solid rgba(255,255,255,.08);margin-top:12px;font-size:11px;color:rgba(255,255,255,.26);font-family:'JetBrains Mono',monospace}
+.main{margin-left:var(--nav-w);flex:1}
+.page{display:none;animation:fade .22s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hero{padding:54px 54px 36px;background:var(--surface);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.hero:before{content:'';position:absolute;right:-70px;top:-60px;width:320px;height:320px;background:radial-gradient(circle,rgba(31,138,91,.13) 0%,transparent 68%)}
+.hero:after{content:'';position:absolute;right:42px;top:32px;width:180px;height:110px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 140'%3E%3Cg fill='none' stroke='%231f8a5b' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' opacity='0.18'%3E%3Cpath d='M66 70h108'/%3E%3Cpath d='M120 38v66'/%3E%3Cpath d='M42 48l42 22-42 22'/%3E%3Cpath d='M198 48l-42 22 42 22'/%3E%3Ccircle cx='120' cy='70' r='18'/%3E%3Cpath d='M36 118h168'/%3E%3Cpath d='M52 118c10-12 22-18 36-18s24 5 32 12c11-15 26-22 44-22 14 0 26 4 40 14'/%3E%3C/g%3E%3C/svg%3E")}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.eyebrow:before{content:'';display:block;width:20px;height:2px;background:var(--primary)}
+.hero h1{font-family:'Noto Serif',serif;font-size:clamp(24px,3.2vw,38px);line-height:1.22;max-width:850px;margin-bottom:12px}
+.hero h1 em{font-style:italic;color:var(--primary)}
+.hero p{max-width:820px;font-size:14px;line-height:1.75;color:var(--ink-soft)}
+.hero-meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:26px;max-width:920px}
+.hero-stat{background:#f8fcf9;border:1px solid var(--border);border-radius:16px;padding:16px 16px 14px;box-shadow:var(--shadow)}
+.hero-stat .val{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.hero-stat .lbl{font-size:11px;color:var(--ink-faint);line-height:1.45}
+.content{padding:42px 54px 60px;max-width:1100px}
+.section{margin-bottom:34px}
+.sh{display:flex;gap:10px;align-items:center;font-family:'Noto Serif',serif;font-size:19px;font-weight:700;margin-bottom:18px}
+.sh:after{content:'';height:1px;background:var(--border);flex:1}
+.note{font-size:13px;line-height:1.72;color:var(--ink-soft);margin-bottom:18px}
+.grid-2,.grid-3,.grid-4{display:grid;gap:14px}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+.card h3{font-size:15px;line-height:1.45;margin-bottom:8px}
+.card p,.card li{font-size:13px;line-height:1.7;color:var(--ink-soft)}
+.card ul{padding-left:18px}
+.kpi{font-family:'JetBrains Mono',monospace;font-size:27px;font-weight:500;margin:4px 0 6px}
+.kpi-sub{font-size:12px;color:var(--ink-faint);line-height:1.5}
+.tag{display:inline-flex;padding:4px 9px;border-radius:999px;font-size:10px;font-family:'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:10px}
+.tag.green{background:var(--primary-light);color:var(--primary-dark);border:1px solid #b7ebc9}
+.tag.blue{background:var(--blue-light);color:var(--blue);border:1px solid #bfdbfe}
+.tag.amber{background:var(--amber-light);color:var(--amber);border:1px solid #f6d089}
+.tag.red{background:var(--red-light);color:var(--red);border:1px solid #f7b6b6}
+.callout{display:flex;gap:14px;border-radius:16px;padding:18px 20px;margin-bottom:16px;align-items:flex-start}
+.callout.green{background:var(--primary-light);border:1px solid #b7ebc9}
+.callout.blue{background:var(--blue-light);border:1px solid #bfdbfe}
+.callout.amber{background:var(--amber-light);border:1px solid #f6d089}
+.callout.red{background:var(--red-light);border:1px solid #f7b6b6}
+.callout-title{font-size:14px;font-weight:700;margin-bottom:5px}
+.callout p{font-size:13px;line-height:1.7;color:var(--ink-soft)}
+.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:18px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);font-weight:500}
+tbody td{padding:12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:#fbfefc}
+.row-strong td{font-weight:700;background:#f2fbf5}
+.seq{display:flex;flex-direction:column}
+.seq-row{display:flex;gap:16px;position:relative}
+.seq-row:not(:last-child):before{content:'';position:absolute;left:15px;top:34px;bottom:-6px;width:2px;background:var(--border)}
+.seq-num{width:32px;height:32px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;flex-shrink:0;z-index:1}
+.seq-body{padding-bottom:22px}
+.seq-trigger{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--primary);margin-bottom:4px}
+.seq-title{font-size:14px;font-weight:700;margin-bottom:4px}
+.seq-body p{font-size:13px;line-height:1.7;color:var(--ink-soft)}
+.dark{background:linear-gradient(180deg,#173126 0%,#10241c 100%);color:#fff;border-radius:18px;padding:24px 26px;position:relative;overflow:hidden;margin-bottom:20px}
+.dark:before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 85% 0%,rgba(46,194,126,.18),transparent 58%)}
+.dark>*{position:relative}
+.dark .small{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#97e7bf;margin-bottom:10px}
+.dark h3{font-family:'Noto Serif',serif;font-size:20px;margin-bottom:8px}
+.dark p{max-width:760px;font-size:13px;line-height:1.78;color:rgba(255,255,255,.76)}
+.footer-note{margin-top:18px;font-size:12px;color:var(--ink-faint);line-height:1.7}
+.divider{height:1px;background:var(--border);margin:30px 0}
+@media (max-width:1000px){
+  .sidebar{transform:translateX(-100%)}
+  .main{margin-left:0}
+  .hero,.content{padding:28px 22px}
+  .hero-meta,.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+  .hero:after{display:none}
+}
+</style>
+<script>
+function show(id,e){
+  if(e) e.preventDefault();
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(e && e.currentTarget) e.currentTarget.classList.add('active');
+}
+</script>
+</head>
+<body>
+<nav class="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-row">
+      <div class="brand-mark">🌾</div>
+      <div>
+        <div class="brand-name">Agricultural Drones Canada</div>
+        <div class="brand-name" style="font-size:14px;opacity:.88">Updated Business Plan</div>
+      </div>
+    </div>
+    <div class="brand-sub">English version · Updated 03/2026</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Overview</div>
+    <a class="nav-item active" href="#" onclick="show('overview',event)"><div class="nav-dot" style="background:#d1fae5"></div><div><div class="nav-title">Executive Summary</div><div class="nav-sub">Revised thesis and market entry direction</div></div></a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Strategy</div>
+    <a class="nav-item" href="#" onclick="show('model',event)"><div class="nav-dot" style="background:#6ee7b7"></div><div><div class="nav-title">Adaptive Model</div><div class="nav-sub">Sell to operators first, don't build a network upfront</div></div></a>
+    <a class="nav-item" href="#" onclick="show('product',event)"><div class="nav-dot" style="background:#93c5fd"></div><div><div class="nav-title">Product & Pricing</div><div class="nav-sub">Competitive pricing framework vs DJI</div></div></a>
+    <a class="nav-item" href="#" onclick="show('market',event)"><div class="nav-dot" style="background:#fcd34d"></div><div><div class="nav-title">Market & Pain Points</div><div class="nav-sub">What's accurate, what needs correcting</div></div></a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Execution</div>
+    <a class="nav-item" href="#" onclick="show('ontario',event)"><div class="nav-dot" style="background:#99f6e4"></div><div><div class="nav-title">Ontario Fit</div><div class="nav-sub">Terrain, crops, and matching use cases</div></div></a>
+    <a class="nav-item" href="#" onclick="show('gtm',event)"><div class="nav-dot" style="background:#f9a8d4"></div><div><div class="nav-title">Go-to-Market</div><div class="nav-sub">Sales channels and 12-month roadmap</div></div></a>
+    <a class="nav-item" href="#" onclick="show('risk',event)"><div class="nav-dot" style="background:#fca5a5"></div><div><div class="nav-title">Risk & Compliance</div><div class="nav-sub">What can be sold now, what must wait</div></div></a>
+  </div>
+  <div class="sidebar-foot">For strategic decision-making and partner discussions</div>
+</nav>
+
+<main class="main">
+  <section id="overview" class="page active">
+    <div class="hero">
+      <div class="eyebrow">Business Plan Revision</div>
+      <h1>Agricultural Drones in Canada: <em>enter through operator/local partner sales first, then expand into services and training</em></h1>
+      <p>This revision changes the original thesis in two ways. First, instead of immediately building and managing a network of Canadian operators, the plan leverages an existing partner who has already identified demand for roughly 1,000 acres of coverage. Second, the market pain point narrative needs to be more precise: drones don't replace all fixed-wing aircraft or ground equipment — they win in jobs that are hard to access, require high precision, need to minimize crop damage, or demand flexible handling of small-to-medium scale operations.</p>
+      <div class="hero-meta">
+        <div class="hero-stat"><div class="val">Operator-first</div><div class="lbl">Recommended market entry model for the first 12 months</div></div>
+        <div class="hero-stat"><div class="val">CAD 24.9k–27.9k</div><div class="lbl">Target price zone for 40L-class drone to create clear gap vs DJI</div></div>
+        <div class="hero-stat"><div class="val">Ontario + Eastern Canada</div><div class="lbl">Best fit for testing specialty crop, vegetable, and mid-size field demand</div></div>
+        <div class="hero-stat"><div class="val">Sales + Training + Service</div><div class="lbl">Bundle offer from day one — don't sell hardware alone</div></div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="section">
+        <div class="callout green">
+          <div>✅</div>
+          <div>
+            <div class="callout-title">Executive Conclusion</div>
+            <p>The best current path is to sell drones to partners/operators who already have local customers, letting them handle operating permits, staffing, and farmer relationships. The company focuses on competitive pricing, training packages, maintenance, spare parts, and standardized operating procedures. This is a far more pragmatic market entry than attempting to operate directly in Canada from the start.</p>
+          </div>
+        </div>
+        <div class="callout amber">
+          <div>⚠️</div>
+          <div>
+            <div class="callout-title">Market Narrative Correction Needed</div>
+            <p>Don't pitch as "Canadian farmers are suffering from expensive aircraft so everyone will switch to drones." The accurate story: drones solve jobs where ground rigs or traditional aerial application aren't optimal — especially in wet fields, small lots, difficult terrain, high-value crops, and tasks requiring flexibility or precision.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">5 Key Theses of This Revision</div>
+        <div class="grid-2">
+          <div class="card"><span class="tag green">01</span><h3>Adoption model should start with partners who already have customers</h3><p>If there's already a contact who wants to buy drones and has identified 1,000 acres of demand, that's a stronger market signal than building a network from scratch. Use this as the wedge account.</p></div>
+          <div class="card"><span class="tag blue">02</span><h3>The offer must be a "system package," not just a drone</h3><p>The sales package should include: drone, basic spare parts, SOP documentation, operator training, maintenance training, remote support, and optional on-site training deployment to Canada.</p></div>
+          <div class="card"><span class="tag amber">03</span><h3>Pricing must be split into two tiers</h3><p>One tier for ex-works/FOB pricing for partners handling their own import and compliance. A second tier for bundled packages with training and maintenance to maintain higher margins.</p></div>
+          <div class="card"><span class="tag red">04</span><h3>Spraying remains a cautious territory</h3><p>As of March 21, 2026, Canada is still in the proposal phase for expanding pesticide application by drone regulations. Near-term strategy should emphasize spreading, seeding, training, readiness, and currently permitted applications.</p></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">Revised Decision Sequence</div>
+        <div class="seq">
+          <div class="seq-row"><div class="seq-num">1</div><div class="seq-body"><div class="seq-trigger">Now</div><div class="seq-title">Commit to the operator-first sales model</div><p>Don't build a Canadian network too early. Focus on closing 1–3 partners who can buy units and have deployment capability.</p></div></div>
+          <div class="seq-row"><div class="seq-num">2</div><div class="seq-body"><div class="seq-trigger">Immediately after</div><div class="seq-title">Standardize the commercial package</div><p>Must have a complete price sheet, spare parts list, training scope, maintenance scope, and clear support SLAs.</p></div></div>
+          <div class="seq-row"><div class="seq-num">3</div><div class="seq-body"><div class="seq-trigger">Pilot market</div><div class="seq-title">Use the 1,000-acre case as lighthouse account</div><p>The goal isn't just selling one unit — it's capturing operational data, real-world demand patterns, support costs, and a case study for scaling.</p></div></div>
+          <div class="seq-row"><div class="seq-num">4</div><div class="seq-body"><div class="seq-trigger">After validation</div><div class="seq-title">Expand into service revenue layers</div><p>Only after having real data should you consider a training network, on-site maintenance, spare parts depots, and seasonal support packages in Canada.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="model" class="page">
+    <div class="hero">
+      <div class="eyebrow">Go-to-market Model</div>
+      <h1><em>The adaptive model</em> should be selling to partners who already have demand, not owning the full operation from day one</h1>
+      <p>This is the most important change in the business plan. Instead of assuming the company will proactively find Canadian operators, find farmers, handle certifications, manage training, maintenance, and seasonal operations simultaneously, this revision shifts to a lighter and more realistic model: partner-led adoption.</p>
+    </div>
+    <div class="content">
+      <div class="dark">
+        <div class="small">Recommended Model</div>
+        <h3>VN side = manufacturer + training + technical support<br>Canada side = buyer + operator + service provider to market</h3>
+        <p>The strength of this model is leveraging manufacturing cost advantages, customization speed, and technical support capability, while the Canadian partner leverages local knowledge, customer relationships, operating permits, and field teams.</p>
+      </div>
+
+      <div class="section">
+        <div class="sh">Three Revenue Models to Pursue</div>
+        <div class="grid-3">
+          <div class="card"><span class="tag green">Model A</span><h3>Hardware sales only</h3><p>Partner buys directly from Vietnam. They handle import, compliance, operators, customers, and chemicals. You provide technical documentation, spare parts, basic video training, and limited or paid remote support.</p></div>
+          <div class="card"><span class="tag blue">Model B</span><h3>Hardware + training + maintenance</h3><p>This is the best model for getting started. The bundle differentiates from buying a "bare machine." It suits partners new to the market or those who want to self-operate but lack a strong technical team.</p></div>
+          <div class="card"><span class="tag amber">Model C</span><h3>Regional master partner</h3><p>After proving 1–2 successful cases, select one regional partner as a hub for sales, demos, spare parts, and service, then consider expanding the network further.</p></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">Why Not Jump Into Mass Partner Recruitment</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Issue</th><th>If you self-build from scratch</th><th>If you go operator-first</th></tr></thead>
+            <tbody>
+              <tr><td>Sales cost</td><td>High, scattered, requires significant trust-building time</td><td>Lower by anchoring on leads who already have customers</td></tr>
+              <tr><td>Compliance</td><td>Complex — you must understand and bear multiple operational layers</td><td>Local partner handles most of the local regulatory burden</td></tr>
+              <tr><td>After-sales</td><td>Easily overwhelmed with many small customers</td><td>Easier to standardize through a single partner contact</td></tr>
+              <tr><td>Market learning speed</td><td>Slow — must discover everything from zero</td><td>Faster — real jobs and real data arrive early</td></tr>
+              <tr class="row-strong"><td>Conclusion</td><td colspan="2">In the first 12 months, prioritize partners who already have customers rather than building an entire network from scratch</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">What the Offer Package Should Look Like</div>
+        <div class="grid-2">
+          <div class="card"><span class="tag green">Core package</span><h3>Base package</h3><ul><li>Drone unit</li><li>Charger / battery station</li><li>Technical manual</li><li>Assembly and pre-flight checklist</li><li>Recommended spare parts list</li></ul></div>
+          <div class="card"><span class="tag blue">Support package</span><h3>Commercial add-on bundle</h3><ul><li>2–3 day operator training</li><li>Basic maintenance training</li><li>Seasonal remote support</li><li>Fast-wear spare parts kit</li><li>Video SOPs and troubleshooting guides</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="product" class="page">
+    <div class="hero">
+      <div class="eyebrow">Product & Pricing</div>
+      <h1>Pricing framework: cheap enough to incentivize switching suppliers, but not so cheap it destroys margins</h1>
+      <p>DJI prices in Canada are higher than initially assumed. The challenge isn't being "slightly cheaper" — it's creating a price gap large enough that partners see it as worth trying a new brand, accepting the trade-off of brand risk and learning curve.</p>
+    </div>
+    <div class="content">
+      <div class="section">
+        <div class="sh">Competitive Benchmarks</div>
+        <div class="grid-4">
+          <div class="card"><span class="tag blue">DJI benchmark</span><div class="kpi">CAD 36,699</div><div class="kpi-sub">DJI Agras T50 standard package in Canada</div></div>
+          <div class="card"><span class="tag blue">DJI benchmark</span><div class="kpi">CAD 37,199</div><div class="kpi-sub">DJI Agras T50 ready-to-fly kit in Canada</div></div>
+          <div class="card"><span class="tag blue">DJI benchmark</span><div class="kpi">CAD 23,359</div><div class="kpi-sub">DJI Agras T25 in Canada</div></div>
+          <div class="card"><span class="tag blue">DJI benchmark</span><div class="kpi">CAD 48,505</div><div class="kpi-sub">DJI Agras T100 in Canada</div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="callout blue">
+          <div>💡</div>
+          <div>
+            <div class="callout-title">Pricing Recommendation</div>
+            <p>If your product targets the T50-equivalent segment, the recommended price zone is <strong>CAD 24,900 to CAD 27,900</strong> for ex-works/FOB Vietnam, and <strong>CAD 29,900 to CAD 32,900</strong> for a bundle package including training, spare parts, and launch support. This creates a 20%–30% gap below T50 list price in Canada, while preserving room for service-attached revenue.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">Proposed Price Tiers</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Tier</th><th>Includes</th><th>Suggested Price</th><th>When to Use</th></tr></thead>
+            <tbody>
+              <tr><td>Ex-works / FOB</td><td>Drone + technical documentation + limited remote support</td><td>CAD 24.9k – 27.9k</td><td>Partner experienced with importing, has existing operations team</td></tr>
+              <tr><td>Starter bundle</td><td>Drone + wear parts + basic online/on-site training + SOPs</td><td>CAD 29.9k – 32.9k</td><td>New partner, needs fast startup</td></tr>
+              <tr><td>Launch package</td><td>Starter bundle + on-site technician training + first-season maintenance plan</td><td>Add CAD 4k – 8k depending on scope</td><td>Customer wants to de-risk first-season deployment</td></tr>
+              <tr class="row-strong"><td>Principle</td><td colspan="3">Never compete on hardware price alone. Maintain differentiation through bundles and services to avoid a pure price war</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">Pricing Logic</div>
+        <div class="grid-3">
+          <div class="card"><span class="tag green">1</span><h3>A new brand must be clearly cheaper</h3><p>Canadian partners buying outside DJI take on additional risk around brand recognition, spare parts availability, resale value, and support. A 20%–30% price gap is more justified than a slim 5%–10% discount.</p></div>
+          <div class="card"><span class="tag amber">2</span><h3>Don't compete on price alone</h3><p>If the only selling point is a lower price, you're easily squeezed further. The value proposition must include training, maintenance, spare parts response time, and customization flexibility.</p></div>
+          <div class="card"><span class="tag blue">3</span><h3>Separate hardware price from support price</h3><p>Experienced customers who can self-deploy prefer lower hardware prices. New customers will pay for on-site training and startup support packages. Separating these two layers creates flexibility.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="market" class="page">
+    <div class="hero">
+      <div class="eyebrow">Market Reality</div>
+      <h1>Reality-check the pain points: demand exists, but the narrative shouldn't be overly broad</h1>
+      <p>The Canadian market has real demand for agricultural drones, but the pain point isn't simply "fixed-wing aircraft are expensive and inconvenient." In practice, fixed-wing planes, helicopters, and ground sprayers remain highly effective for large-area coverage, high-speed operations, and scenarios with well-established regulatory frameworks. Drones win in selective, well-defined jobs.</p>
+    </div>
+    <div class="content">
+      <div class="section">
+        <div class="sh">What's Accurate</div>
+        <div class="grid-2">
+          <div class="card"><span class="tag green">Accurate</span><h3>Wet, soft, or ground-inaccessible fields</h3><p>This is a real pain point. Health Canada also describes aerial application as critical when terrain is soft, wet, or inaccessible to ground equipment.</p></div>
+          <div class="card"><span class="tag green">Accurate</span><h3>Flexible handling for mid-to-small lots and spot jobs</h3><p>Drones have an advantage when job volume isn't large enough for traditional aircraft to be optimal, but still requires fast, precise treatment.</p></div>
+          <div class="card"><span class="tag green">Accurate</span><h3>Specialty crops and vegetables have stronger economics than broadacre</h3><p>When crop value per acre is higher, precision and crop-damage avoidance create clearer economic value.</p></div>
+          <div class="card"><span class="tag green">Accurate</span><h3>Spreading/seeding/cover crop can be a good entry wedge</h3><p>Even while spraying faces regulatory constraints, use cases like spreading or seeding are often easier to commercialize immediately.</p></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">What Needs Correcting</div>
+        <div class="grid-2">
+          <div class="card"><span class="tag red">Overclaim</span><h3>Drones will replace fixed-wing aircraft</h3><p>Not true for most large broadacre operations. Traditional aircraft still have stronger throughput and more established service infrastructure for large-scale jobs.</p></div>
+          <div class="card"><span class="tag red">Bad pitch</span><h3>Every farmer currently hires aircraft</h3><p>Many farmers use ground rigs, custom applicators, or other alternatives. Aerial application is an important tool, but it's not the default for every small farm.</p></div>
+          <div class="card"><span class="tag red">Unverified</span><h3>Ontario has massive broadacre pain points</h3><p>Ontario has more size diversity than the Prairies. Drone advantages in Ontario lean more toward fragmented fields, mixed crops, and specialty agriculture rather than extremely large fields.</p></div>
+          <div class="card"><span class="tag red">Overpromise</span><h3>Drones handle every crop season as fast as traditional aircraft</h3><p>Throughput depends on acreage, task type, application rate, battery swap logistics, and material reloading. Blanket claims don't hold.</p></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">Do Drones Have Sufficient Throughput?</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Metric</th><th>Drone</th><th>Business Implication</th></tr></thead>
+            <tbody>
+              <tr><td>DJI T50 spraying</td><td>Up to 50 acres/hour per manufacturer specs under standard conditions</td><td>Sufficient for mid-to-small jobs, but real-world numbers must be discounted for field conditions and logistics</td></tr>
+              <tr><td>DJI T50 spreading</td><td>50 kg payload, 8 m spread width, high dispersal speed</td><td>Suggests spreading/seeding is worth pursuing as a wedge product</td></tr>
+              <tr><td>1,000-acre job</td><td>Not a "one drone, done fast" scenario</td><td>Handling this scale reliably requires planned logistics, battery inventory, crew sizing, and realistic time estimates</td></tr>
+              <tr class="row-strong"><td>Conclusion</td><td colspan="2">Drones are capable for many commercial jobs, but must be sold based on accurate use cases and realistic deployment capability — never overpromise using manufacturer specs</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">How to Frame Pain Points in the Sales Deck</div>
+        <div class="callout green">
+          <div>🎯</div>
+          <div>
+            <div class="callout-title">The Right Story</div>
+            <p>Agricultural drones don't replace all aerial application or ground sprayers. They create a flexible operational layer for jobs where existing solutions aren't economical, aren't precise enough, or cause more operational damage than the value they deliver.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ontario" class="page">
+    <div class="hero">
+      <div class="eyebrow">Ontario Fit</div>
+      <h1>Ontario has room for drones, but the best fit is selective use cases — not "every farmer needs one"</h1>
+      <p>Ontario is worth entering first because it's both large and diverse: it has large-scale field crops, but also significant specialty crops, vegetables, orchards, and more fragmented farm structures than the Prairies. This creates space for drones in tasks requiring flexibility and precision.</p>
+    </div>
+    <div class="content">
+      <div class="section">
+        <div class="grid-3">
+          <div class="card"><span class="tag blue">Market base</span><div class="kpi">48,346</div><div class="kpi-sub">Number of farms in Ontario per Census of Agriculture 2021</div></div>
+          <div class="card"><span class="tag blue">Market base</span><div class="kpi">9.05M</div><div class="kpi-sub">Acres of land in crops in Ontario per Census of Agriculture 2021</div></div>
+          <div class="card"><span class="tag blue">Specialty angle</span><div class="kpi">245,000</div><div class="kpi-sub">Acres of fruit and vegetables in Ontario per OFVGA</div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">Where Ontario Fits Best</div>
+        <div class="grid-2">
+          <div class="card"><span class="tag green">Strong fit</span><h3>Eastern Ontario and regions with mid-size, mixed farming</h3><p>Easier to generate demand for local operators and customized services, especially given existing drone servicing businesses in Eastern Ontario.</p></div>
+          <div class="card"><span class="tag green">Strong fit</span><h3>Vegetables, orchards, vineyards, specialty crops</h3><p>High crop value and diverse cultivation structures give drones a clearer value story than pure broadacre.</p></div>
+          <div class="card"><span class="tag amber">Moderate fit</span><h3>Selective field crop jobs</h3><p>Can make sense for hard-to-access lots, wet fields, patch spraying, or when ground rigs are no longer optimal. Should not default to full-season replacement for all corn/soy acreage.</p></div>
+          <div class="card"><span class="tag red">Weaker fit</span><h3>Broadacre volume war</h3><p>Competing head-to-head on throughput against traditional aircraft in Prairie-style operations means facing much harder economics and logistics.</p></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">Realistic Market Scenarios</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Scenario</th><th>What the farmer does today</th><th>Is there room for drones?</th></tr></thead>
+            <tbody>
+              <tr><td>Large field, dry conditions, clear spray schedule</td><td>Ground sprayer or custom applicator</td><td>Not the strongest wedge</td></tr>
+              <tr><td>Wet field, hard to get equipment in</td><td>Seeks aerial option if available</td><td>Yes — this is a strong wedge</td></tr>
+              <tr><td>Small lot, irregular shape, patch job</td><td>Often skipped or handled inefficiently</td><td>Yes — drones fit well</td></tr>
+              <tr><td>Specialty crop / vegetables / orchard</td><td>Cares deeply about precision and crop protection</td><td>Yes — very worth testing</td></tr>
+              <tr class="row-strong"><td>Conclusion</td><td colspan="2">Ontario has real opportunity, but must be pursued by specific use case — not a broad narrative</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gtm" class="page">
+    <div class="hero">
+      <div class="eyebrow">Execution Plan</div>
+      <h1>12-month go-to-market: anchor on one partner purchase, then scale through case studies and bundled support</h1>
+      <p>The goal is not to sell many units immediately. The goal is to establish a repeatable commercial model, understand what real customers need, and know what support actually costs.</p>
+    </div>
+    <div class="content">
+      <div class="section">
+        <div class="sh">Target Customers by Priority</div>
+        <div class="grid-3">
+          <div class="card"><span class="tag green">Priority 1</span><h3>Local operator / reseller with existing customers</h3><p>This is the group to close first. They can buy units, deploy quickly, and provide the most practical real-world feedback.</p></div>
+          <div class="card"><span class="tag amber">Priority 2</span><h3>Ag retailer / agronomy service firm</h3><p>This group has existing farmer relationships and can add drone services as an extension of their current offering.</p></div>
+          <div class="card"><span class="tag blue">Priority 3</span><h3>Large farm or early-adopter farm</h3><p>Direct sales are possible, but support-intensive and not the fastest entry path without local infrastructure.</p></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">12-Month Roadmap</div>
+        <div class="seq">
+          <div class="seq-row"><div class="seq-num">1</div><div class="seq-body"><div class="seq-trigger">0–30 days</div><div class="seq-title">Complete the commercial package</div><p>Price sheet, spec sheet, warranty terms, spare parts list, training outline, maintenance packages, implementation checklist.</p></div></div>
+          <div class="seq-row"><div class="seq-num">2</div><div class="seq-body"><div class="seq-trigger">30–60 days</div><div class="seq-title">Close 1 lighthouse partner</div><p>Use the partner with 1,000-acre demand to close the first deal or a paid commercial pilot.</p></div></div>
+          <div class="seq-row"><div class="seq-num">3</div><div class="seq-body"><div class="seq-trigger">First season</div><div class="seq-title">Measure 6 critical variables</div><p>Actual acres processed, downtime, technical failures, spare parts demand, support costs, and time-to-readiness for training.</p></div></div>
+          <div class="seq-row"><div class="seq-num">4</div><div class="seq-body"><div class="seq-trigger">Post-pilot</div><div class="seq-title">Productize 2 support tiers</div><p>Basic support and premium launch support. This is where internal knowledge becomes revenue.</p></div></div>
+          <div class="seq-row"><div class="seq-num">5</div><div class="seq-body"><div class="seq-trigger">6–12 months</div><div class="seq-title">Open 2–3 additional partners</div><p>Don't scale too fast before understanding support costs and equipment failure rates during a real season.</p></div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">Metrics to Track</div>
+        <div class="grid-4">
+          <div class="card"><span class="tag green">KPI</span><div class="kpi">1</div><div class="kpi-sub">Number of lighthouse partners required in the first season</div></div>
+          <div class="card"><span class="tag green">KPI</span><div class="kpi">2–3</div><div class="kpi-sub">Number of follow-on deals to pursue after first season validates</div></div>
+          <div class="card"><span class="tag amber">KPI</span><div class="kpi">&lt;48h</div><div class="kpi-sub">Target support response time for critical issues</div></div>
+          <div class="card"><span class="tag blue">KPI</span><div class="kpi">70%+</div><div class="kpi-sub">Revenue share that should come from support/training vs hardware-only</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="risk" class="page">
+    <div class="hero">
+      <div class="eyebrow">Risk & Compliance</div>
+      <h1>The biggest risk isn't hardware. The biggest risk is overpromising on use cases and hitting compliance at the wrong time</h1>
+      <p>An updated business plan must reflect current regulatory reality: in Canada, pesticide spraying by drone is still not fully open for broad commercial use as of March 2026. Therefore, the commercial plan must clearly distinguish what can be sold now versus what requires regulatory clarity.</p>
+    </div>
+    <div class="content">
+      <div class="section">
+        <div class="callout red">
+          <div>⛔</div>
+          <div>
+            <div class="callout-title">Must Be Stated Clearly in the Plan</div>
+            <p>Do not assume that pesticide spraying by drone is fully open for all field crops in Canada. The plan should state: the company sells the drone platform, training, and readiness; specific application scope must depend on current regulations, product labels, and local partner compliance procedures.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">What Can Be Sold Sooner</div>
+        <div class="grid-3">
+          <div class="card"><span class="tag green">Sooner</span><h3>Hardware sales to operators/importers</h3><p>This is an equipment and support transaction. Compliance risk sits primarily on the Canadian operating side.</p></div>
+          <div class="card"><span class="tag green">Sooner</span><h3>Training, maintenance, spare parts</h3><p>This is a practical revenue layer with less controversy than promising mass spraying services.</p></div>
+          <div class="card"><span class="tag amber">After verification</span><h3>Pesticide spraying applications</h3><p>Should only be included with cautious language, and the Canadian partner should handle compliance with current regulations.</p></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sh">Risk Matrix</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Risk</th><th>Severity</th><th>Mitigation</th></tr></thead>
+            <tbody>
+              <tr><td>Wrong positioning — promising to replace all aircraft</td><td>High</td><td>Narrow the use case, sell a clear wedge</td></tr>
+              <tr><td>Price gap vs DJI not large enough</td><td>High</td><td>Maintain 20–30% gap or add clear support bundle differentiation</td></tr>
+              <tr><td>Weak support, lack of spare parts</td><td>High</td><td>Build standard spare kits and support SLAs before scaling</td></tr>
+              <tr><td>Spraying regulations evolve slowly</td><td>High</td><td>Push selling points toward training, seeding, spreading, readiness</td></tr>
+              <tr><td>Partner fails to deploy in first season</td><td>Medium</td><td>Sell with launch package and on-site training</td></tr>
+              <tr class="row-strong"><td>Conclusion</td><td colspan="2">The biggest risks are commercial execution and positioning — not just technical</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        Strategic note: this business plan should be read as a market-entry direction document, not as confirmation that all drone spraying use cases are fully permitted in Canada. When used with partners or investors, maintain precise language about regulatory timing.
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

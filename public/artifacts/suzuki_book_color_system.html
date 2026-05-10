@@ -3,171 +3,399 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Suzuki Book Color System</title>
+<title>Suzuki Book Color System — Cadence Design Artifact</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    --font-mono: ui-monospace, 'Cascadia Code', 'Fira Code', Consolas, monospace;
-    --color-text-primary: #1f2937;
-    --color-text-secondary: #6b7280;
-    --color-background-primary: #ffffff;
-    --color-background-secondary: #f3f4f6;
-    --color-border-tertiary: #e5e7eb;
-  }
-  body { margin: 0; padding: 16px; background: #fff; }
-</style>
-<style>
-.book-row { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: 8px; margin-bottom: 6px; font-family: var(--font-sans); }
-.book-num { font-size: 13px; font-weight: 500; min-width: 54px; }
-.book-hex { font-size: 12px; font-family: var(--font-mono); color: var(--color-text-secondary); min-width: 70px; }
-.book-name { font-size: 13px; color: var(--color-text-secondary); }
-.book-swatch { width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0; }
-.section-label { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin: 20px 0 10px; }
-.card-mock { border-radius: 12px; padding: 16px; margin-bottom: 10px; border-left: 4px solid; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-sans); background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); }
-.card-mock-inner { display: flex; align-items: center; gap: 10px; }
-.card-name { font-size: 15px; font-weight: 500; color: var(--color-text-primary); }
-.card-level { font-size: 12px; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
-.card-meta { font-size: 12px; color: var(--color-text-secondary); }
-.card-right { text-align: right; font-size: 12px; color: var(--color-text-secondary); }
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b6b6b;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --border: #e5e5e5;
+  --accent: #2D6A4F;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  line-height: 1.6;
+  padding: 32px 24px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.header { margin-bottom: 32px; }
+.header h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+.header .subtitle { font-size: 14px; color: var(--text-secondary); }
+.header .badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: #D8F3DC;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 28px 0 12px;
+}
+.rationale {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+.ref-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+@media (max-width: 500px) {
+  .ref-grid { grid-template-columns: 1fr; }
+}
+.ref-card {
+  background: var(--bg-secondary);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.ref-card .ref-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.ref-card .ref-swatches {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.ref-card .ref-swatches .swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.ref-card .ref-swatches .arrow {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 0 4px;
+}
+.ref-card .ref-swatches .tag {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.ref-card .ref-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.color-bar {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 6px;
+}
+.color-bar .bar-item {
+  flex: 1;
+  text-align: center;
+}
+.color-bar .bar-item .bar-fill {
+  height: 36px;
+  border-radius: 4px 4px 0 0;
+}
+.color-bar .bar-item .bar-num {
+  font-size: 11px;
+  font-weight: 500;
+  padding-top: 4px;
+}
+.bar-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+.bar-labels span {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+.book-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 14px;
+  margin-bottom: 28px;
+}
+@media (max-width: 500px) {
+  .book-grid { grid-template-columns: 1fr; }
+}
+.book-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: 6px;
+}
+.book-row .swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+.book-row .num {
+  font-size: 13px;
+  font-weight: 500;
+  min-width: 50px;
+}
+.book-row .hex {
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  min-width: 66px;
+}
+.book-row .name {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.dashboard-mock {
+  background: var(--bg-secondary);
+  border-radius: 10px;
+  padding: 16px;
+}
+.student-card {
+  background: var(--bg-primary);
+  border: 0.5px solid var(--border);
+  border-left: 4px solid;
+  padding: 10px 14px;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.student-card:last-child { margin-bottom: 0; }
+.student-card .info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.student-card .student-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+.student-card .level-badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.student-card .meta {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.footer-note {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.footer-note a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.footer-note a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
 
-<div style="padding: 0.5rem 0;">
-
-<div class="section-label">Book level colors (1 - 10)</div>
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px;">
-
-<div class="book-row" style="background: #E8F5E9;">
-<div class="book-swatch" style="background: #66BB6A;"></div>
-<div class="book-num" style="color: #2E7D32;">Book 1</div>
-<div class="book-hex">#66BB6A</div>
-<div class="book-name">Fresh green</div>
+<div class="header">
+  <span class="badge">Cadence design artifact</span>
+  <h1>Suzuki book color system</h1>
+  <div class="subtitle">10-level color progression for the Cadence teacher dashboard</div>
 </div>
 
-<div class="book-row" style="background: #E0F2F1;">
-<div class="book-swatch" style="background: #26A69A;"></div>
-<div class="book-num" style="color: #00695C;">Book 2</div>
-<div class="book-hex">#26A69A</div>
-<div class="book-name">Teal</div>
+<div class="section-title">The problem</div>
+<p class="rationale">
+  Suzuki method piano has 10 book levels. Most music apps assign a single accent color or a random palette across levels &mdash; which means a teacher scanning 20 students can't instantly read where each one sits. The color needs to encode proficiency without requiring the teacher to read a number.
+</p>
+
+<div class="section-title">The solution</div>
+<p class="rationale">
+  Borrow from RPG item rarity systems (World of Warcraft, Diablo): a cool-to-warm color gradient where early levels feel approachable and advanced levels feel earned. Green &rarr; blue &rarr; purple &rarr; warm gold. The teacher sees the hue and knows the tier. No tooltip required.
+</p>
+
+<div class="ref-grid">
+  <div class="ref-card">
+    <div class="ref-label">Design reference: RPG rarity ladder</div>
+    <div class="ref-swatches">
+      <div class="swatch" style="background: #9d9d9d;"></div>
+      <div class="swatch" style="background: #1eff00;"></div>
+      <div class="swatch" style="background: #0070dd;"></div>
+      <div class="swatch" style="background: #a335ee;"></div>
+      <div class="swatch" style="background: #ff8000;"></div>
+      <span class="arrow">&rarr;</span>
+      <span class="tag">Common to legendary</span>
+    </div>
+    <div class="ref-desc">Cool colors = common/early. Warm colors = rare/advanced. The brain already maps this from gaming conventions.</div>
+  </div>
+  <div class="ref-card">
+    <div class="ref-label">Cadence adaptation: 10 Suzuki levels</div>
+    <div class="ref-swatches">
+      <div class="swatch" style="background: #66BB6A;"></div>
+      <div class="swatch" style="background: #29B6F6;"></div>
+      <div class="swatch" style="background: #5C6BC0;"></div>
+      <div class="swatch" style="background: #AB47BC;"></div>
+      <div class="swatch" style="background: #FDD835;"></div>
+      <span class="arrow">&rarr;</span>
+      <span class="tag">Book 1 to 10</span>
+    </div>
+    <div class="ref-desc">Green (beginner) &rarr; teal &rarr; blue &rarr; indigo &rarr; purple &rarr; rose &rarr; orange &rarr; amber &rarr; gold (mastery).</div>
+  </div>
 </div>
 
-<div class="book-row" style="background: #E0F7FA;">
-<div class="book-swatch" style="background: #29B6F6;"></div>
-<div class="book-num" style="color: #0277BD;">Book 3</div>
-<div class="book-hex">#29B6F6</div>
-<div class="book-name">Sky blue</div>
+<div class="section-title">10-level color map</div>
+
+<div class="color-bar">
+  <div class="bar-item"><div class="bar-fill" style="background: #66BB6A;"></div><div class="bar-num" style="color: #2E7D32;">1</div></div>
+  <div class="bar-item"><div class="bar-fill" style="background: #26A69A;"></div><div class="bar-num" style="color: #00695C;">2</div></div>
+  <div class="bar-item"><div class="bar-fill" style="background: #29B6F6;"></div><div class="bar-num" style="color: #0277BD;">3</div></div>
+  <div class="bar-item"><div class="bar-fill" style="background: #1E88E5;"></div><div class="bar-num" style="color: #1565C0;">4</div></div>
+  <div class="bar-item"><div class="bar-fill" style="background: #5C6BC0;"></div><div class="bar-num" style="color: #283593;">5</div></div>
+  <div class="bar-item"><div class="bar-fill" style="background: #AB47BC;"></div><div class="bar-num" style="color: #6A1B9A;">6</div></div>
+  <div class="bar-item"><div class="bar-fill" style="background: #EC407A;"></div><div class="bar-num" style="color: #AD1457;">7</div></div>
+  <div class="bar-item"><div class="bar-fill" style="background: #FF9800;"></div><div class="bar-num" style="color: #E65100;">8</div></div>
+  <div class="bar-item"><div class="bar-fill" style="background: #FFB300;"></div><div class="bar-num" style="color: #FF6F00;">9</div></div>
+  <div class="bar-item"><div class="bar-fill" style="background: #FDD835;"></div><div class="bar-num" style="color: #F57F17;">10</div></div>
+</div>
+<div class="bar-labels">
+  <span>Beginner (cool)</span>
+  <span>Mastery (warm)</span>
 </div>
 
-<div class="book-row" style="background: #E3F2FD;">
-<div class="book-swatch" style="background: #1E88E5;"></div>
-<div class="book-num" style="color: #1565C0;">Book 4</div>
-<div class="book-hex">#1E88E5</div>
-<div class="book-name">Royal blue</div>
+<div class="section-title">Color reference</div>
+
+<div class="book-grid">
+  <div class="book-row" style="background: #E8F5E9;">
+    <div class="swatch" style="background: #66BB6A;"></div>
+    <div class="num" style="color: #2E7D32;">Book 1</div>
+    <div class="hex">#66BB6A</div>
+    <div class="name">Fresh green</div>
+  </div>
+  <div class="book-row" style="background: #E0F2F1;">
+    <div class="swatch" style="background: #26A69A;"></div>
+    <div class="num" style="color: #00695C;">Book 2</div>
+    <div class="hex">#26A69A</div>
+    <div class="name">Teal</div>
+  </div>
+  <div class="book-row" style="background: #E0F7FA;">
+    <div class="swatch" style="background: #29B6F6;"></div>
+    <div class="num" style="color: #0277BD;">Book 3</div>
+    <div class="hex">#29B6F6</div>
+    <div class="name">Sky blue</div>
+  </div>
+  <div class="book-row" style="background: #E3F2FD;">
+    <div class="swatch" style="background: #1E88E5;"></div>
+    <div class="num" style="color: #1565C0;">Book 4</div>
+    <div class="hex">#1E88E5</div>
+    <div class="name">Royal blue</div>
+  </div>
+  <div class="book-row" style="background: #E8EAF6;">
+    <div class="swatch" style="background: #5C6BC0;"></div>
+    <div class="num" style="color: #283593;">Book 5</div>
+    <div class="hex">#5C6BC0</div>
+    <div class="name">Indigo</div>
+  </div>
+  <div class="book-row" style="background: #F3E5F5;">
+    <div class="swatch" style="background: #AB47BC;"></div>
+    <div class="num" style="color: #6A1B9A;">Book 6</div>
+    <div class="hex">#AB47BC</div>
+    <div class="name">Purple</div>
+  </div>
+  <div class="book-row" style="background: #FCE4EC;">
+    <div class="swatch" style="background: #EC407A;"></div>
+    <div class="num" style="color: #AD1457;">Book 7</div>
+    <div class="hex">#EC407A</div>
+    <div class="name">Rose</div>
+  </div>
+  <div class="book-row" style="background: #FFF3E0;">
+    <div class="swatch" style="background: #FF9800;"></div>
+    <div class="num" style="color: #E65100;">Book 8</div>
+    <div class="hex">#FF9800</div>
+    <div class="name">Orange</div>
+  </div>
+  <div class="book-row" style="background: #FFF8E1;">
+    <div class="swatch" style="background: #FFB300;"></div>
+    <div class="num" style="color: #FF6F00;">Book 9</div>
+    <div class="hex">#FFB300</div>
+    <div class="name">Amber gold</div>
+  </div>
+  <div class="book-row" style="background: #FFFDE7;">
+    <div class="swatch" style="background: #FDD835;"></div>
+    <div class="num" style="color: #F57F17;">Book 10</div>
+    <div class="hex">#FDD835</div>
+    <div class="name">Gold</div>
+  </div>
 </div>
 
-<div class="book-row" style="background: #E8EAF6;">
-<div class="book-swatch" style="background: #5C6BC0;"></div>
-<div class="book-num" style="color: #283593;">Book 5</div>
-<div class="book-hex">#5C6BC0</div>
-<div class="book-name">Indigo</div>
+<div class="section-title">Applied: teacher dashboard cards</div>
+
+<div class="dashboard-mock">
+  <div class="student-card" style="border-left-color: #66BB6A;">
+    <div class="info">
+      <span class="student-name">Gump Dang</span>
+      <span class="level-badge" style="background: #E8F5E9; color: #2E7D32;">Book 1</span>
+    </div>
+    <span class="meta">2 lessons &middot; Parent linked</span>
+  </div>
+  <div class="student-card" style="border-left-color: #26A69A;">
+    <div class="info">
+      <span class="student-name">Sara Chen</span>
+      <span class="level-badge" style="background: #E0F2F1; color: #00695C;">Book 2</span>
+    </div>
+    <span class="meta">5 lessons &middot; Invite sent</span>
+  </div>
+  <div class="student-card" style="border-left-color: #5C6BC0;">
+    <div class="info">
+      <span class="student-name">Ria Huang</span>
+      <span class="level-badge" style="background: #E8EAF6; color: #283593;">Book 5</span>
+    </div>
+    <span class="meta">12 lessons &middot; Parent linked</span>
+  </div>
+  <div class="student-card" style="border-left-color: #AB47BC;">
+    <div class="info">
+      <span class="student-name">Maya Patel</span>
+      <span class="level-badge" style="background: #F3E5F5; color: #6A1B9A;">Book 6</span>
+    </div>
+    <span class="meta">18 lessons &middot; Parent linked</span>
+  </div>
+  <div class="student-card" style="border-left-color: #FF9800;">
+    <div class="info">
+      <span class="student-name">Leo Nakamura</span>
+      <span class="level-badge" style="background: #FFF3E0; color: #E65100;">Book 8</span>
+    </div>
+    <span class="meta">32 lessons &middot; Parent linked</span>
+  </div>
+  <div class="student-card" style="border-left-color: #FDD835;">
+    <div class="info">
+      <span class="student-name">Nathan Roberts</span>
+      <span class="level-badge" style="background: #FFFDE7; color: #F57F17;">Book 10</span>
+    </div>
+    <span class="meta">48 lessons &middot; Parent linked</span>
+  </div>
 </div>
 
-<div class="book-row" style="background: #F3E5F5;">
-<div class="book-swatch" style="background: #AB47BC;"></div>
-<div class="book-num" style="color: #6A1B9A;">Book 6</div>
-<div class="book-hex">#AB47BC</div>
-<div class="book-name">Purple</div>
+<div class="footer-note">
+  Design artifact for <a href="https://cadence-osa.com" target="_blank" rel="noopener">Cadence</a> &mdash; weekly lesson continuity for private music teachers and parents. Color system applied to student cards, book-level badges, and progress indicators across the teacher dashboard.
+  <br><br>
+  Built by Luke Dang &middot; <a href="https://craftmindship.com" target="_blank" rel="noopener">craftmindship.com</a>
 </div>
 
-<div class="book-row" style="background: #FCE4EC;">
-<div class="book-swatch" style="background: #EC407A;"></div>
-<div class="book-num" style="color: #AD1457;">Book 7</div>
-<div class="book-hex">#EC407A</div>
-<div class="book-name">Rose</div>
-</div>
-
-<div class="book-row" style="background: #FFF3E0;">
-<div class="book-swatch" style="background: #FF9800;"></div>
-<div class="book-num" style="color: #E65100;">Book 8</div>
-<div class="book-hex">#FF9800</div>
-<div class="book-name">Orange</div>
-</div>
-
-<div class="book-row" style="background: #FFF8E1;">
-<div class="book-swatch" style="background: #FFB300;"></div>
-<div class="book-num" style="color: #FF6F00;">Book 9</div>
-<div class="book-hex">#FFB300</div>
-<div class="book-name">Amber gold</div>
-</div>
-
-<div class="book-row" style="background: #FFFDE7;">
-<div class="book-swatch" style="background: #FDD835;"></div>
-<div class="book-num" style="color: #F57F17;">Book 10</div>
-<div class="book-hex">#FDD835</div>
-<div class="book-name">Gold</div>
-</div>
-
-</div>
-
-<div class="section-label" style="margin-top: 28px;">Student card mockups</div>
-
-<div class="card-mock" style="border-left: 4px solid #66BB6A;">
-<div>
-<div class="card-mock-inner">
-<div class="card-name">Gump Dang</div>
-<span style="font-size: 13px; color: var(--color-text-secondary);">&#127931;</span>
-<span class="card-level" style="background: #E8F5E9; color: #2E7D32;">Book 1</span>
-</div>
-<div class="card-meta" style="margin-top: 4px;">2 lessons &middot; Parent linked</div>
-</div>
-<div class="card-right">
-<div style="color: #2E7D32; font-size: 13px; font-weight: 500;">&rarr;</div>
-</div>
-</div>
-
-<div class="card-mock" style="border-left: 4px solid #26A69A;">
-<div>
-<div class="card-mock-inner">
-<div class="card-name">Sara Chen</div>
-<span style="font-size: 13px; color: var(--color-text-secondary);">&#127931;</span>
-<span class="card-level" style="background: #E0F2F1; color: #00695C;">Book 2</span>
-</div>
-<div class="card-meta" style="margin-top: 4px;">5 lessons &middot; Invite sent</div>
-</div>
-<div class="card-right">
-<div style="color: #00695C; font-size: 13px; font-weight: 500;">&rarr;</div>
-</div>
-</div>
-
-<div class="card-mock" style="border-left: 4px solid #AB47BC;">
-<div>
-<div class="card-mock-inner">
-<div class="card-name">Ria Huang</div>
-<span style="font-size: 13px; color: var(--color-text-secondary);">&#127931;</span>
-<span class="card-level" style="background: #F3E5F5; color: #6A1B9A;">Book 6</span>
-</div>
-<div class="card-meta" style="margin-top: 4px;">12 lessons &middot; Parent linked</div>
-</div>
-<div class="card-right">
-<div style="color: #6A1B9A; font-size: 13px; font-weight: 500;">&rarr;</div>
-</div>
-</div>
-
-<div class="card-mock" style="border-left: 4px solid #FDD835;">
-<div>
-<div class="card-mock-inner">
-<div class="card-name">Nathan Roberts</div>
-<span style="font-size: 13px; color: var(--color-text-secondary);">&#127931;</span>
-<span class="card-level" style="background: #FFFDE7; color: #F57F17;">Book 10</span>
-</div>
-<div class="card-meta" style="margin-top: 4px;">48 lessons &middot; Parent linked</div>
-</div>
-<div class="card-right">
-<div style="color: #F57F17; font-size: 13px; font-weight: 500;">&rarr;</div>
-</div>
-</div>
-
-</div>
 </body>
 </html>

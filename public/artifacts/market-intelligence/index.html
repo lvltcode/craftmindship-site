@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Intelligence Reports</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  background: #EDE8E3;
+  color: #0F172A;
+  min-height: 100vh;
+  padding: 48px 32px 64px;
+}
+.container { max-width: 1120px; margin: 0 auto; }
+h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+.subtitle { font-size: 15px; color: #64748B; margin-bottom: 32px; }
+.controls { display: flex; gap: 16px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+.search {
+  flex: 1; min-width: 200px; max-width: 400px;
+  padding: 12px 16px 12px 40px;
+  border: 1.5px solid #D1C7BC; border-radius: 10px;
+  font-size: 14px; font-family: inherit; background: #FFFFFF;
+  outline: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 14px center;
+}
+.search:focus { border-color: #8B3A2A; }
+.sort-select {
+  padding: 12px 16px; border: 1.5px solid #D1C7BC; border-radius: 10px;
+  font-size: 14px; font-family: inherit; background: #FFFFFF; cursor: pointer; outline: none;
+}
+.tags { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+.tag {
+  padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 500;
+  border: 1.5px solid #D1C7BC; background: #FFFFFF; cursor: pointer;
+  transition: all .15s ease;
+}
+.tag:hover { border-color: #8B3A2A; }
+.tag.active { background: #0F172A; color: #FFFFFF; border-color: #0F172A; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.card {
+  background: #FFFFFF;
+  border: 1.5px dashed #D1C7BC;
+  border-radius: 16px;
+  padding: 28px 24px 22px;
+  cursor: pointer;
+  transition: border-color .15s ease, box-shadow .15s ease;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.card:hover { border-color: #8B3A2A; box-shadow: 0 4px 20px rgba(0,0,0,.06); }
+.card-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 14px;
+}
+.card h3 { font-size: 18px; font-weight: 700; line-height: 1.35; margin-bottom: 12px; }
+.card-status {
+  display: inline-block;
+  padding: 4px 10px;
+  border: 1px solid #D1C7BC;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #64748B;
+  margin-bottom: 10px;
+}
+.card-meta { font-size: 12px; color: #94A3B8; }
+.footer {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid #D1C7BC;
+  text-align: center;
+  font-size: 13px;
+  color: #94A3B8;
+}
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) {
+  body { padding: 24px 16px 48px; }
+  .grid { grid-template-columns: 1fr; }
+  h1 { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Market Intelligence Reports</h1>
+  <div class="subtitle">Visual report packs for venture market research</div>
+
+  <div class="controls">
+    <input class="search" type="text" placeholder="Search ventures..." id="search" oninput="filterCards()">
+    <select class="sort-select" id="sort" onchange="sortCards()">
+      <option value="newest">Newest first</option>
+      <option value="oldest">Oldest first</option>
+      <option value="az">A–Z</option>
+    </select>
+  </div>
+
+  <div class="tags" id="tags">
+    <div class="tag active" data-filter="all" onclick="setFilter(this)">All</div>
+    <div class="tag" data-filter="logistics" onclick="setFilter(this)">Logistics</div>
+    <div class="tag" data-filter="fintech" onclick="setFilter(this)">Fintech</div>
+    <div class="tag" data-filter="sleeptech" onclick="setFilter(this)">Sleep Tech</div>
+    <div class="tag" data-filter="construction" onclick="setFilter(this)">Construction</div>
+    <div class="tag" data-filter="constructionmaterials" onclick="setFilter(this)">Construction Materials</div>
+    <div class="tag" data-filter="homeservices" onclick="setFilter(this)">Home Services</div>
+    <div class="tag" data-filter="edtech" onclick="setFilter(this)">EdTech</div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="footer">Market Intelligence Visual Packs</div>
+</div>
+
+<script>
+const reports = [
+  { name: "CultureVerse", title: "Immersive Cultural Learning Platform", category: "edtech", categoryLabel: "EdTech", color: "#0D9488", visuals: 10, date: "2026-05-08", link: "cultureverse/index.html" },
+  { name: "DreamLayer", title: "Smart Mattress — Sleep Tech DTC Canada", category: "sleeptech", categoryLabel: "Sleep Tech", color: "#0F766E", visuals: 12, date: "2026-05-08", link: "cultureverse/index.html" },
+  { name: "WealthPilot", title: "AI Financial Guidance for Canadians", category: "fintech", categoryLabel: "Fintech", color: "#D97706", visuals: 13, date: "2026-05-07", link: "cultureverse/index.html" },
+  { name: "FixBot", title: "AI-Powered Home Repair Diagnostics", category: "homeservices", categoryLabel: "Home Services", color: "#EA580C", visuals: 14, date: "2026-05-07", link: "cultureverse/index.html" },
+  { name: "FireGlass", title: "Fire-Resistant Glass for Canadian Construction", category: "constructionmaterials", categoryLabel: "Construction Materials", color: "#0D9488", visuals: 12, date: "2026-05-07", link: "cultureverse/index.html" },
+  { name: "FleetLock", title: "Smart Cargo Security & Condition Intelligence", category: "logistics", categoryLabel: "Logistics", color: "#0D9488", visuals: 12, date: "2026-05-04", link: "cultureverse/index.html" }
+];
+
+let currentFilter = 'all';
+
+function formatDate(d) {
+  const dt = new Date(d + 'T00:00:00');
+  return 'Updated ' + dt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+}
+
+function renderCards(list) {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = list.map(r => `
+    <a class="card" href="${r.link}" data-category="${r.category}" data-name="${r.name}" data-date="${r.date}">
+      <div class="card-badge" style="background:${r.color}">${r.name}</div>
+      <h3>${r.title}</h3>
+      <div class="card-status">Refresh — May 2026</div>
+      <div class="card-meta">${r.categoryLabel} · ${r.visuals} visuals · ${formatDate(r.date)}</div>
+    </a>
+  `).join('');
+}
+
+function getFiltered() {
+  const q = document.getElementById('search').value.toLowerCase();
+  return reports.filter(r => {
+    if (currentFilter !== 'all' && r.category !== currentFilter) return false;
+    if (q && !r.name.toLowerCase().includes(q) && !r.title.toLowerCase().includes(q) && !r.categoryLabel.toLowerCase().includes(q)) return false;
+    return true;
+  });
+}
+
+function filterCards() { renderCards(sortList(getFiltered())); }
+
+function sortList(list) {
+  const s = document.getElementById('sort').value;
+  if (s === 'newest') return [...list].sort((a,b) => b.date.localeCompare(a.date));
+  if (s === 'oldest') return [...list].sort((a,b) => a.date.localeCompare(b.date));
+  if (s === 'az') return [...list].sort((a,b) => a.name.localeCompare(b.name));
+  return list;
+}
+
+function sortCards() { filterCards(); }
+
+function setFilter(el) {
+  document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  currentFilter = el.dataset.filter;
+  filterCards();
+}
+
+renderCards(reports);
+</script>
+</body>
+</html>
