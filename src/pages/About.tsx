@@ -41,7 +41,7 @@ const ctaLinks = [
 ];
 
 export default function About() {
-  usePageMeta("About", "AI Product Builder and Technical Product Manager. I analyze messy workflows, find the real constraint, and turn it into a working system.");
+  usePageMeta("About", "Luke Dang \u2014 AI Product Builder and Technical Product Manager based in Ontario, Canada.", { canonical: "/about" });
 
   return (
     <div className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">

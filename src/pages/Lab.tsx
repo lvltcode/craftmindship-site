@@ -36,7 +36,7 @@ const artifacts = [
 ];
 
 export default function Lab() {
-  usePageMeta("Lab", "Interactive artifacts from research, architecture, and planning work by Luke Dang.");
+  usePageMeta("Lab", "Interactive artifacts from research, architecture, and planning work by Luke Dang.", { canonical: "/lab" });
 
   return (
     <div className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14 mx-auto max-w-[720px]">

@@ -106,7 +106,7 @@ function ComparisonCard() {
 }
 
 export default function TdInsurance() {
-  usePageMeta("When Safe Driving Apps Punish Safe Drivers", "A product teardown of TD Insurance\u2019s telematics scoring \u2014 proxy metrics, incentive misalignment, and $744/year in lost value.");
+  usePageMeta("TD Insurance Telematics Analysis", "Product analysis of TD MyAdvantage driving score. Proxy metric problems, incentive misalignment, and $744/year discount erosion.", { ogImage: "/images/og/og-td-insurance.png", canonical: "/analysis/td-insurance-telematics" });
 
   return (
     <article className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">

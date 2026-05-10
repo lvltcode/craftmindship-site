@@ -31,7 +31,7 @@ const statusColor: Record<string, string> = {
 };
 
 export default function Home() {
-  usePageMeta();
+  usePageMeta(undefined, undefined, { canonical: "/" });
 
   return (
     <>

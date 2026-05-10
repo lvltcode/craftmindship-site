@@ -201,7 +201,8 @@ function TimelineStep({
 export default function MultiAgentWorkflow() {
   usePageMeta(
     "Multi-Agent Workflow",
-    "A controlled system for using ChatGPT, Claude Chat, Claude Code, Codex, and Playwright to ship production software without agent drift."
+    "Repeatable AI orchestration system using Claude Code, ChatGPT, Codex, and Playwright for production software delivery.",
+    { ogImage: "/images/og/og-multi-agent.png", canonical: "/work/multi-agent-workflow" },
   );
 
   const roleMatrix = [

@@ -13,7 +13,7 @@ const posts = [
 ];
 
 export default function Analysis() {
-  usePageMeta("Analysis", "Product teardowns, system breakdowns, and operational thinking.");
+  usePageMeta("Analysis", "Product teardowns, system breakdowns, and operational thinking by Luke Dang.", { canonical: "/analysis" });
 
   return (
     <div className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">

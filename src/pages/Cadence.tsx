@@ -69,7 +69,7 @@ function ArtifactEmbed({ src, title, height = "480px" }: { src: string; title: s
 
 export default function Cadence() {
   const [prototypeFailed, setPrototypeFailed] = useState(false);
-  usePageMeta("Cadence", "Lesson continuity and practice management for private music teachers and parents.");
+  usePageMeta("Cadence", "Lesson continuity and practice management for private music teachers and parents. Production SaaS case study.", { ogImage: "/images/og/og-cadence.png", canonical: "/work/cadence" });
 
   return (
     <div className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">

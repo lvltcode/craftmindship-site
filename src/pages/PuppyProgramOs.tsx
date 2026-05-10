@@ -50,7 +50,7 @@ function ArtifactEmbed({ src, title, height = "600px" }: { src: string; title: s
 }
 
 export default function PuppyProgramOs() {
-  usePageMeta("Puppy Program OS", "Automated foster management platform for a national guide dog organization.");
+  usePageMeta("Puppy Program OS", "Operational system for a dog training academy. Prototype case study with daily logs, alert logic, and staff workflows.", { ogImage: "/images/og/og-puppy-program.png", canonical: "/work/puppy-program-os" });
 
   return (
     <div className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">
