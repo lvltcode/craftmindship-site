@@ -47,7 +47,7 @@ export default function CodingBootcamps() {
   usePageMeta(
     "Why coding bootcamps are dying \u2014 and what replaces them",
     "A 2023 course review reread in 2026. Coffee Credit formula, business model analysis, and four futures for coding schools as AI compresses the beginner layer.",
-    { canonical: "/analysis/coding-bootcamps-dying" },
+    { ogImage: "/images/og/og-coding-bootcamps.png", canonical: "/analysis/coding-bootcamps-dying" },
   );
 
   return (
