@@ -57,7 +57,7 @@ export default function Lab() {
             href={item.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex flex-col rounded-lg border border-gray-200 p-5 transition-colors hover:border-[#2D6A4F]"
+            className="group flex flex-col rounded-lg bg-[#f5f5f5] p-5 transition-colors hover:bg-[#eeeeee]"
           >
             <span
               className="self-start rounded-full px-2.5 py-0.5 text-xs font-medium"
@@ -71,7 +71,7 @@ export default function Lab() {
             <p className="mt-1 text-sm text-gray-600 leading-relaxed">
               {item.description}
             </p>
-            <span className="mt-auto pt-3 text-sm font-medium text-gray-900 group-hover:underline">
+            <span className="mt-auto pt-3 text-sm font-medium text-gray-500 group-hover:text-[#2D6A4F] group-hover:underline">
               View artifact &rarr;
             </span>
           </a>
