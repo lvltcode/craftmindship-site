@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const DEFAULT_TITLE = "Craftmindship \u2014 Operator & Builder";
+const DEFAULT_TITLE = "Craftmindship \u2014 AI Product Builder";
 const DEFAULT_DESC = "I analyze systems, find what\u2019s broken, and build what\u2019s missing. Production SaaS across construction tech, travel tech, fintech, and edtech.";
 
 export function usePageMeta(title?: string, description?: string) {
