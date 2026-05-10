@@ -39,7 +39,7 @@ const externalLinks = [
   { label: "GitHub", href: "https://github.com/lvltcode", icon: "Code" as const },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/dangtranlevu/", icon: "Briefcase" as const },
   { label: "Substack", href: "https://craftmindship.substack.com", icon: "BookOpen" as const },
-  { label: "lvltcode@gmail.com", href: "mailto:lvltcode@gmail.com", icon: "Mail" as const },
+  { label: "hello@craftmindship.com", href: "mailto:hello@craftmindship.com", icon: "Mail" as const },
 ];
 
 export default function About() {
