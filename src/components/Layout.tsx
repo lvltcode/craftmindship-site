@@ -29,7 +29,7 @@ export default function Layout() {
             Craftmindship
           </Link>
           <div className="flex items-center gap-4 sm:gap-6 text-sm text-gray-600">
-            <Link to="/" className="hover:text-gray-900 transition-colors" aria-label="Home">
+            <Link to="/" className="hidden sm:block hover:text-gray-900 transition-colors" aria-label="Home">
               <Home size={18} />
             </Link>
             {navLinks.map((link) => (
