@@ -7,14 +7,6 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Formula({ children }: { children: string }) {
-  return (
-    <pre className="my-4 overflow-x-auto rounded-lg bg-gray-50 border border-gray-200 px-4 py-3 text-sm font-mono text-gray-800">
-      {children}
-    </pre>
-  );
-}
-
 function Blockquote({ children }: { children: React.ReactNode }) {
   return (
     <blockquote className="my-4 border-l-4 border-gray-300 pl-4 text-gray-600 italic">
