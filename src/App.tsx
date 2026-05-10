@@ -5,6 +5,7 @@ import Cadence from "./pages/Cadence";
 import PuppyProgramOs from "./pages/PuppyProgramOs";
 import MultiAgentWorkflow from "./pages/MultiAgentWorkflow";
 import Analysis from "./pages/Analysis";
+import Lab from "./pages/Lab";
 import About from "./pages/About";
 import TdInsurance from "./pages/TdInsurance";
 import NotFound from "./pages/NotFound";
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/work/puppy-program-os" element={<PuppyProgramOs />} />
           <Route path="/work/multi-agent-workflow" element={<MultiAgentWorkflow />} />
           <Route path="/analysis" element={<Analysis />} />
+          <Route path="/lab" element={<Lab />} />
           <Route path="/analysis/td-insurance-telematics" element={<TdInsurance />} />
           {/* Redirects from old /writing paths */}
           <Route path="/writing" element={<Navigate to="/analysis" replace />} />
