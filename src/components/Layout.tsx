@@ -4,7 +4,6 @@ import { Home, Menu, X, Code, Briefcase, BookOpen, Mail } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 const navLinks = [
-  { to: "/", label: "Home" },
   { to: "/work/cadence", label: "Work" },
   { to: "/analysis", label: "Analysis" },
   { to: "/lab", label: "Lab" },
@@ -61,7 +60,7 @@ export default function Layout() {
             <Link to="/" className="hover:text-gray-900 transition-colors" aria-label="Home">
               <Home size={18} />
             </Link>
-            {navLinks.filter((l) => l.to !== "/").map((link) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
@@ -70,14 +69,6 @@ export default function Layout() {
                 {link.label}
               </Link>
             ))}
-            <a
-              href="/cv.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-gray-900 transition-colors"
-            >
-              CV
-            </a>
           </div>
 
           {/* Mobile hamburger */}
@@ -107,14 +98,6 @@ export default function Layout() {
                 {link.label}
               </Link>
             ))}
-            <a
-              href="/cv.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3.5 text-base text-gray-900 hover:bg-gray-50 transition-colors"
-            >
-              CV
-            </a>
           </div>
         </div>
       </header>
