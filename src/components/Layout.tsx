@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-import { Code, Briefcase, BookOpen, Mail } from "lucide-react";
+import { Home, Code, Briefcase, BookOpen, Mail } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 const navLinks = [
@@ -29,6 +29,9 @@ export default function Layout() {
             Craftmindship
           </Link>
           <div className="flex items-center gap-4 sm:gap-6 text-sm text-gray-600">
+            <Link to="/" className="hover:text-gray-900 transition-colors" aria-label="Home">
+              <Home size={18} />
+            </Link>
             {navLinks.map((link) => (
               <Link
                 key={link.to}
