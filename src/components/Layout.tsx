@@ -1,8 +1,10 @@
-import { Link, Outlet } from "react-router-dom";
-import { Home, Code, Briefcase, BookOpen, Mail } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Link, Outlet, useLocation } from "react-router-dom";
+import { Home, Menu, X, Code, Briefcase, BookOpen, Mail } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 const navLinks = [
+  { to: "/", label: "Home" },
   { to: "/work/cadence", label: "Work" },
   { to: "/analysis", label: "Analysis" },
   { to: "/lab", label: "Lab" },
@@ -17,6 +19,31 @@ const footerLinks: { href: string; label: string; icon: LucideIcon }[] = [
 ];
 
 export default function Layout() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  const panelRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  // Close menu on route change
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
+  // Close menu on click outside
+  useEffect(() => {
+    if (!menuOpen) return;
+    function handleClick(e: MouseEvent) {
+      if (
+        panelRef.current && !panelRef.current.contains(e.target as Node) &&
+        buttonRef.current && !buttonRef.current.contains(e.target as Node)
+      ) {
+        setMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [menuOpen]);
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-sm">
@@ -28,11 +55,13 @@ export default function Layout() {
             <img src="/images/logos/craftmindship-light.png" alt="" className="h-7 w-7 rounded-full" />
             Craftmindship
           </Link>
-          <div className="flex items-center gap-4 sm:gap-6 text-sm text-gray-600">
-            <Link to="/" className="hidden sm:block hover:text-gray-900 transition-colors" aria-label="Home">
+
+          {/* Desktop nav */}
+          <div className="hidden sm:flex items-center gap-6 text-sm text-gray-600">
+            <Link to="/" className="hover:text-gray-900 transition-colors" aria-label="Home">
               <Home size={18} />
             </Link>
-            {navLinks.map((link) => (
+            {navLinks.filter((l) => l.to !== "/").map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
@@ -50,7 +79,44 @@ export default function Layout() {
               CV
             </a>
           </div>
+
+          {/* Mobile hamburger */}
+          <button
+            ref={buttonRef}
+            className="sm:hidden text-gray-600 hover:text-gray-900 transition-colors"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </nav>
+
+        {/* Mobile dropdown panel */}
+        <div
+          ref={panelRef}
+          className={`sm:hidden overflow-hidden border-b border-gray-200 bg-white transition-[max-height] duration-200 ease-in-out ${menuOpen ? "max-h-80" : "max-h-0 border-b-0"}`}
+        >
+          <div className="max-w-5xl mx-auto flex flex-col">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="px-6 py-3.5 text-base text-gray-900 hover:bg-gray-50 transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <a
+              href="/cv.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3.5 text-base text-gray-900 hover:bg-gray-50 transition-colors"
+            >
+              CV
+            </a>
+          </div>
+        </div>
       </header>
 
       <main className="flex-1 max-w-5xl mx-auto w-full">
