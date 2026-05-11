@@ -115,8 +115,9 @@ export default function TdInsurance() {
       <header>
         <div className="flex flex-wrap items-center gap-3">
           <span className="inline-flex items-center rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-700 ring-1 ring-inset ring-emerald-600/20">
-            Published
+            Product teardown
           </span>
+          <span className="text-xs text-gray-400">~8 min read</span>
         </div>
         <h1 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           When Safe Driving Apps Punish Safe Drivers
@@ -126,7 +127,18 @@ export default function TdInsurance() {
           incentive misalignment, and $744/year in lost value.
         </p>
         <p className="mt-4 text-sm text-gray-400">
-          May 2026 &middot; Originally published in Vietnamese on{" "}
+          May 2026
+        </p>
+      </header>
+
+      <hr className="my-6 border-gray-200" />
+
+      {/* Body */}
+      <ContentWithToc>
+      <div className="prose-custom max-w-none space-y-4 text-gray-700 leading-relaxed">
+
+        <p className="text-[13px] text-[#6b6b6b] italic">
+          Originally published in Vietnamese on{" "}
           <a
             href="https://craftmindship.substack.com/p/bai-hoc-mua-bao-hiem-va-app-lai-xe"
             target="_blank"
@@ -136,13 +148,6 @@ export default function TdInsurance() {
             Craftmindship
           </a>
         </p>
-      </header>
-
-      <hr className="my-6 border-gray-200" />
-
-      {/* Body */}
-      <ContentWithToc>
-      <div className="prose-custom max-w-none space-y-4 text-gray-700 leading-relaxed">
 
         <SectionHeading>Auto insurance in Canada is expensive</SectionHeading>
 
