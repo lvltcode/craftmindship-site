@@ -23,10 +23,12 @@ export default function Layout() {
   const panelRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  // Close menu on route change
-  useEffect(() => {
+  // Close menu on route change (render-phase adjustment)
+  const [prevPathname, setPrevPathname] = useState(location.pathname);
+  if (prevPathname !== location.pathname) {
+    setPrevPathname(location.pathname);
     setMenuOpen(false);
-  }, [location.pathname]);
+  }
 
   // Close menu on outside tap/click or Escape key
   const handleOutside = useCallback((e: MouseEvent | TouchEvent) => {

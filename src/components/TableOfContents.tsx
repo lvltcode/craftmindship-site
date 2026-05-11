@@ -25,6 +25,8 @@ export default function TableOfContents() {
       seen.add(h2.id);
       return { id: h2.id, text: h2.textContent || "" };
     });
+    // Syncing with DOM (external system) — valid effect pattern
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHeadings(items);
 
     if (items.length === 0) return;
