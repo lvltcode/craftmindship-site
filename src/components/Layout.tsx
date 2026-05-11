@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { Home, Menu, X, Code, Briefcase, BookOpen, Mail } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -28,28 +28,40 @@ export default function Layout() {
     setMenuOpen(false);
   }, [location.pathname]);
 
-  // Close menu on click outside
+  // Close menu on outside tap/click or Escape key
+  const handleOutside = useCallback((e: MouseEvent | TouchEvent) => {
+    if (
+      panelRef.current && !panelRef.current.contains(e.target as Node) &&
+      buttonRef.current && !buttonRef.current.contains(e.target as Node)
+    ) {
+      setMenuOpen(false);
+    }
+  }, []);
+
+  const handleEscape = useCallback((e: KeyboardEvent) => {
+    if (e.key === "Escape") setMenuOpen(false);
+  }, []);
+
   useEffect(() => {
     if (!menuOpen) return;
-    function handleClick(e: MouseEvent) {
-      if (
-        panelRef.current && !panelRef.current.contains(e.target as Node) &&
-        buttonRef.current && !buttonRef.current.contains(e.target as Node)
-      ) {
-        setMenuOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, [menuOpen]);
+    document.addEventListener("mousedown", handleOutside);
+    document.addEventListener("touchstart", handleOutside);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleOutside);
+      document.removeEventListener("touchstart", handleOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [menuOpen, handleOutside, handleEscape]);
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-sm">
         <nav className="max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
+          {/* Fix 3: 44px tap target on logo */}
           <Link
             to="/"
-            className="flex items-center gap-2 text-lg font-semibold text-gray-900 hover:text-gray-700 transition-colors"
+            className="flex items-center gap-2 min-h-[44px] text-lg font-semibold text-gray-900 hover:text-gray-700 transition-colors"
           >
             <img src="/images/logos/craftmindship-light.png" alt="" className="h-7 w-7 rounded-full" />
             Craftmindship
@@ -71,10 +83,10 @@ export default function Layout() {
             ))}
           </div>
 
-          {/* Mobile hamburger */}
+          {/* Fix 2: 44px tap target on hamburger */}
           <button
             ref={buttonRef}
-            className="sm:hidden text-gray-600 hover:text-gray-900 transition-colors"
+            className="sm:hidden min-h-[44px] min-w-[44px] inline-flex items-center justify-center -mr-2 text-gray-600 hover:text-gray-900 transition-colors"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
@@ -111,6 +123,7 @@ export default function Layout() {
           <p className="text-sm text-gray-400">
             &copy; {new Date().getFullYear()} Craftmindship
           </p>
+          {/* Fix 4: 44px tap targets on footer links */}
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-sm text-gray-500">
             {footerLinks.map((link) => (
               <a
@@ -118,7 +131,7 @@ export default function Layout() {
                 href={link.href}
                 target={link.href.startsWith("mailto:") ? undefined : "_blank"}
                 rel={link.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                className="inline-flex items-center gap-1.5 hover:text-gray-900 transition-colors"
+                className="inline-flex items-center gap-1.5 min-h-[44px] hover:text-gray-900 transition-colors"
               >
                 <link.icon size={16} />
                 {link.label}

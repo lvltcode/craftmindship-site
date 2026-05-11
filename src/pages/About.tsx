@@ -37,7 +37,7 @@ const ctaLinks = [
   { label: "View CV", href: "/cv.pdf", icon: FileText },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/dangtranlevu/", icon: Briefcase },
   { label: "GitHub", href: "https://github.com/lvltcode", icon: Code },
-  { label: "hello@craftmindship.com", href: "mailto:hello@craftmindship.com", icon: Mail },
+  { label: "Email", href: "mailto:hello@craftmindship.com", icon: Mail },
 ];
 
 export default function About() {

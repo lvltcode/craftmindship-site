@@ -41,7 +41,7 @@ export default function Home() {
           Luke V.
         </p>
         <h1 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-[2.5rem]">
-          AI Product Builder&nbsp;· Technical Product Manager
+          AI Product Builder&nbsp;· Technical Product&nbsp;Manager
         </h1>
         <p className="mt-3 max-w-xl text-lg leading-relaxed text-gray-600">
           I design and ship workflow-heavy SaaS products that solve real operational
