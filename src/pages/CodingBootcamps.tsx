@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { usePageMeta } from "../hooks/usePageMeta";
+import ContentWithToc from "../components/ContentWithToc";
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
@@ -67,6 +68,7 @@ export default function CodingBootcamps() {
       <hr className="my-6 border-gray-200" />
 
       {/* Body */}
+      <ContentWithToc>
       <div className="prose-custom max-w-none space-y-4 text-gray-700 leading-relaxed">
 
         <p>
@@ -469,6 +471,7 @@ export default function CodingBootcamps() {
           SignalFire State of Talent 2025
         </p>
       </div>
+      </ContentWithToc>
 
       <hr className="my-6 border-gray-200" />
 

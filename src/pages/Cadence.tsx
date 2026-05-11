@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ExternalLink, Code } from "lucide-react";
 import { usePageMeta } from "../hooks/usePageMeta";
+import ContentWithToc from "../components/ContentWithToc";
 
 const externalLinks = [
   { label: "Live App", href: "https://cadence-osa.com", icon: ExternalLink },
@@ -98,7 +99,7 @@ export default function Cadence() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-3.5 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-3.5 py-1.5 min-h-[44px] text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
             >
               <link.icon size={16} />
               {link.label}
@@ -109,6 +110,7 @@ export default function Cadence() {
 
       <hr className="my-8 border-gray-200" />
 
+      <ContentWithToc>
       {/* 1: The Problem */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">The Problem</h2>
@@ -616,6 +618,7 @@ export default function Cadence() {
           community support.
         </p>
       </section>
+      </ContentWithToc>
     </div>
   );
 }

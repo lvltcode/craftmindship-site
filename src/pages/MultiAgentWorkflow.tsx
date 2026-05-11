@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Code } from "lucide-react";
 import { usePageMeta } from "../hooks/usePageMeta";
+import ContentWithToc from "../components/ContentWithToc";
 
 /* ── Workflow Map (inline SVG diagram) ── */
 function WorkflowMap() {
@@ -236,7 +237,7 @@ export default function MultiAgentWorkflow() {
             href="https://github.com/lvltcode/lukedang/blob/main/casestudies/multi-agent-workflow.md"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-3.5 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-3.5 py-1.5 min-h-[44px] text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
           >
             <Code size={16} />
             View on GitHub
@@ -246,6 +247,7 @@ export default function MultiAgentWorkflow() {
 
       <hr className="my-8 border-gray-200" />
 
+      <ContentWithToc>
       {/* 1: Before / After */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
@@ -488,7 +490,7 @@ export default function MultiAgentWorkflow() {
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
             to="/work/cadence"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-3.5 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-3.5 py-1.5 min-h-[44px] text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
           >
             View Cadence case study &rarr;
           </Link>
@@ -496,13 +498,14 @@ export default function MultiAgentWorkflow() {
             href="https://github.com/lvltcode/lukedang/blob/main/casestudies/multi-agent-workflow.md"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-3.5 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-3.5 py-1.5 min-h-[44px] text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
           >
             <Code size={16} />
             View source on GitHub
           </a>
         </div>
       </section>
+      </ContentWithToc>
     </div>
   );
 }

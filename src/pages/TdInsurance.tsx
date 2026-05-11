@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { usePageMeta } from "../hooks/usePageMeta";
+import ContentWithToc from "../components/ContentWithToc";
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
@@ -140,6 +141,7 @@ export default function TdInsurance() {
       <hr className="my-6 border-gray-200" />
 
       {/* Body */}
+      <ContentWithToc>
       <div className="prose-custom max-w-none space-y-4 text-gray-700 leading-relaxed">
 
         <SectionHeading>Auto insurance in Canada is expensive</SectionHeading>
@@ -433,6 +435,7 @@ export default function TdInsurance() {
           the underlying model is.
         </p>
       </div>
+      </ContentWithToc>
 
       <hr className="my-6 border-gray-200" />
 

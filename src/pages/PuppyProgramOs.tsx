@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ExternalLink, Code } from "lucide-react";
 import { usePageMeta } from "../hooks/usePageMeta";
+import ContentWithToc from "../components/ContentWithToc";
 
 const externalLinks = [
   { label: "Case Study Source", href: "https://github.com/lvltcode/lukedang/blob/main/casestudies/puppy-program-os.md", icon: Code },
@@ -74,7 +75,7 @@ export default function PuppyProgramOs() {
             href="https://puppy-prototype.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
+            className="inline-flex items-center gap-1.5 min-h-[44px] rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
           >
             <ExternalLink size={16} />
             View Prototype
@@ -85,7 +86,7 @@ export default function PuppyProgramOs() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-3.5 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+              className="inline-flex items-center gap-1.5 min-h-[44px] rounded-lg border border-gray-300 px-3.5 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
             >
               <link.icon size={16} />
               {link.label}
@@ -99,6 +100,7 @@ export default function PuppyProgramOs() {
 
       <hr className="my-8 border-gray-200" />
 
+      <ContentWithToc>
       {/* Problem */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">The Problem</h2>
@@ -339,6 +341,7 @@ foster_stats + foster_achievements`}</pre>
           Postgres-native alert engine.
         </p>
       </section>
+      </ContentWithToc>
     </div>
   );
 }
