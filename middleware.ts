@@ -3,7 +3,7 @@ import { next } from '@vercel/edge';
 const BASE_URL = 'https://craftmindship.com';
 
 const CRAWLER_RE =
-  /facebookexternalhit|Facebot|LinkedInBot|Twitterbot|WhatsApp|Slackbot|Discordbot|TelegramBot/i;
+  /facebookexternalhit|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp/i;
 
 const ogData: Record<string, { title: string; description: string; image: string }> = {
   '/': {
