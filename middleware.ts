@@ -9,13 +9,13 @@ const ogData: Record<string, { title: string; description: string; image: string
   '/': {
     title: 'Craftmindship — Luke Dang',
     description:
-      "AI Product Builder · Technical Product Manager. I analyze systems, find what's broken, and build what's missing.",
+      "AI Product Builder and Technical Product Manager. Workflow-heavy SaaS with Supabase/RLS, real user pilots, and AI-assisted delivery.",
     image: '/images/logos/craftmindship-light.png',
   },
   '/work/cadence': {
     title: 'Cadence — Weekly Lesson Continuity for Music Teachers',
     description:
-      'Case study: designing and shipping a production SaaS for private music teachers and parents. React, Supabase, Vercel.',
+      'Production SaaS for music teacher-parent lesson continuity. Supabase/RLS, email OTP, parent-safe views, and real teacher pilot.',
     image: '/images/og/og-cadence.png',
   },
   '/work/puppy-program-os': {

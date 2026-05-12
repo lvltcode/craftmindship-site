@@ -70,7 +70,7 @@ function ArtifactEmbed({ src, title, height = "480px" }: { src: string; title: s
 
 export default function Cadence() {
   const [prototypeFailed, setPrototypeFailed] = useState(false);
-  usePageMeta("Cadence", "Lesson continuity and practice management for private music teachers and parents. Production SaaS case study.", { ogImage: "/images/og/og-cadence.png", canonical: "/work/cadence" });
+  usePageMeta("Cadence", "Production SaaS for music teacher-parent lesson continuity. Supabase/RLS, email OTP, parent-safe views, and real teacher pilot.", { ogImage: "/images/og/og-cadence.png", canonical: "/work/cadence" });
 
   return (
     <div className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">
@@ -596,7 +596,63 @@ export default function Cadence() {
 
       <hr className="my-8 border-gray-200" />
 
-      {/* 15: Current Status */}
+      {/* 15: Decisions I'm Proud Of */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          Decisions I&apos;m Proud Of
+        </h2>
+        <div className="mt-6 space-y-4">
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900">Magic link auth instead of passwords</h3>
+            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
+              <strong className="text-gray-900">Why:</strong> Teachers and parents are non-technical. Password friction kills adoption before the product gets a chance.
+            </p>
+            <p className="mt-1 text-sm text-gray-500 italic">
+              Tradeoff: Requires reliable email delivery (Resend + custom domain), but removes the single biggest onboarding barrier.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900">Teacher-first data ownership</h3>
+            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
+              <strong className="text-gray-900">Why:</strong> Teachers can adopt independently &mdash; no org procurement needed. <code className="rounded bg-gray-100 px-1.5 py-0.5 text-sm font-mono text-gray-800">org_id</code> is nullable everywhere.
+            </p>
+            <p className="mt-1 text-sm text-gray-500 italic">
+              Tradeoff: Nullable foreign keys add schema complexity, but removing org-level procurement friction was worth it for pilot adoption.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900">Parent-safe database views</h3>
+            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
+              <strong className="text-gray-900">Why:</strong> Teachers won&apos;t use a system where parents can see private lesson observations. Privacy enforced at the database layer, not just the UI.
+            </p>
+            <p className="mt-1 text-sm text-gray-500 italic">
+              Tradeoff: Two views per table (<code className="rounded bg-gray-100 px-1.5 py-0.5 text-sm font-mono text-gray-800">parent_safe_*</code>), more maintenance &mdash; but prevents data leaks even if the UI has bugs.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900">Skills architecturally separate from pieces</h3>
+            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
+              <strong className="text-gray-900">Why:</strong> A child can polish Twinkle but still need work on bow hold. These are different axes of progress.
+            </p>
+            <p className="mt-1 text-sm text-gray-500 italic">
+              Tradeoff: More data model complexity, but prevents the false signal of &ldquo;finished a song = mastered the technique.&rdquo;
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900">RLS as product trust, not backend plumbing</h3>
+            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
+              <strong className="text-gray-900">Why:</strong> Teachers see only their students. Parents see only their children. Private notes never leak across the boundary.
+            </p>
+            <p className="mt-1 text-sm text-gray-500 italic">
+              Tradeoff: RLS policies add development overhead and debugging complexity, but they&apos;re the reason the pilot teacher trusts the system.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <hr className="my-8 border-gray-200" />
+
+      {/* 16: Current Status */}
       <section className="pb-8">
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Current Status

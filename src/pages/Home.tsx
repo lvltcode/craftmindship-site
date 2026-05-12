@@ -5,19 +5,19 @@ import { usePageMeta } from "../hooks/usePageMeta";
 const projects = [
   {
     name: "Cadence",
-    description: "Live production app for teacher-parent lesson continuity, practice visibility, scheduling, and progress tracking.",
+    description: "Production SaaS for private music teachers and parents. Supabase/RLS, email OTP auth, parent-safe database views, scheduling, and a live teacher pilot.",
     status: "Live",
     path: "/work/cadence",
   },
   {
     name: "Puppy Program OS",
-    description: "Prototype for foster management with daily logs, alert logic, and staff intervention workflows.",
+    description: "Operational system for a national guide dog organization. Postgres-native alert engine, 18-table multi-tenant schema with RLS, and staff intervention workflows.",
     status: "Prototype",
     path: "/work/puppy-program-os",
   },
   {
     name: "Multi-Agent Workflow",
-    description: "Repeatable ChatGPT, Claude Code, Codex, and Playwright delivery system for shipping with AI without agent drift.",
+    description: "Structured AI build workflow used to ship Cadence. Scoped prompts, sequential execution, Playwright QA gates, and clean git checkpoints.",
     status: "Active",
     path: "/work/multi-agent-workflow",
   },
@@ -44,8 +44,9 @@ export default function Home() {
           AI Product Builder&nbsp;· Technical Product&nbsp;Manager
         </h1>
         <p className="mt-3 max-w-xl text-lg leading-relaxed text-gray-600">
-          I design and ship workflow-heavy SaaS products that solve real operational
-          problems, from concept to production. Systems over hype. Craft over ceremony.
+          I ship workflow-heavy SaaS from product architecture to
+          production &mdash; Supabase/RLS, AI-assisted delivery, and real user
+          pilots with non-technical users.
         </p>
         <p className="mt-2 max-w-xl text-sm text-gray-400">
           Production SaaS · Supabase/RLS · AI-native delivery · Workflow automation · Real user pilots

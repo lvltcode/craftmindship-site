@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 const BASE_URL = "https://craftmindship.com";
 const DEFAULT_TITLE = "Craftmindship \u2014 Luke Dang";
-const DEFAULT_DESC = "AI Product Builder and Technical Product Manager. Production SaaS, workflow automation, and AI-native delivery.";
+const DEFAULT_DESC = "AI Product Builder and Technical Product Manager. Workflow-heavy SaaS with Supabase/RLS, real user pilots, and AI-assisted delivery.";
 const DEFAULT_OG_IMAGE = `${BASE_URL}/images/logos/craftmindship-light.png`;
 
 export function usePageMeta(
