@@ -95,7 +95,7 @@ export default function PuppyProgramOs() {
           ))}
         </div>
         <p className="mt-2 text-sm text-gray-500">
-          Prototype password: <code className="rounded bg-gray-100 px-1.5 py-0.5 text-sm font-mono text-gray-700">ZuriLion2026</code>
+          Demo access code: <code className="rounded bg-gray-100 px-1.5 py-0.5 text-sm font-mono text-gray-700">ZURI-LION-2026</code>
         </p>
       </header>
 
@@ -110,7 +110,7 @@ export default function PuppyProgramOs() {
         links={<>
           <a href="https://puppy-prototype.vercel.app" target="_blank" rel="noopener noreferrer" className="text-[#2D6A4F] hover:underline">Prototype</a>
           {" "}
-          <span className="text-[13px] text-[#6b6b6b]">(password: ZuriLion2026)</span>
+          <span className="text-[13px] text-[#6b6b6b]">(Demo access code: ZURI-LION-2026)</span>
           {" \u00b7 "}
           <a href="https://github.com/lvltcode/lukedang/blob/main/casestudies/puppy-program-os.md" target="_blank" rel="noopener noreferrer" className="text-[#2D6A4F] hover:underline">GitHub source</a>
         </>}
