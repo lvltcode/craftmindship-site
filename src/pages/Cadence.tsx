@@ -652,7 +652,93 @@ export default function Cadence() {
 
       <hr className="my-8 border-gray-200" />
 
-      {/* 16: Current Status */}
+      {/* 16: Shipping to a Real User */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          Shipping to a Real User
+        </h2>
+        <p className="mt-4 text-gray-700 leading-relaxed">
+          Cadence&apos;s first pilot teacher is Janet, a near-70-year-old violin teacher with
+          decades of teaching experience and very low computer confidence. Her daily digital
+          workflow is almost entirely iPhone email: she forwards parent messages manually, does
+          not use BCC, and had hundreds of Safari tabs open because browser tab management was
+          unfamiliar. For this user, shipping a working app was not enough. I had to make
+          Cadence reachable.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          The product challenge was not just interface design. It was adoption design. Cadence
+          needed to feel less like &ldquo;new software&rdquo; and more like a simple routine
+          she could repeat after every lesson.
+        </p>
+
+        <div className="mt-6 space-y-4">
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900">PWA &mdash; Add to Home Screen</h3>
+            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
+              Cadence is a Progressive Web App. Instead of asking Janet to search the App Store,
+              manage downloads, or remember a URL, she opens one link, taps &ldquo;Add to Home
+              Screen,&rdquo; and gets a Cadence icon that behaves like an app. No App Store
+              friction. No installation anxiety. No extra account setup.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900">Coach marks &mdash; guided inside the app</h3>
+            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
+              I added five interactive tours across teacher, parent, and admin workflows. Each
+              tour highlights one action at a time with a short tooltip, so users learn by doing
+              instead of reading a manual. This matters for teachers who are willing to try the
+              product but are not confident exploring software on their own.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900">Printed guide &mdash; designed for the pilot context</h3>
+            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
+              I spent two hours in Canva creating a printed, step-by-step guide using real
+              screenshots from the actual Cadence flow. The guide is designed to sit next to
+              Janet&apos;s iPhone while she sets up the app, adds students, and invites parents.
+              This is not scalable onboarding automation. It is founder-led adoption work for
+              the first real user.
+            </p>
+          </div>
+        </div>
+
+        <figure className="mt-8">
+          <img
+            src="/images/projects/cadence/pilot-onboarding-guide.png"
+            alt="PWA installation guide and Quick Start for teachers and parents"
+            className="w-full rounded-lg border border-gray-200"
+            loading="lazy"
+          />
+          <figcaption className="mt-2 text-[13px] text-gray-500">
+            <strong className="text-gray-700">PWA installation guide + Quick Start</strong> &mdash; designed in Canva for the first pilot teacher
+          </figcaption>
+        </figure>
+
+        <blockquote className="mt-8 rounded-lg border-l-[3px] border-[#2D6A4F] bg-[#f9fafb] px-6 py-5">
+          <p className="text-gray-700 italic leading-relaxed">
+            &ldquo;Oh my goodness, this is amazing!!!! Thank you so much. I will open the link
+            and see if I can figure things out. I&apos;ve actually been thinking of trying to take
+            a very basic computer course for beginners because I don&apos;t know how to do anything
+            with computers. You have no idea how much I appreciate your work on this!&rdquo;
+          </p>
+          <p className="mt-3 text-sm text-[#6b6b6b]">
+            &mdash; Janet, pilot teacher
+          </p>
+          <p className="text-xs text-gray-400">
+            Sent from her iPhone
+          </p>
+        </blockquote>
+
+        <p className="mt-6 text-gray-700 leading-relaxed">
+          Cadence did not become more real when the code compiled. It became more real when a
+          non-technical teacher could open it, understand it, and feel supported enough to try
+          it with her own students.
+        </p>
+      </section>
+
+      <hr className="my-8 border-gray-200" />
+
+      {/* 17: Current Status */}
       <section className="pb-8">
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Current Status
