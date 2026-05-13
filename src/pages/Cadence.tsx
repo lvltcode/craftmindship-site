@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ExternalLink, Code } from "lucide-react";
 import { usePageMeta } from "../hooks/usePageMeta";
 import ContentWithToc from "../components/ContentWithToc";
+import AtAGlance from "../components/AtAGlance";
 
 const externalLinks = [
   { label: "Live App", href: "https://cadence-osa.com", icon: ExternalLink },
@@ -108,34 +109,22 @@ export default function Cadence() {
         </div>
       </header>
 
-      {/* At a Glance */}
-      <div className="mt-8 mb-12 rounded-lg border border-gray-200 p-5 sm:p-6">
-        <h2 className="text-base font-semibold text-[#1a1a1a]">At a Glance</h2>
-        <dl className="mt-4 space-y-3 sm:space-y-2">
-          {([
-            ["Role", "Solo founder \u00b7 product builder \u00b7 technical PM"],
-            ["Status", "Production pilot \u2014 live app, first teacher onboarding"],
-            ["Domain", "Music education \u00b7 workflow SaaS"],
-            ["Stack", "React \u00b7 TypeScript \u00b7 Supabase \u00b7 PostgreSQL RLS \u00b7 Edge Functions \u00b7 Resend \u00b7 Vercel"],
-            ["What I did", "Problem discovery \u2192 system design \u2192 AI-assisted build \u2192 pilot deployment \u2192 real-user onboarding"],
-          ] as const).map(([label, value]) => (
-            <div key={label} className="sm:grid sm:grid-cols-[110px_1fr] sm:gap-4">
-              <dt className="text-xs sm:text-[13px] font-medium uppercase tracking-wide text-[#6b6b6b]">{label}</dt>
-              <dd className="mt-0.5 sm:mt-0 text-[15px] text-[#1a1a1a]">{value}</dd>
-            </div>
-          ))}
-          <div className="sm:grid sm:grid-cols-[110px_1fr] sm:gap-4">
-            <dt className="text-xs sm:text-[13px] font-medium uppercase tracking-wide text-[#6b6b6b]">Links</dt>
-            <dd className="mt-0.5 sm:mt-0 text-[15px] text-[#1a1a1a]">
-              <a href="https://cadence-osa.com" target="_blank" rel="noopener noreferrer" className="text-[#2D6A4F] hover:underline">Live app</a>
-              {" \u00b7 "}
-              <a href="https://cadence-prototype-psi.vercel.app" target="_blank" rel="noopener noreferrer" className="text-[#2D6A4F] hover:underline">Prototype</a>
-              {" \u00b7 "}
-              <a href="https://github.com/lvltcode/cadence-osa" target="_blank" rel="noopener noreferrer" className="text-[#2D6A4F] hover:underline">GitHub source</a>
-            </dd>
-          </div>
-        </dl>
-      </div>
+      <AtAGlance
+        rows={[
+          ["Role", "Solo founder \u00b7 product builder \u00b7 technical PM"],
+          ["Status", "Production pilot \u2014 live app, first teacher onboarding"],
+          ["Domain", "Music education \u00b7 workflow SaaS"],
+          ["Stack", "React \u00b7 TypeScript \u00b7 Supabase \u00b7 PostgreSQL RLS \u00b7 Edge Functions \u00b7 Resend \u00b7 Vercel"],
+          ["What I did", "Problem discovery \u2192 system design \u2192 AI-assisted build \u2192 pilot deployment \u2192 real-user onboarding"],
+        ]}
+        links={<>
+          <a href="https://cadence-osa.com" target="_blank" rel="noopener noreferrer" className="text-[#2D6A4F] hover:underline">Live app</a>
+          {" \u00b7 "}
+          <a href="https://cadence-prototype-psi.vercel.app" target="_blank" rel="noopener noreferrer" className="text-[#2D6A4F] hover:underline">Prototype</a>
+          {" \u00b7 "}
+          <a href="https://github.com/lvltcode/cadence-osa" target="_blank" rel="noopener noreferrer" className="text-[#2D6A4F] hover:underline">GitHub source</a>
+        </>}
+      />
 
       <ContentWithToc>
       {/* 1: The Problem */}

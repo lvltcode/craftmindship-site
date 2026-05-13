@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ExternalLink, Code } from "lucide-react";
 import { usePageMeta } from "../hooks/usePageMeta";
 import ContentWithToc from "../components/ContentWithToc";
+import AtAGlance from "../components/AtAGlance";
 
 const externalLinks = [
   { label: "Case Study Source", href: "https://github.com/lvltcode/lukedang/blob/main/casestudies/puppy-program-os.md", icon: Code },
@@ -98,7 +99,22 @@ export default function PuppyProgramOs() {
         </p>
       </header>
 
-      <hr className="my-8 border-gray-200" />
+      <AtAGlance
+        rows={[
+          ["Role", "Product builder \u00b7 systems designer"],
+          ["Status", "Prototype \u2014 pilot-ready, Lions Foundation engagement (March 2026)"],
+          ["Domain", "Animal welfare operations \u00b7 nonprofit workflow SaaS"],
+          ["Stack", "React \u00b7 TypeScript \u00b7 Supabase \u00b7 PostgreSQL RLS \u00b7 Vercel"],
+          ["What I did", "Discovery interviews \u2192 operational mapping \u2192 workflow design \u2192 interactive prototype \u2192 pilot readiness"],
+        ]}
+        links={<>
+          <a href="https://puppy-prototype.vercel.app" target="_blank" rel="noopener noreferrer" className="text-[#2D6A4F] hover:underline">Prototype</a>
+          {" "}
+          <span className="text-[13px] text-[#6b6b6b]">(password: ZuriLion2026)</span>
+          {" \u00b7 "}
+          <a href="https://github.com/lvltcode/lukedang/blob/main/casestudies/puppy-program-os.md" target="_blank" rel="noopener noreferrer" className="text-[#2D6A4F] hover:underline">GitHub source</a>
+        </>}
+      />
 
       <ContentWithToc>
       {/* Problem */}

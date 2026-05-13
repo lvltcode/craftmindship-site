@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Code } from "lucide-react";
 import { usePageMeta } from "../hooks/usePageMeta";
 import ContentWithToc from "../components/ContentWithToc";
+import AtAGlance from "../components/AtAGlance";
 
 /* ── Workflow Map (inline SVG diagram) ── */
 function WorkflowMap() {
@@ -245,7 +246,20 @@ export default function MultiAgentWorkflow() {
         </div>
       </header>
 
-      <hr className="my-8 border-gray-200" />
+      <AtAGlance
+        rows={[
+          ["Role", "Operator \u00b7 AI orchestrator"],
+          ["Status", "Documented methodology \u2014 active across Cadence + Puppy Program OS"],
+          ["Domain", "AI-native software development"],
+          ["Stack", "Claude Chat \u00b7 Claude Code \u00b7 ChatGPT \u00b7 Codex \u00b7 Playwright \u00b7 GitHub \u00b7 Vercel \u00b7 Supabase"],
+          ["What I did", "Designed a 7-step loop coordinating multiple AI models across planning, implementation, QA, and deployment"],
+        ]}
+        links={<>
+          <Link to="/work/cadence" className="text-[#2D6A4F] hover:underline">Cadence case study</Link>
+          {" \u00b7 "}
+          <Link to="/work/puppy-program-os" className="text-[#2D6A4F] hover:underline">Puppy Program OS case study</Link>
+        </>}
+      />
 
       <ContentWithToc>
       {/* 1: Before / After */}
