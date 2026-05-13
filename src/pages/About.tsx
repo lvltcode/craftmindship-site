@@ -92,6 +92,32 @@ export default function About() {
 
       <hr className="my-8 border-gray-200" />
 
+      {/* Why This Portfolio Exists */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          Why This Portfolio Exists
+        </h2>
+        <div className="mt-4 space-y-4 text-gray-700 leading-relaxed">
+          <p>
+            I use Craftmindship to show how I turn messy real-world workflows into shipped software.
+          </p>
+          <p>
+            The projects here are not mock case studies. Cadence came from working with a real
+            music teacher trying to coordinate lessons, parents, practice notes, and scheduling.
+            Puppy Program OS came from observing the operational load behind guide dog fostering.
+            Multi-Agent Workflow documents how I use AI tools as a disciplined build system, not
+            random prompting.
+          </p>
+          <p>
+            The common thread: find the constraint, design the system, ship the workflow, then
+            prove it with real usage. Every project starts with planning documents, not code.
+            AI tools execute against specs, not vibes.
+          </p>
+        </div>
+      </section>
+
+      <hr className="my-8 border-gray-200" />
+
       {/* Target Roles */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
