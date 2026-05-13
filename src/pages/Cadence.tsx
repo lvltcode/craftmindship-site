@@ -140,7 +140,7 @@ export default function Cadence() {
           daily practice, but they have almost no real information to do it well.
         </p>
         <p className="mt-3 text-gray-700 leading-relaxed">
-          At the same time, teachers like Janet manage 15&ndash;30 students across a season.
+          At the same time, a private teacher may manage 15&ndash;30 students across a season.
           Schedules change. Makeups get missed. Parents ask the same questions by text. Recitals
           require coordination across families. None of this has a system &mdash; it runs on
           memory, email, and manual effort.
@@ -376,19 +376,19 @@ export default function Cadence() {
           The first real user was not a technical early adopter.
         </p>
         <p className="mt-3 text-gray-700 leading-relaxed">
-          Janet is a long-time private violin/viola teacher with Suzuki and RCM students.
+          The first pilot teacher is a long-time private violin/viola teacher with Suzuki and RCM students.
           She manages schedules, notes, and parent communication mostly through paper, email,
           and memory. That shaped the product: no complex dashboard, no heavy setup, no
           passwords, no extra data entry for the sake of data entry.
         </p>
         <p className="mt-3 text-gray-700 leading-relaxed">
-          If the system created more work than it saved, Janet would stop using it. Every
-          feature had to pass a simple test: does this reduce Janet&apos;s daily coordination
+          If the system created more work than it saved, she would stop using it. Every
+          feature had to pass a simple test: does this reduce the teacher&apos;s daily coordination
           overhead, or does it add to it?
         </p>
         <p className="mt-3 text-gray-700 leading-relaxed">
           The design decisions that came from this reality: passwordless email OTP (no
-          passwords to forget), mobile-first layout (Janet uses her phone between lessons),
+          passwords to forget), mobile-first layout (she uses her phone between lessons),
           pre-filled lesson dates and times (from the schedule), and tap-based piece/skill
           selection (no typing lists of song names).
         </p>
@@ -674,12 +674,9 @@ export default function Cadence() {
           Shipping to a Real User
         </h2>
         <p className="mt-4 text-gray-700 leading-relaxed">
-          Cadence&apos;s first pilot teacher is Janet, a near-70-year-old violin teacher with
-          decades of teaching experience and very low computer confidence. Her daily digital
-          workflow is almost entirely iPhone email: she forwards parent messages manually, does
-          not use BCC, and had hundreds of Safari tabs open because browser tab management was
-          unfamiliar. For this user, shipping a working app was not enough. I had to make
-          Cadence reachable.
+          Cadence&apos;s first pilot teacher is an experienced violin teacher with very low
+          computer confidence and a phone-first email workflow. Shipping a working app was not
+          enough. I had to make Cadence reachable, repeatable, and safe to try.
         </p>
         <p className="mt-3 text-gray-700 leading-relaxed">
           The product challenge was not just interface design. It was adoption design. Cadence
@@ -691,7 +688,7 @@ export default function Cadence() {
           <div className="rounded-lg border border-gray-200 p-4">
             <h3 className="font-semibold text-gray-900">PWA &mdash; Add to Home Screen</h3>
             <p className="mt-1 text-sm text-gray-600 leading-relaxed">
-              Cadence is a Progressive Web App. Instead of asking Janet to search the App Store,
+              Cadence is a Progressive Web App. Instead of asking the teacher to search the App Store,
               manage downloads, or remember a URL, she opens one link, taps &ldquo;Add to Home
               Screen,&rdquo; and gets a Cadence icon that behaves like an app. No App Store
               friction. No installation anxiety. No extra account setup.
@@ -711,7 +708,7 @@ export default function Cadence() {
             <p className="mt-1 text-sm text-gray-600 leading-relaxed">
               I spent two hours in Canva creating a printed, step-by-step guide using real
               screenshots from the actual Cadence flow. The guide is designed to sit next to
-              Janet&apos;s iPhone while she sets up the app, adds students, and invites parents.
+              the teacher&apos;s iPhone while she sets up the app, adds students, and invites parents.
               This is not scalable onboarding automation. It is founder-led adoption work for
               the first real user.
             </p>
@@ -730,25 +727,23 @@ export default function Cadence() {
           </figcaption>
         </figure>
 
-        <blockquote className="mt-8 rounded-lg border-l-[3px] border-[#2D6A4F] bg-[#f9fafb] px-6 py-5">
-          <p className="text-gray-700 italic leading-relaxed">
-            &ldquo;Oh my goodness, this is amazing!!!! Thank you so much. I will open the link
-            and see if I can figure things out. I&apos;ve actually been thinking of trying to take
-            a very basic computer course for beginners because I don&apos;t know how to do anything
-            with computers. You have no idea how much I appreciate your work on this!&rdquo;
+        <div className="mt-8 rounded-lg border-l-[3px] border-[#2D6A4F] bg-[#f9fafb] px-6 py-5">
+          <p className="text-xs font-medium uppercase tracking-wide text-[#6b6b6b] mb-2">Pilot feedback, paraphrased</p>
+          <p className="text-gray-700 leading-relaxed">
+            The pilot teacher responded with strong appreciation, saying the guide made the app
+            feel approachable and that she had been considering a basic computer course because
+            she was not confident with technology.
           </p>
           <p className="mt-3 text-sm text-[#6b6b6b]">
-            &mdash; Janet, pilot teacher
+            &mdash; J., pilot teacher
           </p>
-          <p className="text-xs text-gray-400">
-            Sent from her iPhone
-          </p>
-        </blockquote>
+        </div>
 
         <p className="mt-6 text-gray-700 leading-relaxed">
-          Cadence did not become more real when the code compiled. It became more real when a
-          non-technical teacher could open it, understand it, and feel supported enough to try
-          it with her own students.
+          This was intentionally unscalable work for the first pilot. The goal was not to create
+          a permanent manual onboarding process. The goal was to remove adoption risk, observe
+          where the product broke down for a low-confidence user, and turn those lessons into
+          reusable onboarding patterns.
         </p>
       </section>
 
@@ -772,7 +767,7 @@ export default function Cadence() {
         </p>
         <p className="mt-3 text-gray-700 leading-relaxed">
           Next phase: profile polish, parent progress reports with PDF export, deeper teacher
-          validation with Janet&apos;s full student roster, and funding transparency for
+          validation with the pilot teacher&apos;s full student roster, and funding transparency for
           community support.
         </p>
       </section>
