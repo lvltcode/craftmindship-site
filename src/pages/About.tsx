@@ -65,8 +65,9 @@ export default function About() {
             </p>
             <p>
               My work sits between product strategy, software architecture, and AI-assisted
-              execution. I use planning artifacts, scoped prompts, and quality gates to ship
-              production software with AI tools as execution leverage.
+              execution. I use planning artifacts, scoped prompts, implementation review
+              checkpoints, and quality gates to ship live pilot apps with AI tools as
+              execution leverage.
             </p>
           </section>
         </div>

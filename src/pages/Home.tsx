@@ -5,7 +5,7 @@ import { usePageMeta } from "../hooks/usePageMeta";
 const projects = [
   {
     name: "Cadence",
-    description: "Production SaaS for private music teachers and parents. Supabase/RLS, email OTP auth, parent-safe database views, scheduling, and a live teacher pilot.",
+    description: "Live pilot app for private music teachers and parents. Supabase/RLS, email OTP auth, parent-safe database views, scheduling, and a live teacher pilot.",
     status: "Live",
     path: "/work/cadence",
   },
@@ -44,12 +44,12 @@ export default function Home() {
           AI Product Builder&nbsp;· Technical Product&nbsp;Manager
         </h1>
         <p className="mt-3 max-w-xl text-lg leading-relaxed text-gray-600">
-          I ship workflow-heavy SaaS from product architecture to
-          production &mdash; Supabase/RLS, AI-assisted delivery, and real user
-          pilots with non-technical users.
+          I ship workflow-heavy pilot apps from product architecture to
+          live deployment &mdash; Supabase/RLS, AI-assisted delivery, and
+          real-user onboarding with non-technical users.
         </p>
         <p className="mt-2 max-w-xl text-sm text-gray-400">
-          Production SaaS · Supabase/RLS · AI-native delivery · Workflow automation · Real user pilots
+          Live Pilot App · Supabase/RLS · AI-native delivery · Workflow automation · Real user pilots
         </p>
         <div className="mt-5 flex flex-wrap gap-4">
           <a

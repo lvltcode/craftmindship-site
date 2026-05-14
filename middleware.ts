@@ -15,7 +15,7 @@ const ogData: Record<string, { title: string; description: string; image: string
   '/work/cadence': {
     title: 'Cadence — Weekly Lesson Continuity for Music Teachers',
     description:
-      'Production SaaS for music teacher-parent lesson continuity. Supabase/RLS, email OTP, parent-safe views, and real teacher pilot.',
+      'Live pilot app for music teacher-parent lesson continuity. Supabase/RLS, email OTP, parent-safe views, and real teacher pilot.',
     image: '/images/og/og-cadence.png',
   },
   '/work/puppy-program-os': {

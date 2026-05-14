@@ -71,7 +71,7 @@ function ArtifactEmbed({ src, title, height = "480px" }: { src: string; title: s
 
 export default function Cadence() {
   const [prototypeFailed, setPrototypeFailed] = useState(false);
-  usePageMeta("Cadence", "Production SaaS for music teacher-parent lesson continuity. Supabase/RLS, email OTP, parent-safe views, and real teacher pilot.", { ogImage: "/images/og/og-cadence.png", canonical: "/work/cadence" });
+  usePageMeta("Cadence", "Live pilot app for music teacher-parent lesson continuity. Supabase/RLS, email OTP, parent-safe views, and real teacher pilot.", { ogImage: "/images/og/og-cadence.png", canonical: "/work/cadence" });
 
   return (
     <div className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">
@@ -612,7 +612,68 @@ export default function Cadence() {
 
       <hr className="my-8 border-gray-200" />
 
-      {/* 15: Decisions I'm Proud Of */}
+      {/* 15: How I Control AI-Generated Software */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          How I Control AI-Generated Software
+        </h2>
+        <p className="mt-4 text-gray-700 leading-relaxed">
+          AI accelerated implementation, but I did not treat generated code as trusted output.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          For Cadence, I kept control through five checks:
+        </p>
+        <ul className="mt-3 ml-5 list-disc space-y-2 text-gray-700 leading-relaxed">
+          <li>
+            <strong className="text-gray-900">Product model review</strong> &mdash; every generated
+            feature had to preserve the lesson &rarr; practice &rarr; parent visibility loop.
+          </li>
+          <li>
+            <strong className="text-gray-900">Schema review</strong> &mdash; tables, foreign keys,
+            and progress records had to match the product model, not just make the UI work.
+          </li>
+          <li>
+            <strong className="text-gray-900">RLS validation</strong> &mdash; parent access stayed
+            constrained to parent-safe views and linked student records.
+          </li>
+          <li>
+            <strong className="text-gray-900">Build and browser gates</strong> &mdash; lint, build,
+            Playwright checks, and manual mobile review before accepting changes.
+          </li>
+          <li>
+            <strong className="text-gray-900">Scope control</strong> &mdash; agents executed one
+            bounded task at a time, with clean commits after each accepted change.
+          </li>
+        </ul>
+        <p className="mt-4 text-gray-700 leading-relaxed">
+          One example: Cadence&apos;s lesson date handling. AI-generated date code can easily
+          turn <code className="rounded bg-gray-100 px-1.5 py-0.5 text-sm font-mono text-gray-800">2026-05-09</code> into
+          the wrong local day because JavaScript parses bare date strings as UTC.{" "}
+          <code className="rounded bg-gray-100 px-1.5 py-0.5 text-sm font-mono text-gray-800">new Date(&apos;2026-05-09&apos;)</code> parses
+          as UTC midnight and shifts backward in Eastern Time &mdash; which would show parents
+          in Ontario a lesson on the wrong day.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          I kept lesson dates as date-only values in the data model and used string-split parsing
+          for display instead of bare <code className="rounded bg-gray-100 px-1.5 py-0.5 text-sm font-mono text-gray-800">new Date()</code> calls
+          in display paths. Small technical decision, but it protected a core trust point: parents
+          and teachers must see the same lesson date.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          The point was not to manually write every line. The point was to inspect the system
+          boundaries that matter &mdash; data ownership, permissions, dates, parent-safe views,
+          and the core lesson workflow &mdash; and protect them before they become problems at scale.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          Cadence is early. The pilot is live with one teacher. At this stage, maintenance is
+          mostly about catching boundary issues before they reach users, then tightening the
+          system as the pilot reveals new edge cases.
+        </p>
+      </section>
+
+      <hr className="my-8 border-gray-200" />
+
+      {/* 16: Decisions I'm Proud Of */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Decisions I&apos;m Proud Of
