@@ -612,57 +612,69 @@ export default function Cadence() {
 
       <hr className="my-8 border-gray-200" />
 
-      {/* 15: How I Control AI-Generated Software */}
+      {/* 15: How I Control AI-Generated Implementation */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
-          How I Control AI-Generated Software
+          How I Control AI-Generated Implementation
         </h2>
         <p className="mt-4 text-gray-700 leading-relaxed">
-          AI accelerated implementation, but I did not treat generated code as trusted output.
+          I do not treat AI-generated output as trusted software.
         </p>
         <p className="mt-3 text-gray-700 leading-relaxed">
-          For Cadence, I kept control through five checks:
+          My strongest review loop is product and implementation control: I run the app locally,
+          test the workflow directly, inspect the database and deployment surfaces, refactor
+          UI/UX behavior, and read code deeply only where the system boundary requires it.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          For Cadence, that meant checking the parts that could break user trust:
         </p>
         <ul className="mt-3 ml-5 list-disc space-y-2 text-gray-700 leading-relaxed">
           <li>
-            <strong className="text-gray-900">Product model review</strong> &mdash; every generated
-            feature had to preserve the lesson &rarr; practice &rarr; parent visibility loop.
+            <strong className="text-gray-900">Workflow integrity</strong> &mdash; every feature
+            had to preserve the lesson &rarr; practice &rarr; parent visibility loop.
           </li>
           <li>
-            <strong className="text-gray-900">Schema review</strong> &mdash; tables, foreign keys,
-            and progress records had to match the product model, not just make the UI work.
+            <strong className="text-gray-900">UI/UX refactoring</strong> &mdash; I tested screens
+            directly, adjusted flows, and tightened the interface around how a non-technical
+            teacher would actually use it.
           </li>
           <li>
-            <strong className="text-gray-900">RLS validation</strong> &mdash; parent access stayed
-            constrained to parent-safe views and linked student records.
+            <strong className="text-gray-900">Schema and RLS control</strong> &mdash; I reviewed
+            the Supabase data model, parent-safe access boundaries, and role-based visibility rules.
           </li>
           <li>
-            <strong className="text-gray-900">Build and browser gates</strong> &mdash; lint, build,
-            Playwright checks, and manual mobile review before accepting changes.
+            <strong className="text-gray-900">Local dev and deployment control</strong> &mdash; I
+            worked across local development, Supabase, Vercel, auth, email, and production
+            deployment instead of treating the app as a black box.
           </li>
           <li>
-            <strong className="text-gray-900">Scope control</strong> &mdash; agents executed one
-            bounded task at a time, with clean commits after each accepted change.
+            <strong className="text-gray-900">Targeted code inspection</strong> &mdash; I do not
+            read every AI-generated line, but I inspect the code when behavior, data boundaries,
+            or production risk requires it.
+          </li>
+          <li>
+            <strong className="text-gray-900">QA gates</strong> &mdash; lint/build checks,
+            Playwright tests, manual browser checks, and mobile review before accepting changes.
           </li>
         </ul>
         <p className="mt-4 text-gray-700 leading-relaxed">
-          One example: Cadence&apos;s lesson date handling. AI-generated date code can easily
+          One example was Cadence&apos;s lesson date handling. AI-generated date code can easily
           turn <code className="rounded bg-gray-100 px-1.5 py-0.5 text-sm font-mono text-gray-800">2026-05-09</code> into
           the wrong local day because JavaScript parses bare date strings as UTC.{" "}
           <code className="rounded bg-gray-100 px-1.5 py-0.5 text-sm font-mono text-gray-800">new Date(&apos;2026-05-09&apos;)</code> parses
-          as UTC midnight and shifts backward in Eastern Time &mdash; which would show parents
+          as UTC midnight and can shift backward in Eastern Time &mdash; which would show parents
           in Ontario a lesson on the wrong day.
         </p>
         <p className="mt-3 text-gray-700 leading-relaxed">
-          I kept lesson dates as date-only values in the data model and used string-split parsing
-          for display instead of bare <code className="rounded bg-gray-100 px-1.5 py-0.5 text-sm font-mono text-gray-800">new Date()</code> calls
-          in display paths. Small technical decision, but it protected a core trust point: parents
-          and teachers must see the same lesson date.
+          I kept lesson dates as date-only values in the data model and avoided
+          bare <code className="rounded bg-gray-100 px-1.5 py-0.5 text-sm font-mono text-gray-800">new Date()</code> calls
+          in display paths. This protected a core trust point: parents and teachers must see the
+          same lesson date.
         </p>
         <p className="mt-3 text-gray-700 leading-relaxed">
-          The point was not to manually write every line. The point was to inspect the system
-          boundaries that matter &mdash; data ownership, permissions, dates, parent-safe views,
-          and the core lesson workflow &mdash; and protect them before they become problems at scale.
+          The point is not to manually write or read every line. The point is to know which
+          boundaries matter, inspect those boundaries, and tighten the product before small
+          technical mistakes become real user problems.
         </p>
         <p className="mt-3 text-gray-700 leading-relaxed">
           Cadence is early. The pilot is live with one teacher. At this stage, maintenance is
@@ -810,7 +822,39 @@ export default function Cadence() {
 
       <hr className="my-8 border-gray-200" />
 
-      {/* 17: Current Status */}
+      {/* 17: Pilot Iteration With a Real Teacher */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          Pilot Iteration With a Real Teacher
+        </h2>
+        <p className="mt-4 text-gray-700 leading-relaxed">
+          Cadence is being tested with one real teacher first, not launched broadly.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          That matters because the early work is not just shipping features. It is observing
+          how a non-technical teacher actually teaches, schedules, explains practice, and
+          communicates with parents.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          Through the pilot, I learned details that shaped the product:
+        </p>
+        <ul className="mt-3 ml-5 list-disc space-y-1 text-gray-700 leading-relaxed">
+          <li>The pilot teacher works across violin and viola, not only violin.</li>
+          <li>Many students follow RCM paths, not only Suzuki.</li>
+          <li>Teacher onboarding needed printed guidance, not just an app walkthrough.</li>
+          <li>Parent clarity matters as much as teacher data entry.</li>
+          <li>The product had to reduce repeated explanation, not create another admin task.</li>
+        </ul>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          This is still early, but it is real product iteration: observe the user, adjust the
+          workflow, simplify the surface, and avoid scaling before the pilot proves the system
+          is usable.
+        </p>
+      </section>
+
+      <hr className="my-8 border-gray-200" />
+
+      {/* 18: Current Status */}
       <section className="pb-8">
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Current Status

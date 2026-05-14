@@ -139,7 +139,7 @@ export default function About() {
       <hr className="my-8 border-gray-200" />
 
       {/* How I Build */}
-      <section className="pb-8">
+      <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           How I Build
         </h2>
@@ -151,6 +151,17 @@ export default function About() {
             </div>
           ))}
         </div>
+      </section>
+
+      <hr className="my-8 border-gray-200" />
+
+      {/* Private Work Context */}
+      <section className="pb-8">
+        <p className="text-sm text-gray-500 leading-relaxed">
+          Some production and company work cannot be public because it contains client,
+          company, or real-user context. This portfolio focuses on public-safe case studies,
+          shipped artifacts, and product reasoning rather than exposing private repositories.
+        </p>
       </section>
     </div>
   );

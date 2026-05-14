@@ -375,6 +375,12 @@ export default function MultiAgentWorkflow() {
             No uncommitted handoff mess. One prompt, one task, one commit.
           </p>
         </div>
+        <p className="mt-6 text-gray-700 leading-relaxed">
+          I use tools like Lovable, Stitch, Canva, and Gemini for fast layout exploration,
+          visual direction, and rapid idea testing, not as final authority over the product.
+          Production-facing work is tightened through local development, Claude Code/Codex
+          refactors, Supabase review, Vercel deployment checks, and manual QA.
+        </p>
       </section>
 
       <hr className="my-8 border-gray-200" />
