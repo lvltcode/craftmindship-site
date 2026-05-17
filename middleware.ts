@@ -36,6 +36,12 @@ const ogData: Record<string, { title: string; description: string; image: string
       'Proxy metric analysis of TD Advantage driving score. Incentive misalignment, aggregation logic critique, $744/year impact.',
     image: '/images/og/og-td-insurance.png',
   },
+  '/analysis/ai-repair-intake-marketplace': {
+    title: 'AI Repair Intake Marketplace — Market Intelligence',
+    description:
+      'Market intelligence and pilot-ready MVP experiment on contractor lead quality, home repair trust, and subscription-first monetization.',
+    image: '/images/og/og-ai-repair-intake.png',
+  },
   '/analysis/coding-bootcamps-dying': {
     title: 'Why Coding Bootcamps Are Dying — And What Replaces Them',
     description:

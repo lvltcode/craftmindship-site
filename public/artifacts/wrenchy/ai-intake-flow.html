@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wrenchy — AI Repair Intake Flow</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', system-ui, sans-serif; color: #111827; background: #FFFFFF; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4 { font-family: 'Space Grotesk', system-ui, sans-serif; }
+
+.page { max-width: 680px; margin: 0 auto; padding: 32px 24px 64px; }
+
+/* Header */
+.page-header { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.page-header .logo-mark { width: 28px; height: 28px; background: #F97316; border-radius: 7px; display: flex; align-items: center; justify-content: center; }
+.page-header .logo-mark svg { width: 14px; height: 14px; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.page-header h1 { font-size: 22px; font-weight: 700; color: #111827; }
+.page-subtitle { color: #64748B; font-size: 15px; margin-bottom: 32px; }
+
+/* Form card */
+.intake-form { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 12px; padding: 28px; }
+.form-label { display: block; font-size: 14px; font-weight: 500; color: #111827; margin-bottom: 8px; }
+.form-textarea { width: 100%; min-height: 120px; padding: 12px 14px; border: 1px solid #E5E7EB; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 14px; color: #111827; resize: vertical; line-height: 1.5; outline: none; transition: border-color 0.15s; }
+.form-textarea:focus { border-color: #F97316; box-shadow: 0 0 0 3px rgba(249,115,22,0.1); }
+.form-textarea::placeholder { color: #94A3B8; }
+
+/* Upload area */
+.upload-area { margin-top: 24px; }
+.upload-box { border: 2px dashed rgba(249,115,22,0.3); border-radius: 12px; padding: 32px; text-align: center; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+.upload-box:hover { border-color: rgba(249,115,22,0.6); background: rgba(249,115,22,0.03); }
+.upload-icon { width: 32px; height: 32px; margin: 0 auto 8px; color: #64748B; }
+.upload-icon svg { width: 32px; height: 32px; stroke: #94A3B8; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.upload-text { font-size: 14px; color: #64748B; }
+.upload-hint { font-size: 12px; color: #94A3B8; margin-top: 4px; }
+.upload-helper { font-size: 12px; color: #94A3B8; margin-top: 8px; }
+
+/* Image preview (shown state) */
+.upload-preview { position: relative; display: inline-block; margin-top: 8px; }
+.upload-preview img { width: 160px; height: 160px; object-fit: cover; border-radius: 12px; border: 1px solid #E5E7EB; }
+.upload-preview .remove-btn { position: absolute; top: -8px; right: -8px; width: 24px; height: 24px; background: #DC2626; color: white; border: none; border-radius: 50%; font-size: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+
+/* Submit button */
+.submit-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 24px; padding: 14px 24px; background: #F97316; color: white; border: none; border-radius: 8px; font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+.submit-btn:hover { background: #EA580C; }
+.submit-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Privacy line */
+.privacy-line { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; font-size: 12px; color: #94A3B8; }
+.privacy-line svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Divider */
+.flow-divider { display: flex; align-items: center; gap: 12px; margin: 40px 0; }
+.flow-divider::before, .flow-divider::after { content: ''; flex: 1; height: 1px; background: #E5E7EB; }
+.flow-divider .divider-badge { display: flex; align-items: center; gap: 6px; background: #FFF7ED; border: 1px solid #FDBA74; border-radius: 100px; padding: 6px 14px; font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 600; color: #EA580C; white-space: nowrap; }
+.flow-divider .divider-badge svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Result section */
+.result-section { }
+
+/* Badges row */
+.badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 500; }
+.badge svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.badge-urgency-med { background: #FEF3C7; color: #92400E; }
+.badge-difficulty-mod { background: #FEF3C7; color: #92400E; }
+.badge-time { background: #F3F4F6; color: #64748B; }
+.badge-confidence { background: #ECFDF5; color: #065F46; }
+
+/* Complexity pill */
+.complexity-pill { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 100px; font-size: 14px; font-weight: 500; margin-bottom: 20px; }
+.complexity-pill svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.complexity-complex { background: #FEF3C7; color: #92400E; }
+
+/* Disclaimer */
+.disclaimer { display: flex; align-items: flex-start; gap: 8px; background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 8px; padding: 12px 14px; margin-bottom: 20px; }
+.disclaimer svg { width: 16px; height: 16px; stroke: #94A3B8; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; margin-top: 1px; }
+.disclaimer p { font-size: 12px; color: #64748B; line-height: 1.5; }
+
+/* Original issue */
+.original-issue { border-left: 4px solid #E5E7EB; background: #F9FAFB; border-radius: 0 8px 8px 0; padding: 14px 16px; margin-bottom: 20px; }
+.original-issue p { font-size: 13px; font-style: italic; color: #64748B; line-height: 1.5; }
+
+/* Result cards */
+.result-card { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 12px; padding: 24px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.result-card h2 { font-size: 16px; font-weight: 600; color: #111827; margin-bottom: 12px; }
+.result-card p { font-size: 14px; color: #64748B; line-height: 1.6; }
+
+/* Why pro card */
+.why-pro-card { border-left: 4px solid #0F766E; background: #F0FDFA; border-radius: 0 12px 12px 0; padding: 20px 24px; margin-bottom: 16px; }
+.why-pro-card h3 { font-size: 14px; font-weight: 600; color: #111827; margin-bottom: 8px; }
+.why-pro-card p { font-size: 13px; color: #64748B; line-height: 1.5; }
+
+/* Parts grid */
+.parts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+.part-card { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 8px; padding: 14px; }
+.part-card .part-name { font-size: 13px; font-weight: 500; color: #111827; }
+.part-card .part-price { font-size: 13px; font-weight: 500; color: #059669; margin-top: 4px; }
+.part-card .part-stores { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+.part-card .store-tag { background: #F3F4F6; color: #64748B; font-size: 11px; padding: 2px 8px; border-radius: 100px; }
+.part-card .part-notes { font-size: 11px; color: #94A3B8; margin-top: 6px; line-height: 1.4; }
+
+/* Pro suggestion */
+.pro-section { background: rgba(249,115,22,0.03); border: 2px solid rgba(249,115,22,0.15); border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+.pro-section h2 { font-size: 16px; font-weight: 600; color: #111827; margin-bottom: 4px; }
+.pro-section .pro-subtitle { font-size: 13px; color: #64748B; margin-bottom: 16px; }
+.pro-card { display: flex; align-items: center; justify-content: space-between; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 12px; padding: 16px; margin-bottom: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.pro-card:last-child { margin-bottom: 0; }
+.pro-info { display: flex; align-items: center; gap: 12px; }
+.pro-avatar { width: 40px; height: 40px; border-radius: 50%; background: rgba(249,115,22,0.1); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #F97316; font-size: 16px; flex-shrink: 0; }
+.pro-name { font-size: 14px; font-weight: 500; color: #111827; }
+.pro-meta { font-size: 12px; color: #64748B; margin-top: 2px; }
+.pro-rate { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: #64748B; border: 1px solid #E5E7EB; border-radius: 100px; padding: 2px 8px; margin-top: 4px; }
+.book-btn { padding: 8px 16px; background: #F97316; color: white; border: none; border-radius: 8px; font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.15s; flex-shrink: 0; }
+.book-btn:hover { background: #EA580C; }
+.pro-trust { display: flex; align-items: center; gap: 6px; margin-top: 14px; font-size: 12px; color: #64748B; }
+.pro-trust svg { width: 16px; height: 16px; stroke: #F97316; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Mobile */
+@media (max-width: 640px) {
+  .page { padding: 24px 16px 48px; }
+  .parts-grid { grid-template-columns: 1fr; }
+  .pro-card { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .book-btn { width: 100%; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ═══ INPUT STATE ═══ -->
+  <div class="page-header">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+    </div>
+    <h1>Ask Wrenchy</h1>
+  </div>
+  <p class="page-subtitle">Describe what's broken or upload a photo — Wrenchy AI will identify the problem and tell you how to fix it.</p>
+
+  <div class="intake-form">
+    <label class="form-label">What's the problem?</label>
+    <textarea class="form-textarea" readonly>Water is leaking from under my kitchen sink. Started yesterday, getting worse. There's a small puddle forming on the floor each morning. I can hear a slow drip when the tap is off.</textarea>
+
+    <div class="upload-area">
+      <label class="form-label">Upload a photo (optional)</label>
+      <div class="upload-preview">
+        <div style="width:160px;height:160px;border-radius:12px;border:1px solid #E5E7EB;background:linear-gradient(135deg,#F9FAFB 0%,#F3F4F6 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span style="font-size:11px;color:#94A3B8;">sink_leak.jpg</span>
+        </div>
+        <button class="remove-btn" type="button">&times;</button>
+      </div>
+      <p class="upload-helper">Upload a clear photo for better accuracy. Good examples: leaky pipe, cracked wall, broken appliance.</p>
+    </div>
+
+    <button class="submit-btn" type="button">
+      <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      Ask Wrenchy
+    </button>
+
+    <div class="privacy-line">
+      <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Your diagnosis is private. Results are saved to your dashboard.
+    </div>
+  </div>
+
+  <!-- ═══ FLOW DIVIDER ═══ -->
+  <div class="flow-divider">
+    <div class="divider-badge">
+      <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      AI Assessment — 2.4 seconds
+    </div>
+  </div>
+
+  <!-- ═══ OUTPUT STATE ═══ -->
+  <div class="result-section">
+
+    <!-- Badges -->
+    <div class="badges">
+      <span class="badge badge-urgency-med">
+        <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Medium Urgency
+      </span>
+      <span class="badge badge-difficulty-mod">
+        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        Moderate
+      </span>
+      <span class="badge badge-time">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        30–60 min (pro)
+      </span>
+      <span class="badge badge-confidence">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+        AI Confidence: High
+      </span>
+    </div>
+
+    <!-- Complexity pill -->
+    <div>
+      <span class="complexity-pill complexity-complex">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Professional Recommended
+      </span>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="disclaimer">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <p>AI diagnosis is a guide only. Always verify before attempting electrical, gas, or structural repairs. When in doubt, book a licensed professional.</p>
+    </div>
+
+    <!-- Original issue -->
+    <div class="original-issue">
+      <p>Water is leaking from under my kitchen sink. Started yesterday, getting worse. There's a small puddle forming on the floor each morning. I can hear a slow drip when the tap is off.</p>
+    </div>
+
+    <!-- What's happening card -->
+    <div class="result-card">
+      <h2>What's happening</h2>
+      <p>The symptoms indicate a failing P-trap seal or loose compression fitting on the drain assembly beneath your kitchen sink. The slow drip when the tap is off suggests the leak is on the drain side rather than the supply line — likely where the tailpiece connects to the P-trap. Water is pooling overnight because residual water in the trap is seeping through the degraded washer. Left unaddressed for more than a few days, this can cause subfloor water damage and potential mold growth in the cabinet interior.</p>
+    </div>
+
+    <!-- Why pro card -->
+    <div class="why-pro-card">
+      <h3>Why you need a pro</h3>
+      <p>While P-trap replacement is sometimes DIY-able, the combination of active leaking, potential subfloor moisture, and the need to assess whether the drain pipe or garbage disposal connection is also compromised makes this a job for a licensed plumber. A professional can also check for water damage behind the cabinet that isn't visible.</p>
+    </div>
+
+    <!-- What to tell your tradesman -->
+    <div class="result-card" style="border-left: 4px solid #0F766E; background: #F0FDFA;">
+      <h3 style="font-size:14px;font-weight:600;margin-bottom:8px;">What to tell your tradesman</h3>
+      <p style="font-size:13px;">When booking, your tradesman will receive: <em>"P-trap seal failure or loose compression fitting on kitchen sink drain assembly. Active slow drip, overnight pooling. Assess for subfloor moisture damage."</em> Urgency: <strong>Medium — address within 48 hours.</strong></p>
+    </div>
+
+    <!-- Parts card -->
+    <div class="result-card">
+      <h2 style="display:flex;align-items:center;gap:8px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        Parts You May Need
+      </h2>
+      <div class="parts-grid">
+        <div class="part-card">
+          <div class="part-name">1-1/2" P-Trap Kit (PVC)</div>
+          <div class="part-price">CAD $8–$15</div>
+          <div class="part-stores">
+            <span class="store-tag">Home Depot</span>
+            <span class="store-tag">Home Hardware</span>
+          </div>
+          <div class="part-notes">Universal fit for most kitchen sinks. Includes washers and slip nuts.</div>
+        </div>
+        <div class="part-card">
+          <div class="part-name">Compression Washer Set</div>
+          <div class="part-price">CAD $4–$7</div>
+          <div class="part-stores">
+            <span class="store-tag">Canadian Tire</span>
+            <span class="store-tag">Home Depot</span>
+          </div>
+          <div class="part-notes">Nylon or rubber. Replace all washers during repair for longevity.</div>
+        </div>
+        <div class="part-card">
+          <div class="part-name">Plumber's Tape (PTFE)</div>
+          <div class="part-price">CAD $3–$5</div>
+          <div class="part-stores">
+            <span class="store-tag">Any hardware store</span>
+          </div>
+          <div class="part-notes">For threaded connections. 3–4 wraps clockwise on male threads.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Suggested Pros -->
+    <div class="pro-section">
+      <h2>Suggested Pros for This Job</h2>
+      <p class="pro-subtitle">Based on your diagnosis, here are vetted tradesmen who specialize in plumbing repairs.</p>
+
+      <div class="pro-card">
+        <div class="pro-info">
+          <div class="pro-avatar">M</div>
+          <div>
+            <div class="pro-name">Marcus Chen</div>
+            <div class="pro-meta">📍 Scarborough &nbsp;⭐ 4.9 (47 reviews)</div>
+            <div class="pro-rate">💲 From CAD $85/hr · 1 hr min</div>
+          </div>
+        </div>
+        <button class="book-btn" type="button">Book Now</button>
+      </div>
+
+      <div class="pro-card">
+        <div class="pro-info">
+          <div class="pro-avatar">R</div>
+          <div>
+            <div class="pro-name">Raj Patel</div>
+            <div class="pro-meta">📍 North York &nbsp;⭐ 4.8 (32 reviews)</div>
+            <div class="pro-rate">💲 Custom quote</div>
+          </div>
+        </div>
+        <button class="book-btn" type="button" style="background:transparent;border:1px solid #E5E7EB;color:#111827;">Request Free Quote</button>
+      </div>
+
+      <div class="pro-card">
+        <div class="pro-info">
+          <div class="pro-avatar">J</div>
+          <div>
+            <div class="pro-name">James Okafor</div>
+            <div class="pro-meta">📍 Etobicoke &nbsp;⭐ 4.7 (28 reviews)</div>
+            <div class="pro-rate">💲 From CAD $75/hr · 1.5 hr min</div>
+          </div>
+        </div>
+        <button class="book-btn" type="button">Book Now</button>
+      </div>
+
+      <div class="pro-trust">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        All Pros are vetted, insured, and rated 4.5★ or above.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

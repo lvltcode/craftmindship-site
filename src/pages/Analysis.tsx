@@ -3,6 +3,14 @@ import { usePageMeta } from "../hooks/usePageMeta";
 
 const posts = [
   {
+    category: "Market intelligence · Home repair · AI intake",
+    title: "AI Repair Intake Marketplace",
+    thesis:
+      "The repair request is the unit of value. Better intake improves matching, quoting, and contractor willingness to pay for leads.",
+    impact: "Subscription-first · AI diagnosis → structured lead · Pilot-ready MVP",
+    path: "/analysis/ai-repair-intake-marketplace",
+  },
+  {
     category: "Edtech teardown · Coding bootcamps · Business model",
     title: "Why coding bootcamps are dying \u2014 and what replaces them",
     thesis:

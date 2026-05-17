@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wrenchy — Smart Repair Intake + Local Pros On Demand</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', system-ui, sans-serif; color: #111827; background: #FFFFFF; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+h1, h2, h3, h4 { font-family: 'Space Grotesk', system-ui, sans-serif; }
+a { text-decoration: none; color: inherit; }
+
+/* Layout */
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+/* Nav */
+.nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #E5E7EB; }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+.nav-brand { display: flex; align-items: center; gap: 8px; font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: #111827; }
+.nav-brand .logo-mark { width: 32px; height: 32px; background: #F97316; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; }
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-links a { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 500; color: #64748B; padding: 8px 12px; border-radius: 8px; transition: color 0.15s; }
+.nav-links a:hover { color: #F97316; }
+.nav-cta { display: flex; align-items: center; gap: 12px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.15s; border: none; }
+.btn-ghost { font-size: 14px; padding: 8px 16px; background: transparent; color: #111827; }
+.btn-ghost:hover { background: #F3F4F6; }
+.btn-primary { font-size: 14px; padding: 10px 20px; background: #F97316; color: white; }
+.btn-primary:hover { background: #EA580C; }
+.btn-xl { font-size: 16px; padding: 14px 28px; border-radius: 10px; }
+.btn-hero { background: linear-gradient(135deg, #F97316 0%, #FDBA74 100%); color: white; box-shadow: 0 20px 60px -15px rgba(249,115,22,0.25); }
+.btn-hero:hover { opacity: 0.9; }
+.btn-outline { background: transparent; border: 2px solid #F97316; color: #F97316; }
+.btn-outline:hover { background: #F97316; color: white; }
+
+/* Hero */
+.hero { position: relative; padding: 80px 0 100px; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,247,237,0.5) 0%, rgba(255,237,213,0.3) 100%); }
+.hero-content { position: relative; max-width: 720px; margin: 0 auto; text-align: center; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(249,115,22,0.1); color: #F97316; font-size: 14px; font-weight: 500; padding: 6px 16px; border-radius: 100px; margin-bottom: 24px; }
+.hero h1 { font-size: clamp(32px, 5vw, 56px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: #111827; }
+.hero h1 .gradient { background: linear-gradient(135deg, #F97316 0%, #FDBA74 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { margin-top: 24px; font-size: 18px; color: #64748B; max-width: 600px; margin-left: auto; margin-right: auto; }
+.hero-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 40px; }
+
+/* Steps */
+.steps { padding: 80px 0; }
+.section-header { text-align: center; margin-bottom: 56px; }
+.section-header h2 { font-size: 30px; font-weight: 700; color: #111827; }
+.section-header p { margin-top: 12px; color: #64748B; font-size: 16px; }
+.steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.step-card { position: relative; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 12px; padding: 32px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.04); transition: box-shadow 0.2s; }
+.step-card:hover { box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08); }
+.step-number { position: absolute; top: -12px; left: 24px; width: 28px; height: 28px; background: #F97316; color: white; font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.step-icon { width: 56px; height: 56px; margin: 0 auto 20px; background: linear-gradient(135deg, #F97316, #FDBA74); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+.step-icon svg { width: 24px; height: 24px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.step-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #111827; }
+.step-card p { font-size: 14px; color: #64748B; line-height: 1.5; }
+
+/* Features */
+.features { padding: 80px 0; background: #F9FAFB; border-top: 1px solid #E5E7EB; }
+.features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.feature-card { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 12px; padding: 24px; }
+.feature-icon { width: 40px; height: 40px; background: rgba(249,115,22,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+.feature-icon svg { width: 20px; height: 20px; stroke: #F97316; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.feature-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; color: #111827; }
+.feature-card p { font-size: 13px; color: #64748B; line-height: 1.5; }
+
+/* Stats */
+.stats { padding: 80px 0; }
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; text-align: center; }
+.stat-value { font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 700; background: linear-gradient(135deg, #F97316, #FDBA74); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.stat-label { margin-top: 4px; font-size: 14px; color: #64748B; }
+
+/* CTA */
+.cta-section { padding: 80px 0; }
+.cta-box { max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, #F97316 0%, #FDBA74 100%); border-radius: 16px; padding: 64px 40px; text-align: center; }
+.cta-box h2 { font-size: 30px; font-weight: 700; color: white; }
+.cta-box p { margin-top: 12px; color: rgba(255,255,255,0.8); font-size: 16px; }
+.cta-box .btn { margin-top: 32px; background: transparent; border: 2px solid white; color: white; }
+.cta-box .btn:hover { background: rgba(255,255,255,0.1); }
+
+/* Footer */
+.footer { background: #111827; color: white; padding: 48px 0 24px; }
+.footer-inner { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+.footer-brand { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.footer-tagline { margin-top: 12px; font-size: 14px; color: #94A3B8; line-height: 1.5; }
+.footer-col h4 { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: white; margin-bottom: 12px; }
+.footer-col a { display: block; font-size: 13px; color: #94A3B8; padding: 4px 0; transition: color 0.15s; }
+.footer-col a:hover { color: #FDBA74; }
+.footer-bottom { margin-top: 40px; padding-top: 24px; border-top: 1px solid #374151; text-align: center; font-size: 13px; color: #64748B; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr 1fr; }
+  .stats-grid { grid-template-columns: 1fr; gap: 24px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .hero { padding: 48px 0 64px; }
+  .hero p { font-size: 16px; }
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .cta-box { padding: 40px 24px; }
+}
+@media (max-width: 480px) {
+  .features-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <div class="logo-mark">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      Wrenchy
+    </a>
+    <div class="nav-links">
+      <a href="#">How It Works</a>
+      <a href="#">Pricing</a>
+      <a href="#">For Contractors</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#" class="btn btn-ghost">Sign In</a>
+      <a href="#" class="btn btn-primary">Get Started</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        AI-Powered Home Repairs
+      </div>
+      <h1>Smart Repair Intake + <span class="gradient">Local Pros On Demand</span></h1>
+      <p>Describe your problem or upload a photo. Our AI diagnoses it instantly and connects you with vetted tradesmen in your area.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-xl btn-hero">Start Free Diagnosis &rarr;</a>
+        <a href="#" class="btn btn-xl btn-outline">Find a Pro Near You</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="steps">
+  <div class="container">
+    <div class="section-header">
+      <h2>How It Works</h2>
+      <p>Three simple steps to get your home fixed</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <h3>Diagnose</h3>
+        <p>Describe your issue or upload a photo. Our AI instantly identifies the problem.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h3>Decide</h3>
+        <p>Get a clear DIY plan for simple fixes — or a recommendation to hire a pro.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
+        </div>
+        <h3>Book a Pro</h3>
+        <p>Connect with vetted local tradesmen across the GTA in one click.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features">
+  <div class="container">
+    <div class="section-header">
+      <h2>Why Wrenchy?</h2>
+      <p>Everything you need for smarter home maintenance</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <h3>AI-Powered Diagnosis</h3>
+        <p>Get instant, accurate diagnoses powered by advanced AI technology.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Vetted Professionals</h3>
+        <p>Every tradesman is verified, rated, and reviewed by real customers.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Save Time &amp; Money</h3>
+        <p>Fix simple issues yourself with our guides. Book pros only when needed.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h3>Transparent Pricing</h3>
+        <p>No hidden fees. See costs upfront before booking any service.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-value">10,000+</div>
+        <div class="stat-label">Issues Diagnosed</div>
+      </div>
+      <div>
+        <div class="stat-value">500+</div>
+        <div class="stat-label">Verified Tradesmen</div>
+      </div>
+      <div>
+        <div class="stat-value">4.9/5</div>
+        <div class="stat-label">Average Rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Ready to fix smarter?</h2>
+      <p>Join thousands of homeowners saving time and money with AI-powered repairs.</p>
+      <a href="#" class="btn btn-xl">Start for Free</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          Wrenchy
+        </div>
+        <p class="footer-tagline">Smart repair intake for homeowners and contractors.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#">Pricing</a>
+        <a href="#">Find a Pro</a>
+        <a href="#">Repair Guides</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Career</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Wrenchy Inc. All rights reserved. &middot; wrenchy.app
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

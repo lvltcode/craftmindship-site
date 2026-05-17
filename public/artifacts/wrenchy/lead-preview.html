@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wrenchy — Contractor Lead Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', system-ui, sans-serif; color: #111827; background: #F9FAFB; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4 { font-family: 'Space Grotesk', system-ui, sans-serif; }
+
+.page { max-width: 780px; margin: 0 auto; padding: 24px 24px 64px; }
+
+/* Top bar */
+.top-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.top-bar-left { display: flex; align-items: center; gap: 10px; }
+.top-bar-left .logo-mark { width: 28px; height: 28px; background: #111827; border-radius: 7px; display: flex; align-items: center; justify-content: center; }
+.top-bar-left .logo-mark svg { width: 14px; height: 14px; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.top-bar-left span { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; color: #111827; }
+.new-badge { display: inline-flex; align-items: center; gap: 5px; background: #FFF7ED; border: 1px solid #FDBA74; border-radius: 100px; padding: 4px 12px; font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 600; color: #EA580C; }
+.new-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #F97316; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* Lead header */
+.lead-header { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+.lead-title { font-size: 20px; font-weight: 700; color: #111827; }
+.lead-category { font-size: 13px; color: #64748B; margin-top: 4px; }
+.lead-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 100px; font-size: 11px; font-weight: 500; }
+.badge svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.badge-urgency { background: #FEF3C7; color: #92400E; }
+.badge-difficulty { background: #FEF3C7; color: #92400E; }
+.badge-status { background: #FFF7ED; color: #EA580C; }
+.badge-time { background: #F3F4F6; color: #64748B; }
+.badge-confidence { background: #ECFDF5; color: #065F46; }
+.badge-category { background: rgba(249,115,22,0.1); color: #EA580C; }
+
+/* Content grid */
+.content-grid { display: grid; gap: 16px; grid-template-columns: 1fr 300px; }
+.content-main { display: flex; flex-direction: column; gap: 16px; }
+
+/* Cards */
+.card { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 12px; padding: 20px; }
+.card-label { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: #64748B; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+.card-label svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Issue reported */
+.issue-quote { border-left: 4px solid #E5E7EB; padding-left: 14px; font-size: 14px; font-style: italic; color: #374151; line-height: 1.6; }
+.issue-photo { margin-top: 12px; width: 120px; height: 120px; border-radius: 10px; border: 1px solid #E5E7EB; background: linear-gradient(135deg, #F9FAFB, #F3F4F6); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.issue-photo svg { width: 24px; height: 24px; stroke: #94A3B8; fill: none; stroke-width: 1.5; }
+.issue-photo span { font-size: 10px; color: #94A3B8; }
+
+/* Diagnosis context */
+.diag-card { border-left: 4px solid #0F766E; background: #F0FDFA; }
+.diag-card .card-label { color: #0F766E; }
+.diag-summary { font-size: 14px; color: #374151; line-height: 1.6; margin-bottom: 12px; }
+.diag-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* Scope details */
+.scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.scope-item { }
+.scope-item .scope-label { font-size: 11px; font-weight: 500; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.3px; }
+.scope-item .scope-value { font-size: 14px; color: #111827; margin-top: 2px; }
+
+/* Homeowner */
+.ho-row { display: flex; align-items: center; gap: 12px; }
+.ho-avatar { width: 40px; height: 40px; border-radius: 50%; background: #DBEAFE; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #1D4ED8; font-size: 16px; flex-shrink: 0; }
+.ho-name { font-size: 15px; font-weight: 500; color: #111827; }
+.ho-meta { font-size: 12px; color: #64748B; margin-top: 2px; }
+.ho-verified { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 500; color: #059669; margin-top: 4px; }
+.ho-verified svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+/* Action panel */
+.action-panel { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 12px; padding: 20px; height: fit-content; position: sticky; top: 24px; }
+.action-panel h3 { font-size: 15px; font-weight: 600; color: #111827; margin-bottom: 16px; }
+.action-btn { display: block; width: 100%; padding: 12px; border-radius: 8px; font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; text-align: center; border: none; margin-bottom: 10px; transition: all 0.15s; }
+.action-btn:last-child { margin-bottom: 0; }
+.btn-accept { background: #F97316; color: white; }
+.btn-accept:hover { background: #EA580C; }
+.btn-quote { background: white; border: 1px solid #E5E7EB; color: #111827; }
+.btn-quote:hover { background: #F9FAFB; }
+.btn-decline { background: white; border: 1px solid #FECACA; color: #DC2626; }
+.btn-decline:hover { background: #FEF2F2; }
+.action-note { font-size: 11px; color: #94A3B8; text-align: center; margin-top: 12px; line-height: 1.4; }
+
+/* Payout preview */
+.payout-preview { background: #F9FAFB; border-radius: 8px; padding: 12px; margin-top: 16px; }
+.payout-row { display: flex; justify-content: space-between; font-size: 13px; padding: 3px 0; }
+.payout-row .label { color: #64748B; }
+.payout-row .value { color: #111827; font-weight: 500; }
+.payout-row.total { border-top: 1px solid #E5E7EB; margin-top: 6px; padding-top: 8px; }
+.payout-row.total .label, .payout-row.total .value { color: #0F766E; font-weight: 600; }
+
+/* Comparison section */
+.comparison { margin-top: 48px; padding-top: 32px; border-top: 1px solid #E5E7EB; }
+.comparison h2 { font-size: 20px; font-weight: 700; color: #111827; text-align: center; margin-bottom: 8px; }
+.comparison .comp-subtitle { font-size: 14px; color: #64748B; text-align: center; margin-bottom: 24px; }
+.comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.comp-card { border-radius: 12px; padding: 24px; }
+.comp-traditional { background: #F9FAFB; border: 1px solid #E5E7EB; }
+.comp-wrenchy { background: #FFF7ED; border: 2px solid #FDBA74; }
+.comp-card h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
+.comp-traditional h4 { color: #94A3B8; }
+.comp-wrenchy h4 { color: #EA580C; }
+.comp-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 14px; font-size: 13px; line-height: 1.5; }
+.comp-row:last-child { margin-bottom: 0; }
+.comp-row .comp-icon { flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; margin-top: 1px; }
+.comp-traditional .comp-icon { background: #F3F4F6; color: #94A3B8; }
+.comp-wrenchy .comp-icon { background: #FFEDD5; color: #EA580C; }
+.comp-traditional .comp-row { color: #64748B; }
+.comp-wrenchy .comp-row { color: #374151; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .content-grid { grid-template-columns: 1fr; }
+  .action-panel { position: static; }
+  .scope-grid { grid-template-columns: 1fr; }
+  .comp-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .page { padding: 16px 16px 48px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <span>Wrenchy for Contractors</span>
+    </div>
+    <div class="new-badge">Incoming Lead</div>
+  </div>
+
+  <!-- Lead header -->
+  <div class="lead-header">
+    <div class="lead-title">Kitchen Sink Leak — P-Trap / Drain Assembly</div>
+    <div class="lead-category">Plumbing &middot; Residential &middot; Oakville, ON</div>
+    <div class="lead-meta">
+      <span class="badge badge-urgency">
+        <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Medium Urgency
+      </span>
+      <span class="badge badge-difficulty">
+        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        Moderate
+      </span>
+      <span class="badge badge-status">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        2 hours ago
+      </span>
+      <span class="badge badge-confidence">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg>
+        AI Confidence: High
+      </span>
+      <span class="badge badge-category">Plumbing</span>
+    </div>
+  </div>
+
+  <!-- Content grid -->
+  <div class="content-grid">
+
+    <!-- Main column -->
+    <div class="content-main">
+
+      <!-- Issue Reported -->
+      <div class="card">
+        <div class="card-label">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Issue Reported by Homeowner
+        </div>
+        <blockquote class="issue-quote">
+          Water is leaking from under my kitchen sink. Started yesterday, getting worse. There's a small puddle forming on the floor each morning. I can hear a slow drip when the tap is off.
+        </blockquote>
+        <div class="issue-photo">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Photo attached</span>
+        </div>
+      </div>
+
+      <!-- AI Diagnosis Context -->
+      <div class="card diag-card">
+        <div class="card-label">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg>
+          AI Diagnosis Context
+        </div>
+        <p class="diag-summary">Failing P-trap seal or loose compression fitting on the drain assembly beneath the kitchen sink. The slow drip when the tap is off indicates a drain-side leak — likely where the tailpiece connects to the P-trap. Residual water in the trap is seeping through a degraded washer. Risk of subfloor water damage and mold growth in cabinet interior if not addressed within 48 hours.</p>
+        <div class="diag-badges">
+          <span class="badge badge-urgency">
+            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Medium urgency
+          </span>
+          <span class="badge badge-difficulty">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            Moderate difficulty
+          </span>
+          <span class="badge badge-category">Plumbing</span>
+        </div>
+      </div>
+
+      <!-- Scope Details -->
+      <div class="card">
+        <div class="card-label">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          Job Scope
+        </div>
+        <div class="scope-grid">
+          <div class="scope-item">
+            <div class="scope-label">Estimated Time</div>
+            <div class="scope-value">30–60 minutes</div>
+          </div>
+          <div class="scope-item">
+            <div class="scope-label">Likely Parts</div>
+            <div class="scope-value">P-trap kit, compression washers, PTFE tape</div>
+          </div>
+          <div class="scope-item">
+            <div class="scope-label">Access Notes</div>
+            <div class="scope-value">Under-sink cabinet, standard access</div>
+          </div>
+          <div class="scope-item">
+            <div class="scope-label">Complexity</div>
+            <div class="scope-value">Professional recommended — check for subfloor moisture</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Homeowner -->
+      <div class="card">
+        <div class="card-label">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Homeowner
+        </div>
+        <div class="ho-row">
+          <div class="ho-avatar">S</div>
+          <div>
+            <div class="ho-name">Sarah M.</div>
+            <div class="ho-meta">Oakville, ON &middot; Submitted 2 hours ago</div>
+            <div class="ho-verified">
+              <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Verified Wrenchy account
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Action panel (right sidebar) -->
+    <div class="action-panel">
+      <h3>Respond to Lead</h3>
+      <button class="action-btn btn-accept" type="button">Accept Lead</button>
+      <button class="action-btn btn-quote" type="button">Submit Quote</button>
+      <button class="action-btn btn-decline" type="button">Decline</button>
+      <p class="action-note">Responding within 1 hour improves your ranking. This lead matched your specialty and location.</p>
+
+      <div class="payout-preview">
+        <div class="payout-row">
+          <span class="label">Typical job value</span>
+          <span class="value">CAD $150–$250</span>
+        </div>
+        <div class="payout-row">
+          <span class="label">Subscription model</span>
+          <span class="value">No platform fee</span>
+        </div>
+        <div class="payout-row total">
+          <span class="label">You keep</span>
+          <span class="value">100%</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ COMPARISON SECTION ═══ -->
+  <div class="comparison">
+    <h2>Traditional Lead vs. Wrenchy Lead</h2>
+    <p class="comp-subtitle">What contractors receive before deciding whether to respond</p>
+
+    <div class="comp-grid">
+      <!-- Traditional -->
+      <div class="comp-card comp-traditional">
+        <h4>Traditional lead</h4>
+        <div class="comp-row">
+          <span class="comp-icon">?</span>
+          <span><strong>"I have a leak under my sink"</strong> — no detail on type, severity, or location</span>
+        </div>
+        <div class="comp-row">
+          <span class="comp-icon">✗</span>
+          <span>No photo — can't assess scope before arriving</span>
+        </div>
+        <div class="comp-row">
+          <span class="comp-icon">?</span>
+          <span>Unknown urgency — is it an emergency or can it wait?</span>
+        </div>
+        <div class="comp-row">
+          <span class="comp-icon">?</span>
+          <span>No time estimate — could be 20 min or 3 hours</span>
+        </div>
+        <div class="comp-row">
+          <span class="comp-icon">✗</span>
+          <span>No parts info — bring everything or make two trips</span>
+        </div>
+        <div class="comp-row">
+          <span class="comp-icon">?</span>
+          <span>Unverified caller — may be a no-show or price shopper</span>
+        </div>
+      </div>
+
+      <!-- Wrenchy -->
+      <div class="comp-card comp-wrenchy">
+        <h4>Wrenchy structured lead</h4>
+        <div class="comp-row">
+          <span class="comp-icon">✓</span>
+          <span><strong>P-trap seal failure, kitchen sink drain assembly</strong> — AI-diagnosed root cause</span>
+        </div>
+        <div class="comp-row">
+          <span class="comp-icon">✓</span>
+          <span>Photo attached — visible water pooling, cabinet condition assessed</span>
+        </div>
+        <div class="comp-row">
+          <span class="comp-icon">✓</span>
+          <span>Medium urgency — address within 48 hours, no immediate emergency</span>
+        </div>
+        <div class="comp-row">
+          <span class="comp-icon">✓</span>
+          <span>Estimated 30–60 min — standard under-sink access</span>
+        </div>
+        <div class="comp-row">
+          <span class="comp-icon">✓</span>
+          <span>Parts: P-trap kit + compression washers + PTFE tape (CAD $15–27)</span>
+        </div>
+        <div class="comp-row">
+          <span class="comp-icon">✓</span>
+          <span>Verified account — Sarah M., Oakville, responsive homeowner</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
