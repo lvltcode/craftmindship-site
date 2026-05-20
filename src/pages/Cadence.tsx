@@ -63,7 +63,7 @@ function ArtifactEmbed({ src, title, height = "480px" }: { src: string; title: s
         className="w-full border-0"
         style={{ height }}
         onError={() => setFailed(true)}
-        sandbox="allow-scripts"
+        sandbox="allow-scripts allow-same-origin"
       />
     </div>
   );

@@ -46,7 +46,7 @@ function ArtifactEmbed({ src, title, height = "600px" }: { src: string; title: s
   }
   return (
     <div className="rounded-lg border border-gray-200 overflow-hidden">
-      <iframe src={src} title={title} className="w-full border-0" style={{ height }} onError={() => setFailed(true)} sandbox="allow-scripts" />
+      <iframe src={src} title={title} className="w-full border-0" style={{ height }} onError={() => setFailed(true)} sandbox="allow-scripts allow-same-origin" />
     </div>
   );
 }

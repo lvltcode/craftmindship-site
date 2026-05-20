@@ -36,7 +36,7 @@ function ArtifactEmbed({ src, title, label, caption, height = "600px" }: { src: 
     <div className="my-8">
       <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">{label}</p>
       <div className="rounded-lg border border-gray-200 overflow-hidden">
-        <iframe src={src} title={title} className="w-full border-0" style={{ height }} onError={() => setFailed(true)} loading="lazy" sandbox="allow-scripts" />
+        <iframe src={src} title={title} className="w-full border-0" style={{ height }} onError={() => setFailed(true)} loading="lazy" sandbox="allow-scripts allow-same-origin" />
       </div>
       <p className="text-sm text-gray-500 mt-2">{caption}</p>
     </div>
