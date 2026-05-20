@@ -4,6 +4,7 @@ import ContentWithToc from "../components/ContentWithToc";
 import LearningStateModel from "../components/artifacts/LearningStateModel";
 import LearningInfrastructureArchitecture from "../components/artifacts/LearningInfrastructureArchitecture";
 import VerifiedAiSkillCredential from "../components/artifacts/VerifiedAiSkillCredential";
+import ReaderMap from "../components/ReaderMap";
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
@@ -58,6 +59,19 @@ export default function AnthropicAcademy() {
           That&apos;s not a complaint about quality. It&apos;s a structural observation &mdash; and
           it points to a larger problem in how AI companies are building their education infrastructure.
         </p>
+
+        <ReaderMap
+          eyebrow="Reader map"
+          title="How to read this analysis"
+          description="A quick path through the argument, from first-hand observation to the evidence notebook."
+          steps={[
+            { number: "1", title: "Observation", description: "What the Claude 101 course revealed about AI education today.", href: "#1-why-im-not-looking-at-this-as-a-casual-learner" },
+            { number: "2", title: "Diagnosis", description: "Why course completion is not the same as skill formation.", href: "#4-the-real-problem-tool-syntax-versus-cognitive-partnership" },
+            { number: "3", title: "System model", description: "What living learning infrastructure would need to support.", href: "#10-what-a-working-system-would-look-like" },
+            { number: "4", title: "Evidence", description: "A Python notebook measuring public coverage gap from Anthropic release data.", href: "#14-evidence-measuring-the-gap-with-public-data" },
+            { number: "5", title: "Implication", description: "Why education may become part of adoption infrastructure.", href: "#12-why-this-matters-now" },
+          ]}
+        />
 
         {/* Section 1 */}
         <SectionHeading>1. Why I&apos;m not looking at this as a casual learner</SectionHeading>
