@@ -134,7 +134,7 @@ export default function LearningStateModel() {
         <table className="w-full border-collapse" style={{ minWidth: 640 }}>
           <thead>
             <tr style={{ borderBottom: "2px solid #1a1a1a" }}>
-              <th style={{ textAlign: "left", fontSize: 11, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#6b6b6b", padding: "0 16px 12px 0", width: 140 }}>
+              <th style={{ textAlign: "left", fontSize: 11, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#6b6b6b", padding: "0 16px 12px 16px", width: 140 }}>
                 State
               </th>
               <th style={{ textAlign: "left", fontSize: 11, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#6b6b6b", padding: "0 16px 12px 16px" }}>
@@ -149,7 +149,7 @@ export default function LearningStateModel() {
           <tbody>
             {rows.map((row, i) => (
               <tr key={i} style={{ borderBottom: i < rows.length - 1 ? "1px solid #e5e5e5" : "none" }}>
-                <td style={{ padding: "16px 16px 16px 0", verticalAlign: "top" }}>
+                <td style={{ padding: 16, verticalAlign: "top" }}>
                   <span className="font-mono" style={{ fontSize: 12, fontWeight: 500, color: "#1a1a1a", lineHeight: 1.4 }}>
                     {row.dimension[0]}<br />{row.dimension[1]}
                   </span>

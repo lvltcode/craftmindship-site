@@ -48,8 +48,8 @@ export default function About() {
       {/* Two-column: intro + CTA card */}
       <div className="sm:grid sm:grid-cols-[1fr_260px] sm:gap-10">
         <div>
-          <header>
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <header className="prose-narrow">
+            <h1 className="page-title">
               About
             </h1>
             <p className="mt-3 text-lg font-medium text-gray-900">
@@ -57,7 +57,7 @@ export default function About() {
             </p>
           </header>
 
-          <section className="mt-6 space-y-4 text-gray-700 leading-relaxed">
+          <section className="prose-narrow mt-6 space-y-4 text-gray-700 leading-relaxed">
             <p>
               I&apos;m Luke, an AI Product Builder and Technical Product Manager based in
               Ontario. I start with the workflow &mdash; who does the work, where it breaks,
@@ -94,11 +94,11 @@ export default function About() {
       <hr className="my-8 border-gray-200" />
 
       {/* Why This Portfolio Exists */}
-      <section>
+      <section className="prose-narrow">
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Why This Portfolio Exists
         </h2>
-        <div className="mt-4 space-y-4 text-gray-700 leading-relaxed">
+        <div className="prose-narrow mt-4 space-y-4 text-gray-700 leading-relaxed">
           <p>
             I use Craftmindship to show how I turn messy real-world workflows into shipped software.
           </p>
@@ -156,7 +156,7 @@ export default function About() {
       <hr className="my-8 border-gray-200" />
 
       {/* Private Work Context */}
-      <section className="pb-8">
+      <section className="prose-narrow pb-8">
         <p className="text-sm text-gray-500 leading-relaxed">
           Some production and company work cannot be public because it contains client,
           company, or real-user context. This portfolio focuses on public-safe case studies,

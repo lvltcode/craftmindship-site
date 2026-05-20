@@ -12,6 +12,11 @@ const ogData: Record<string, { title: string; description: string; image: string
       "AI Product Builder and Technical Product Manager. Workflow-heavy SaaS with Supabase/RLS, real user pilots, and AI-assisted delivery.",
     image: '/images/logos/craftmindship-light.png',
   },
+  '/work': {
+    title: 'Work — Craftmindship',
+    description: 'Case studies and production projects by Luke Dang',
+    image: '/images/logos/craftmindship-light.png',
+  },
   '/work/cadence': {
     title: 'Cadence — Weekly Lesson Continuity for Music Teachers',
     description:

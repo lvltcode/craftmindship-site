@@ -76,10 +76,10 @@ export default function Cadence() {
   return (
     <div className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">
       {/* Hero */}
-      <header>
+      <header className="prose-narrow">
         <div className="flex flex-wrap items-center gap-3">
           <img src="/images/projects/cadence/logo.jpg" alt="Cadence logo" className="h-12 w-auto" />
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h1 className="page-title">
             Cadence
           </h1>
           <span className="inline-flex items-center rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-medium text-emerald-700 ring-1 ring-inset ring-emerald-600/20">
@@ -518,7 +518,7 @@ export default function Cadence() {
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Technical Architecture
         </h2>
-        <div className="mt-4 overflow-x-auto">
+        <div className="responsive-table mt-4">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-200 text-left">
@@ -540,7 +540,7 @@ export default function Cadence() {
         </div>
 
         <h3 className="mt-8 text-sm font-medium text-gray-900">Key Architecture Decisions</h3>
-        <div className="mt-4 overflow-x-auto">
+        <div className="responsive-table mt-4">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-200 text-left">
@@ -575,7 +575,7 @@ export default function Cadence() {
           QA sequencing, prompt structure, and scope control. AI tools were used as specialized
           execution agents within a disciplined workflow:
         </p>
-        <div className="mt-4 overflow-x-auto">
+        <div className="responsive-table mt-4">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-200 text-left">

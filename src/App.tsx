@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
+import Work from "./pages/Work";
 import Cadence from "./pages/Cadence";
 import PuppyProgramOs from "./pages/PuppyProgramOs";
 import MultiAgentWorkflow from "./pages/MultiAgentWorkflow";
@@ -20,6 +21,7 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/work" element={<Work />} />
           <Route path="/work/cadence" element={<Cadence />} />
           <Route path="/work/puppy-program-os" element={<PuppyProgramOs />} />
           <Route path="/work/multi-agent-workflow" element={<MultiAgentWorkflow />} />

@@ -10,6 +10,7 @@ const serverDir = resolve(root, 'dist-server');
 
 const routes = [
   '/',
+  '/work',
   '/work/cadence',
   '/work/puppy-program-os',
   '/work/multi-agent-workflow',

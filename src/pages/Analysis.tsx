@@ -41,8 +41,8 @@ export default function Analysis() {
 
   return (
     <div className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">
-      <header>
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+      <header className="prose-narrow">
+        <h1 className="page-title">
           Analysis
         </h1>
         <p className="mt-3 text-lg text-gray-600">
@@ -55,7 +55,7 @@ export default function Analysis() {
           <Link
             key={post.path}
             to={post.path}
-            className="group flex flex-col rounded-xl border border-gray-200 p-6 text-left transition-colors hover:border-gray-300 hover:bg-gray-50"
+            className="group flex h-full flex-col rounded-lg border border-gray-200 p-6 text-left transition-colors hover:border-gray-300 hover:bg-gray-50"
           >
             <p className="text-xs font-medium text-gray-400 uppercase">
               {post.category}

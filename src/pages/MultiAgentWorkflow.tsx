@@ -219,10 +219,10 @@ export default function MultiAgentWorkflow() {
   return (
     <div className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">
       {/* Hero */}
-      <header>
+      <header className="prose-narrow">
         <div className="flex flex-wrap items-center gap-3">
           <img src="/images/logos/craftmindship-light.png" alt="Craftmindship logo" className="h-12 w-auto" />
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h1 className="page-title">
             Multi-Agent Development Workflow
           </h1>
           <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-600/20">
@@ -316,7 +316,7 @@ export default function MultiAgentWorkflow() {
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Agent Role Matrix
         </h2>
-        <div className="mt-4 overflow-x-auto">
+        <div className="responsive-table mt-4">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-200 text-left">
