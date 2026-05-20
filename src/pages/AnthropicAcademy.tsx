@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { usePageMeta } from "../hooks/usePageMeta";
 import ContentWithToc from "../components/ContentWithToc";
@@ -9,26 +8,111 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-function ArtifactEmbed({ src, title, label, height = "600px" }: { src: string; title: string; label: string; height?: string }) {
-  const [failed, setFailed] = useState(false);
-  if (failed) {
-    return (
-      <div className="my-8">
-        <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">{label}</p>
-        <div className="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center">
-          <p className="text-sm text-gray-500">{title}</p>
-          <a href={src} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-sm font-medium text-gray-900 underline">
-            Open in new tab &rarr;
-          </a>
-        </div>
-      </div>
-    );
-  }
+/* ── Artifact A: Learning State Model ── */
+function LearningStateModel() {
+  const rows = [
+    { dimension: "Content state", traditional: "Static modules", living: "Continuously updated learning map" },
+    { dimension: "Learner state", traditional: "Everyone starts at lesson one", living: "Placement and gap detection" },
+    { dimension: "Assessment state", traditional: "Quizzes / completion", living: "Applied tasks and rubric scoring" },
+    { dimension: "Credential state", traditional: "Certificate of exposure", living: "Artifact-backed endorsement" },
+    { dimension: "Outcome state", traditional: "Weak signal after completion", living: "Employer-readable evidence" },
+  ];
   return (
     <div className="my-8">
-      <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">{label}</p>
+      <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
+        Design artifact: Learning State Model
+      </p>
       <div className="rounded-lg border border-gray-200 overflow-hidden">
-        <iframe src={src} title={title} className="w-full border-0" style={{ height }} onError={() => setFailed(true)} loading="lazy" sandbox="allow-scripts allow-same-origin" />
+        {/* Header */}
+        <div className="bg-gray-50 px-4 py-3 sm:px-5">
+          <p className="text-sm font-semibold text-gray-900">Traditional LMS vs Living Learning Infrastructure</p>
+        </div>
+        {/* Rows */}
+        <div className="divide-y divide-gray-100">
+          {rows.map((r) => (
+            <div key={r.dimension} className="grid grid-cols-1 sm:grid-cols-[140px_1fr_1fr] gap-1 sm:gap-4 px-4 py-3 sm:px-5">
+              <p className="text-xs font-medium text-gray-400 uppercase tracking-wider sm:py-0.5">{r.dimension}</p>
+              <p className="text-sm text-gray-500">{r.traditional}</p>
+              <p className="text-sm font-medium text-gray-900">{r.living}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Artifact B: Learning Infrastructure System Map ── */
+function LearningInfrastructureMap() {
+  const layers = [
+    { label: "Inputs", items: ["Learner goal", "Prior experience", "Target role", "Product version"] },
+    { label: "Placement Engine", items: ["Diagnostic assessment", "Skill map", "Gap detection"] },
+    { label: "Personal Roadmap", items: ["Modules", "Applied tasks", "Skip logic"] },
+    { label: "Shared Gates", items: ["Artifact review", "Rubric scoring", "Failure-mode checks"] },
+    { label: "Validation Layer", items: ["AI evaluator", "Peer reviewers", "Expert reviewer"] },
+    { label: "Verified Signal", items: ["Credential", "Portfolio artifact", "Employer-readable evidence"] },
+  ];
+  return (
+    <div className="my-8">
+      <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
+        System architecture: Learning Infrastructure Pipeline
+      </p>
+      <div className="rounded-lg border border-gray-200 overflow-hidden bg-gray-50 px-4 py-5 sm:px-6">
+        <div className="flex flex-col items-center gap-3">
+          {layers.map((layer, i) => (
+            <div key={layer.label} className="w-full max-w-md">
+              <div className="rounded-md border border-gray-200 bg-white px-4 py-3">
+                <p className="text-xs font-semibold text-gray-900 uppercase tracking-wider mb-1.5">{layer.label}</p>
+                <div className="flex flex-wrap gap-x-3 gap-y-1">
+                  {layer.items.map((item) => (
+                    <span key={item} className="text-sm text-gray-600">{item}</span>
+                  ))}
+                </div>
+              </div>
+              {i < layers.length - 1 && (
+                <div className="flex justify-center py-1">
+                  <span className="text-gray-300 text-lg leading-none">&#8595;</span>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Artifact C: Mock AI Skill Credential ── */
+function MockCredential() {
+  const fields = [
+    { label: "Credential ID", value: "CLAUDE-WORKFLOW-0427" },
+    { label: "Status", value: "Verified with reviewer trail" },
+    { label: "Capability verified", value: "AI-assisted product workflow design" },
+    { label: "Evidence package", value: "Submitted artifact, task brief, revision history, evaluator notes" },
+    { label: "Rubric snapshot", value: "Problem framing, constraint handling, output quality, failure recovery" },
+    { label: "Validation trail", value: "AI evaluator \u2192 peer review \u2192 expert review" },
+    { label: "Credential type", value: "Artifact-based endorsement" },
+  ];
+  return (
+    <div className="my-8">
+      <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
+        Sample credential object: Verified AI Skill Credential
+      </p>
+      <div className="rounded-lg border border-gray-200 overflow-hidden">
+        <div className="bg-gray-50 px-4 py-3 sm:px-5 flex items-center justify-between">
+          <p className="text-sm font-semibold text-gray-900">Verified AI Skill Credential</p>
+          <span className="inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-500 ring-1 ring-inset ring-gray-200">
+            Mock example
+          </span>
+        </div>
+        <div className="divide-y divide-gray-100">
+          {fields.map((f) => (
+            <div key={f.label} className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-1 sm:gap-4 px-4 py-2.5 sm:px-5">
+              <p className="text-xs font-medium text-gray-400 uppercase tracking-wider sm:py-0.5">{f.label}</p>
+              <p className="text-sm text-gray-700">{f.value}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -167,12 +251,7 @@ export default function AnthropicAcademy() {
           dichotomy throughout this piece is between those two systems.
         </p>
 
-        <ArtifactEmbed
-          src="/artifacts/learning-state-model.html"
-          title="Learning State Model"
-          label="Design artifact: Learning State Model"
-          height="520px"
-        />
+        <LearningStateModel />
 
         {/* Section 2 */}
         <SectionHeading>2. What Anthropic built</SectionHeading>
@@ -498,12 +577,7 @@ export default function AnthropicAcademy() {
           in some form across programs I&apos;ve taught, taken, or built.
         </p>
 
-        <ArtifactEmbed
-          src="/artifacts/learning-infrastructure-architecture.html"
-          title="Learning Infrastructure Architecture"
-          label="System architecture: Learning Infrastructure Pipeline"
-          height="580px"
-        />
+        <LearningInfrastructureMap />
 
         <p>
           <strong className="text-gray-900">Entrance assessment.</strong> A diagnostic at any level,
@@ -545,12 +619,7 @@ export default function AnthropicAcademy() {
           and reviewed by a credible institution, is harder to fake and easier to verify.
         </p>
 
-        <ArtifactEmbed
-          src="/artifacts/verified-ai-skill-credential.html"
-          title="Verified AI Skill Credential"
-          label="Sample credential object: Verified AI Skill Credential"
-          height="820px"
-        />
+        <MockCredential />
 
         {/* Subsection */}
         <h3 className="mt-6 mb-3 text-lg font-semibold text-gray-900">
