@@ -121,12 +121,15 @@ export default function Home() {
             to="/analysis/anthropic-academy-skill-formation"
             className="group rounded-xl border border-gray-200 p-6 text-left transition-colors hover:border-gray-300 hover:bg-gray-50"
           >
-            <p className="text-xs font-medium text-gray-400 uppercase">Product Analysis</p>
+            <p className="text-xs font-medium text-gray-400 uppercase">Product Analysis &middot; AI Education &middot; Edtech</p>
             <h3 className="mt-2 font-semibold text-gray-900 group-hover:text-gray-700">
-              From Course Completion to Skill Formation
+              Anthropic Academy and the Skill Formation Gap
             </h3>
             <p className="mt-1 text-sm text-gray-600">
-              Why AI product education needs living learning infrastructure &mdash; analyzed from the instructor, learner, and operator side.
+              Why AI product education needs living learning infrastructure, not just courses, quizzes, and completion certificates.
+            </p>
+            <p className="mt-2 text-xs text-gray-400">
+              Skilljar LMS &middot; content decay &middot; assessment gaps &middot; labor-market signal
             </p>
             <span className="mt-3 inline-block text-sm font-medium text-gray-900 group-hover:underline">
               Read &rarr;

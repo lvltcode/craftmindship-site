@@ -10,7 +10,7 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 export default function AnthropicAcademy() {
   usePageMeta(
-    "From Course Completion to Skill Formation",
+    "Anthropic Academy and the Skill Formation Gap",
     "Why AI product education needs living learning infrastructure. Analyzed from the instructor, learner, and operator side.",
     { ogImage: "/images/og/og-anthropic-academy.png", canonical: "/analysis/anthropic-academy-skill-formation" },
   );
@@ -26,10 +26,10 @@ export default function AnthropicAcademy() {
           <span className="text-xs text-gray-400">~20 min read</span>
         </div>
         <h1 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          From Course Completion to Skill Formation: Why AI Product Education Needs Living Learning Infrastructure
+          Anthropic Academy and the Skill Formation Gap
         </h1>
         <p className="mt-3 text-lg text-gray-600">
-          I enrolled in Anthropic Academy. Here&apos;s what I noticed &mdash; from inside an industry I&apos;ve worked in from several sides.
+          Why AI product education needs living learning infrastructure, analyzed from the instructor, learner, operator, and AI-builder side.
         </p>
         <p className="mt-4 text-sm text-gray-400">
           May 19, 2026

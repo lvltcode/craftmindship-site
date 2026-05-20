@@ -4,9 +4,9 @@ import { usePageMeta } from "../hooks/usePageMeta";
 const posts = [
   {
     category: "Product analysis · AI Education · Edtech",
-    title: "From Course Completion to Skill Formation",
+    title: "Anthropic Academy and the Skill Formation Gap",
     thesis:
-      "Why AI product education needs living learning infrastructure — analyzed from the instructor, learner, and operator side.",
+      "A teardown of Anthropic Academy, Skilljar, and why AI education needs to move beyond course completion into verified capability.",
     impact: "18 courses · 5 education hires · 4 structural gaps",
     path: "/analysis/anthropic-academy-skill-formation",
   },
