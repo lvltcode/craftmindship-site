@@ -1,40 +1,13 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { usePageMeta } from "../hooks/usePageMeta";
 import ContentWithToc from "../components/ContentWithToc";
+import LearningStateModel from "../components/artifacts/LearningStateModel";
+import LearningInfrastructureArchitecture from "../components/artifacts/LearningInfrastructureArchitecture";
+import VerifiedAiSkillCredential from "../components/artifacts/VerifiedAiSkillCredential";
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
     <h2 className="mt-8 mb-4 text-xl font-bold text-gray-900">{children}</h2>
-  );
-}
-
-function ArtifactEmbed({ src, title, label, height = "600px", mobileHeight }: { src: string; title: string; label: string; height?: string; mobileHeight?: string }) {
-  const [failed, setFailed] = useState(false);
-  if (failed) {
-    return (
-      <div className="my-8">
-        <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">{label}</p>
-        <div className="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center">
-          <p className="text-sm text-gray-500">{title}</p>
-          <a href={src} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-sm font-medium text-gray-900 underline">
-            Open in new tab &rarr;
-          </a>
-        </div>
-      </div>
-    );
-  }
-  const iframeStyle = mobileHeight
-    ? { "--artifact-h": height, "--artifact-h-mobile": mobileHeight } as React.CSSProperties
-    : { "--artifact-h": height, "--artifact-h-mobile": height } as React.CSSProperties;
-
-  return (
-    <div className="my-8" style={iframeStyle}>
-      <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">{label}</p>
-      <div className="rounded-lg border border-gray-200 overflow-hidden">
-        <iframe src={src} title={title} className="w-full border-0 h-[var(--artifact-h-mobile)] sm:h-[var(--artifact-h)]" onError={() => setFailed(true)} loading="lazy" sandbox="allow-scripts allow-same-origin" />
-      </div>
-    </div>
   );
 }
 
@@ -171,12 +144,7 @@ export default function AnthropicAcademy() {
           dichotomy throughout this piece is between those two systems.
         </p>
 
-        <ArtifactEmbed
-          src="/artifacts/learning-state-model.html"
-          title="Learning State Model"
-          label="Design artifact: Learning State Model"
-          height="520px"
-        />
+        <LearningStateModel />
 
         {/* Section 2 */}
         <SectionHeading>2. What Anthropic built</SectionHeading>
@@ -502,13 +470,7 @@ export default function AnthropicAcademy() {
           in some form across programs I&apos;ve taught, taken, or built.
         </p>
 
-        <ArtifactEmbed
-          src="/artifacts/learning-infrastructure-architecture.html"
-          title="Learning Infrastructure Architecture"
-          label="System architecture: Learning Infrastructure Pipeline"
-          height="580px"
-          mobileHeight="920px"
-        />
+        <LearningInfrastructureArchitecture />
 
         <p>
           <strong className="text-gray-900">Entrance assessment.</strong> A diagnostic at any level,
@@ -550,13 +512,7 @@ export default function AnthropicAcademy() {
           and reviewed by a credible institution, is harder to fake and easier to verify.
         </p>
 
-        <ArtifactEmbed
-          src="/artifacts/verified-ai-skill-credential.html"
-          title="Verified AI Skill Credential"
-          label="Sample credential object: Verified AI Skill Credential"
-          height="820px"
-          mobileHeight="920px"
-        />
+        <VerifiedAiSkillCredential />
 
         {/* Subsection */}
         <h3 className="mt-6 mb-3 text-lg font-semibold text-gray-900">
