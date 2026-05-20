@@ -51,7 +51,7 @@ const ogData: Record<string, { title: string; description: string; image: string
   '/analysis/anthropic-academy-skill-formation': {
     title: 'Anthropic Academy and the Skill Formation Gap | Craftmindship',
     description:
-      'Why AI product education needs living learning infrastructure. Analyzed from the instructor, learner, and operator side.',
+      'Why AI product education needs living learning infrastructure, not just courses, quizzes, and completion certificates.',
     image: '/images/og/og-anthropic-academy.png',
   },
   '/analysis': {

@@ -9,7 +9,7 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-function ArtifactEmbed({ src, title, label, height = "600px" }: { src: string; title: string; label: string; height?: string }) {
+function ArtifactEmbed({ src, title, label, height = "600px", mobileHeight }: { src: string; title: string; label: string; height?: string; mobileHeight?: string }) {
   const [failed, setFailed] = useState(false);
   if (failed) {
     return (
@@ -24,11 +24,15 @@ function ArtifactEmbed({ src, title, label, height = "600px" }: { src: string; t
       </div>
     );
   }
+  const iframeStyle = mobileHeight
+    ? { "--artifact-h": height, "--artifact-h-mobile": mobileHeight } as React.CSSProperties
+    : { "--artifact-h": height, "--artifact-h-mobile": height } as React.CSSProperties;
+
   return (
-    <div className="my-8">
+    <div className="my-8" style={iframeStyle}>
       <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">{label}</p>
       <div className="rounded-lg border border-gray-200 overflow-hidden">
-        <iframe src={src} title={title} className="w-full border-0" style={{ height }} onError={() => setFailed(true)} loading="lazy" sandbox="allow-scripts allow-same-origin" />
+        <iframe src={src} title={title} className="w-full border-0 h-[var(--artifact-h-mobile)] sm:h-[var(--artifact-h)]" onError={() => setFailed(true)} loading="lazy" sandbox="allow-scripts allow-same-origin" />
       </div>
     </div>
   );
@@ -37,7 +41,7 @@ function ArtifactEmbed({ src, title, label, height = "600px" }: { src: string; t
 export default function AnthropicAcademy() {
   usePageMeta(
     "Anthropic Academy and the Skill Formation Gap",
-    "Why AI product education needs living learning infrastructure. Analyzed from the instructor, learner, and operator side.",
+    "Why AI product education needs living learning infrastructure, not just courses, quizzes, and completion certificates.",
     { ogImage: "/images/og/og-anthropic-academy.png", canonical: "/analysis/anthropic-academy-skill-formation" },
   );
 
@@ -216,7 +220,7 @@ export default function AnthropicAcademy() {
         </p>
 
         {/* Table: Skilljar limitations */}
-        <div className="my-6 overflow-x-auto">
+        <div className="my-6 -mx-6 px-6 overflow-x-auto">
           <table className="w-full border-collapse text-sm">
             <thead>
               <tr className="border-b border-gray-200">
@@ -444,8 +448,8 @@ export default function AnthropicAcademy() {
         </p>
 
         {/* Table: Job postings */}
-        <div className="my-6 overflow-x-auto">
-          <table className="w-full border-collapse text-sm">
+        <div className="my-6 -mx-6 px-6 overflow-x-auto">
+          <table className="w-full border-collapse text-sm" style={{ minWidth: 520 }}>
             <thead>
               <tr className="border-b border-gray-200">
                 <th className="py-3 pr-4 text-left font-semibold text-gray-900">Role</th>
@@ -503,6 +507,7 @@ export default function AnthropicAcademy() {
           title="Learning Infrastructure Architecture"
           label="System architecture: Learning Infrastructure Pipeline"
           height="580px"
+          mobileHeight="920px"
         />
 
         <p>
@@ -550,6 +555,7 @@ export default function AnthropicAcademy() {
           title="Verified AI Skill Credential"
           label="Sample credential object: Verified AI Skill Credential"
           height="820px"
+          mobileHeight="920px"
         />
 
         {/* Subsection */}
@@ -600,38 +606,38 @@ export default function AnthropicAcademy() {
         </p>
 
         {/* Table: Market context */}
-        <div className="my-6 overflow-x-auto">
-          <table className="w-full border-collapse text-sm">
+        <div className="my-6 -mx-6 px-6 overflow-x-auto">
+          <table className="w-full border-collapse text-sm" style={{ minWidth: 580 }}>
             <thead>
               <tr className="border-b border-gray-200">
-                <th className="py-3 pr-4 text-left font-semibold text-gray-900">Provider</th>
+                <th className="py-3 pr-4 text-left font-semibold text-gray-900 whitespace-nowrap">Provider</th>
                 <th className="py-3 px-4 text-left font-semibold text-gray-900">Approach</th>
                 <th className="py-3 pl-4 text-left font-semibold text-gray-900">Where they sit on the four problems</th>
               </tr>
             </thead>
             <tbody className="text-gray-600">
               <tr className="border-b border-gray-100">
-                <td className="py-2 pr-4">Anthropic Academy</td>
+                <td className="py-2 pr-4 whitespace-nowrap">Anthropic Academy</td>
                 <td className="py-2 px-4">18 courses on Skilljar, free, completion certificates</td>
                 <td className="py-2 pl-4">Strong on delivery; light on assessment, personalization, signal</td>
               </tr>
               <tr className="border-b border-gray-100">
-                <td className="py-2 pr-4">OpenAI Academy</td>
+                <td className="py-2 pr-4 whitespace-nowrap">OpenAI Academy</td>
                 <td className="py-2 px-4">Growing catalog, similar completion model</td>
                 <td className="py-2 pl-4">Same trade-offs</td>
               </tr>
               <tr className="border-b border-gray-100">
-                <td className="py-2 pr-4">Google AI (Coursera)</td>
+                <td className="py-2 pr-4 whitespace-nowrap">Google AI (Coursera)</td>
                 <td className="py-2 px-4">University-partnered, peer-graded assignments</td>
                 <td className="py-2 pl-4">Closer to Level 1 assessment, but slow to update</td>
               </tr>
               <tr className="border-b border-gray-100">
-                <td className="py-2 pr-4">AWS Skill Builder</td>
+                <td className="py-2 pr-4 whitespace-nowrap">AWS Skill Builder</td>
                 <td className="py-2 px-4">Proctored certification exams</td>
                 <td className="py-2 pl-4">Closest to competence verification; product changes slower so content lasts longer</td>
               </tr>
               <tr>
-                <td className="py-2 pr-4">Salesforce Trailhead</td>
+                <td className="py-2 pr-4 whitespace-nowrap">Salesforce Trailhead</td>
                 <td className="py-2 px-4">Badges, superbadges, hands-on challenges</td>
                 <td className="py-2 pl-4">Most mature signal system, built over 10+ years</td>
               </tr>
