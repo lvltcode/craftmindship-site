@@ -48,6 +48,12 @@ const ogData: Record<string, { title: string; description: string; image: string
       'Coffee Credit formula, business model analysis, and four futures as AI compresses the beginner layer.',
     image: '/images/og/og-coding-bootcamps.png',
   },
+  '/analysis/anthropic-academy-skill-formation': {
+    title: 'From Course Completion to Skill Formation | Craftmindship',
+    description:
+      'Why AI product education needs living learning infrastructure. Analyzed from the instructor, learner, and operator side.',
+    image: '/images/og/og-anthropic-academy.png',
+  },
   '/analysis': {
     title: 'Analysis — Craftmindship',
     description: 'Product teardowns, system breakdowns, and operational thinking.',

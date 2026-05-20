@@ -118,6 +118,21 @@ export default function Home() {
         </h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           <Link
+            to="/analysis/anthropic-academy-skill-formation"
+            className="group rounded-xl border border-gray-200 p-6 text-left transition-colors hover:border-gray-300 hover:bg-gray-50"
+          >
+            <p className="text-xs font-medium text-gray-400 uppercase">Product Analysis</p>
+            <h3 className="mt-2 font-semibold text-gray-900 group-hover:text-gray-700">
+              From Course Completion to Skill Formation
+            </h3>
+            <p className="mt-1 text-sm text-gray-600">
+              Why AI product education needs living learning infrastructure &mdash; analyzed from the instructor, learner, and operator side.
+            </p>
+            <span className="mt-3 inline-block text-sm font-medium text-gray-900 group-hover:underline">
+              Read &rarr;
+            </span>
+          </Link>
+          <Link
             to="/analysis/coding-bootcamps-dying"
             className="group rounded-xl border border-gray-200 p-6 text-left transition-colors hover:border-gray-300 hover:bg-gray-50"
           >
@@ -127,21 +142,6 @@ export default function Home() {
             </h3>
             <p className="mt-1 text-sm text-gray-600">
               A 2023 course review reread in 2026. Coffee Credit formula, business model analysis, and four futures for coding schools.
-            </p>
-            <span className="mt-3 inline-block text-sm font-medium text-gray-900 group-hover:underline">
-              Read &rarr;
-            </span>
-          </Link>
-          <Link
-            to="/analysis/td-insurance-telematics"
-            className="group rounded-xl border border-gray-200 p-6 text-left transition-colors hover:border-gray-300 hover:bg-gray-50"
-          >
-            <p className="text-xs font-medium text-gray-400 uppercase">Product Analysis</p>
-            <h3 className="mt-2 font-semibold text-gray-900 group-hover:text-gray-700">
-              When Safe Driving Apps Punish Safe Drivers
-            </h3>
-            <p className="mt-1 text-sm text-gray-600">
-              A product teardown of TD Insurance&apos;s telematics scoring &mdash; proxy metrics, incentive misalignment, and $744/year in lost value.
             </p>
             <span className="mt-3 inline-block text-sm font-medium text-gray-900 group-hover:underline">
               Read &rarr;

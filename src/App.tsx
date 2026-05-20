@@ -11,6 +11,7 @@ import About from "./pages/About";
 import TdInsurance from "./pages/TdInsurance";
 import CodingBootcamps from "./pages/CodingBootcamps";
 import AiRepairIntake from "./pages/AiRepairIntake";
+import AnthropicAcademy from "./pages/AnthropicAcademy";
 import NotFound from "./pages/NotFound";
 
 export default function App() {
@@ -27,9 +28,11 @@ export default function App() {
           <Route path="/analysis/td-insurance-telematics" element={<TdInsurance />} />
           <Route path="/analysis/coding-bootcamps-dying" element={<CodingBootcamps />} />
           <Route path="/analysis/ai-repair-intake-marketplace" element={<AiRepairIntake />} />
+          <Route path="/analysis/anthropic-academy-skill-formation" element={<AnthropicAcademy />} />
           {/* Redirects from old /writing paths */}
           <Route path="/writing" element={<Navigate to="/analysis" replace />} />
           <Route path="/writing/td-insurance-telematics" element={<Navigate to="/analysis/td-insurance-telematics" replace />} />
+          <Route path="/analysis/anthropic-academy" element={<Navigate to="/analysis/anthropic-academy-skill-formation" replace />} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />
         </Route>

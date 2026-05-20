@@ -17,6 +17,7 @@ const routes = [
   '/analysis/td-insurance-telematics',
   '/analysis/coding-bootcamps-dying',
   '/analysis/ai-repair-intake-marketplace',
+  '/analysis/anthropic-academy-skill-formation',
   '/lab',
   '/about',
 ];
