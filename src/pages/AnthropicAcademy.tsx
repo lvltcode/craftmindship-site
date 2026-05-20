@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { usePageMeta } from "../hooks/usePageMeta";
 import ContentWithToc from "../components/ContentWithToc";
@@ -5,6 +6,31 @@ import ContentWithToc from "../components/ContentWithToc";
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
     <h2 className="mt-8 mb-4 text-xl font-bold text-gray-900">{children}</h2>
+  );
+}
+
+function ArtifactEmbed({ src, title, label, height = "600px" }: { src: string; title: string; label: string; height?: string }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) {
+    return (
+      <div className="my-8">
+        <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">{label}</p>
+        <div className="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center">
+          <p className="text-sm text-gray-500">{title}</p>
+          <a href={src} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-sm font-medium text-gray-900 underline">
+            Open in new tab &rarr;
+          </a>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="my-8">
+      <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">{label}</p>
+      <div className="rounded-lg border border-gray-200 overflow-hidden">
+        <iframe src={src} title={title} className="w-full border-0" style={{ height }} onError={() => setFailed(true)} loading="lazy" sandbox="allow-scripts" />
+      </div>
+    </div>
   );
 }
 
@@ -128,35 +154,12 @@ export default function AnthropicAcademy() {
           dichotomy throughout this piece is between those two systems.
         </p>
 
-        {/* Artifact 1: System Comparison */}
-        <p className="mt-8 mb-3 text-xs font-mono font-medium tracking-[0.15em] text-[#6b6b6b] uppercase">System Comparison</p>
-        <div className="rounded-lg border border-[#e5e5e5] bg-white p-6">
-          <div className="flex flex-col sm:flex-row">
-            <div className="flex-1 sm:pr-6">
-              <p className="text-[13px] font-semibold text-[#6b6b6b] mb-3">Traditional LMS</p>
-              <div className="space-y-3 text-sm text-[#6b6b6b]">
-                <p>Static content</p>
-                <p>Lesson-one entry</p>
-                <p>Completion tracking</p>
-                <p>Recall quizzes</p>
-                <p>Generic roadmap</p>
-                <p>Certificate of attendance</p>
-              </div>
-            </div>
-            <div className="my-4 border-t border-[#e5e5e5] sm:my-0 sm:border-t-0 sm:border-l" />
-            <div className="flex-1 sm:pl-6">
-              <p className="text-[13px] font-semibold text-[#2D6A4F] mb-3">Living Learning Infrastructure</p>
-              <div className="space-y-3 text-sm text-[#1a1a1a]">
-                <p>Content updates with product changes</p>
-                <p>Diagnostic placement</p>
-                <p>Competency tracking</p>
-                <p>Applied work assessment</p>
-                <p>Personalized roadmap</p>
-                <p>Artifact-based endorsement</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ArtifactEmbed
+          src="/artifacts/learning-state-model.html"
+          title="Learning State Model"
+          label="Design artifact: Learning State Model"
+          height="520px"
+        />
 
         {/* Section 2 */}
         <SectionHeading>2. What Anthropic built</SectionHeading>
@@ -482,60 +485,12 @@ export default function AnthropicAcademy() {
           in some form across programs I&apos;ve taught, taken, or built.
         </p>
 
-        {/* Artifact 2: Learning Infrastructure Architecture */}
-        <p className="mt-8 mb-3 text-xs font-mono font-medium tracking-[0.15em] text-[#6b6b6b] uppercase">Learning Infrastructure Architecture</p>
-        <div className="rounded-lg border border-[#e5e5e5] bg-white px-4 py-6 sm:px-8 sm:py-8">
-          <div className="flex flex-col items-stretch">
-            {/* Stage 1 */}
-            <div className="flex items-center gap-3 sm:gap-4">
-              <div className="flex-1 rounded-lg border-[1.5px] border-[#2D6A4F] bg-white px-3 py-2.5 sm:px-4 sm:py-3">
-                <p className="text-[14px] font-semibold text-[#1a1a1a] sm:text-[15px]">Diagnostic Entry</p>
-              </div>
-              <p className="shrink-0 text-[11px] font-mono text-[#6b6b6b]">learner state</p>
-            </div>
-            <div className="flex justify-start pl-6 sm:pl-8 py-1"><div className="flex flex-col items-center"><div className="w-px h-3 bg-[#2D6A4F]" /><span className="text-[#2D6A4F] text-[8px] leading-none">{"\u25BC"}</span></div></div>
-            {/* Stage 2 */}
-            <div className="flex items-center gap-3 sm:gap-4">
-              <div className="flex-1 rounded-lg border-[1.5px] border-[#2D6A4F] bg-white px-3 py-2.5 sm:px-4 sm:py-3">
-                <p className="text-[14px] font-semibold text-[#1a1a1a] sm:text-[15px]">Personal Roadmap</p>
-              </div>
-              <p className="shrink-0 text-[11px] font-mono text-[#6b6b6b]">content state</p>
-            </div>
-            <div className="flex justify-start pl-6 sm:pl-8 py-1"><div className="flex flex-col items-center"><div className="w-px h-3 bg-[#2D6A4F]" /><span className="text-[#2D6A4F] text-[8px] leading-none">{"\u25BC"}</span></div></div>
-            {/* Stage 3 */}
-            <div className="flex items-center gap-3 sm:gap-4">
-              <div className="flex-1 rounded-lg border-[1.5px] border-[#2D6A4F] bg-white px-3 py-2.5 sm:px-4 sm:py-3">
-                <p className="text-[14px] font-semibold text-[#1a1a1a] sm:text-[15px]">Applied Milestone Gates</p>
-              </div>
-              <p className="shrink-0 text-[11px] font-mono text-[#6b6b6b]">assessment state</p>
-            </div>
-            <div className="flex justify-start pl-6 sm:pl-8 py-1"><div className="flex flex-col items-center"><div className="w-px h-3 bg-[#2D6A4F]" /><span className="text-[#2D6A4F] text-[8px] leading-none">{"\u25BC"}</span></div></div>
-            {/* Stage 4 */}
-            <div className="flex items-center gap-3 sm:gap-4">
-              <div className="flex-1 rounded-lg border-[1.5px] border-[#2D6A4F] bg-white px-3 py-2.5 sm:px-4 sm:py-3">
-                <p className="text-[14px] font-semibold text-[#1a1a1a] sm:text-[15px]">Three-Source Validation</p>
-                <p className="mt-1 text-[13px] text-[#6b6b6b]">AI evaluator + Peer review + Expert review</p>
-              </div>
-              <p className="shrink-0 text-[11px] font-mono text-[#6b6b6b]">validation state</p>
-            </div>
-            <div className="flex justify-start pl-6 sm:pl-8 py-1"><div className="flex flex-col items-center"><div className="w-px h-3 bg-[#2D6A4F]" /><span className="text-[#2D6A4F] text-[8px] leading-none">{"\u25BC"}</span></div></div>
-            {/* Stage 5 */}
-            <div className="flex items-center gap-3 sm:gap-4">
-              <div className="flex-1 rounded-lg border-[1.5px] border-[#2D6A4F] bg-white px-3 py-2.5 sm:px-4 sm:py-3">
-                <p className="text-[14px] font-semibold text-[#1a1a1a] sm:text-[15px]">Artifact-Based Credential</p>
-              </div>
-              <p className="shrink-0 text-[11px] font-mono text-[#6b6b6b]">credential state</p>
-            </div>
-            <div className="flex justify-start pl-6 sm:pl-8 py-1"><div className="flex flex-col items-center"><div className="w-px h-3 bg-[#2D6A4F]" /><span className="text-[#2D6A4F] text-[8px] leading-none">{"\u25BC"}</span></div></div>
-            {/* Stage 6 */}
-            <div className="flex items-center gap-3 sm:gap-4">
-              <div className="flex-1 rounded-lg border-[1.5px] border-[#2D6A4F] bg-white px-3 py-2.5 sm:px-4 sm:py-3">
-                <p className="text-[14px] font-semibold text-[#1a1a1a] sm:text-[15px]">Talent / Employer Signal</p>
-              </div>
-              <p className="shrink-0 text-[11px] font-mono text-[#6b6b6b]">outcome state</p>
-            </div>
-          </div>
-        </div>
+        <ArtifactEmbed
+          src="/artifacts/learning-infrastructure-architecture.html"
+          title="Learning Infrastructure Architecture"
+          label="System architecture: Learning Infrastructure Pipeline"
+          height="580px"
+        />
 
         <p>
           <strong className="text-gray-900">Entrance assessment.</strong> A diagnostic at any level,
@@ -577,60 +532,12 @@ export default function AnthropicAcademy() {
           and reviewed by a credible institution, is harder to fake and easier to verify.
         </p>
 
-        {/* Artifact 3: Mock AI Skill Credential */}
-        <p className="mt-8 mb-3 text-xs font-mono font-medium tracking-[0.15em] text-[#6b6b6b] uppercase">What an Artifact-Based Credential Looks Like</p>
-        <div className="rounded-lg border border-[#e5e5e5] border-l-4 border-l-[#2D6A4F] bg-white p-6 sm:p-8">
-          <p className="text-[17px] font-semibold text-[#1a1a1a] sm:text-[18px]">
-            AI Workflow Design &mdash; Verified Credential
-          </p>
-
-          <p className="mt-5 text-[13px] font-semibold tracking-wide text-[#6b6b6b] uppercase">Capability verified</p>
-          <p className="mt-1.5 text-sm text-[#1a1a1a] leading-relaxed">
-            Can decompose a business workflow into agentic tasks, define constraints,
-            test outputs, and recover from failure modes.
-          </p>
-
-          <p className="mt-5 text-[13px] font-semibold tracking-wide text-[#6b6b6b] uppercase">Evidence submitted</p>
-          <div className="mt-1.5 space-y-2 text-sm text-[#1a1a1a]">
-            <p>&bull; Workflow map</p>
-            <p>&bull; Prompt system design</p>
-            <p>&bull; Evaluation checklist</p>
-            <p>&bull; Failure-mode analysis</p>
-            <p>&bull; Final working artifact</p>
-          </div>
-
-          <p className="mt-5 text-[13px] font-semibold tracking-wide text-[#6b6b6b] uppercase">Evaluated against</p>
-          <div className="mt-1.5 space-y-2 text-sm text-[#1a1a1a]">
-            <p>&bull; Problem decomposition</p>
-            <p>&bull; Constraint clarity</p>
-            <p>&bull; Output reliability</p>
-            <p>&bull; Human review integration</p>
-            <p>&bull; Risk handling</p>
-          </div>
-
-          <p className="mt-5 text-[13px] font-semibold tracking-wide text-[#6b6b6b] uppercase">Validation</p>
-          <div className="mt-1.5 font-mono text-[12px] text-[#1a1a1a] sm:text-[13px] space-y-1.5">
-            <div className="flex items-baseline gap-1">
-              <span className="shrink-0">AI evaluator</span>
-              <span className="flex-1 border-b border-dotted border-gray-300 relative -top-0.5 mx-1" />
-              <span className="shrink-0">Passed</span>
-            </div>
-            <div className="flex items-baseline gap-1">
-              <span className="shrink-0">Peer reviewers (2/2)</span>
-              <span className="flex-1 border-b border-dotted border-gray-300 relative -top-0.5 mx-1" />
-              <span className="shrink-0">Passed</span>
-            </div>
-            <div className="flex items-baseline gap-1">
-              <span className="shrink-0">Expert reviewer</span>
-              <span className="flex-1 border-b border-dotted border-gray-300 relative -top-0.5 mx-1" />
-              <span className="shrink-0 text-right">Approved at capstone gate</span>
-            </div>
-          </div>
-
-          <div className="mt-5 border-t border-[#e5e5e5] pt-3">
-            <p className="text-[13px] italic text-[#6b6b6b]">Credential type: Artifact-based endorsement</p>
-          </div>
-        </div>
+        <ArtifactEmbed
+          src="/artifacts/verified-ai-skill-credential.html"
+          title="Verified AI Skill Credential"
+          label="Sample credential object: Verified AI Skill Credential"
+          height="820px"
+        />
 
         {/* Subsection */}
         <h3 className="mt-6 mb-3 text-lg font-semibold text-gray-900">
