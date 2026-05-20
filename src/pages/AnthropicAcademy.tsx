@@ -743,17 +743,77 @@ export default function AnthropicAcademy() {
           It may become one of the most important talent pipelines in the AI economy.
         </p>
 
-        <hr className="my-6 border-gray-200" />
+        {/* Section 14 — Evidence */}
+        <SectionHeading>14. Evidence: Measuring the gap with public data</SectionHeading>
 
-        {/* Teaser */}
-        <p className="text-sm text-gray-500 italic">
-          <strong className="text-gray-700 not-italic">Next: measuring the gap</strong>
+        <p>
+          I also built a Python research notebook to test the public-data version of this claim.
         </p>
-        <p className="text-sm text-gray-500 italic">
-          This essay is the theoretical foundation for an upcoming empirical analysis that will
-          measure the rate at which AI product features change relative to the pace of education
-          content updates &mdash; quantifying the content-decay problem using public release data
-          from Anthropic, OpenAI, and Google.
+        <p>
+          The notebook analyzes 329 Anthropic public release entries, covering Claude release notes
+          and the Claude Code changelog from April 2025 to May 2026, against the 18 courses in the
+          Anthropic Academy catalog. It measures topic-level coverage gap, not exact update lag,
+          because public course update timestamps were not visible during data collection.
+        </p>
+        <p>
+          The clearest visible gaps were in topics that shipped substantive product changes but had
+          no visible matching Academy course coverage.
+        </p>
+
+        {/* Table: Coverage gaps */}
+        <div className="my-6 -mx-6 px-6 overflow-x-auto">
+          <table className="w-full border-collapse text-sm">
+            <thead>
+              <tr className="border-b border-gray-200">
+                <th className="py-3 pr-4 text-left font-semibold text-gray-900">Topic</th>
+                <th className="py-3 px-4 text-right font-semibold text-gray-900">Substantive releases</th>
+                <th className="py-3 pl-4 text-left font-semibold text-gray-900">Academy coverage</th>
+              </tr>
+            </thead>
+            <tbody className="text-gray-600">
+              <tr className="border-b border-gray-100">
+                <td className="py-2 pr-4">permissions/security</td>
+                <td className="py-2 px-4 text-right">21</td>
+                <td className="py-2 pl-4">not visible</td>
+              </tr>
+              <tr className="border-b border-gray-100">
+                <td className="py-2 pr-4">IDE integration</td>
+                <td className="py-2 px-4 text-right">14</td>
+                <td className="py-2 pl-4">not visible</td>
+              </tr>
+              <tr className="border-b border-gray-100">
+                <td className="py-2 pr-4">enterprise/admin</td>
+                <td className="py-2 px-4 text-right">14</td>
+                <td className="py-2 pl-4">not visible</td>
+              </tr>
+              <tr>
+                <td className="py-2 pr-4">model support</td>
+                <td className="py-2 px-4 text-right">16</td>
+                <td className="py-2 pl-4">partial</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p className="text-sm italic" style={{ color: '#6b6b6b' }}>
+          This is a single-vendor case study. The reconnaissance phase attempted OpenAI and Google
+          data collection, but access restrictions and source-quality issues prevented a clean
+          cross-vendor comparison in V1. A multi-vendor analysis is a separate research task.
+        </p>
+
+        <p>
+          The notebook, charts, and audit trail are public:
+        </p>
+        <p>
+          <a
+            href="https://github.com/lvltcode/anthropic-academy-coverage-gap"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold underline"
+            style={{ color: '#2D6A4F' }}
+          >
+            github.com/lvltcode/anthropic-academy-coverage-gap
+          </a>
         </p>
 
         <hr className="my-6 border-gray-200" />
