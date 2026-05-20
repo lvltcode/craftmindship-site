@@ -32,7 +32,7 @@ export default function AnthropicAcademy() {
           Anthropic Academy and the Skill Formation Gap
         </h1>
         <p className="mt-3 text-lg text-gray-600">
-          Why AI product education needs living learning infrastructure, analyzed from the instructor, learner, operator, and AI-builder side.
+          Why AI product education needs living learning infrastructure, not just courses, quizzes, and completion certificates.
         </p>
         <p className="mt-4 text-sm text-gray-400">
           May 19, 2026
