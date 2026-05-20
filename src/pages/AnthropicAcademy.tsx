@@ -43,14 +43,14 @@ export default function AnthropicAcademy() {
         }
       `}</style>
       {/* Header */}
-      <header>
+      <header className="prose-narrow">
         <div className="flex flex-wrap items-center gap-3">
           <span className="inline-flex items-center rounded-full bg-amber-50 px-2.5 py-0.5 text-xs font-medium text-amber-700 ring-1 ring-inset ring-amber-600/20">
             Product analysis
           </span>
           <span className="text-xs text-gray-400">~20 min read</span>
         </div>
-        <h1 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <h1 className="page-title mt-3">
           Anthropic Academy and the Skill Formation Gap
         </h1>
         <p className="mt-3 text-lg text-gray-600">
@@ -89,8 +89,8 @@ export default function AnthropicAcademy() {
             { number: "1", title: "Observation", description: "What the Claude 101 course revealed about AI education today.", href: "#1-why-im-not-looking-at-this-as-a-casual-learner" },
             { number: "2", title: "Diagnosis", description: "Why course completion is not the same as skill formation.", href: "#4-the-real-problem-tool-syntax-versus-cognitive-partnership" },
             { number: "3", title: "System model", description: "What living learning infrastructure would need to support.", href: "#10-what-a-working-system-would-look-like" },
-            { number: "4", title: "Evidence", description: "A Python notebook measuring public coverage gap from Anthropic release data.", href: "#14-evidence-measuring-the-gap-with-public-data" },
-            { number: "5", title: "Implication", description: "Why education may become part of adoption infrastructure.", href: "#12-why-this-matters-now" },
+            { number: "4", title: "Implication", description: "Why education may become part of adoption infrastructure.", href: "#12-why-this-matters-now" },
+            { number: "5", title: "Evidence", description: "A Python notebook measuring public coverage gap from Anthropic release data.", href: "#14-evidence-measuring-the-gap-with-public-data" },
           ]}
         />
 
@@ -223,7 +223,7 @@ export default function AnthropicAcademy() {
         </p>
 
         {/* Table: Skilljar limitations */}
-        <div className="my-6 -mx-6 px-6 overflow-x-auto">
+        <div className="responsive-table my-6">
           <table className="w-full border-collapse text-sm">
             <thead>
               <tr className="border-b border-gray-200">
@@ -451,7 +451,7 @@ export default function AnthropicAcademy() {
         </p>
 
         {/* Table: Job postings */}
-        <div className="my-6 -mx-6 px-6 overflow-x-auto">
+        <div className="responsive-table my-6">
           <table className="w-full border-collapse text-sm" style={{ minWidth: 520 }}>
             <thead>
               <tr className="border-b border-gray-200">
@@ -597,7 +597,7 @@ export default function AnthropicAcademy() {
         </p>
 
         {/* Table: Market context */}
-        <div className="my-6 -mx-6 px-6 overflow-x-auto">
+        <div className="responsive-table my-6">
           <table className="w-full border-collapse text-sm" style={{ minWidth: 580 }}>
             <thead>
               <tr className="border-b border-gray-200">
@@ -670,7 +670,7 @@ export default function AnthropicAcademy() {
         </p>
 
         {/* Section 12 */}
-        <SectionHeading readerMapStep="5" readerMapLabel="Implication">12. Why this matters now</SectionHeading>
+        <SectionHeading readerMapStep="4" readerMapLabel="Implication">12. Why this matters now</SectionHeading>
 
         <p>
           In the coding bootcamp era, weak education mostly hurt individual learners who paid for
@@ -779,7 +779,7 @@ export default function AnthropicAcademy() {
         </p>
 
         {/* Section 14 — Evidence */}
-        <SectionHeading readerMapStep="4" readerMapLabel="Evidence">14. Evidence: Measuring the gap with public data</SectionHeading>
+        <SectionHeading readerMapStep="5" readerMapLabel="Evidence">14. Evidence: Measuring the gap with public data</SectionHeading>
 
         <p>
           I also built a Python research notebook to test the public-data version of this claim.
@@ -796,7 +796,7 @@ export default function AnthropicAcademy() {
         </p>
 
         {/* Table: Coverage gaps */}
-        <div className="my-6 -mx-6 px-6 overflow-x-auto">
+        <div className="responsive-table my-6">
           <table className="w-full border-collapse text-sm">
             <thead>
               <tr className="border-b border-gray-200">

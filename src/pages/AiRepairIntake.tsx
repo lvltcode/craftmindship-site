@@ -56,7 +56,7 @@ export default function AiRepairIntake() {
   return (
     <article className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">
       {/* Header */}
-      <header>
+      <header className="prose-narrow">
         <div className="flex flex-wrap items-center gap-3">
           <span className="inline-flex items-center rounded-full bg-amber-50 px-2.5 py-0.5 text-xs font-medium text-amber-700 ring-1 ring-inset ring-amber-600/20">
             Marketplace thesis
@@ -66,7 +66,7 @@ export default function AiRepairIntake() {
           </span>
           <span className="text-xs text-gray-400">~12 min read</span>
         </div>
-        <h1 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <h1 className="page-title mt-3">
           AI Repair Intake Marketplace
         </h1>
         <p className="mt-3 text-lg text-gray-600">

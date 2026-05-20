@@ -4,10 +4,15 @@ import { Home, Menu, X, Code, Briefcase, BookOpen, Mail } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 const navLinks = [
-  { to: "/work/cadence", label: "Work" },
+  { to: "/work", label: "Work" },
   { to: "/analysis", label: "Analysis" },
   { to: "/lab", label: "Lab" },
   { to: "/about", label: "About" },
+];
+
+const mobileNavLinks = [
+  { to: "/", label: "Home" },
+  ...navLinks,
 ];
 
 const footerLinks: { href: string; label: string; icon: LucideIcon }[] = [
@@ -92,6 +97,7 @@ export default function Layout() {
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -99,14 +105,18 @@ export default function Layout() {
 
         {/* Mobile dropdown panel */}
         <div
+          id="mobile-navigation"
           ref={panelRef}
-          className={`sm:hidden overflow-hidden border-b border-gray-200 bg-white transition-[max-height] duration-200 ease-in-out ${menuOpen ? "max-h-80" : "max-h-0 border-b-0"}`}
+          aria-hidden={!menuOpen}
+          className={`absolute left-0 right-0 top-full sm:hidden border-b border-gray-200 bg-white shadow-sm transition-[opacity,transform] duration-150 ease-out ${menuOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"}`}
         >
           <div className="max-w-5xl mx-auto flex flex-col">
-            {navLinks.map((link) => (
+            {mobileNavLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
+                onClick={() => setMenuOpen(false)}
+                tabIndex={menuOpen ? 0 : -1}
                 className="px-6 py-3.5 text-base text-gray-900 hover:bg-gray-50 transition-colors"
               >
                 {link.label}

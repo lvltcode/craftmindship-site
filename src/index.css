@@ -2,6 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply antialiased;
+@layer base {
+  body {
+    @apply antialiased;
+  }
+
+  :where(a, button, [role="button"], input, select, textarea):focus-visible {
+    outline: 2px solid #2D6A4F;
+    outline-offset: 3px;
+  }
+
+  :where(a, button, [role="button"], input, select, textarea):focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+@layer components {
+  .page-title {
+    @apply break-words text-3xl font-bold leading-tight text-gray-900 sm:text-4xl lg:text-5xl;
+  }
+
+  .prose-narrow > :where(h2, h3, p, ul, ol, blockquote) {
+    max-width: min(68ch, 680px);
+  }
+
+  .article-flow > section > :where(h2, h3, p, ul, ol, blockquote),
+  .article-flow .prose-custom > :where(h2, h3, p, ul, ol, blockquote) {
+    max-width: min(68ch, 680px);
+  }
+
+  .responsive-table {
+    @apply overflow-x-auto rounded-lg border border-gray-200 bg-white;
+    box-shadow: inset -14px 0 14px -16px rgba(17, 24, 39, 0.45);
+  }
+
+  .responsive-table > table {
+    min-width: 640px;
+  }
+
+  .responsive-table :where(th, td) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }

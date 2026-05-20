@@ -53,7 +53,7 @@ export default function CodingBootcamps() {
           </span>
           <span className="text-xs text-gray-400">~10 min read</span>
         </div>
-        <h1 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <h1 className="page-title mt-3">
           Why coding bootcamps are dying &mdash; and what replaces them
         </h1>
         <p className="mt-3 text-lg text-gray-600">
@@ -132,7 +132,7 @@ export default function CodingBootcamps() {
         </p>
 
         {/* Two-column comparison table */}
-        <div className="my-6 overflow-x-auto">
+        <div className="responsive-table my-6">
           <table className="w-full border-collapse text-sm">
             <thead>
               <tr className="border-b border-gray-200">

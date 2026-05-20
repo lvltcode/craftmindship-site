@@ -57,10 +57,10 @@ export default function PuppyProgramOs() {
   return (
     <div className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">
       {/* Header */}
-      <header>
+      <header className="prose-narrow">
         <div className="flex flex-wrap items-center gap-3">
           <img src="/images/projects/puppy-program/logo.svg" alt="Puppy Program OS logo" className="h-12 w-auto" />
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h1 className="page-title">
             Puppy Program OS
           </h1>
           <span className="inline-flex items-center rounded-full bg-sky-50 px-2.5 py-0.5 text-xs font-medium text-sky-700 ring-1 ring-inset ring-sky-600/20">
@@ -223,7 +223,7 @@ export default function PuppyProgramOs() {
           Four behavioral rules run as Postgres triggers &mdash; not in application code.
           Deduplication via partial unique index guarantees one open alert per puppy per rule type.
         </p>
-        <div className="mt-4 overflow-x-auto">
+        <div className="responsive-table mt-4">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-200 text-left">
@@ -250,7 +250,7 @@ export default function PuppyProgramOs() {
       {/* Architecture Decisions */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">Architecture Decisions</h2>
-        <div className="mt-4 overflow-x-auto">
+        <div className="responsive-table mt-4">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-200 text-left">
@@ -313,7 +313,7 @@ export default function PuppyProgramOs() {
       {/* Tech Stack */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">Tech Stack</h2>
-        <div className="mt-4 overflow-x-auto">
+        <div className="responsive-table mt-4">
           <table className="w-full text-sm">
             <tbody>
               {techStack.map((row) => (
