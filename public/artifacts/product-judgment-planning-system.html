@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Judgment Assessment — Planning System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sans: 'Inter', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --text: #1a1a1a;
+  --text2: #6b6b6b;
+  --text3: #999;
+  --bg: #fff;
+  --bg2: #f5f5f5;
+  --border: #e5e5e5;
+  --accent: #2D6A4F;
+  --purple: #7F77DD;
+  --purple-bg: #EEEDFE;
+  --purple-text: #3C3489;
+  --teal: #1D9E75;
+  --teal-bg: #E1F5EE;
+  --teal-text: #085041;
+  --coral: #D85A30;
+  --coral-bg: #FAECE7;
+  --coral-text: #712B13;
+  --amber: #BA7517;
+  --amber-bg: #FAEEDA;
+  --amber-text: #633806;
+  --blue: #378ADD;
+  --blue-bg: #E6F1FB;
+  --blue-text: #0C447C;
+  --gray-bg: #F1EFE8;
+  --gray-text: #444441;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--sans); color: var(--text); background: var(--bg); line-height: 1.6; padding: 32px 24px; max-width: 720px; margin: 0 auto; }
+.badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 12px; background: var(--purple-bg); color: var(--purple-text); margin-bottom: 10px; }
+h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+.subtitle { font-size: 14px; color: var(--text2); margin-bottom: 32px; }
+.section-title { font-size: 16px; font-weight: 600; color: var(--text); margin: 36px 0 14px; }
+.section-sub { font-size: 13px; color: var(--text2); margin: -8px 0 14px; }
+
+.radar-container { display: flex; gap: 24px; align-items: flex-start; margin-bottom: 8px; }
+@media (max-width: 500px) { .radar-container { flex-direction: column; } }
+.radar-legend { flex: 1; min-width: 200px; }
+.radar-item { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.radar-bar-track { flex: 1; height: 6px; background: var(--bg2); border-radius: 3px; overflow: hidden; }
+.radar-bar-fill { height: 100%; border-radius: 3px; }
+.radar-label { font-size: 12px; color: var(--text2); min-width: 120px; }
+.radar-weight { font-size: 11px; font-family: var(--mono); color: var(--text3); min-width: 28px; text-align: right; }
+
+.scoring-flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.scoring-node { padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 500; text-align: center; }
+.scoring-arrow { color: var(--text3); font-size: 14px; }
+
+.levels-strip { display: flex; gap: 2px; margin-bottom: 6px; }
+.level-block { flex: 1; text-align: center; padding: 8px 4px; border-radius: 6px; }
+.level-block .level-name { font-size: 11px; font-weight: 500; }
+.level-block .level-band { font-size: 10px; font-family: var(--mono); margin-top: 2px; }
+
+.task-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 3px; margin-bottom: 8px; }
+@media (max-width: 600px) { .task-grid { grid-template-columns: repeat(4, 1fr); } }
+.task-cell { padding: 8px 4px; border-radius: 6px; text-align: center; }
+.task-cell .task-id { font-size: 11px; font-weight: 600; }
+.task-cell .task-type { font-size: 9px; margin-top: 2px; line-height: 1.3; }
+
+.coverage-row { display: flex; align-items: center; gap: 4px; margin-bottom: 4px; }
+.coverage-label { font-size: 11px; color: var(--text2); min-width: 110px; }
+.coverage-dots { display: flex; gap: 3px; }
+.dot { width: 14px; height: 14px; border-radius: 3px; font-size: 8px; font-weight: 600; display: flex; align-items: center; justify-content: center; color: #fff; }
+.dot.on { opacity: 1; }
+.dot.off { opacity: 0.15; }
+
+.rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (max-width: 500px) { .rules-grid { grid-template-columns: 1fr; } }
+.rule-card { background: var(--bg2); border-radius: 8px; padding: 12px 14px; }
+.rule-card .rule-num { font-size: 11px; font-weight: 600; color: var(--text3); margin-bottom: 2px; }
+.rule-card .rule-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.rule-card .rule-desc { font-size: 11px; color: var(--text2); line-height: 1.5; }
+
+.scoring-rules { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px; }
+@media (max-width: 500px) { .scoring-rules { grid-template-columns: 1fr; } }
+.scoring-rule { display: flex; align-items: flex-start; gap: 6px; font-size: 11px; color: var(--text2); line-height: 1.4; padding: 6px 8px; background: var(--bg2); border-radius: 6px; }
+.scoring-rule .check { color: var(--teal); font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+.scoring-rule .cross { color: var(--coral); font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+
+.rubric-strip { display: flex; gap: 2px; margin-bottom: 8px; }
+.rubric-block { flex: 1; padding: 6px 4px; border-radius: 4px; text-align: center; background: var(--bg2); }
+.rubric-block .rubric-score { font-size: 12px; font-weight: 600; color: var(--text); }
+.rubric-block .rubric-label { font-size: 9px; color: var(--text2); margin-top: 1px; }
+
+.footer-note { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text2); line-height: 1.6; }
+.footer-note a { color: var(--accent); text-decoration: none; }
+.footer-note a:hover { text-decoration: underline; }
+
+.two-layer { display: flex; gap: 8px; margin-bottom: 16px; }
+@media (max-width: 500px) { .two-layer { flex-direction: column; } }
+.layer-card { flex: 1; border-radius: 8px; padding: 14px 16px; }
+.layer-card .layer-pct { font-size: 22px; font-weight: 600; margin-bottom: 2px; }
+.layer-card .layer-name { font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+.layer-card .layer-items { font-size: 11px; line-height: 1.6; }
+
+.file-flow { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin-bottom: 16px; }
+.file-node { font-size: 10px; font-family: var(--mono); padding: 4px 8px; border-radius: 4px; background: var(--bg2); color: var(--text2); }
+.file-arrow { font-size: 10px; color: var(--text3); }
+</style>
+</head>
+<body>
+
+<span class="badge">Product planning</span>
+<h1>Product judgment assessment</h1>
+<div class="subtitle">Planning system for a scenario-based product judgment assessment. 11 files, 8 tasks, 5 capability dimensions, rule-based scoring.</div>
+
+<div class="section-title">Planning file sequence</div>
+<div class="file-flow">
+  <span class="file-node">00 workflow guide</span>
+  <span class="file-arrow">&rarr;</span>
+  <span class="file-node">01 master plan</span>
+  <span class="file-arrow">&rarr;</span>
+  <span class="file-node">02 assessment plan</span>
+  <span class="file-arrow">&rarr;</span>
+  <span class="file-node">03 user journey</span>
+  <span class="file-arrow">&rarr;</span>
+  <span class="file-node">04 design guidelines</span>
+  <span class="file-arrow">&rarr;</span>
+  <span class="file-node">05 tasks</span>
+  <span class="file-arrow">&rarr;</span>
+  <span class="file-node">06 project brief</span>
+  <span class="file-arrow">&rarr;</span>
+  <span class="file-node">07 task inventory</span>
+  <span class="file-arrow">&rarr;</span>
+  <span class="file-node">08 scoring keys</span>
+  <span class="file-arrow">&rarr;</span>
+  <span class="file-node">09 implementation</span>
+  <span class="file-arrow">&rarr;</span>
+  <span class="file-node">10 content assets</span>
+</div>
+
+<div class="section-title">5 capability dimensions</div>
+<div class="section-sub">What the assessment actually measures &mdash; weighted by importance</div>
+<div class="radar-legend">
+  <div class="radar-item">
+    <span class="radar-label">Flow judgment</span>
+    <div class="radar-bar-track"><div class="radar-bar-fill" style="width:100%; background: var(--purple);"></div></div>
+    <span class="radar-weight">25%</span>
+  </div>
+  <div class="radar-item">
+    <span class="radar-label">Problem framing</span>
+    <div class="radar-bar-track"><div class="radar-bar-fill" style="width:80%; background: var(--teal);"></div></div>
+    <span class="radar-weight">20%</span>
+  </div>
+  <div class="radar-item">
+    <span class="radar-label">System awareness</span>
+    <div class="radar-bar-track"><div class="radar-bar-fill" style="width:80%; background: var(--blue);"></div></div>
+    <span class="radar-weight">20%</span>
+  </div>
+  <div class="radar-item">
+    <span class="radar-label">Trade-off quality</span>
+    <div class="radar-bar-track"><div class="radar-bar-fill" style="width:80%; background: var(--coral);"></div></div>
+    <span class="radar-weight">20%</span>
+  </div>
+  <div class="radar-item">
+    <span class="radar-label">AI collaboration maturity</span>
+    <div class="radar-bar-track"><div class="radar-bar-fill" style="width:60%; background: var(--amber);"></div></div>
+    <span class="radar-weight">15%</span>
+  </div>
+</div>
+
+<div class="section-title">8 tasks &times; 5 task types</div>
+<div class="section-sub">Color = task type. Every task maps to real product decisions.</div>
+<div class="task-grid">
+  <div class="task-cell" style="background: var(--teal-bg); color: var(--teal-text);">
+    <div class="task-id">T1</div><div class="task-type">Scenario</div>
+  </div>
+  <div class="task-cell" style="background: var(--teal-bg); color: var(--teal-text);">
+    <div class="task-id">T2</div><div class="task-type">Scenario</div>
+  </div>
+  <div class="task-cell" style="background: var(--coral-bg); color: var(--coral-text);">
+    <div class="task-id">T3</div><div class="task-type">Trade-off</div>
+  </div>
+  <div class="task-cell" style="background: var(--coral-bg); color: var(--coral-text);">
+    <div class="task-id">T4</div><div class="task-type">Trade-off</div>
+  </div>
+  <div class="task-cell" style="background: var(--purple-bg); color: var(--purple-text);">
+    <div class="task-id">T5</div><div class="task-type">Critique</div>
+  </div>
+  <div class="task-cell" style="background: var(--purple-bg); color: var(--purple-text);">
+    <div class="task-id">T6</div><div class="task-type">Critique</div>
+  </div>
+  <div class="task-cell" style="background: var(--blue-bg); color: var(--blue-text);">
+    <div class="task-id">T7</div><div class="task-type">Rewrite</div>
+  </div>
+  <div class="task-cell" style="background: var(--amber-bg); color: var(--amber-text);">
+    <div class="task-id">T8</div><div class="task-type">AI collab</div>
+  </div>
+</div>
+
+<div class="section-title">Capability coverage matrix</div>
+<div class="section-sub">Which tasks test which dimensions &mdash; darker = higher weight</div>
+<div style="margin-bottom: 16px;">
+  <div class="coverage-row">
+    <span class="coverage-label" style="font-weight:500; color: var(--text);">Capability</span>
+    <div class="coverage-dots">
+      <div class="dot" style="background:transparent; color:var(--text3);">T1</div>
+      <div class="dot" style="background:transparent; color:var(--text3);">T2</div>
+      <div class="dot" style="background:transparent; color:var(--text3);">T3</div>
+      <div class="dot" style="background:transparent; color:var(--text3);">T4</div>
+      <div class="dot" style="background:transparent; color:var(--text3);">T5</div>
+      <div class="dot" style="background:transparent; color:var(--text3);">T6</div>
+      <div class="dot" style="background:transparent; color:var(--text3);">T7</div>
+      <div class="dot" style="background:transparent; color:var(--text3);">T8</div>
+    </div>
+  </div>
+  <div class="coverage-row">
+    <span class="coverage-label">Problem framing</span>
+    <div class="coverage-dots">
+      <div class="dot on" style="background: var(--teal);">4</div>
+      <div class="dot on" style="background: var(--teal);">4</div>
+      <div class="dot off" style="background: var(--teal);">&nbsp;</div>
+      <div class="dot on" style="background: var(--teal); opacity:.6;">3</div>
+      <div class="dot off" style="background: var(--teal);">&nbsp;</div>
+      <div class="dot on" style="background: var(--teal); opacity:.6;">3</div>
+      <div class="dot on" style="background: var(--teal);">7</div>
+      <div class="dot on" style="background: var(--teal); opacity:.5;">2</div>
+    </div>
+  </div>
+  <div class="coverage-row">
+    <span class="coverage-label">Flow judgment</span>
+    <div class="coverage-dots">
+      <div class="dot on" style="background: var(--purple);">4</div>
+      <div class="dot on" style="background: var(--purple);">4</div>
+      <div class="dot on" style="background: var(--purple);">4</div>
+      <div class="dot off" style="background: var(--purple);">&nbsp;</div>
+      <div class="dot on" style="background: var(--purple);">7</div>
+      <div class="dot on" style="background: var(--purple);">6</div>
+      <div class="dot off" style="background: var(--purple);">&nbsp;</div>
+      <div class="dot off" style="background: var(--purple);">&nbsp;</div>
+    </div>
+  </div>
+  <div class="coverage-row">
+    <span class="coverage-label">System awareness</span>
+    <div class="coverage-dots">
+      <div class="dot off" style="background: var(--blue);">&nbsp;</div>
+      <div class="dot off" style="background: var(--blue);">&nbsp;</div>
+      <div class="dot on" style="background: var(--blue); opacity:.5;">2</div>
+      <div class="dot on" style="background: var(--blue); opacity:.5;">2</div>
+      <div class="dot on" style="background: var(--blue);">5</div>
+      <div class="dot on" style="background: var(--blue); opacity:.6;">3</div>
+      <div class="dot on" style="background: var(--blue);">4</div>
+      <div class="dot off" style="background: var(--blue);">&nbsp;</div>
+    </div>
+  </div>
+  <div class="coverage-row">
+    <span class="coverage-label">Trade-off quality</span>
+    <div class="coverage-dots">
+      <div class="dot on" style="background: var(--coral);">4</div>
+      <div class="dot on" style="background: var(--coral);">4</div>
+      <div class="dot on" style="background: var(--coral); opacity:.6;">3</div>
+      <div class="dot on" style="background: var(--coral);">4</div>
+      <div class="dot off" style="background: var(--coral);">&nbsp;</div>
+      <div class="dot off" style="background: var(--coral);">&nbsp;</div>
+      <div class="dot on" style="background: var(--coral);">7</div>
+      <div class="dot on" style="background: var(--coral);">5</div>
+    </div>
+  </div>
+  <div class="coverage-row">
+    <span class="coverage-label">AI collaboration</span>
+    <div class="coverage-dots">
+      <div class="dot off" style="background: var(--amber);">&nbsp;</div>
+      <div class="dot off" style="background: var(--amber);">&nbsp;</div>
+      <div class="dot off" style="background: var(--amber);">&nbsp;</div>
+      <div class="dot off" style="background: var(--amber);">&nbsp;</div>
+      <div class="dot off" style="background: var(--amber);">&nbsp;</div>
+      <div class="dot off" style="background: var(--amber);">&nbsp;</div>
+      <div class="dot off" style="background: var(--amber);">&nbsp;</div>
+      <div class="dot on" style="background: var(--amber);">9</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title">Two-layer scoring</div>
+<div class="two-layer">
+  <div class="layer-card" style="background: var(--teal-bg);">
+    <div class="layer-pct" style="color: var(--teal-text);">60%</div>
+    <div class="layer-name" style="color: var(--teal-text);">Objective-ish</div>
+    <div class="layer-items" style="color: var(--teal-text);">Direction choice, issue spotting, priority ranking, risky AI identification</div>
+  </div>
+  <div class="layer-card" style="background: var(--purple-bg);">
+    <div class="layer-pct" style="color: var(--purple-text);">40%</div>
+    <div class="layer-name" style="color: var(--purple-text);">Judgment</div>
+    <div class="layer-items" style="color: var(--purple-text);">Reasoning quality, completeness, realism, system awareness, AI steering maturity</div>
+  </div>
+</div>
+
+<div class="section-sub">Judgment rubric: 0&ndash;4 per dimension</div>
+<div class="rubric-strip">
+  <div class="rubric-block"><div class="rubric-score">0</div><div class="rubric-label">Weak</div></div>
+  <div class="rubric-block"><div class="rubric-score">1</div><div class="rubric-label">Limited</div></div>
+  <div class="rubric-block"><div class="rubric-score">2</div><div class="rubric-label">Functional</div></div>
+  <div class="rubric-block" style="background: var(--teal-bg);"><div class="rubric-score" style="color: var(--teal-text);">3</div><div class="rubric-label" style="color: var(--teal-text);">Strong</div></div>
+  <div class="rubric-block" style="background: var(--purple-bg);"><div class="rubric-score" style="color: var(--purple-text);">4</div><div class="rubric-label" style="color: var(--purple-text);">Excellent</div></div>
+</div>
+
+<div class="section-title">Scoring rewards vs. penalties</div>
+<div class="scoring-rules">
+  <div class="scoring-rule"><span class="check">&check;</span> Clear judgment over polished wording</div>
+  <div class="scoring-rule"><span class="check">&check;</span> Realistic prioritization</div>
+  <div class="scoring-rule"><span class="check">&check;</span> Commitment to a direction</div>
+  <div class="scoring-rule"><span class="check">&check;</span> Selective AI trust</div>
+  <div class="scoring-rule"><span class="cross">&times;</span> Jargon without substance</div>
+  <div class="scoring-rule"><span class="cross">&times;</span> Long answers with thin reasoning</div>
+  <div class="scoring-rule"><span class="cross">&times;</span> Blind AI trust or blanket rejection</div>
+  <div class="scoring-rule"><span class="cross">&times;</span> Hiding behind "it depends"</div>
+</div>
+
+<div class="section-title">5 output levels</div>
+<div class="levels-strip">
+  <div class="level-block" style="background: var(--gray-bg);">
+    <div class="level-name" style="color: var(--gray-text);">Executor</div>
+    <div class="level-band" style="color: var(--gray-text);">0&ndash;39</div>
+  </div>
+  <div class="level-block" style="background: var(--teal-bg);">
+    <div class="level-name" style="color: var(--teal-text);">Reliable builder</div>
+    <div class="level-band" style="color: var(--teal-text);">40&ndash;54</div>
+  </div>
+  <div class="level-block" style="background: var(--blue-bg);">
+    <div class="level-name" style="color: var(--blue-text);">Flow thinker</div>
+    <div class="level-band" style="color: var(--blue-text);">55&ndash;69</div>
+  </div>
+  <div class="level-block" style="background: var(--purple-bg);">
+    <div class="level-name" style="color: var(--purple-text);">System designer</div>
+    <div class="level-band" style="color: var(--purple-text);">70&ndash;84</div>
+  </div>
+  <div class="level-block" style="background: var(--amber-bg);">
+    <div class="level-name" style="color: var(--amber-text);">Product judge</div>
+    <div class="level-band" style="color: var(--amber-text);">85&ndash;100</div>
+  </div>
+</div>
+
+<div class="section-title">Scope protection rules</div>
+<div class="section-sub">Anti-drift system &mdash; these rules are mandatory throughout the build</div>
+<div class="rules-grid">
+  <div class="rule-card">
+    <div class="rule-num">01</div>
+    <div class="rule-title">Assessment first</div>
+    <div class="rule-desc">Landing page, AI comparisons, and branding must never become larger than the assessment itself.</div>
+  </div>
+  <div class="rule-card">
+    <div class="rule-num">02</div>
+    <div class="rule-title">No fake depth</div>
+    <div class="rule-desc">No theory-heavy content, jargon, or inflated result language to make the product feel "smart."</div>
+  </div>
+  <div class="rule-card">
+    <div class="rule-num">03</div>
+    <div class="rule-title">No drift into content site</div>
+    <div class="rule-desc">This is an assessment, not a blog, media site, or AI tool review.</div>
+  </div>
+  <div class="rule-card">
+    <div class="rule-num">04</div>
+    <div class="rule-title">No heavy auth in v1</div>
+    <div class="rule-desc">No login-first, dashboard-first, or profile-heavy flows unless re-approved.</div>
+  </div>
+  <div class="rule-card">
+    <div class="rule-num">05</div>
+    <div class="rule-title">No overbuilding</div>
+    <div class="rule-desc">Short public experiment, not a full platform. Speed and clarity over feature count.</div>
+  </div>
+  <div class="rule-card">
+    <div class="rule-num">06</div>
+    <div class="rule-title">Truthfulness wins</div>
+    <div class="rule-desc">If there is ever a conflict between broader/prettier/louder and more truthful &mdash; choose truthful.</div>
+  </div>
+</div>
+
+<div class="footer-note">
+  Planning system for AI-Era Product Judgment Check &mdash; a scenario-based assessment web app. 11 planning files, rule-based scoring, client-side execution, no backend dependency. Vietnamese v1, designed for a 10&ndash;15 day public experiment.
+  <br><br>
+  Built by Luke Dang &middot; <a href="https://craftmindship.com" target="_blank" rel="noopener">craftmindship.com</a>
+</div>
+
+</body>
+</html>
