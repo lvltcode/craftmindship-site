@@ -49,7 +49,7 @@ const ogData: Record<string, { title: string; description: string; image: string
     image: '/images/og/og-coding-bootcamps.png',
   },
   '/analysis/anthropic-academy-skill-formation': {
-    title: 'Anthropic Academy and the Skill Formation Gap | Craftmindship',
+    title: 'Anthropic Academy and the Skill Formation Gap \u2014 Craftmindship',
     description:
       'Why AI product education needs living learning infrastructure, not just courses, quizzes, and completion certificates.',
     image: '/images/og/og-anthropic-academy.png',
