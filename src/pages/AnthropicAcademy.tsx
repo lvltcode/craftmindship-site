@@ -97,10 +97,20 @@ export default function AnthropicAcademy() {
           reported back, and how disconnected that data is from any real measure of whether students learned.
         </p>
         <p>
-          As a learner, I&apos;ve gone through a long list of LMS-based programs: Google Project
-          Management on Coursera, the KPMG Data Analytics Consulting Virtual Internship on Forage,
-          IDEO&apos;s Designing a Business course, and many others. I&apos;ve seen the difference
-          between a credential people respect and a credential people quietly ignore.
+          As a learner, I have spent years moving through almost every major format of modern skills
+          education: Coursera specializations, Udemy courses, DataCamp and Codecademy-style coding
+          tracks, Khan Academy-style self-paced learning, Duolingo and ELSA-style habit-based
+          language apps, and competitive coding platforms like HackerRank and Codeforces. I have also
+          gone through offline or hybrid programs inspired by 42 School, local coding schools in
+          Vietnam, and North American bootcamp-style programs such as BrainStation in Toronto —
+          part of why I later wrote a separate analysis on{" "}
+          <a href="/analysis/coding-bootcamps-dying" className="underline text-gray-700 hover:text-gray-900">
+            why coding bootcamps are dying and what replaces them
+          </a>. That range matters because each model teaches differently: some optimize for
+          completion, some for repetition, some for challenge, some for peer pressure, and some for
+          career signaling. I have seen the difference between a credential that proves exposure, a
+          practice system that builds fluency, and a learning environment that actually changes how
+          someone works.
         </p>
         <p>
           As an operator, I worked inside a Southeast Asian edtech company that had reportedly raised
