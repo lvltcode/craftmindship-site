@@ -113,12 +113,15 @@ export default function AnthropicAcademy() {
           someone works.
         </p>
         <p>
-          As an operator, I worked inside a Southeast Asian edtech company that had reportedly raised
-          around $50M. My role required reconstructing how the business actually ran: instructor data
-          lived in one system, course data in another, contract data in another, content publishing in
-          another, course-status tracking in another. No single team had a complete operating map.
-          Before anyone could improve the product, someone had to assemble the real system from
-          scattered accounts, screenshots, workflows, and partial knowledge.
+          As an operator, I was hired as a Learning Design Expert inside a Southeast Asian edtech
+          company that had reportedly raised around $50M. By the time I joined, the company was
+          already under pressure and many parts of the organization had been reduced or shut down.
+          To do my actual job well, I had to understand how the learning system really worked
+          underneath the surface. That meant tracing the data flow across instructor records, course
+          data, contract information, content publishing, course-status tracking, and handoff
+          workflows. The issue was not that people lacked talent. The issue was that the operating
+          knowledge was fragmented across systems, teams, accounts, screenshots, and partial context.
+          Before the learning experience could be improved, the real system had to be mapped.
         </p>
         <p>
           As a self-directed learner, I studied at a top technical university in Vietnam before leaving
