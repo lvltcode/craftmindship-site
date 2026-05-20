@@ -43,62 +43,6 @@ function KvRow({ label, value, mono }: { label: string; value: string; mono?: bo
 export default function VerifiedAiSkillCredential() {
   return (
     <div className="my-8">
-      <style>{`
-        .vasc-kv-row {
-          display: grid;
-          grid-template-columns: 140px 1fr;
-          gap: 8px;
-          align-items: baseline;
-        }
-        .vasc-trail-entry {
-          display: grid;
-          grid-template-columns: 90px 1fr;
-          gap: 12px;
-          align-items: baseline;
-        }
-        .vasc-claim {
-          position: relative;
-          padding: 6px 0 6px 18px;
-          font-size: 13px;
-          color: #1a1a1a;
-          line-height: 1.5;
-          border-bottom: 1px solid #f7f7f7;
-          list-style: none;
-        }
-        .vasc-claim:last-child { border-bottom: none; }
-        .vasc-claim::before {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 12px;
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: #2D6A4F;
-        }
-        .vasc-claim-not-yet {
-          color: #6b6b6b;
-          font-style: italic;
-        }
-        .vasc-claim-not-yet::before {
-          background: none;
-          border: 1.5px solid #c4c4c4;
-        }
-        @media (max-width: 640px) {
-          .vasc-kv-row {
-            grid-template-columns: 1fr;
-            gap: 2px;
-            margin-bottom: 12px;
-          }
-          .vasc-trail-entry {
-            grid-template-columns: 1fr;
-            gap: 2px;
-          }
-          .vasc-header { flex-direction: column; }
-          .vasc-section { padding: 14px 16px; }
-        }
-      `}</style>
-
       <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "#2D6A4F", marginBottom: 6 }}>
         Sample Credential Object
       </p>
