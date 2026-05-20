@@ -720,6 +720,29 @@ export default function AnthropicAcademy() {
           That helps workers, helps employers, and helps AI companies build a durable adoption base.
         </p>
         <p>
+          One reason this may matter strategically for Anthropic is that education can become
+          distribution. That does not mean Academy is only a sales channel. It means that when people
+          learn to solve real problems through Claude, they carry those habits into teams, workflows,
+          and eventually buying decisions. A product becomes harder to replace when it becomes part of
+          how people think, work, and prove capability.
+        </p>
+        <p>
+          This is only a hypothesis, but the signal is worth watching. If Anthropic Academy evolves
+          from tutorials into a system for placement, applied work, validation, and credible
+          endorsement, it could become one of Anthropic&apos;s strongest competitive advantages. The
+          academy would not just teach people what Claude can do. It would help create the class of
+          workers, builders, analysts, operators, and founders who know how to create value with
+          Claude.
+        </p>
+        <p>
+          That matters because the optimistic version of AI adoption is not just job replacement. It
+          is leverage. A capable person who previously needed a full software team may now be able to
+          build and test a useful product alone. An operator who could only describe a workflow may
+          now be able to automate part of it. A small team may be able to serve users earlier, with
+          lower cost and less delay. If Academy helps more people cross that gap, it supports
+          Anthropic&apos;s business while also making AI adoption less socially fragile.
+        </p>
+        <p>
           There is one more reason this matters now, and it connects back to the
           tool-syntax-versus-cognitive-partnership distinction. AI is often described as a brilliant
           junior employee that needs clear instructions. That framing is incomplete. AI is better
