@@ -15,6 +15,14 @@ type ReaderMapProps = {
 export default function ReaderMap({ eyebrow, title, description, steps }: ReaderMapProps) {
   return (
     <div className="my-8">
+      <style>{`
+        .rm-node:hover .rm-badge,
+        .rm-node:focus-visible .rm-badge {
+          background: #2D6A4F;
+          color: #ffffff;
+          border-color: #2D6A4F;
+        }
+      `}</style>
       {eyebrow && (
         <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "#2D6A4F", marginBottom: 4 }}>
           {eyebrow}
@@ -40,20 +48,20 @@ export default function ReaderMap({ eyebrow, title, description, steps }: Reader
             style={{ height: 1, background: "#d4d4d4" }}
           />
 
-          {steps.map((step, i) => {
+          {steps.map((step) => {
             const inner = (
               <div className="relative flex flex-col items-center text-center" style={{ flex: 1 }}>
                 <span
-                  className="relative z-10 inline-flex items-center justify-center font-mono"
+                  className="rm-badge relative z-10 inline-flex items-center justify-center font-mono transition-colors"
                   style={{
                     width: 24,
                     height: 24,
                     borderRadius: "50%",
                     fontSize: 11,
                     fontWeight: 600,
-                    background: i === 0 ? "#2D6A4F" : "#f5f5f5",
-                    color: i === 0 ? "#ffffff" : "#1a1a1a",
-                    border: i === 0 ? "none" : "1px solid #e5e5e5",
+                    background: "#f5f5f5",
+                    color: "#1a1a1a",
+                    border: "1px solid #e5e5e5",
                   }}
                 >
                   {step.number}
@@ -71,7 +79,7 @@ export default function ReaderMap({ eyebrow, title, description, steps }: Reader
               <a
                 key={step.number}
                 href={step.href}
-                className="no-underline hover:opacity-75 transition-opacity"
+                className="rm-node no-underline transition-opacity"
                 style={{ flex: 1, textDecoration: "none" }}
               >
                 {inner}
@@ -111,8 +119,9 @@ export default function ReaderMap({ eyebrow, title, description, steps }: Reader
                   borderRadius: "50%",
                   fontSize: 11,
                   fontWeight: 600,
-                  background: "#2D6A4F",
-                  color: "#ffffff",
+                  background: "#f5f5f5",
+                  color: "#1a1a1a",
+                  border: "1px solid #e5e5e5",
                   marginTop: 1,
                 }}
               >

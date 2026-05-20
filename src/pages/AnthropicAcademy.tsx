@@ -6,9 +6,16 @@ import LearningInfrastructureArchitecture from "../components/artifacts/Learning
 import VerifiedAiSkillCredential from "../components/artifacts/VerifiedAiSkillCredential";
 import ReaderMap from "../components/ReaderMap";
 
-function SectionHeading({ children }: { children: React.ReactNode }) {
+function SectionHeading({ children, readerMapStep, readerMapLabel }: { children: React.ReactNode; readerMapStep?: string; readerMapLabel?: string }) {
   return (
-    <h2 className="mt-8 mb-4 text-xl font-bold text-gray-900">{children}</h2>
+    <div className="mt-8 mb-4">
+      {readerMapStep && readerMapLabel && (
+        <p style={{ fontSize: 10, fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "#2D6A4F", marginBottom: 4 }}>
+          Reader map step {readerMapStep} · {readerMapLabel}
+        </p>
+      )}
+      <h2 className="aa-section-heading text-xl font-bold text-gray-900">{children}</h2>
+    </div>
   );
 }
 
@@ -21,6 +28,20 @@ export default function AnthropicAcademy() {
 
   return (
     <article className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">
+      <style>{`
+        .aa-section-heading {
+          scroll-margin-top: 96px;
+          transition: border-color 0.15s, padding-left 0.15s;
+          border-left: 2px solid transparent;
+          padding-left: 0;
+          margin-left: 0;
+        }
+        .aa-section-heading:target {
+          border-left-color: #2D6A4F;
+          padding-left: 12px;
+          margin-left: -14px;
+        }
+      `}</style>
       {/* Header */}
       <header>
         <div className="flex flex-wrap items-center gap-3">
@@ -74,7 +95,7 @@ export default function AnthropicAcademy() {
         />
 
         {/* Section 1 */}
-        <SectionHeading>1. Why I&apos;m not looking at this as a casual learner</SectionHeading>
+        <SectionHeading readerMapStep="1" readerMapLabel="Observation">1. Why I&apos;m not looking at this as a casual learner</SectionHeading>
 
         <p>
           Most reviews of online courses are written from one angle: the learner finished a course
@@ -249,7 +270,7 @@ export default function AnthropicAcademy() {
         </p>
 
         {/* Section 4 */}
-        <SectionHeading>4. The real problem: tool syntax versus cognitive partnership</SectionHeading>
+        <SectionHeading readerMapStep="2" readerMapLabel="Diagnosis">4. The real problem: tool syntax versus cognitive partnership</SectionHeading>
 
         <p>
           Every AI company&apos;s education program &mdash; Anthropic, OpenAI, Google, AWS &mdash;
@@ -476,7 +497,7 @@ export default function AnthropicAcademy() {
         </p>
 
         {/* Section 10 */}
-        <SectionHeading>10. What a working system would look like</SectionHeading>
+        <SectionHeading readerMapStep="3" readerMapLabel="System model">10. What a working system would look like</SectionHeading>
 
         <p>
           If an AI academy wanted to address all four problems, the architecture would have five
@@ -649,7 +670,7 @@ export default function AnthropicAcademy() {
         </p>
 
         {/* Section 12 */}
-        <SectionHeading>12. Why this matters now</SectionHeading>
+        <SectionHeading readerMapStep="5" readerMapLabel="Implication">12. Why this matters now</SectionHeading>
 
         <p>
           In the coding bootcamp era, weak education mostly hurt individual learners who paid for
@@ -758,7 +779,7 @@ export default function AnthropicAcademy() {
         </p>
 
         {/* Section 14 — Evidence */}
-        <SectionHeading>14. Evidence: Measuring the gap with public data</SectionHeading>
+        <SectionHeading readerMapStep="4" readerMapLabel="Evidence">14. Evidence: Measuring the gap with public data</SectionHeading>
 
         <p>
           I also built a Python research notebook to test the public-data version of this claim.
