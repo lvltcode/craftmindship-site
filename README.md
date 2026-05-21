@@ -1,73 +1,116 @@
-# React + TypeScript + Vite
+# Craftmindship
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Portfolio site for Luke Dang — AI Product Builder and Technical Product Manager.
 
-Currently, two official plugins are available:
+**Live:** [craftmindship.com](https://craftmindship.com)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## What's on the site
 
-## React Compiler
+### Case studies (`/work`)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Route | Project | Status |
+|---|---|---|
+| `/work/cadence` | Lesson continuity app for private music teachers and parents. Supabase/RLS, email OTP, parent-safe views, real teacher pilot. | Production |
+| `/work/puppy-program-os` | Operational system for a guide dog training organization. Postgres alert engine, multi-tenant schema with RLS. | Prototype |
+| `/work/multi-agent-workflow` | Documented methodology for coordinating multiple AI models across planning, implementation, QA, and deployment. | Methodology |
 
-## Expanding the ESLint configuration
+### Analysis (`/analysis`)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Route | Topic |
+|---|---|
+| `/analysis/anthropic-academy-skill-formation` | Why AI education needs living learning infrastructure, not just courses and certificates. |
+| `/analysis/coding-bootcamps-dying` | Business model analysis of coding bootcamps and four futures as AI compresses the beginner layer. |
+| `/analysis/td-insurance-telematics` | Product teardown of TD MyAdvantage driving score — incentive misalignment and proxy metric problems. |
+| `/analysis/ai-repair-intake-marketplace` | Market intelligence and MVP experiment on contractor lead quality and subscription-first monetization. |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Lab (`/lab`)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Standalone interactive artifacts: design systems, data flow diagrams, market intelligence visuals. Built as static HTML files in `public/artifacts/`.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Other pages
+
+- `/about` — background, build process, target roles
+- `/work` — case study index
+
+## Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | React 18 + TypeScript |
+| Build | Vite |
+| Styling | Tailwind CSS |
+| Routing | React Router v6 |
+| Prerender | Build-time SSG via `scripts/prerender.mjs` |
+| Deploy | Vercel (auto-deploy from `main`) |
+| Analytics | Vercel Analytics |
+| OG/Social | Edge middleware for crawler-specific responses |
+| Sitemap | Static `public/sitemap.xml` + Google Search Console |
+
+No database, no auth, no CMS. Content lives in TSX components and static HTML artifacts.
+
+## Architecture
+
+```
+Browser / Googlebot / AI tool
+        │
+        ▼
+   Vercel Edge
+        │
+        ├─ Social crawler (Twitter, Facebook, LinkedIn, etc.)
+        │     └─ middleware.ts returns OG-only HTML
+        │
+        └─ Normal visitor / Googlebot
+              └─ Prerendered static HTML (real content in <div id="root">)
+                    └─ React hydrates on client
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- `scripts/prerender.mjs` generates static HTML for all known routes at build time. Each route gets a full server-rendered HTML file so search engines and AI tools see real content without JavaScript.
+- `middleware.ts` intercepts social crawler user-agents and returns a lightweight HTML page with OG/Twitter meta tags. Normal visitors and Googlebot receive the prerendered HTML directly.
+- The build command (`npm run build`) runs TypeScript checks, Vite production build, and prerendering in sequence.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Artifacts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Some case studies link to standalone HTML files under `public/artifacts/` for full artifact views (design systems, data flow diagrams, credential models). Case study pages use compact preview cards that link out to these files rather than embedding large iframes inline.
+
+The Lab page (`/lab`) also links to artifacts in the same directory.
+
+## Adding a new page
+
+The site depends on multiple files staying in sync. Checklist:
+
+1. Create page component in `src/pages/`
+2. Add route in `src/App.tsx`
+3. Add route to `scripts/prerender.mjs` routes array
+4. Add OG metadata to `middleware.ts`
+5. Add or update OG image in `public/images/og/` if needed
+6. Add route to `public/sitemap.xml`
+7. Run `npm run build` — verify prerender succeeds
+8. Check for hydration errors locally
+9. Push to `main` after review
+
+## Local development
+
+```bash
+npm install
+npm run dev        # Vite dev server with HMR
+npm run build      # TypeScript + Vite build + prerender
+npm run lint       # ESLint
+npm run preview    # Serve production build locally
 ```
+
+## Development workflow
+
+Content and implementation are maintained through an AI-assisted development workflow using ChatGPT, Claude, Claude Code, Codex, and local QA. Planning artifacts drive build sessions. AI tools execute against specs, not ad-hoc prompts. See the [Multi-Agent Workflow case study](https://craftmindship.com/work/multi-agent-workflow) for the full methodology.
+
+## Related repos
+
+- [cadence-osa](https://github.com/lvltcode/cadence-osa) — Cadence production app
+- [lukedang](https://github.com/lvltcode/lukedang) — case study source documents and planning artifacts
+
+## Contact
+
+- [craftmindship.com](https://craftmindship.com)
+- [LinkedIn](https://www.linkedin.com/in/dangtranlevu/)
+- [GitHub](https://github.com/lvltcode)
+- [Substack](https://craftmindship.substack.com)
+- hello@craftmindship.com
