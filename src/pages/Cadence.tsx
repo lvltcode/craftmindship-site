@@ -56,11 +56,8 @@ export default function Cadence() {
           </span>
         </div>
         <p className="mt-3 text-lg text-gray-600">
-          Lesson continuity and practice management for private music teachers and parents.
-        </p>
-        <p className="mt-2 text-gray-700 leading-relaxed">
-          One teacher input after every lesson gives parents weekly clarity on what their
-          child is learning and what to practice next.
+          A production music-education pilot built from months of parent-side observation,
+          then shipped as the smallest reliable system to reduce invisible teacher admin work.
         </p>
         <div className="mt-4 flex flex-wrap gap-3">
           {externalLinks.map((link) => (
@@ -96,7 +93,54 @@ export default function Cadence() {
       />
 
       <ContentWithToc>
-      {/* 1: The Problem */}
+      {/* 1: Origin */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">Origin</h2>
+        <p className="mt-4 text-gray-700 leading-relaxed">
+          I joined the music lesson workflow as a parent in September 2025. My child started
+          Suzuki violin, and I bought a violin to practice alongside them &mdash; not to become
+          a violinist, but to understand the learning loop from the parent side. By March 2026,
+          after months of watching the same operational burden repeat, I started building Cadence.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          The pilot teacher &mdash; a long-time private violin/viola teacher with Suzuki and RCM
+          students &mdash; was carrying invisible operational work: scheduling, remembering lesson
+          context, coordinating with parents, and keeping each child moving across the week. Cadence
+          started from a personal question about measuring a child&apos;s progress, but became a
+          focused product when I saw the bigger bottleneck: teacher admin burden was pulling
+          attention away from teaching itself.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          The focused build took two weeks. The speed came from prior context, not from skipping
+          product thinking. Most of the schema shape, role boundaries, and &ldquo;what to leave
+          out&rdquo; decisions had already been made during the six months of observation. The
+          2-week sprint was implementation, not discovery.
+        </p>
+      </section>
+
+      <hr className="my-8 border-gray-200" />
+
+      {/* 2: Adoption Risk */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          Adoption Risk Was Higher Than Technical Risk
+        </h2>
+        <p className="mt-4 text-gray-700 leading-relaxed">
+          The pilot teacher has low confidence with web apps and a phone-first email workflow.
+          Building working software was not the hard part. Making it safe to try, easy to repeat,
+          and impossible to lose trust over &mdash; that was the hard part.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          Every architecture decision, every &ldquo;no,&rdquo; and every onboarding artifact in
+          this case study was shaped by one principle: if she stops using it, it does not matter
+          what was built. Technical elegance is irrelevant if the first real user cannot get in
+          the door.
+        </p>
+      </section>
+
+      <hr className="my-8 border-gray-200" />
+
+      {/* 3: The Problem */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">The Problem</h2>
         <p className="mt-4 text-gray-700 leading-relaxed">
@@ -198,64 +242,7 @@ export default function Cadence() {
 
       <hr className="my-8 border-gray-200" />
 
-      {/* 5: Learning Pattern Model */}
-      <section>
-        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
-          Learning Pattern Model
-        </h2>
-        <p className="mt-4 text-gray-700 leading-relaxed">
-          Cadence is not trying to measure children against each other. That is the wrong
-          incentive in early music education.
-        </p>
-        <p className="mt-3 text-gray-700 leading-relaxed">
-          Instead, Cadence tracks the smallest useful learning signals: which pieces appeared
-          in lessons, which skills were practiced, how often they were repeated, and when the
-          teacher confirms something is retained.
-        </p>
-        <div className="mt-6 space-y-4">
-          <div className="rounded-lg border border-gray-200 p-4">
-            <h3 className="font-semibold text-gray-900">Pieces show repertoire progress</h3>
-            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
-              Each student has a live piece list mapped to their Suzuki book. Teacher updates
-              status as pieces move through a mastery progression: introduced &rarr; working
-              &rarr; can play &rarr; polished. Parents see progress in real terms, not abstract percentages.
-            </p>
-          </div>
-          <div className="rounded-lg border border-gray-200 p-4">
-            <h3 className="font-semibold text-gray-900">Skills show transferable technique</h3>
-            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
-              A child may polish a piece but still need work on tone production, bow direction,
-              rhythm, posture, or left-hand control. Cadence keeps skills architecturally separate
-              from pieces so teachers can see what is improving across the repertoire, not just
-              whether one song is finished.
-            </p>
-          </div>
-          <div className="rounded-lg border border-gray-200 p-4">
-            <h3 className="font-semibold text-gray-900">+N exposure counts</h3>
-            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
-              Track how often a piece or skill has appeared across lessons and practice context.
-              A &ldquo;+7&rdquo; does not mean seven perfect practices. It means the skill or
-              piece has been touched repeatedly. This helps the teacher see repetition and exposure
-              without turning the app into a fake scoring system.
-            </p>
-          </div>
-          <div className="rounded-lg border border-gray-200 p-4">
-            <h3 className="font-semibold text-gray-900">Retained status</h3>
-            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
-              Teacher-confirmed mastery &mdash; not an algorithm, not a threshold. The teacher
-              decides when a skill or piece is truly retained based on their professional judgment.
-            </p>
-          </div>
-        </div>
-        <p className="mt-6 text-sm text-gray-500 italic">
-          Instead of calling a child &ldquo;talented&rdquo; or &ldquo;behind,&rdquo; Cadence
-          makes progress visible at the smallest useful level.
-        </p>
-      </section>
-
-      <hr className="my-8 border-gray-200" />
-
-      {/* 6: Privacy and Trust */}
+      {/* Privacy and Trust */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Privacy and Trust Architecture
@@ -283,6 +270,34 @@ export default function Cadence() {
         <p className="mt-3 text-sm text-gray-500 italic">
           This matters for adoption. Teachers will not use a system where parents can see their
           unfiltered teaching notes. The privacy architecture made adoption possible.
+        </p>
+      </section>
+
+      <hr className="my-8 border-gray-200" />
+
+      {/* Learning Pattern Model */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          Learning Pattern Model
+        </h2>
+        <p className="mt-4 text-gray-700 leading-relaxed">
+          Cadence is not trying to measure children against each other. That is the wrong
+          incentive in early music education.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          Instead, Cadence tracks the smallest useful learning signals: which pieces appeared
+          in lessons, which skills were practiced, how often they were repeated, and when the
+          teacher confirms something is retained.
+        </p>
+        <ul className="mt-4 ml-5 list-disc space-y-2 text-gray-700 leading-relaxed">
+          <li><strong className="text-gray-900">Pieces</strong> show repertoire progress. Status moves through introduced &rarr; working &rarr; can play &rarr; polished, mapped to the student&apos;s Suzuki book.</li>
+          <li><strong className="text-gray-900">Skills</strong> show transferable technique. Tone, bow direction, rhythm, posture, and left-hand control are tracked separately from pieces so improvement is visible across the repertoire.</li>
+          <li><strong className="text-gray-900">+N exposure counts.</strong> Repetition across lessons and practice context is tracked as exposure, not as a fake score.</li>
+          <li><strong className="text-gray-900">Retained status</strong> is teacher-confirmed. Mastery is a professional judgment, not an algorithm threshold.</li>
+        </ul>
+        <p className="mt-6 text-sm text-gray-500 italic">
+          Instead of calling a child &ldquo;talented&rdquo; or &ldquo;behind,&rdquo; Cadence
+          makes progress visible at the smallest useful level.
         </p>
       </section>
 
@@ -341,86 +356,146 @@ export default function Cadence() {
 
       <hr className="my-8 border-gray-200" />
 
-      {/* 9: Rollout and Business Model */}
+      {/* Shipping to a Real User */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
-          Rollout and Business Model
+          Shipping to a Real User
+        </h2>
+        <p className="mt-4 text-gray-700 leading-relaxed">
+          Cadence&apos;s first pilot teacher is an experienced violin teacher with very low
+          computer confidence and a phone-first email workflow. Shipping a working app was not
+          enough. I had to make Cadence reachable, repeatable, and safe to try.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          The product challenge was not just interface design. It was adoption design. Cadence
+          needed to feel less like &ldquo;new software&rdquo; and more like a simple routine
+          she could repeat after every lesson.
+        </p>
+
+        <div className="mt-6 space-y-4">
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900">PWA &mdash; Add to Home Screen</h3>
+            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
+              Cadence is a Progressive Web App. Instead of asking the teacher to search the App Store,
+              manage downloads, or remember a URL, she opens one link, taps &ldquo;Add to Home
+              Screen,&rdquo; and gets a Cadence icon that behaves like an app. No App Store
+              friction. No installation anxiety. No extra account setup.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900">Coach marks &mdash; guided inside the app</h3>
+            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
+              I added five interactive tours across teacher, parent, and admin workflows. Each
+              tour highlights one action at a time with a short tooltip, so users learn by doing
+              instead of reading a manual. This matters for teachers who are willing to try the
+              product but are not confident exploring software on their own.
+            </p>
+          </div>
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900">Printed guide &mdash; designed for the pilot context</h3>
+            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
+              I spent two hours in Canva creating a printed, step-by-step guide using real
+              screenshots from the actual Cadence flow. The guide is designed to sit next to
+              the teacher&apos;s iPhone while she sets up the app, adds students, and invites parents.
+              This is not scalable onboarding automation. It is founder-led adoption work for
+              the first real user.
+            </p>
+          </div>
+        </div>
+
+        <figure className="mt-8">
+          <img
+            src="/images/projects/cadence/pilot-onboarding-guide.png"
+            alt="PWA installation guide and Quick Start for teachers and parents"
+            className="w-full rounded-lg border border-gray-200"
+            loading="lazy"
+          />
+          <figcaption className="mt-2 text-[13px] text-gray-500">
+            <strong className="text-gray-700">PWA installation guide + Quick Start</strong> &mdash; designed in Canva for the first pilot teacher
+          </figcaption>
+        </figure>
+
+        <div className="mt-8 rounded-lg border-l-[3px] border-[#2D6A4F] bg-[#f9fafb] px-6 py-5">
+          <p className="text-xs font-medium uppercase tracking-wide text-[#6b6b6b] mb-2">Pilot feedback, paraphrased</p>
+          <p className="text-gray-700 leading-relaxed">
+            The pilot teacher responded with strong appreciation, saying the guide made the app
+            feel approachable and that she had been considering a basic computer course because
+            she was not confident with technology.
+          </p>
+          <p className="mt-3 text-sm text-[#6b6b6b]">
+            &mdash; J., pilot teacher
+          </p>
+        </div>
+
+        <p className="mt-6 text-gray-700 leading-relaxed">
+          This was intentionally unscalable work for the first pilot. The goal was not to create
+          a permanent manual onboarding process. The goal was to remove adoption risk, observe
+          where the product broke down for a low-confidence user, and turn those lessons into
+          reusable onboarding patterns.
+        </p>
+      </section>
+
+      <hr className="my-8 border-gray-200" />
+
+      {/* Pilot Iteration With a Real Teacher */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          Pilot Iteration With a Real Teacher
+        </h2>
+        <p className="mt-4 text-gray-700 leading-relaxed">
+          Cadence is being tested with one real teacher first, not launched broadly.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          That matters because the early work is not just shipping features. It is observing
+          how a non-technical teacher actually teaches, schedules, explains practice, and
+          communicates with parents.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          Through the pilot, I learned details that shaped the product:
+        </p>
+        <ul className="mt-3 ml-5 list-disc space-y-1 text-gray-700 leading-relaxed">
+          <li>The pilot teacher works across violin and viola, not only violin.</li>
+          <li>Many students follow RCM paths, not only Suzuki.</li>
+          <li>Teacher onboarding needed printed guidance, not just an app walkthrough.</li>
+          <li>Parent clarity matters as much as teacher data entry.</li>
+          <li>The product had to reduce repeated explanation, not create another admin task.</li>
+        </ul>
+        <p className="mt-3 text-gray-700 leading-relaxed">
+          This is still early, but it is real product iteration: observe the user, adjust the
+          workflow, simplify the surface, and avoid scaling before the pilot proves the system
+          is usable.
+        </p>
+      </section>
+
+      <hr className="my-8 border-gray-200" />
+
+      {/* Rollout and Commercial Path */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          Rollout and Commercial Path
         </h2>
         <p className="mt-4 text-gray-700 leading-relaxed">
           Cadence was designed to avoid enterprise-style adoption friction.
         </p>
         <p className="mt-3 text-gray-700 leading-relaxed">
-          The first phase is a free pilot with one real teacher and a small group of families.
-          The goal is proof: fewer repeated parent questions, faster lesson notes, better
-          schedule clarity, and more consistent home practice.
-        </p>
-        <p className="mt-3 text-gray-700 leading-relaxed">
-          The commercial path starts with teachers, not parents and not the organization.
-          Teachers own the workflow and create the data. If the teacher uses Cadence, parents
-          receive value automatically. Teacher-level pricing avoids org procurement friction.
+          The first phase is a free pilot with one real teacher and her families. The commercial
+          path starts with teachers, not parents and not the school. Teachers own the workflow
+          and create the data &mdash; if the teacher uses Cadence, parents receive value
+          automatically. Teacher-level pricing removes org procurement friction, which is the
+          same adoption logic that shaped the rest of the product.
         </p>
         <p className="mt-3 text-gray-700 leading-relaxed">
           Future expansion can add an organization layer for visibility across teachers,
           group-class context, and administrative support &mdash; but the product starts
-          teacher-first.
+          teacher-first and stays teacher-first by default. Core progress visibility &mdash;
+          lesson notes, piece status, skill tracking, practice guidance &mdash; will not be
+          paywalled.
         </p>
       </section>
 
       <hr className="my-8 border-gray-200" />
 
-      {/* 10: Why This Exists */}
-      <section>
-        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
-          Why This Exists
-        </h2>
-        <p className="mt-4 text-gray-700 leading-relaxed">
-          Luke has over 10 years of teaching experience as a side job across multiple
-          disciplines, and has worked around EdTech and organizational systems professionally.
-          When his son joined the Suzuki violin community, Luke bought a violin and started
-          practicing alongside him &mdash; not to become a violinist, but to understand the
-          learning loop from the parent side.
-        </p>
-        <p className="mt-3 text-gray-700 leading-relaxed">
-          Cadence came from that gap: what the teacher knows after a lesson, what the parent
-          actually understands, and what happens (or doesn&apos;t) during home practice between
-          lessons. The model is not limited to violin. The same coach-parent-child feedback
-          gap exists in piano, cello, swimming, martial arts, and team sports. Any structured
-          learning environment where a coach sees the student weekly and a parent manages
-          daily practice has the same problem.
-        </p>
-        <p className="mt-3 text-gray-700 leading-relaxed">
-          Cadence is founder-supported during the pilot phase. The goal is to prove usefulness
-          with real teachers and families before introducing payment pressure. Long-term
-          sustainability may come from teacher subscriptions, optional community support,
-          and local partner sponsorship. Core progress visibility &mdash; lesson notes, piece
-          status, skill tracking, practice guidance &mdash; will not be paywalled.
-        </p>
-      </section>
-
-      <hr className="my-8 border-gray-200" />
-
-      {/* 11: Prototype to Production */}
-      <section>
-        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
-          Prototype to Production
-        </h2>
-        <p className="mt-4 text-gray-700 leading-relaxed">
-          The early prototype proved the teacher-parent flow: lesson note, parent view, piece
-          status, and weekly practice clarity.
-        </p>
-        <p className="mt-3 text-gray-700 leading-relaxed">
-          Production added the hard parts: Supabase RLS and parent-safe database views,
-          invite-only parent onboarding with email delivery via Resend, teacher approval queue,
-          recurring schedule generation with cancellation and makeup handling, parent practice
-          check-ins with duplicate prevention, events with student assignment and parent RSVP,
-          Super Admin support tools, and mobile QA with production auth and branded email
-          setup on a custom domain.
-        </p>
-      </section>
-
-      <hr className="my-8 border-gray-200" />
-
-      {/* 12: Interactive Prototype */}
+      {/* Interactive Prototype */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Interactive Prototype
@@ -458,11 +533,15 @@ export default function Cadence() {
 
       <hr className="my-8 border-gray-200" />
 
-      {/* 13: Technical Architecture */}
+      {/* Technical Architecture */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Technical Architecture
         </h2>
+        <p className="mt-4 text-gray-700 leading-relaxed">
+          Stack chosen for adoption speed and maintainability, not framework fashion. Every
+          layer is something the operator can debug, deploy, and replace alone.
+        </p>
         <div className="responsive-table mt-4">
           <table className="w-full text-sm">
             <thead>
@@ -512,7 +591,12 @@ export default function Cadence() {
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           AI-Assisted Build Workflow
         </h2>
-        <p className="mt-4 text-gray-700 leading-relaxed font-medium">
+        <p className="mt-4 text-gray-700 leading-relaxed">
+          Cadence used a hybrid build approach: enough upfront architecture to avoid costly
+          rework, then small iterative releases around the real teacher workflow. Not pure
+          Agile, not waterfall &mdash; risk-shaped.
+        </p>
+        <p className="mt-3 text-gray-700 leading-relaxed font-medium">
           AI accelerated execution. It did not decide the product.
         </p>
         <p className="mt-3 text-gray-700 leading-relaxed">
@@ -681,125 +765,21 @@ export default function Cadence() {
               Tradeoff: RLS policies add development overhead and debugging complexity, but they&apos;re the reason the pilot teacher trusts the system.
             </p>
           </div>
+          <div className="rounded-lg border border-gray-200 p-4">
+            <h3 className="font-semibold text-gray-900">Designed to avoid future operational debt</h3>
+            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
+              <strong className="text-gray-900">Why:</strong> Maintainability was treated as a product constraint, not a code-quality concern. The goal was not the fastest demo, but a system that could support future books, students, schedules, and parent views without turning every new feature into a rewrite.
+            </p>
+            <p className="mt-1 text-sm text-gray-500 italic">
+              Tradeoff: More upfront schema and RLS design time, but the pilot can expand to a second teacher and a second curriculum without architectural rework.
+            </p>
+          </div>
         </div>
       </section>
 
       <hr className="my-8 border-gray-200" />
 
-      {/* 16: Shipping to a Real User */}
-      <section>
-        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
-          Shipping to a Real User
-        </h2>
-        <p className="mt-4 text-gray-700 leading-relaxed">
-          Cadence&apos;s first pilot teacher is an experienced violin teacher with very low
-          computer confidence and a phone-first email workflow. Shipping a working app was not
-          enough. I had to make Cadence reachable, repeatable, and safe to try.
-        </p>
-        <p className="mt-3 text-gray-700 leading-relaxed">
-          The product challenge was not just interface design. It was adoption design. Cadence
-          needed to feel less like &ldquo;new software&rdquo; and more like a simple routine
-          she could repeat after every lesson.
-        </p>
-
-        <div className="mt-6 space-y-4">
-          <div className="rounded-lg border border-gray-200 p-4">
-            <h3 className="font-semibold text-gray-900">PWA &mdash; Add to Home Screen</h3>
-            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
-              Cadence is a Progressive Web App. Instead of asking the teacher to search the App Store,
-              manage downloads, or remember a URL, she opens one link, taps &ldquo;Add to Home
-              Screen,&rdquo; and gets a Cadence icon that behaves like an app. No App Store
-              friction. No installation anxiety. No extra account setup.
-            </p>
-          </div>
-          <div className="rounded-lg border border-gray-200 p-4">
-            <h3 className="font-semibold text-gray-900">Coach marks &mdash; guided inside the app</h3>
-            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
-              I added five interactive tours across teacher, parent, and admin workflows. Each
-              tour highlights one action at a time with a short tooltip, so users learn by doing
-              instead of reading a manual. This matters for teachers who are willing to try the
-              product but are not confident exploring software on their own.
-            </p>
-          </div>
-          <div className="rounded-lg border border-gray-200 p-4">
-            <h3 className="font-semibold text-gray-900">Printed guide &mdash; designed for the pilot context</h3>
-            <p className="mt-1 text-sm text-gray-600 leading-relaxed">
-              I spent two hours in Canva creating a printed, step-by-step guide using real
-              screenshots from the actual Cadence flow. The guide is designed to sit next to
-              the teacher&apos;s iPhone while she sets up the app, adds students, and invites parents.
-              This is not scalable onboarding automation. It is founder-led adoption work for
-              the first real user.
-            </p>
-          </div>
-        </div>
-
-        <figure className="mt-8">
-          <img
-            src="/images/projects/cadence/pilot-onboarding-guide.png"
-            alt="PWA installation guide and Quick Start for teachers and parents"
-            className="w-full rounded-lg border border-gray-200"
-            loading="lazy"
-          />
-          <figcaption className="mt-2 text-[13px] text-gray-500">
-            <strong className="text-gray-700">PWA installation guide + Quick Start</strong> &mdash; designed in Canva for the first pilot teacher
-          </figcaption>
-        </figure>
-
-        <div className="mt-8 rounded-lg border-l-[3px] border-[#2D6A4F] bg-[#f9fafb] px-6 py-5">
-          <p className="text-xs font-medium uppercase tracking-wide text-[#6b6b6b] mb-2">Pilot feedback, paraphrased</p>
-          <p className="text-gray-700 leading-relaxed">
-            The pilot teacher responded with strong appreciation, saying the guide made the app
-            feel approachable and that she had been considering a basic computer course because
-            she was not confident with technology.
-          </p>
-          <p className="mt-3 text-sm text-[#6b6b6b]">
-            &mdash; J., pilot teacher
-          </p>
-        </div>
-
-        <p className="mt-6 text-gray-700 leading-relaxed">
-          This was intentionally unscalable work for the first pilot. The goal was not to create
-          a permanent manual onboarding process. The goal was to remove adoption risk, observe
-          where the product broke down for a low-confidence user, and turn those lessons into
-          reusable onboarding patterns.
-        </p>
-      </section>
-
-      <hr className="my-8 border-gray-200" />
-
-      {/* 17: Pilot Iteration With a Real Teacher */}
-      <section>
-        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
-          Pilot Iteration With a Real Teacher
-        </h2>
-        <p className="mt-4 text-gray-700 leading-relaxed">
-          Cadence is being tested with one real teacher first, not launched broadly.
-        </p>
-        <p className="mt-3 text-gray-700 leading-relaxed">
-          That matters because the early work is not just shipping features. It is observing
-          how a non-technical teacher actually teaches, schedules, explains practice, and
-          communicates with parents.
-        </p>
-        <p className="mt-3 text-gray-700 leading-relaxed">
-          Through the pilot, I learned details that shaped the product:
-        </p>
-        <ul className="mt-3 ml-5 list-disc space-y-1 text-gray-700 leading-relaxed">
-          <li>The pilot teacher works across violin and viola, not only violin.</li>
-          <li>Many students follow RCM paths, not only Suzuki.</li>
-          <li>Teacher onboarding needed printed guidance, not just an app walkthrough.</li>
-          <li>Parent clarity matters as much as teacher data entry.</li>
-          <li>The product had to reduce repeated explanation, not create another admin task.</li>
-        </ul>
-        <p className="mt-3 text-gray-700 leading-relaxed">
-          This is still early, but it is real product iteration: observe the user, adjust the
-          workflow, simplify the surface, and avoid scaling before the pilot proves the system
-          is usable.
-        </p>
-      </section>
-
-      <hr className="my-8 border-gray-200" />
-
-      {/* 18: Current Status */}
+      {/* Current Status */}
       <section className="pb-8">
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
           Current Status
@@ -809,16 +789,13 @@ export default function Cadence() {
           <a href="https://cadence-osa.com" target="_blank" rel="noopener noreferrer" className="font-medium underline">
             cadence-osa.com
           </a>.
-        </p>
-        <p className="mt-3 text-gray-700 leading-relaxed">
           The teacher-parent lesson continuity loop, parent practice view, piece and skill
-          progress tracking, scheduling, events, parent practice check-ins, and Super Admin
-          support layer are all functional.
+          progress tracking, scheduling, events, and Super Admin support layer are all functional.
         </p>
         <p className="mt-3 text-gray-700 leading-relaxed">
           Next phase: profile polish, parent progress reports with PDF export, deeper teacher
-          validation with the pilot teacher&apos;s full student roster, and funding transparency for
-          community support.
+          validation with the pilot teacher&apos;s full student roster, and funding transparency
+          for community support.
         </p>
       </section>
       </ContentWithToc>
