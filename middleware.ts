@@ -9,7 +9,7 @@ const ogData: Record<string, { title: string; description: string; image: string
   '/': {
     title: 'Craftmindship — Luke Dang',
     description:
-      "AI Product Builder and Technical Product Manager. Workflow-heavy SaaS with Supabase/RLS, real user pilots, and AI-assisted delivery.",
+      "AI Product Builder & Technical Product Manager. I work in ambiguous workflows, reduce risk before code, and ship reliable systems real users adopt.",
     image: '/images/logos/craftmindship-light.png',
   },
   '/work': {

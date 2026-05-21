@@ -44,12 +44,15 @@ export default function Home() {
           AI Product Builder&nbsp;· Technical Product&nbsp;Manager
         </h1>
         <p className="mt-3 max-w-xl text-lg leading-relaxed text-gray-600">
-          I ship workflow-heavy pilot apps from product architecture to
-          live deployment &mdash; Supabase/RLS, AI-assisted delivery, and
-          real-user onboarding with non-technical users.
+          I work in unfamiliar, ambiguous workflows: learn the domain fast,
+          reduce risk before code, and ship the smallest reliable system real
+          users can actually adopt. AI-assisted execution stays under operator control.
+        </p>
+        <p className="mt-2 max-w-xl text-sm text-gray-500 italic">
+          Reliable over clever. Judgment over automation.
         </p>
         <p className="mt-2 max-w-xl text-sm text-gray-400">
-          Live Pilot App · Supabase/RLS · AI-native delivery · Workflow automation · Real user pilots
+          Production pilot · Real users · Supabase/RLS · Multi-agent AI workflow · Observation-led product design
         </p>
         <div className="mt-5 flex flex-wrap gap-4">
           <Link
