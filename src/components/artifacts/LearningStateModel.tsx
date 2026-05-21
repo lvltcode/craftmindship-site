@@ -99,26 +99,6 @@ const rows = [
 export default function LearningStateModel() {
   return (
     <div className="my-8">
-      <style>{`
-        .lsm-divider { width: 1px; padding: 0 !important; position: relative; }
-        .lsm-divider::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 50%;
-          width: 1px;
-          background: #d4d4d4;
-        }
-        thead .lsm-divider::after { bottom: -1px; }
-        @media (max-width: 640px) {
-          .lsm-scroll-hint { display: block; }
-        }
-        @media (min-width: 641px) {
-          .lsm-scroll-hint { display: none; }
-        }
-      `}</style>
-
       <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "#2D6A4F", marginBottom: 6 }}>
         Learning State Model
       </p>
