@@ -3,6 +3,7 @@ import { ExternalLink, Code } from "lucide-react";
 import { usePageMeta } from "../hooks/usePageMeta";
 import ContentWithToc from "../components/ContentWithToc";
 import AtAGlance from "../components/AtAGlance";
+import ArtifactPreviewCard from "../components/ArtifactPreviewCard";
 
 const externalLinks = [
   { label: "Live App", href: "https://cadence-osa.com", icon: ExternalLink },
@@ -36,38 +37,6 @@ const buildRoles = [
   { role: "Overflow / refactor", tool: "Codex", did: "Secondary patches, code cleanup" },
 ];
 
-function ArtifactEmbed({ src, title, height = "480px" }: { src: string; title: string; height?: string }) {
-  const [failed, setFailed] = useState(false);
-
-  if (failed) {
-    return (
-      <div className="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center">
-        <p className="text-sm text-gray-500">{title}</p>
-        <a
-          href={src}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-2 inline-block text-sm font-medium text-gray-900 underline"
-        >
-          Open in new tab &rarr;
-        </a>
-      </div>
-    );
-  }
-
-  return (
-    <div className="rounded-lg border border-gray-200 overflow-hidden">
-      <iframe
-        src={src}
-        title={title}
-        className="w-full border-0"
-        style={{ height }}
-        onError={() => setFailed(true)}
-        sandbox="allow-scripts allow-same-origin"
-      />
-    </div>
-  );
-}
 
 export default function Cadence() {
   const [prototypeFailed, setPrototypeFailed] = useState(false);
@@ -325,43 +294,19 @@ export default function Cadence() {
           Design System
         </h2>
 
-        <div className="mt-6 space-y-8">
-          <div>
-            <h3 className="text-sm font-medium text-gray-900">
-              Suzuki Book Color System
-            </h3>
-            <p className="mt-1 text-sm text-gray-500">
-              The Suzuki book color system maps 10 books to a consistent visual language
-              across the entire app. Every book reference renders through a single BookChip
-              component &mdash; no hand-coded color values anywhere in the codebase.
-            </p>
-            <div className="mt-3">
-              <ArtifactEmbed
-                src="/artifacts/suzuki_book_color_system.html"
-                title="Suzuki Book Color System"
-                height="520px"
-              />
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-medium text-gray-900">
-              Student Card Layout
-            </h3>
-            <p className="mt-1 text-sm text-gray-500">
-              Student cards on the teacher dashboard use a compact layout optimized for
-              scanning at a glance: student name, instrument, book level, parent link status,
-              lesson count, practice frequency, next lesson date and time. The left stripe
-              color matches the student&apos;s current book level.
-            </p>
-            <div className="mt-3">
-              <ArtifactEmbed
-                src="/artifacts/student_card_compact_options.html"
-                title="Student Card Compact Layout Options"
-                height="640px"
-              />
-            </div>
-          </div>
+        <div className="mt-6 space-y-4">
+          <ArtifactPreviewCard
+            eyebrow="Design system"
+            title="Suzuki Book Color System"
+            description="10 books mapped to a consistent visual language. Every book reference renders through a single BookChip component — no hand-coded color values anywhere in the codebase."
+            href="/artifacts/suzuki_book_color_system.html"
+          />
+          <ArtifactPreviewCard
+            eyebrow="Design system"
+            title="Student Card Compact Layout"
+            description="Teacher dashboard cards optimized for scanning: student name, book level, parent link status, lesson count, practice frequency, and next lesson. Left stripe matches current book level."
+            href="/artifacts/student_card_compact_options.html"
+          />
         </div>
       </section>
 
