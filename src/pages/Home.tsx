@@ -63,7 +63,7 @@ export default function Home() {
             View Work
           </Link>
           <a
-            href="/cv.pdf"
+            href="/CV_Luke_Dang_Technical_Product_Manager_2026.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 min-h-[44px] rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"

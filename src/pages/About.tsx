@@ -34,7 +34,7 @@ const buildProcess = [
 ];
 
 const ctaLinks = [
-  { label: "View CV", href: "/cv.pdf", icon: FileText },
+  { label: "View CV", href: "/CV_Luke_Dang_Technical_Product_Manager_2026.pdf", icon: FileText },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/dangtranlevu/", icon: Briefcase },
   { label: "GitHub", href: "https://github.com/lvltcode", icon: Code },
   { label: "Email", href: "mailto:hello@craftmindship.com", icon: Mail },
@@ -60,14 +60,13 @@ export default function About() {
           <section className="prose-narrow mt-6 space-y-4 text-gray-700 leading-relaxed">
             <p>
               I&apos;m Luke, an AI Product Builder and Technical Product Manager based in
-              Ontario. I start with the workflow &mdash; who does the work, where it breaks,
-              what data matters &mdash; and build systems that solve the real constraint.
+              Ontario. I build operational software end-to-end in unfamiliar domains: learn
+              the workflow fast, reduce risk before code, and ship the smallest reliable
+              system real users adopt.
             </p>
             <p>
-              My work sits between product strategy, software architecture, and AI-assisted
-              execution. I use planning artifacts, scoped prompts, implementation review
-              checkpoints, and quality gates to ship live pilot apps with AI tools as
-              execution leverage.
+              Strong across product scoping, system design, Supabase/RLS architecture,
+              AI-assisted execution, and production QA.
             </p>
           </section>
         </div>
@@ -114,6 +113,75 @@ export default function About() {
             prove it with real usage. Every project starts with planning documents, not code.
             AI tools execute against specs, not vibes.
           </p>
+        </div>
+      </section>
+
+      <hr className="my-8 border-gray-200" />
+
+      {/* Professional Experience */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          Professional Experience
+        </h2>
+        <div className="mt-6 space-y-6">
+          <div>
+            <h3 className="font-semibold text-gray-900">Product Builder &amp; Technical Product Manager</h3>
+            <p className="text-sm text-gray-500">Cognito Technology Canada Inc. &middot; Aug 2023 &ndash; Present</p>
+            <p className="mt-2 text-sm text-gray-700 leading-relaxed">
+              Translated ambiguous founder briefs into production-ready architecture across a
+              portfolio of 20&ndash;30 ventures in SaaS, fintech, logistics, and edtech. Owned
+              product scoping, schema design, implementation planning, QA review, and deployment
+              handoff across multiple concurrent MVPs.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-semibold text-gray-900">Organization Design</h3>
+            <p className="text-sm text-gray-500">GEEK Up &middot; Aug 2020 &ndash; Sep 2021, Jul 2022 &ndash; Dec 2022</p>
+            <p className="mt-2 text-sm text-gray-700 leading-relaxed">
+              Designed organizational systems and operational workflows for a growing technology
+              company. Redesigned competency frameworks, contribution models, and performance
+              review processes used across engineering and design teams.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-semibold text-gray-900">Learning Design Expert</h3>
+            <p className="text-sm text-gray-500">Topica Edtech Group &middot; Nov 2021 &ndash; Jul 2022</p>
+            <p className="mt-2 text-sm text-gray-700 leading-relaxed">
+              Analyzed platform workflows and operational data within a large-scale edtech
+              environment serving 100K+ learners. Mapped LMS/CMS data flows and identified
+              integration gaps that informed product improvement roadmaps.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <hr className="my-8 border-gray-200" />
+
+      {/* Education & Certifications */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          Education &amp; Certifications
+        </h2>
+        <div className="mt-4 space-y-2 text-sm text-gray-700">
+          <p><strong className="text-gray-900">B.Eng. Engineering Physics</strong> &mdash; Ho Chi Minh City University of Technology (Bach Khoa)</p>
+          <p className="text-gray-500">Google Data Analytics &middot; IBM Data Analyst &middot; Google Project Management</p>
+        </div>
+      </section>
+
+      <hr className="my-8 border-gray-200" />
+
+      {/* Technologies */}
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          Technologies
+        </h2>
+        <div className="mt-4 space-y-2 text-sm text-gray-700 leading-relaxed">
+          <p><strong className="text-gray-900">Web:</strong> React &middot; TypeScript &middot; JavaScript &middot; HTML/CSS &middot; Tailwind</p>
+          <p><strong className="text-gray-900">Data:</strong> Python &middot; SQL &middot; Power BI</p>
+          <p><strong className="text-gray-900">Backend &amp; Infra:</strong> Supabase &middot; PostgreSQL &middot; RLS &middot; Edge Functions &middot; Vercel &middot; GitHub</p>
+          <p><strong className="text-gray-900">AI workflow:</strong> Claude &middot; Claude Code &middot; ChatGPT &middot; Codex</p>
+          <p><strong className="text-gray-900">QA:</strong> Playwright &middot; Manual mobile QA</p>
+          <p><strong className="text-gray-900">Project &amp; Workflow:</strong> Jira &middot; Notion &middot; Obsidian &middot; Draw.io &middot; Whimsical</p>
         </div>
       </section>
 
