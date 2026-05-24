@@ -216,6 +216,39 @@ export default function MultiAgentWorkflow() {
     { tool: "Git", role: "Checkpoint, handoff boundary, clean state enforcement", not: "Messy parallel work on the same codebase", color: "#6B7280" },
   ];
 
+  const antiPatterns = [
+    {
+      pattern: "Treating all AI tools as interchangeable",
+      breaks: "Context gets smeared across tools and each agent repeats or contradicts prior decisions.",
+      rule: "Assign each tool a narrow lane with explicit authority boundaries.",
+    },
+    {
+      pattern: "Sending vague mega-prompts",
+      breaks: "The agent optimizes for breadth, guesses at product intent, and produces hard-to-review diffs.",
+      rule: "Send one scoped task with clear inputs, constraints, and expected output.",
+    },
+    {
+      pattern: "Letting executor agents make product decisions",
+      breaks: "Implementation speed starts overriding product model, permission, and UX tradeoffs.",
+      rule: "Humans own scope and product judgment; executor agents own the assigned implementation.",
+    },
+    {
+      pattern: "Switching tools without a committed checkpoint",
+      breaks: "The next tool inherits partial context, dirty diffs, and unclear ownership.",
+      rule: "Handoff only after a reviewed checkpoint with current repo state captured.",
+    },
+    {
+      pattern: "Debugging with repeated speculative prompts",
+      breaks: "Fixes stack on guesses, masking the root cause and creating new regressions.",
+      rule: "Inspect the failing state, isolate the cause, then prompt for the smallest corrective change.",
+    },
+    {
+      pattern: "Letting context run too long without reset",
+      breaks: "Old assumptions linger and the agent starts optimizing against stale constraints.",
+      rule: "Reset with a fresh summary, current files, and the latest accepted decisions.",
+    },
+  ];
+
   return (
     <div className="px-6 pt-8 pb-10 sm:pt-10 sm:pb-14">
       {/* Hero */}
@@ -262,6 +295,21 @@ export default function MultiAgentWorkflow() {
       />
 
       <ContentWithToc>
+      <section>
+        <div className="rounded-lg border-l-4 bg-gray-50 p-4" style={{ borderLeftColor: "#2D6A4F" }}>
+          <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+            The Interchangeability Trap
+          </h2>
+          <p className="mt-3 text-gray-700 leading-relaxed">
+            Most builders treat AI coding tools as interchangeable. That creates context loss,
+            tool drift, and compounding bugs. The real unlock is routing work to the right agent
+            with clear lane separation and handoff rules.
+          </p>
+        </div>
+      </section>
+
+      <hr className="my-8 border-gray-200" />
+
       {/* 1: Before / After */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
@@ -344,6 +392,40 @@ export default function MultiAgentWorkflow() {
               ))}
             </tbody>
           </table>
+        </div>
+        <div className="mt-6 rounded-lg border-l-4 border-amber-400 bg-amber-50/60 p-4">
+          <h3 className="text-sm font-semibold text-gray-900">Lane crossing debt</h3>
+          <p className="mt-2 text-sm text-gray-700 leading-relaxed">
+            When a tool works outside its lane, the short-term speed gain creates downstream
+            handoff debt: a prototyping tool touching database or security logic, a code executor
+            making product-scope decisions, or a chat assistant producing implementation
+            instructions without repo context.
+          </p>
+        </div>
+        <div className="mt-8">
+          <h3 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+            Common Anti-Patterns
+          </h3>
+          <div className="responsive-table mt-4">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-gray-200 text-left">
+                  <th className="py-3 pr-4 font-medium text-gray-900">Anti-pattern</th>
+                  <th className="py-3 pr-4 font-medium text-gray-900">What breaks</th>
+                  <th className="py-3 font-medium text-gray-900">Better operating rule</th>
+                </tr>
+              </thead>
+              <tbody>
+                {antiPatterns.map((row, i) => (
+                  <tr key={row.pattern} className={i % 2 === 1 ? "bg-gray-50/50" : ""}>
+                    <td className="py-3 pr-4 font-medium text-gray-900 align-top">{row.pattern}</td>
+                    <td className="py-3 pr-4 text-gray-600 align-top">{row.breaks}</td>
+                    <td className="py-3 text-gray-600 align-top">{row.rule}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
