@@ -310,6 +310,34 @@ export default function MultiAgentWorkflow() {
 
       <hr className="my-8 border-gray-200" />
 
+      <section>
+        <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
+          The Orchestration Tax
+        </h2>
+        <div className="mt-4 space-y-4 text-gray-700 leading-relaxed">
+          <p>
+            Running more agents does not remove the human bottleneck. It usually moves the
+            bottleneck to review, judgment, merge control, and architectural consistency.
+          </p>
+          <p>
+            In AI-assisted development, the scarce resource is not AI output. The scarce
+            resource is operator attention.
+          </p>
+          <p>
+            That is why this workflow is intentionally sequential. Each task moves through
+            one executor, one repo state, one QA gate, and one commit boundary. This reduces
+            orchestration tax: fewer conflicting diffs, fewer cold context reloads, and less
+            risk of merging code I no longer understand.
+          </p>
+          <p>
+            The bottleneck in AI-assisted development is no longer code generation. It is
+            review throughput, judgment quality, and keeping a live mental model of the system.
+          </p>
+        </div>
+      </section>
+
+      <hr className="my-8 border-gray-200" />
+
       {/* 1: Before / After */}
       <section>
         <h2 className="text-sm font-medium tracking-wide text-gray-500 uppercase">
@@ -527,9 +555,9 @@ export default function MultiAgentWorkflow() {
             <h3 className="font-semibold text-gray-900">2. Sequential over parallel</h3>
             <p className="mt-2 text-sm text-gray-600 leading-relaxed">
               Running multiple agents on the same codebase at the same time
-              creates merge conflicts, duplicated work, and compounding bugs.
+              creates merge conflicts, duplicated work, cold context reloads, and compounding bugs.
               Sequential execution with clean handoffs is slower per-task but
-              faster per-project.
+              faster per-project because it protects the operator&apos;s review bandwidth.
             </p>
           </div>
           <div className="rounded-lg border border-gray-200 p-5">
