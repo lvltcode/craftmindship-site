@@ -4,9 +4,9 @@ import { usePageMeta } from "../hooks/usePageMeta";
 const targetRoles = [
   "AI Product Builder",
   "Technical Product Manager",
-  "Product Ops",
-  "Workflow Automation",
-  "Vertical SaaS",
+  "Product Engineer",
+  "Founding Engineer",
+  "Forward-Deployed Engineer",
   "AI-Native Startups",
 ];
 
@@ -68,6 +68,9 @@ export default function About() {
               Strong across product scoping, system design, Supabase/RLS architecture,
               AI-assisted execution, and production QA.
             </p>
+            <p className="text-gray-500">
+              Reliable over clever. Judgment over automation.
+            </p>
           </section>
         </div>
 
@@ -102,16 +105,23 @@ export default function About() {
             I use Craftmindship to show how I turn messy real-world workflows into shipped software.
           </p>
           <p>
-            The projects here are not mock case studies. Cadence came from working with a real
-            music teacher trying to coordinate lessons, parents, practice notes, and scheduling.
-            Puppy Program OS came from observing the operational load behind guide dog fostering.
-            Multi-Agent Workflow documents how I use AI tools as a disciplined build system, not
-            random prompting.
+            The projects here are not mock case studies. Cadence came from working with a
+            real music teacher trying to coordinate lessons, parents, practice notes, and
+            scheduling — now running as a live pilot. Puppy Program OS is a pre-pilot
+            operational system designed for a national guide dog program managing 200+ dogs
+            across breeding, training, and placement. Multi-Agent Workflow documents how I
+            use AI tools as a disciplined build system, not random prompting.
           </p>
           <p>
             The common thread: find the constraint, design the system, ship the workflow, then
             prove it with real usage. Every project starts with planning documents, not code.
             AI tools execute against specs, not vibes.
+          </p>
+          <p>
+            Alongside the case studies, Analysis covers product teardowns of systems I&apos;ve
+            used or operated inside, and Lab holds standalone artifacts — market
+            intelligence reports, data flow architectures, and planning systems — produced
+            during real builds.
           </p>
         </div>
       </section>
@@ -180,7 +190,7 @@ export default function About() {
           <p><strong className="text-gray-900">Web:</strong> React &middot; TypeScript &middot; JavaScript &middot; HTML/CSS &middot; Tailwind</p>
           <p><strong className="text-gray-900">Data:</strong> Python &middot; SQL &middot; Power BI</p>
           <p><strong className="text-gray-900">Backend &amp; Infra:</strong> Supabase &middot; PostgreSQL &middot; RLS &middot; Edge Functions &middot; Vercel &middot; GitHub</p>
-          <p><strong className="text-gray-900">AI workflow:</strong> Claude &middot; Claude Code &middot; ChatGPT &middot; Codex</p>
+          <p><strong className="text-gray-900">AI workflow:</strong> Claude &middot; Claude Code &middot; ChatGPT &middot; Codex &middot; Gemini &middot; Lovable &middot; Stitch</p>
           <p><strong className="text-gray-900">QA:</strong> Playwright &middot; Manual mobile QA</p>
           <p><strong className="text-gray-900">Project &amp; Workflow:</strong> Jira &middot; Notion &middot; Obsidian &middot; Draw.io &middot; Whimsical</p>
         </div>
