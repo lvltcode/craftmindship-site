@@ -163,7 +163,8 @@ export default function About() {
           Education &amp; Certifications
         </h2>
         <div className="mt-4 space-y-2 text-sm text-gray-700">
-          <p><strong className="text-gray-900">B.Eng. Engineering Physics</strong> &mdash; Ho Chi Minh City University of Technology (Bach Khoa)</p>
+          <p><strong className="text-gray-900">Engineering Physics coursework</strong> &mdash; Ho Chi Minh City University of Technology (Bach Khoa)</p>
+          <p className="text-gray-500" style={{ fontSize: '13px' }}>First year completed &middot; Left the degree program</p>
           <p className="text-gray-500">Google Data Analytics &middot; IBM Data Analyst &middot; Google Project Management</p>
         </div>
       </section>
